@@ -23,16 +23,14 @@ uses
   uFrm in '..\BASE\uFrm.pas' {frm},
   uCfg in '..\GERENCIAL\uCfg.pas' {frmCfg},
   uDM in '..\GERENCIAL\uDM.pas' {DM: TDataModule},
-  uCadCli in '..\GERENCIAL\CADASTROS\uCadCli.pas',
-  uCadEmpresa in '..\GERENCIAL\CADASTROS\uCadEmpresa.pas',
-  uCadEstoque in '..\GERENCIAL\CADASTROS\uCadEstoque.pas',
-  uCadForn in '..\GERENCIAL\CADASTROS\uCadForn.pas',
+  uCadCli in '..\CADASTROS\uCadCli.pas',
+  uCadEmpresa in '..\CADASTROS\uCadEmpresa.pas',
+  uCadEstoque in '..\CADASTROS\uCadEstoque.pas',
+  uCadForn in '..\CADASTROS\uCadForn.pas',
   ufrmCad in '..\BASE\ufrmCad.pas' {frmCad},
   uTraducao in '..\COMUM\uTraducao.pas',
-  uPesqCidade in '..\GERENCIAL\uPesqCidade.pas' {frmPesqCidade},
-  uPesqNCM in '..\GERENCIAL\uPesqNCM.pas' {frmPesqNCM},
-  uCadSpedTabelas in '..\GERENCIAL\CADASTROS\uCadSpedTabelas.pas' {frmCadSpedTabelas},
-  uReplica in '..\GERENCIAL\OPERACIONAIS\uReplica.pas' {frmReplica},
+  uCadSpedTabelas in '..\CADASTROS\uCadSpedTabelas.pas' {frmCadSpedTabelas},
+  uReplica in '..\OPERACIONAIS\uReplica.pas' {frmReplica},
   uPesqCli in 'uPesqCli.pas' {frmPesqCli},
   uPesqProd in 'uPesqProd.pas' {frmPesqProd},
   uPesqNatOper in 'uPesqNatOper.pas' {frmPesqNatOper},
@@ -43,11 +41,13 @@ uses
   uAssDevol in 'uAssDevol.pas' {frmAssDevol},
   uDM_NF_Entr in '..\GERENCIAL\uDM_NF_Entr.pas' {DM_NF_Entr: TDataModule},
   uVendaNF in 'uVendaNF.pas' {frmVendaNF},
-  uRegras_Imposto in '..\GERENCIAL\OPERACIONAIS\uRegras_Imposto.pas' {frmRegras_Imposto},
+  uRegras_Imposto in '..\OPERACIONAIS\uRegras_Imposto.pas' {frmRegras_Imposto},
   uDic_NF in 'uDic_NF.pas' {frmDic_NF},
-  uConverteEmitInform in '..\GERENCIAL\OPERACIONAIS\uConverteEmitInform.pas' {frmConverteEmitInform},
-  uDadosItemNF in '..\GERENCIAL\OPERACIONAIS\uDadosItemNF.pas' {frmdadosItemNF},
-  uViews in '..\COMUM\uViews.pas';
+  uConverteEmitInform in '..\OPERACIONAIS\uConverteEmitInform.pas' {frmConverteEmitInform},
+  uDadosItemNF in '..\OPERACIONAIS\uDadosItemNF.pas' {frmdadosItemNF},
+  uViews in '..\COMUM\uViews.pas',
+  uPesqCidade in '..\GERENCIAL\uPesqCidade.pas' {frmPesqCidade},
+  uPesqNCM in '..\GERENCIAL\uPesqNCM.pas' {frmPesqNCM};
 
 {$R *.res}
 
@@ -63,5 +63,7 @@ begin
   Application.CreateForm(TDM_INI, DM_INI);
   Application.CreateForm(TDM_NFE, DM_NFE);
   Application.CreateForm(TfrmMain, frmMain);
+  Application.CreateForm(TfrmPesqCidade, frmPesqCidade);
+  Application.CreateForm(TfrmPesqNCM, frmPesqNCM);
   Application.Run;
 end.

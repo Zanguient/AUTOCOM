@@ -144,10 +144,6 @@
             <Form>frmPesqProd</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="uItem.pas">
-            <Form>frmItem</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="uCancelar.pas">
             <Form>frmCancelar</Form>
             <FormType>dfm</FormType>
@@ -194,9 +190,24 @@
             <Form>frmStatus</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="..\GERENCIAL\OPERACIONAIS\uRegras_Imposto.pas">
+        <DCCReference Include="..\OPERACIONAIS\uRegras_Imposto.pas">
             <Form>frmRegras_Imposto</Form>
+        </DCCReference>
+        <DCCReference Include="..\PTI\uDMecf.pas">
+            <Form>DM_ECF</Form>
             <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\COMUM\uSplash.pas">
+            <Form>frmsplash</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\PTI\utefMsg.pas">
+            <Form>frmTEFMessage</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uItem.pas">
+            <Form>frmItem</Form>
         </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

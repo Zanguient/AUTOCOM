@@ -924,9 +924,8 @@ implementation
 
 uses uAutocomConsts, udmnfe, uFuncoes, ualterar_natop, uMD5Print, uCadFemissao, ucce,
   uInutilizaNumeracao, uListaNF, uManut, uXML, udm_ini, dmSkins, uSkinDLL, uCadCli,
-  uCadEmpresa, uCadEstoque, uCadForn,
-  uCfg, uDM, uPesqCli, uPesqProd, uPesqNatOper, uRateio, uSplash, uManiDest, uAssDevol,
-  uVendaNF, uDic_NF;
+  uCadEmpresa, uCadEstoque, uCadForn, uCfg, uDM, uPesqCli, uPesqProd,
+  uPesqNatOper, uRateio, uSplash, uManiDest, uAssDevol, uVendaNF, uDic_NF;
 
 {$R *.dfm}
 

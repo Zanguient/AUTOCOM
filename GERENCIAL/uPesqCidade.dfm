@@ -36,8 +36,8 @@ inherited frmPesqCidade: TfrmPesqCidade
     Height = 321
     ExplicitWidth = 493
     ExplicitHeight = 321
-    ClientRectBottom = 321
-    ClientRectRight = 493
+    ClientRectBottom = 317
+    ClientRectRight = 489
     inherited TabCad: TcxTabSheet
       ExplicitTop = 26
       ExplicitWidth = 493
@@ -50,12 +50,11 @@ inherited frmPesqCidade: TfrmPesqCidade
       end
     end
     inherited TabPesq: TcxTabSheet
-      ExplicitLeft = 0
-      ExplicitWidth = 493
+      ExplicitWidth = 489
       ExplicitHeight = 295
       inherited grd: TcxGrid
-        Width = 493
-        Height = 249
+        Width = 485
+        Height = 245
         ExplicitWidth = 493
         ExplicitHeight = 249
         inherited tbv: TcxGridDBTableView
@@ -74,10 +73,10 @@ inherited frmPesqCidade: TfrmPesqCidade
         end
       end
       inherited pnlPesq: TPanel
-        Top = 249
-        Width = 493
+        Top = 245
+        Width = 485
         ExplicitTop = 249
-        ExplicitWidth = 493
+        ExplicitWidth = 489
         inherited edPesq: TcxTextEdit
           Properties.OnChange = edPesqPropertiesChange
         end

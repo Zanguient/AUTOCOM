@@ -59,7 +59,7 @@ uses
   uViews in '..\COMUM\uViews.pas',
   uCfg in '..\GERENCIAL\uCfg.pas' {frmCfg},
   uStatus in '..\NFE_new\uStatus.pas' {frmStatus},
-  uRegras_Imposto in '..\GERENCIAL\OPERACIONAIS\uRegras_Imposto.pas' {frmRegras_Imposto};
+  uRegras_Imposto in '..\OPERACIONAIS\uRegras_Imposto.pas' {frmRegras_Imposto};
 
 {$R *.res}
 {$R UAC.res}

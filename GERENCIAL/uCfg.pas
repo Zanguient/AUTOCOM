@@ -271,7 +271,10 @@ implementation
 
 {$R *.dfm}
 
-uses uDM, uAutocomConsts, uFuncoes, udm_ini, dmSkins, uSkinDLL{$IFDEF PDV},uDMecf{$ENDIF};
+uses uDM, uAutocomConsts, uFuncoes, udm_ini, dmSkins, uSkinDLL
+{$IFDEF PDV}
+,uDMecf
+{$ENDIF};
 
 {$IFDEF PDV}
 procedure ShowAAC; stdcall; external 'aac_XE2.dll';

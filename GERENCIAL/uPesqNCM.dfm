@@ -6,9 +6,6 @@ inherited frmPesqNCM: TfrmPesqNCM
   TextHeight = 15
   inherited pgCad: TcxPageControl
     inherited TabPesq: TcxTabSheet
-      ExplicitLeft = 0
-      ExplicitWidth = 640
-      ExplicitHeight = 294
       inherited grd: TcxGrid
         LookAndFeel.SkinName = 'Coffee'
         inherited tbv: TcxGridDBTableView
@@ -40,8 +37,6 @@ inherited frmPesqNCM: TfrmPesqNCM
         end
       end
       inherited pnlPesq: TPanel
-        ExplicitTop = 248
-        ExplicitWidth = 640
         inherited edPesq: TcxTextEdit
           Properties.OnChange = edPesqPropertiesChange
         end

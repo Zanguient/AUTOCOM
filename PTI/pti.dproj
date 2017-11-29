@@ -291,9 +291,8 @@
             <Form>frmStatus</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="..\GERENCIAL\OPERACIONAIS\uRegras_Imposto.pas">
+        <DCCReference Include="..\OPERACIONAIS\uRegras_Imposto.pas">
             <Form>frmRegras_Imposto</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

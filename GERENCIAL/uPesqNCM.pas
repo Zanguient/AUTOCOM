@@ -11,7 +11,7 @@ uses
   cxGridLevel, cxClasses, cxGridCustomView, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxGrid, cxNavigator, cxDBNavigator, cxPC,
   dxStatusBar, cxButtons, Vcl.ExtCtrls, FireDAC.Comp.Client, dxSkinsCore,
-  dxSkinsdxStatusBarPainter, dxSkinscxPCPainter;
+  dxSkinsdxStatusBarPainter, dxSkinscxPCPainter, dxSkinCaramel, dxBarBuiltInMenu;
 
 type
   TfrmPesqNCM = class(TfrmCad)
