@@ -1,5 +1,0 @@
-[TfrmSpedFiscal]
-FormVersion=0
-cmbFinalidade_ItemIndex=0
-w=0
-h=0

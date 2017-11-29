@@ -1,5 +1,0 @@
-[TfrmMain]
-FormVersion=0
-w=856
-h=556
-data_atu=01/01/2000

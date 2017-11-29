@@ -1,4 +1,0 @@
-[TfrmListaNF]
-FormVersion=0
-w=0
-h=0

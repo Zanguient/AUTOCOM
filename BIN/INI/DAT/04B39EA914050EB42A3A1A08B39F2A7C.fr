@@ -1,6 +1,0 @@
-[TfrmBoletoAvulso]
-FormVersion=0
-cbPrint_Checked=False
-crFormato_ItemIndex=1
-w=0
-h=0

@@ -1,6 +1,0 @@
-[TfrmPV]
-FormVersion=0
-w=847
-h=564
-data_atu=00:00:00
-modo=0

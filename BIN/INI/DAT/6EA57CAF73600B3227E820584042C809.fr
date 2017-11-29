@@ -1,8 +1,0 @@
-[TfrmCadCli]
-FormVersion=0
-tbvcnpj_Tag=0
-tbvid_Tag=0
-tbvnome_Tag=1
-tbvrazaosocial_Tag=0
-w=0
-h=0

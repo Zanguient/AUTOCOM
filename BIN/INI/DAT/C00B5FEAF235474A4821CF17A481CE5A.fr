@@ -1,7 +1,0 @@
-[TfrmCadCFOP]
-FormVersion=0
-tbvcfop_Tag=1
-tbvdescr_completa_Tag=0
-tbvdescricao_Tag=0
-w=0
-h=0

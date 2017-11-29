@@ -1,4 +1,0 @@
-[TfrmAss_CFOP_Devol]
-FormVersion=0
-w=0
-h=0

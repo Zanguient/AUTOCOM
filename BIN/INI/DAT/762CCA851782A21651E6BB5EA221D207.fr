@@ -1,6 +1,0 @@
-[TfrmGeraRel]
-FormVersion=0
-cbPadrao_Checked=False
-w=476
-h=446
-data_atu=00:00:00

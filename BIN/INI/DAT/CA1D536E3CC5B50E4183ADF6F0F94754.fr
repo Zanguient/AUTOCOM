@@ -1,6 +1,0 @@
-[TfrmParcelamento]
-FormVersion=0
-crFormato_ItemIndex=1
-cbPrint_Checked=False
-w=0
-h=0

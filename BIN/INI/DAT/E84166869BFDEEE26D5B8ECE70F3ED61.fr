@@ -1,9 +1,0 @@
-[TfrmIntBal]
-FormVersion=0
-tbvbalanca_Width=60
-tbvsessao_Width=100
-tbvtransferir_Width=120
-tbv1nome_Width=396
-tbv1cod_barra_Width=97
-w=0
-h=0
