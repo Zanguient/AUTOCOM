@@ -19,7 +19,6 @@ uses
   upv in 'upv.pas' {frmPV},
   uPesqCli in 'uPesqCli.pas' {frmPesqCli},
   uPesqProd in 'uPesqProd.pas' {frmPesqProd},
-  uItem in 'uItem.pas' {frmItem},
   uCancelar in 'uCancelar.pas' {frmCancelar},
   uConcluir in 'uConcluir.pas' {frmConcluir},
   uEmpresa in '..\COMUM\uEmpresa.pas' {frmEmpresa},
@@ -32,22 +31,18 @@ uses
   uParcelas in 'uParcelas.pas' {frmParcelas},
   uViews in '..\COMUM\uViews.pas',
   uStatus in '..\NFE_new\uStatus.pas' {frmStatus},
-  uRegras_Imposto in '..\GERENCIAL\OPERACIONAIS\uRegras_Imposto.pas' {frmRegras_Imposto};
+  uRegras_Imposto in '..\OPERACIONAIS\uRegras_Imposto.pas' {frmRegras_Imposto},
+  uDMecf in '..\PTI\uDMecf.pas' {DM_ECF: TDataModule},
+  uSplash in '..\COMUM\uSplash.pas' {frmsplash},
+  utefMsg in '..\PTI\utefMsg.pas' {frmTEFMessage},
+  uItem in 'uItem.pas' {frmItem};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TfrmPV, frmPV);
-  Application.CreateForm(Tfrm, frm);
   Application.CreateForm(TDMSkin, DMSkin);
-  Application.CreateForm(TDM_PDV, DM_PDV);
-  Application.CreateForm(Tfrmprogress, frmprogress);
-  Application.CreateForm(TfrmVendedor, frmVendedor);
-  Application.CreateForm(TfrmParcelas, frmParcelas);
-  Application.CreateForm(TfrmStatus, frmStatus);
-  Application.CreateForm(TfrmStatus, frmStatus);
-  Application.CreateForm(TfrmRegras_Imposto, frmRegras_Imposto);
+  Application.CreateForm(TfrmPV, frmPV);
   Application.Run;
 end.

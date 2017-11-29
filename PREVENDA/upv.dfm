@@ -3,19 +3,19 @@ inherited frmPV: TfrmPV
   BorderIcons = [biSystemMenu, biMinimize, biMaximize]
   BorderStyle = bsSizeable
   Caption = 'frmPV'
-  ClientHeight = 485
+  ClientHeight = 465
   ClientWidth = 831
   Menu = Menu1
   ExplicitWidth = 847
-  ExplicitHeight = 544
+  ExplicitHeight = 524
   PixelsPerInch = 96
   TextHeight = 15
   inherited TPA: TPanel
-    Top = 434
+    Top = 414
     Width = 831
     Height = 31
     Visible = False
-    ExplicitTop = 434
+    ExplicitTop = 414
     ExplicitWidth = 831
     ExplicitHeight = 31
     inherited pnlBtnClose: TPanel
@@ -225,12 +225,12 @@ inherited frmPV: TfrmPV
     Left = 0
     Top = 75
     Width = 831
-    Height = 359
+    Height = 339
     Align = alClient
     TabOrder = 3
     Properties.ActivePage = TabIni
     Properties.CustomButtons.Buttons = <>
-    ClientRectBottom = 355
+    ClientRectBottom = 335
     ClientRectLeft = 4
     ClientRectRight = 827
     ClientRectTop = 26
@@ -242,7 +242,7 @@ inherited frmPV: TfrmPV
         Left = 417
         Top = 0
         Width = 406
-        Height = 329
+        Height = 309
         Align = alRight
         AutoSize = True
         BevelOuter = bvNone
@@ -252,7 +252,7 @@ inherited frmPV: TfrmPV
           Left = 19
           Top = 98
           Width = 384
-          Height = 228
+          Height = 208
           Align = alRight
           AutoSize = True
           Center = True
@@ -2729,7 +2729,7 @@ inherited frmPV: TfrmPV
         Left = 0
         Top = 0
         Width = 385
-        Height = 329
+        Height = 309
         Align = alLeft
         BevelOuter = bvNone
         TabOrder = 1
@@ -2738,7 +2738,7 @@ inherited frmPV: TfrmPV
           Left = 3
           Top = 3
           Width = 384
-          Height = 217
+          Height = 197
           Align = alLeft
           AutoSize = True
           Picture.Data = {
@@ -5201,7 +5201,7 @@ inherited frmPV: TfrmPV
         end
         object pnlLogin: TPanel
           Left = 0
-          Top = 223
+          Top = 203
           Width = 385
           Height = 41
           Align = alBottom
@@ -5264,7 +5264,7 @@ inherited frmPV: TfrmPV
         object cxLabel1: TcxLabel
           AlignWithMargins = True
           Left = 3
-          Top = 267
+          Top = 247
           Margins.Bottom = 20
           Align = alBottom
           Caption = 'AUTOCOM PR'#201'-VENDA'
@@ -5396,7 +5396,7 @@ inherited frmPV: TfrmPV
   end
   object bar1: TdxStatusBar [4]
     Left = 0
-    Top = 465
+    Top = 445
     Width = 831
     Height = 20
     Panels = <

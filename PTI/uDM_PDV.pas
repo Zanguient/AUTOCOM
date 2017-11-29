@@ -685,8 +685,11 @@ implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
-uses uDM, uAutocomConsts, {$IFDEF PDV} uDMecf, updv, {$ENDIF}  uProgress, udm_ini,
-  uViews;
+uses uDM, uAutocomConsts
+{$IFDEF PDV}
+, uDMecf, updv
+{$ENDIF}
+, uProgress, udm_ini, uViews;
 
 {$R *.dfm}
 

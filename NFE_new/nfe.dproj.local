@@ -2,10 +2,12 @@
 <BorlandProject>
 	<Transactions>
     <Transaction>2015/02/17 14:04:50.000.990,=Z:\E\PROJETOSXE5\NFE_new\Unit1.pas</Transaction>
-    <Transaction>2015/02/17 14:29:52.000.380,Z:\E\PROJETOSXE5\NFE_new\uDic_NF.pas=Z:\E\PROJETOSXE5\NFE_new\Unit1.pas</Transaction>
-    <Transaction>2015/02/17 14:29:52.000.380,Z:\E\PROJETOSXE5\NFE_new\uDic_NF.dfm=Z:\E\PROJETOSXE5\NFE_new\Unit1.dfm</Transaction>
+    <Transaction>2015/02/17 14:29:52.000.380,Z:\E\PROJETOSXE5\NFE_new\Unit1.pas=Z:\E\PROJETOSXE5\NFE_new\uDic_NF.pas</Transaction>
+    <Transaction>2015/02/17 14:29:52.000.380,Z:\E\PROJETOSXE5\NFE_new\Unit1.dfm=Z:\E\PROJETOSXE5\NFE_new\uDic_NF.dfm</Transaction>
     <Transaction>2015/09/24 20:00:11.000.998,=Z:\E\PROJETOSXE5\GERENCIAL\OPERACIONAIS\uConverteEmitInform.pas</Transaction>
     <Transaction>2015/09/24 20:00:56.000.177,=Z:\E\PROJETOSXE5\GERENCIAL\OPERACIONAIS\uDadosItemNF.pas</Transaction>
     <Transaction>2016/02/21 12:33:12.000.420,=Z:\E\PROJETOSXE5\COMUM\uViews.pas</Transaction>
+    <Transaction>2017/11/29 15:18:15.008,=C:\PROJETOS\AUTOCOM\GERENCIAL\uPesqCidade.pas</Transaction>
+    <Transaction>2017/11/29 15:18:33.628,=C:\PROJETOS\AUTOCOM\GERENCIAL\uPesqNCM.pas</Transaction>
   </Transactions>
 </BorlandProject>

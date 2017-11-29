@@ -203,7 +203,7 @@ implementation
 
 {$R *.dfm}
 
-uses udm_ini, uDM, dmSkins, uFuncoes, uSkinDLL, uAutocomConsts, uMD5Print, uCfg, uPesqCli, uPesqProd, uItem,
+uses udm_ini, uDM, dmSkins, uFuncoes, uSkinDLL, uAutocomConsts, uMD5Print, uPesqCli, uPesqProd, uItem,
   uCancelar, uConcluir, uEmpresa, uOpcoes, uDM_PDV;
 
 //funçoes de dlls
@@ -263,7 +263,9 @@ begin
    if not DM.Conectar then
    begin
       ShowMessage('Não foi possível conectar com o servidor.');
+{$IFNDEF PV}
       Abrir_form('frmCfg', TfrmCfg);
+{$ENDIF}
       edLogin.Clear;
       edSenha.Clear;
       edLogin.SetFocus;
@@ -284,7 +286,7 @@ begin
    if DM_INI.ini.StoredValue['idTerm'] = '00' then
    begin
       ShowMessage('Informar o ID do terminal.');
-      Abrir_form('frmCfg', TfrmCfg);
+//      Abrir_form('frmCfg', TfrmCfg);
       edLogin.Clear;
       edSenha.Clear;
       edLogin.SetFocus;
@@ -740,8 +742,8 @@ end;
 
 procedure TfrmPV.Configurao1Click(Sender: TObject);
 begin
-   if Permissao(True) then
-      Abrir_form('frmCfg', TfrmCfg);
+ ///  if Permissao(True) then
+ //     Abrir_form('frmCfg', TfrmCfg);
 end;
 
 end.
