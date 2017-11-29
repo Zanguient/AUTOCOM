@@ -1,0 +1,11 @@
+﻿[Main]
+Version=2
+
+[frmCadEmpresa.tbv: TcxGridDBTableView]
+=
+Footer="False"
+GroupByBox="False"
+GroupFooters=0
+NewItemRow="False"
+Version=1
+

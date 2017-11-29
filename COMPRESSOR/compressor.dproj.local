@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2013/03/12 09:34:33.000.401,=C:\Users\koplin\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2013/03/12 13:55:28.000.926,=C:\Users\koplin\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2013/03/12 13:56:03.000.975,=C:\Users\koplin\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2013/03/12 14:43:25.000.468,=C:\Users\koplin\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2013/05/30 21:00:53.000.351,=C:\Users\koplin\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2013/05/30 21:02:05.000.916,C:\Users\koplin\Documents\RAD Studio\Projects\Unit1.pas=E:\PROJETOS\uCompressor.pas</Transaction>
+    <Transaction>2013/05/30 21:02:05.000.917,C:\Users\koplin\Documents\RAD Studio\Projects\Unit1.dfm=E:\PROJETOS\uCompressor.dfm</Transaction>
+    <Transaction>2013/05/30 21:02:21.000.932,C:\Users\koplin\Documents\RAD Studio\Projects\Project1.dproj=E:\PROJETOS\COMPRESSOR\compressor.dproj</Transaction>
+    <Transaction>2013/05/30 21:02:37.000.961,E:\PROJETOS\uCompressor.dfm=E:\PROJETOS\COMPRESSOR\uCompressor.dfm</Transaction>
+    <Transaction>2013/05/30 21:02:37.000.961,E:\PROJETOS\uCompressor.pas=E:\PROJETOS\COMPRESSOR\uCompressor.pas</Transaction>
+    <Transaction>2013/05/30 21:03:27.000.520,=E:\PROJETOS\COMUM\uAutocomConsts.pas</Transaction>
+    <Transaction>2013/05/30 21:03:27.000.470,=E:\PROJETOS\COMUM\uFuncoes.pas</Transaction>
+    <Transaction>2013/05/30 21:03:35.000.482,=E:\PROJETOS\COMUM\uMD5Print.pas</Transaction>
+  </Transactions>
+</BorlandProject>

@@ -1,0 +1,22 @@
+﻿[Main]
+Version=2
+
+[frmBolLote.tbv: TcxGridDBTableView]
+=
+Footer="False"
+GroupByBox="False"
+GroupFooters=0
+NewItemRow="False"
+Version=1
+
+[frmBolLote.tbv/tbvNome: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=287
+AlignmentHorz=0
+Index=0
+Visible="True"
+SortOrder="soAscending"
+SortIndex=0
+WasVisibleBeforeGrouping="False"
+

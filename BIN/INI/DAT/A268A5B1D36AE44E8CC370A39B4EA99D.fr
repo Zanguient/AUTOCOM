@@ -1,0 +1,10 @@
+[TfrmSpedPIS]
+FormVersion=0
+cmbVersao_ItemIndex=0
+cmbTipoEscr_ItemIndex=0
+cmbTipo_contrib_ItemIndex=0
+cmbIncid_ItemIndex=0
+cmbCriterio_ItemIndex=-1
+cmbAprop_ItemIndex=0
+w=0
+h=0

@@ -1,0 +1,44 @@
+﻿[Main]
+Version=2
+
+[frmCadban.tbvag: TcxGridDBTableView]
+=
+Footer="False"
+GroupByBox="False"
+GroupFooters=0
+NewItemRow="False"
+Version=1
+
+[frmCadban.tbvag/tbvagagencia: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=93
+AlignmentHorz=0
+Index=0
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmCadban.tbvag/tbvagdig: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=46
+AlignmentHorz=1
+Index=1
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmCadban.tbvag/tbvagnome: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=219
+AlignmentHorz=0
+Index=2
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+

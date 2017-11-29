@@ -1,0 +1,6 @@
+[TfrmCadEstoque]
+FormVersion=0
+tbvcod_gtin_Tag=0
+tbvnome_Tag=1
+w=0
+h=0

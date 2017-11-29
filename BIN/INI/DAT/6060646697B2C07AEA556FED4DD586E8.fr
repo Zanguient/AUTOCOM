@@ -1,0 +1,9 @@
+[TfrmGestaoReceber]
+FormVersion=0
+TbvCliDebrazaosocial_Tag=0
+TbvCliDebnome_Tag=1
+TbvCliDebid_Tag=0
+TbvCliDebcnpj_Tag=0
+pgMain_ActivePage=TabBol
+w=0
+h=0

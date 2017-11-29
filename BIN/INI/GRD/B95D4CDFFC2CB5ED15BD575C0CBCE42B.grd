@@ -1,0 +1,88 @@
+﻿[Main]
+Version=2
+
+[frmMain.TbvInventInicial: TcxGridDBTableView]
+=
+Footer="False"
+GroupByBox="False"
+GroupFooters=0
+NewItemRow="False"
+Version=1
+
+[frmMain.TbvInventInicial/TbvInventInicialid: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=40
+AlignmentHorz=1
+Index=0
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmMain.TbvInventInicial/TbvInventInicialproduto: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=50
+AlignmentHorz=1
+Index=1
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmMain.TbvInventInicial/TbvInventInicialqtd: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=30
+AlignmentHorz=1
+Index=2
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmMain.TbvInventInicial/TbvInventInicialdescricao: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=266
+AlignmentHorz=0
+Index=3
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmMain.TbvInventInicial/TbvInventInicialregistro_ms: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=100
+AlignmentHorz=0
+Index=4
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmMain.TbvInventInicial/TbvInventIniciallote: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=74
+AlignmentHorz=0
+Index=5
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmMain.TbvInventInicial/TbvInventInicialclasse_terap: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=74
+AlignmentHorz=1
+Index=6
+Visible="False"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+

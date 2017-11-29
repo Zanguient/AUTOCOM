@@ -1,0 +1,12 @@
+[menufiscal]
+FormVersion=0
+Flags=0
+ShowCmd=1
+PixelsPerInch=96
+MinMaxPos(1920x1080)=-1,-1,0,0
+MinMaxPos=-1,-1,0,0
+NormPos(1920x1080)=1640,971,1753,1025
+NormPos=1640,971,1753,1025
+Visible=1
+w=0
+h=0

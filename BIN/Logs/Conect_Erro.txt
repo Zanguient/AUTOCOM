@@ -1,0 +1,7 @@
+28/11/2017 13:27:26:406- CONECTAR: [FireDAC][Phys][MySQL] Can't connect to MySQL server on '127.0.0.1' (10061)
+28/11/2017 15:34:52:763- CONECTAR: [FireDAC][Phys][MySQL]-314. Cannot load vendor library [libmysql.dll or libmysqld.dll]. Não foi possível encontrar o módulo especificado
+Hint: check it is in the PATH or application EXE directories, and has x86 bitness.
+28/11/2017 15:37:12:908- CONECTAR: [FireDAC][Phys][MySQL]-314. Cannot load vendor library [libmysql.dll or libmysqld.dll]. Não foi possível encontrar o módulo especificado
+Hint: check it is in the PATH or application EXE directories, and has x86 bitness.
+28/11/2017 21:11:17:031- CONECTAR: [FireDAC][Phys][MySQL]-314. Cannot load vendor library [libmysql.dll or libmysqld.dll]. Não foi possível encontrar o módulo especificado
+Hint: check it is in the PATH or application EXE directories, and has x86 bitness.

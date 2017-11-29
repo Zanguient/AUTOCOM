@@ -1,0 +1,192 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{6B6F7560-822F-4352-A878-7E9FCA1F0AF8}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="GERENCIAL\Gerencial.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="PTI\pti.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="PREVENDA\prevenda.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="NFE_new\nfe.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="GERADOR DE RELATORIOS\GeraRel.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="SNGPC_2.0\KSNGPC.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="AAC_dll\aacXE10.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ATUALIZADOR\Atualizador.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="COMPRESSOR\compressor.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="K_BKP_AUTO\K_bkp_auto.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="validador\fonte\Validador.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="SkinsDLL\Skins.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="VALIDA\softlock.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="LOGOBAN\TesteLogoban.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="Gerencial">
+        <MSBuild Projects="GERENCIAL\Gerencial.dproj"/>
+    </Target>
+    <Target Name="Gerencial:Clean">
+        <MSBuild Projects="GERENCIAL\Gerencial.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Gerencial:Make">
+        <MSBuild Projects="GERENCIAL\Gerencial.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="pti">
+        <MSBuild Projects="PTI\pti.dproj"/>
+    </Target>
+    <Target Name="pti:Clean">
+        <MSBuild Projects="PTI\pti.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="pti:Make">
+        <MSBuild Projects="PTI\pti.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="prevenda">
+        <MSBuild Projects="PREVENDA\prevenda.dproj"/>
+    </Target>
+    <Target Name="prevenda:Clean">
+        <MSBuild Projects="PREVENDA\prevenda.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="prevenda:Make">
+        <MSBuild Projects="PREVENDA\prevenda.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="nfe">
+        <MSBuild Projects="NFE_new\nfe.dproj"/>
+    </Target>
+    <Target Name="nfe:Clean">
+        <MSBuild Projects="NFE_new\nfe.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="nfe:Make">
+        <MSBuild Projects="NFE_new\nfe.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="GeraRel">
+        <MSBuild Projects="GERADOR DE RELATORIOS\GeraRel.dproj"/>
+    </Target>
+    <Target Name="GeraRel:Clean">
+        <MSBuild Projects="GERADOR DE RELATORIOS\GeraRel.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="GeraRel:Make">
+        <MSBuild Projects="GERADOR DE RELATORIOS\GeraRel.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="KSNGPC">
+        <MSBuild Projects="SNGPC_2.0\KSNGPC.dproj"/>
+    </Target>
+    <Target Name="KSNGPC:Clean">
+        <MSBuild Projects="SNGPC_2.0\KSNGPC.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="KSNGPC:Make">
+        <MSBuild Projects="SNGPC_2.0\KSNGPC.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="aacXE10">
+        <MSBuild Projects="AAC_dll\aacXE10.dproj"/>
+    </Target>
+    <Target Name="aacXE10:Clean">
+        <MSBuild Projects="AAC_dll\aacXE10.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="aacXE10:Make">
+        <MSBuild Projects="AAC_dll\aacXE10.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Atualizador">
+        <MSBuild Projects="ATUALIZADOR\Atualizador.dproj"/>
+    </Target>
+    <Target Name="Atualizador:Clean">
+        <MSBuild Projects="ATUALIZADOR\Atualizador.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Atualizador:Make">
+        <MSBuild Projects="ATUALIZADOR\Atualizador.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="compressor">
+        <MSBuild Projects="COMPRESSOR\compressor.dproj"/>
+    </Target>
+    <Target Name="compressor:Clean">
+        <MSBuild Projects="COMPRESSOR\compressor.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="compressor:Make">
+        <MSBuild Projects="COMPRESSOR\compressor.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="K_bkp_auto">
+        <MSBuild Projects="K_BKP_AUTO\K_bkp_auto.dproj"/>
+    </Target>
+    <Target Name="K_bkp_auto:Clean">
+        <MSBuild Projects="K_BKP_AUTO\K_bkp_auto.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="K_bkp_auto:Make">
+        <MSBuild Projects="K_BKP_AUTO\K_bkp_auto.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Validador">
+        <MSBuild Projects="validador\fonte\Validador.dproj"/>
+    </Target>
+    <Target Name="Validador:Clean">
+        <MSBuild Projects="validador\fonte\Validador.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Validador:Make">
+        <MSBuild Projects="validador\fonte\Validador.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Skins">
+        <MSBuild Projects="SkinsDLL\Skins.dproj"/>
+    </Target>
+    <Target Name="Skins:Clean">
+        <MSBuild Projects="SkinsDLL\Skins.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Skins:Make">
+        <MSBuild Projects="SkinsDLL\Skins.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="softlock">
+        <MSBuild Projects="VALIDA\softlock.dproj"/>
+    </Target>
+    <Target Name="softlock:Clean">
+        <MSBuild Projects="VALIDA\softlock.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="softlock:Make">
+        <MSBuild Projects="VALIDA\softlock.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="TesteLogoban">
+        <MSBuild Projects="LOGOBAN\TesteLogoban.dproj"/>
+    </Target>
+    <Target Name="TesteLogoban:Clean">
+        <MSBuild Projects="LOGOBAN\TesteLogoban.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TesteLogoban:Make">
+        <MSBuild Projects="LOGOBAN\TesteLogoban.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="Gerencial;pti;prevenda;nfe;GeraRel;KSNGPC;aacXE10;Atualizador;compressor;K_bkp_auto;Validador;Skins;softlock;TesteLogoban"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="Gerencial:Clean;pti:Clean;prevenda:Clean;nfe:Clean;GeraRel:Clean;KSNGPC:Clean;aacXE10:Clean;Atualizador:Clean;compressor:Clean;K_bkp_auto:Clean;Validador:Clean;Skins:Clean;softlock:Clean;TesteLogoban:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="Gerencial:Make;pti:Make;prevenda:Make;nfe:Make;GeraRel:Make;KSNGPC:Make;aacXE10:Make;Atualizador:Make;compressor:Make;K_bkp_auto:Make;Validador:Make;Skins:Make;softlock:Make;TesteLogoban:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

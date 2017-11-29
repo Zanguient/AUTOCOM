@@ -1,0 +1,77 @@
+﻿[Main]
+Version=2
+
+[frmCadPlanoContas.tbv: TcxGridDBTableView]
+=
+Footer="False"
+GroupByBox="False"
+GroupFooters=0
+NewItemRow="False"
+Version=1
+
+[frmCadPlanoContas.tbv/tbvid: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=49
+AlignmentHorz=2
+Index=0
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmCadPlanoContas.tbv/tbvplano: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=77
+AlignmentHorz=0
+Index=1
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmCadPlanoContas.tbv/tbvnivel: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=59
+AlignmentHorz=2
+Index=2
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmCadPlanoContas.tbv/tbvconta: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=110
+AlignmentHorz=0
+Index=3
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmCadPlanoContas.tbv/tbvdescricao: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=240
+AlignmentHorz=0
+Index=4
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmCadPlanoContas.tbv/tbvabrev: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=64
+AlignmentHorz=0
+Index=5
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+

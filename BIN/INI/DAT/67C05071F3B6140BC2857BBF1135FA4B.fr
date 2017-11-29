@@ -1,0 +1,8 @@
+[TfrmQuita]
+FormVersion=0
+cbParc_Checked=True
+cbjuros_Checked=True
+eddias_Value=28
+edjuros_Value=3
+w=0
+h=0

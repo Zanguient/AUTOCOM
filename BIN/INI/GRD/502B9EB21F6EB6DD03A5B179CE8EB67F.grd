@@ -1,0 +1,165 @@
+﻿[Main]
+Version=2
+
+[frmGestaoReceber_3.tbv: TcxGridDBTableView]
+=
+Footer="True"
+GroupByBox="False"
+GroupFooters=0
+NewItemRow="False"
+Version=1
+
+[frmGestaoReceber_3.tbv/tbvid: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=48
+AlignmentHorz=1
+Index=0
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmGestaoReceber_3.tbv/tbvnossonmro: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=87
+AlignmentHorz=0
+Index=1
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmGestaoReceber_3.tbv/tbvdata_process: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=85
+AlignmentHorz=0
+Index=2
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmGestaoReceber_3.tbv/tbvdt_vencimento: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=82
+AlignmentHorz=0
+Index=3
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmGestaoReceber_3.tbv/tbvdt_baixa_canc: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=79
+AlignmentHorz=0
+Index=4
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmGestaoReceber_3.tbv/tbvbaixa: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=33
+AlignmentHorz=0
+Index=5
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmGestaoReceber_3.tbv/tbvcancelado: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=32
+AlignmentHorz=0
+Index=6
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmGestaoReceber_3.tbv/tbvvalor: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=74
+AlignmentHorz=1
+Index=7
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmGestaoReceber_3.tbv/tbvjuros_dias: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=51
+AlignmentHorz=1
+Index=8
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmGestaoReceber_3.tbv/tbvmulta: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=56
+AlignmentHorz=1
+Index=9
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmGestaoReceber_3.tbv/tbvdesconto: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=60
+AlignmentHorz=1
+Index=10
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmGestaoReceber_3.tbv/tbvvalor_pg: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=70
+AlignmentHorz=1
+Index=11
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmGestaoReceber_3.tbv/tbvsacado_cnpj: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=144
+AlignmentHorz=0
+Index=12
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmGestaoReceber_3.tbv/tbvsacado_nome: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=319
+AlignmentHorz=0
+Index=13
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+

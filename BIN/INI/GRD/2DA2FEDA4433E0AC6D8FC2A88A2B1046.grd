@@ -1,0 +1,45 @@
+﻿[Main]
+Version=2
+
+[frmCad_Estoque_Inicial.tbv: TcxGridDBTableView]
+=
+Footer="False"
+GroupByBox="False"
+GroupFooters=0
+NewItemRow="False"
+EditFormUseDefaultLayout="True"
+Version=1
+
+[frmCad_Estoque_Inicial.tbv/tbvcod_gtin: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=132
+AlignmentHorz=0
+Index=0
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmCad_Estoque_Inicial.tbv/tbvnome: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=482
+AlignmentHorz=0
+Index=1
+Visible="True"
+SortOrder="soAscending"
+SortIndex=0
+WasVisibleBeforeGrouping="False"
+
+[frmCad_Estoque_Inicial.tbv/tbvquant: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=74
+AlignmentHorz=1
+Index=2
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+

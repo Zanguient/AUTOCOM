@@ -1,0 +1,77 @@
+﻿[Main]
+Version=2
+
+[frmCadEstoque.tbv: TcxGridDBTableView]
+=
+Footer="False"
+GroupByBox="False"
+GroupFooters=0
+NewItemRow="False"
+Version=1
+
+[frmCadEstoque.tbv/tbvcod_gtin: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=96
+AlignmentHorz=0
+Index=0
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmCadEstoque.tbv/tbvnome: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=247
+AlignmentHorz=0
+Index=1
+Visible="True"
+SortOrder="soAscending"
+SortIndex=0
+WasVisibleBeforeGrouping="False"
+
+[frmCadEstoque.tbv/tbvmedicam_principio_atv: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=127
+AlignmentHorz=0
+Index=2
+Visible="False"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmCadEstoque.tbv/tbvncm: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=65
+AlignmentHorz=2
+Index=3
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmCadEstoque.tbv/tbvvrcusto: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=74
+AlignmentHorz=1
+Index=4
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmCadEstoque.tbv/tbvvrvenda_vista: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=96
+AlignmentHorz=1
+Index=5
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+

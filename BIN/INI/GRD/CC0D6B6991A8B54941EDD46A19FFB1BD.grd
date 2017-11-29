@@ -1,0 +1,725 @@
+﻿[Main]
+Version=2
+
+[cxDBVerticalGrid1: TcxDBVerticalGrid]
+=
+PaintStyle=0
+HeaderWidth=140
+ValueWidth=100
+NewLoad=1
+
+[cxDBVerticalGrid1/Categ_Prod: TcxCategoryRow]
+=
+Caption="DADOS DO ITEM"
+AParentID="-1"
+Index=0
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1DBEditorRow1: TcxDBEditorRow]
+=
+AParentID="Categ_Prod"
+Index=0
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1QTD: TcxDBEditorRow]
+=
+AParentID="Categ_Prod"
+Index=1
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1ULT_CUSTO: TcxDBEditorRow]
+=
+AParentID="Categ_Prod"
+Index=2
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1VR_VENDA: TcxDBEditorRow]
+=
+AParentID="Categ_Prod"
+Index=3
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1VR_CUSTO: TcxDBEditorRow]
+=
+AParentID="Categ_Prod"
+Index=4
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1vDesc: TcxDBEditorRow]
+=
+AParentID="Categ_Prod"
+Index=5
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1vSeg: TcxDBEditorRow]
+=
+AParentID="Categ_Prod"
+Index=6
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1vFrete: TcxDBEditorRow]
+=
+AParentID="Categ_Prod"
+Index=7
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1vOutro: TcxDBEditorRow]
+=
+AParentID="Categ_Prod"
+Index=8
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1uTrib: TcxDBEditorRow]
+=
+AParentID="Categ_Prod"
+Index=9
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1qTrib: TcxDBEditorRow]
+=
+AParentID="Categ_Prod"
+Index=10
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1vUnTrib: TcxDBEditorRow]
+=
+AParentID="Categ_Prod"
+Index=11
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1uCom: TcxDBEditorRow]
+=
+AParentID="Categ_Prod"
+Index=12
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1qCom: TcxDBEditorRow]
+=
+AParentID="Categ_Prod"
+Index=13
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1vUnCom: TcxDBEditorRow]
+=
+AParentID="Categ_Prod"
+Index=14
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1vProd: TcxDBEditorRow]
+=
+AParentID="Categ_Prod"
+Index=15
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/CategICMS: TcxCategoryRow]
+=
+Caption="ICMS"
+AParentID="-1"
+Index=1
+Visible="True"
+Height=-1
+Expanded="False"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1CFOP: TcxDBEditorRow]
+=
+AParentID="CategICMS"
+Index=0
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1ICMS_orig: TcxDBEditorRow]
+=
+AParentID="CategICMS"
+Index=1
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1ICMS_vBC: TcxDBEditorRow]
+=
+AParentID="CategICMS"
+Index=2
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1ICMS_pICMS: TcxDBEditorRow]
+=
+AParentID="CategICMS"
+Index=3
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1ICMS_vICMS: TcxDBEditorRow]
+=
+AParentID="CategICMS"
+Index=4
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1ICMS_modBC: TcxDBEditorRow]
+=
+AParentID="CategICMS"
+Index=5
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1ICMS_CST: TcxDBEditorRow]
+=
+AParentID="CategICMS"
+Index=6
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1ICMS_CSOSN: TcxDBEditorRow]
+=
+AParentID="CategICMS"
+Index=7
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1ICMS_pRedBC: TcxDBEditorRow]
+=
+AParentID="CategICMS"
+Index=8
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/CategICMSST: TcxCategoryRow]
+=
+Caption="ICMS ST"
+AParentID="-1"
+Index=2
+Visible="True"
+Height=-1
+Expanded="False"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1ICMS_modBCST: TcxDBEditorRow]
+=
+AParentID="CategICMSST"
+Index=0
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1ICMS_vBCST: TcxDBEditorRow]
+=
+AParentID="CategICMSST"
+Index=1
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1ICMS_vICMSST: TcxDBEditorRow]
+=
+AParentID="CategICMSST"
+Index=2
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1ICMS_pICMSST: TcxDBEditorRow]
+=
+AParentID="CategICMSST"
+Index=3
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1ICMS_pRedBCST: TcxDBEditorRow]
+=
+AParentID="CategICMSST"
+Index=4
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1ICMS_vTabelaST: TcxDBEditorRow]
+=
+AParentID="CategICMSST"
+Index=5
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1ICMS_pMVAST: TcxDBEditorRow]
+=
+AParentID="CategICMSST"
+Index=6
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/CategSN: TcxCategoryRow]
+=
+Caption="SIMPLES NACIONAL"
+AParentID="-1"
+Index=3
+Visible="True"
+Height=-1
+Expanded="False"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1ICMS_pCredSN: TcxDBEditorRow]
+=
+AParentID="CategSN"
+Index=0
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1ICMS_vCredICMSSN: TcxDBEditorRow]
+=
+AParentID="CategSN"
+Index=1
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/CategIPI: TcxCategoryRow]
+=
+Caption="IPI"
+AParentID="-1"
+Index=4
+Visible="True"
+Height=-1
+Expanded="False"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1IPI_CNPJProd: TcxDBEditorRow]
+=
+AParentID="CategIPI"
+Index=0
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1IPI_CST: TcxDBEditorRow]
+=
+AParentID="CategIPI"
+Index=1
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1IPI_clEnq: TcxDBEditorRow]
+=
+AParentID="CategIPI"
+Index=2
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1IPI_cEnq: TcxDBEditorRow]
+=
+AParentID="cxDBVerticalGrid1IPI_clEnq"
+Index=0
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1IPI_cSelo: TcxDBEditorRow]
+=
+AParentID="cxDBVerticalGrid1IPI_clEnq"
+Index=1
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1IPI_qSelo: TcxDBEditorRow]
+=
+AParentID="cxDBVerticalGrid1IPI_clEnq"
+Index=2
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1IPI_vBC: TcxDBEditorRow]
+=
+AParentID="CategIPI"
+Index=3
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1IPI_qUnid: TcxDBEditorRow]
+=
+AParentID="CategIPI"
+Index=4
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1IPI_vUnid: TcxDBEditorRow]
+=
+AParentID="CategIPI"
+Index=5
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1IPI_pIPI: TcxDBEditorRow]
+=
+AParentID="CategIPI"
+Index=6
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1IPI_vIPI: TcxDBEditorRow]
+=
+AParentID="CategIPI"
+Index=7
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/CategPIS: TcxCategoryRow]
+=
+Caption="PIS"
+AParentID="-1"
+Index=5
+Visible="True"
+Height=-1
+Expanded="False"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1PIS_CST: TcxDBEditorRow]
+=
+AParentID="CategPIS"
+Index=0
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1PIS_vBC: TcxDBEditorRow]
+=
+AParentID="CategPIS"
+Index=1
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1PIS_pPIS: TcxDBEditorRow]
+=
+AParentID="CategPIS"
+Index=2
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1PIS_vPIS: TcxDBEditorRow]
+=
+AParentID="CategPIS"
+Index=3
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1PIS_qBCProd: TcxDBEditorRow]
+=
+AParentID="CategPIS"
+Index=4
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1PIS_vAliqProd: TcxDBEditorRow]
+=
+AParentID="CategPIS"
+Index=5
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/CategPISST: TcxCategoryRow]
+=
+Caption="PIS ST"
+AParentID="-1"
+Index=6
+Visible="True"
+Height=-1
+Expanded="False"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1PISST_vBc: TcxDBEditorRow]
+=
+AParentID="CategPISST"
+Index=0
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1PISST_pPis: TcxDBEditorRow]
+=
+AParentID="CategPISST"
+Index=1
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1PISST_qBCProd: TcxDBEditorRow]
+=
+AParentID="CategPISST"
+Index=2
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1PISST_vAliqProd: TcxDBEditorRow]
+=
+AParentID="CategPISST"
+Index=3
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1PISST_vPIS: TcxDBEditorRow]
+=
+AParentID="CategPISST"
+Index=4
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/CategII: TcxCategoryRow]
+=
+Caption="IMPORTAÇÃO"
+AParentID="-1"
+Index=7
+Visible="True"
+Height=-1
+Expanded="False"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1II_vBc: TcxDBEditorRow]
+=
+AParentID="CategII"
+Index=0
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1II_vDespAdu: TcxDBEditorRow]
+=
+AParentID="CategII"
+Index=1
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1II_vII: TcxDBEditorRow]
+=
+AParentID="CategII"
+Index=2
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1II_vIOF: TcxDBEditorRow]
+=
+AParentID="CategII"
+Index=3
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/CategCOFINS: TcxCategoryRow]
+=
+Caption="COFINS"
+AParentID="-1"
+Index=8
+Visible="True"
+Height=-1
+Expanded="False"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1COFINS_CST: TcxDBEditorRow]
+=
+AParentID="CategCOFINS"
+Index=0
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1COFINS_vBC: TcxDBEditorRow]
+=
+AParentID="CategCOFINS"
+Index=1
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1COFINS_pCOFINS: TcxDBEditorRow]
+=
+AParentID="CategCOFINS"
+Index=2
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1COFINS_vCOFINS: TcxDBEditorRow]
+=
+AParentID="CategCOFINS"
+Index=3
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1COFINS_qBCProd: TcxDBEditorRow]
+=
+AParentID="CategCOFINS"
+Index=4
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1COFINS_vAliqProd: TcxDBEditorRow]
+=
+AParentID="CategCOFINS"
+Index=5
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/CAtegCOFINSST: TcxCategoryRow]
+=
+Caption="COFINS ST"
+AParentID="-1"
+Index=9
+Visible="True"
+Height=-1
+Expanded="False"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1COFINSST_vBC: TcxDBEditorRow]
+=
+AParentID="CAtegCOFINSST"
+Index=0
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1COFINSST_pCOFINS: TcxDBEditorRow]
+=
+AParentID="CAtegCOFINSST"
+Index=1
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1COFINSST_qBCProd: TcxDBEditorRow]
+=
+AParentID="CAtegCOFINSST"
+Index=2
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1COFINSST_vAliqProd: TcxDBEditorRow]
+=
+AParentID="CAtegCOFINSST"
+Index=3
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1COFINSST_vCOFINS: TcxDBEditorRow]
+=
+AParentID="CAtegCOFINSST"
+Index=4
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/CategISS: TcxCategoryRow]
+=
+Caption="ISSQN"
+AParentID="-1"
+Index=10
+Visible="True"
+Height=-1
+Expanded="False"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1ISSQN_SitTrib: TcxDBEditorRow]
+=
+AParentID="CategISS"
+Index=0
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1ISSQN_vBC: TcxDBEditorRow]
+=
+AParentID="CategISS"
+Index=1
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1ISSQN_vAliq: TcxDBEditorRow]
+=
+AParentID="CategISS"
+Index=2
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1ISSQN_vISSQN: TcxDBEditorRow]
+=
+AParentID="CategISS"
+Index=3
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1ISSQN_cMunFG: TcxDBEditorRow]
+=
+AParentID="CategISS"
+Index=4
+Visible="True"
+Height=-1
+Expanded="True"
+
+[cxDBVerticalGrid1/cxDBVerticalGrid1ISSQN_cListServ: TcxDBEditorRow]
+=
+AParentID="CategISS"
+Index=5
+Visible="True"
+Height=-1
+Expanded="True"
+

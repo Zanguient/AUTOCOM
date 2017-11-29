@@ -1,0 +1,23 @@
+﻿[Main]
+Version=2
+
+[frmMain.TbvLacre: TcxGridDBTableView]
+=
+Footer="False"
+GroupByBox="False"
+GroupFooters=0
+NewItemRow="False"
+EditFormUseDefaultLayout="True"
+Version=1
+
+[frmMain.TbvLacre/TbvLacrenlacre: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=277
+AlignmentHorz=0
+Index=0
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+

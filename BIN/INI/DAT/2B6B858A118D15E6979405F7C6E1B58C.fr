@@ -1,0 +1,6 @@
+[TfrmCadVendedor]
+FormVersion=0
+tbvnome_Tag=0
+tbvnomered_Tag=0
+w=0
+h=0

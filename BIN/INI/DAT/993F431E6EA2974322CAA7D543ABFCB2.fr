@@ -1,0 +1,8 @@
+[TfrmPesqNCM]
+FormVersion=0
+tbvcod_nbm_Tag=0
+tbvcod_ncm_Tag=0
+tbvdescr_nbm_Tag=1
+tbvdescr_ncm_Tag=0
+w=0
+h=0

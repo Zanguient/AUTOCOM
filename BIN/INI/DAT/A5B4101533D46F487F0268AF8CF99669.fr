@@ -1,0 +1,7 @@
+[TfrmCadConvenio]
+FormVersion=0
+tbvCNPJ_Tag=0
+tbvNOME_Tag=1
+tbvRAZAOSOCIAL_Tag=0
+w=0
+h=0

@@ -1,0 +1,110 @@
+﻿[Main]
+Version=2
+
+[frmPDV.tbv: TcxGridDBTableView]
+=
+Footer="False"
+GroupByBox="False"
+GroupFooters=0
+NewItemRow="False"
+Version=1
+
+[frmPDV.tbv/tbvnItem: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=46
+AlignmentHorz=1
+Index=0
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmPDV.tbv/tbvcEAN: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=76
+AlignmentHorz=0
+Index=1
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmPDV.tbv/tbvxProd: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=100
+AlignmentHorz=0
+Index=2
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmPDV.tbv/tbvuCom: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=46
+AlignmentHorz=0
+Index=3
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmPDV.tbv/tbvvUnCom: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=74
+AlignmentHorz=1
+Index=4
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmPDV.tbv/tbvqCom: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=41
+AlignmentHorz=1
+Index=5
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmPDV.tbv/tbvvDesc: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=45
+AlignmentHorz=1
+Index=6
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmPDV.tbv/tbvvProd: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=74
+AlignmentHorz=1
+Index=7
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmPDV.tbv/tbvecf_aliq: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=32
+AlignmentHorz=0
+Index=8
+Visible="False"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+

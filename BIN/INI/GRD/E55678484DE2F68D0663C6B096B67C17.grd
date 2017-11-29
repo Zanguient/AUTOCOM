@@ -1,0 +1,45 @@
+﻿[Main]
+Version=2
+
+[frmCadOperador.tbvSegur: TcxGridDBTableView]
+=
+Footer="False"
+GroupByBox="False"
+GroupFooters=0
+NewItemRow="False"
+EditFormUseDefaultLayout="True"
+Version=1
+
+[frmCadOperador.tbvSegur/tbvSegurcaption: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=229
+AlignmentHorz=0
+Index=0
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmCadOperador.tbvSegur/tbvSegurchave: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=150
+AlignmentHorz=0
+Index=1
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmCadOperador.tbvSegur/tbvSegurbotao: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=50
+AlignmentHorz=2
+Index=2
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+

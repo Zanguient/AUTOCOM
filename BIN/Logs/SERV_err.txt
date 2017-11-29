@@ -1,0 +1,18 @@
+28/11/2017 13:29:21:205- SQL: select versao,dt_vigencia_fim,chave from ibptax
+
+28/11/2017 14:07:50:188- SQL: select versao,dt_vigencia_fim,chave from ibptax
+
+28/11/2017 14:18:15:465- SQL: select versao,dt_vigencia_fim,chave from ibptax
+
+28/11/2017 15:36:46:721- SQL: select versao,dt_vigencia_fim,chave from ibptax
+
+28/11/2017 15:41:25:131- SQL: select versao,dt_vigencia_fim,chave from ibptax
+
+28/11/2017 15:44:46:306- SQL: select versao,dt_vigencia_fim,chave from ibptax
+
+28/11/2017 15:46:18:802- SQL: select versao,dt_vigencia_fim,chave from ibptax
+
+28/11/2017 21:10:59:338- SQL: select count(*) from nf where Ide_dSaiEnt is null
+
+28/11/2017 21:12:59:176- SQL: select count(*) from nf where Ide_dSaiEnt is null
+

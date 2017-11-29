@@ -1,0 +1,36 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{2D0C8EB8-3469-4093-9BD2-716AAC9B3C35}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="nfe.dproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="nfe">
+			<MSBuild Projects="nfe.dproj"/>
+		</Target>
+		<Target Name="nfe:Clean">
+			<MSBuild Targets="Clean" Projects="nfe.dproj"/>
+		</Target>
+		<Target Name="nfe:Make">
+			<MSBuild Targets="Make" Projects="nfe.dproj"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="nfe"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="nfe:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="nfe:Make"/>
+		</Target>
+		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+	</Project>

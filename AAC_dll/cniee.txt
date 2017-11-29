@@ -1,0 +1,870 @@
+AOKI                          AOKI 1E                       FCP-402   010101
+AOKI                          AOKI 1E                       FCP-500   010102
+ASTICK                        ASTICK 100                    0         020101
+ASTICK                        ASTICK 100                    1BRASFIS.1020102
+ASTICK                        ASTICK L                      0         020201
+ASTICK                        ASTICK L                      1BRASFIS.1020202
+BEMATECH                      Kit ECF-IF FM-20 FI           2.12      030101
+BEMATECH                      MP-20 FI                      2.0       030201
+BEMATECH                      ECF-IF MP-20 FI               2.10      030202
+BEMATECH                      ECF-IF MP-20 FI               2.12      030203
+BEMATECH                      MP-20 FI DUAL                 VER03.15  030301
+BEMATECH                      MP-20 FI DUAL R               VER03.21  030401
+BEMATECH                      MP-20 FI II                   VER.03.00 030501
+BEMATECH                      MP-20 FI II                   03.05     030502
+BEMATECH                      MP-20 FI II                   03.10     030503
+BEMATECH                      MP-20 FI II                   VER03.15  030504
+BEMATECH                      MP-20 FI II                   VER03.22  030505
+BEMATECH                      MP-20 FI II                   VER03.25  030506
+BEMATECH                      MP-20 FI II                   VER03.26  030507
+BEMATECH                      MP-20 FI II                   VER03.31  030508
+BEMATECH                      MP-20 FI II R                 03.00     030601
+BEMATECH                      MP-20 FI II R                 03.10     030602
+BEMATECH                      MP-20 FI II R                 VER03.20  030603
+BEMATECH                      MP-20 FI R                    1.10      030701
+BEMATECH                      MP-2000 TH FI                 01.00.00  030801
+BEMATECH                      MP-2000 TH FI                 01.00.01  030802
+BEMATECH                      MP-2000 TH FI                 01.01.01  030803
+BEMATECH                      MP-2000 TH FI                 01.02.02  030804
+BEMATECH                      MP-2000 TH FI                 01.03.02  030805
+BEMATECH                      MP-2000 TH FI                 01.03.03  030806
+BEMATECH                      MP-2100 TH FI                 01.00.00  030901
+BEMATECH                      MP-2100 TH FI                 01.01.00  030902
+BEMATECH                      MP-2100 TH FI                 01.00.01  030903
+BEMATECH                      MP-2100 TH FI                 01.01.01  030904
+BEMATECH                      MP-25 FI                      01.00.00  031001
+BEMATECH                      MP-25 FI                      01.01.01  031002
+BEMATECH                      MP-25 FI                      01.02.02  031003
+BEMATECH                      MP-25 FI                      01.03.02  031004
+BEMATECH                      MP-25 FI                      01.01.02  031005
+BEMATECH                      MP-30 FI                      2.12      031101
+BEMATECH                      MP-40 FI                      2.12      031201
+BEMATECH                      MP-40 FI                      2.13      031202
+BEMATECH                      MP-40 FI II                   VER.03.00 031301
+BEMATECH                      MP-40 FI II                   03.05     031302
+BEMATECH                      MP-40 FI II                   03.10     031303
+BEMATECH                      MP-40 FI II                   VER03.21  031304
+BEMATECH                      MP-40 FI II R                 03.00     031401
+BEMATECH                      MP-40 FI II R                 03.10     031402
+BEMATECH                      MP-45 FI                      VER03.21  031501
+BEMATECH                      MP-50 FI                      2.12      031601
+BEMATECH                      MP-50 FI                      01.00.00  031602
+BEMATECH                      MP-6000 TH FI                 01.00.00  031701
+BEMATECH                      MP-6000 TH FI                 01.01.01  031702
+BEMATECH                      MP-6000 TH FI                 01.02.02  031703
+BEMATECH                      MP-6000 TH FI                 01.03.02  031704
+BEMATECH                      MP-6000 TH FI                 01.03.03  031705
+BEMATECH                      MP-6000 TH FI                 01.03.04  031706
+BEMATECH                      MP-6100 TH FI                 01.01.02  031801
+BEMATECH                      MP-6100 TH FI                 01.03.02  031802
+BEMATECH                      MP-3000 TH FI                 01.00.00  031901
+BEMATECH                      MP-3000 TH FI                 01.01.00  031902
+BEMATECH                      MP-3000 TH FI                 01.01.01  031903
+BEMATECH                      MP-7000 TH FI                 01.00.01  032001
+BEMATECH                      MP-7000 TH FI                 01.00.02  032002
+BEMATECH                      MP-4000 TH FI                 01.00.01  032101
+BEMATECH                      MP-4000 TH FI                 01.00.02  032102
+BETHA                         BETHA 1E                      FCP-201   040101
+BETHA                         BETHA 2E                      FPE-301   040201
+CHRONOS                       250 1E                        FCP-201   050101
+CHRONOS                       250-1E                        FCP-500   050102
+CHRONOS                       260-1E                        FPE-301   050201
+CHRONOS                       270-2E                        FPE-301   050301
+CHRONOS                       ACC 220                       V3.5      050401
+CHRONOS                       MULTI-50110                   FPO-400   050501
+CORISCO                       CT-7000 V1                    1.10      060101
+CORISCO                       CT-7000 V1                    1.20      060102
+CORISCO                       CT-7000 V2                    V3.00     060201
+CORISCO                       CT-7000 V2A                   3.10      060301
+CORISCO                       CT-7000 V2B                   3.20      060401
+CORISCO                       CT-7000 V2C                   3.30      060501
+CORISCO                       CT-7000 V2D                   3.40      060601
+CORISCO                       CT-7000 V2E                   3.50      060701
+CORISCO                       CT-7000 V3                    1.0       060801
+CORISCO                       CT-7000 V3                    2.0       060802
+CORISCO                       CT-7000 V3                    V3.0      060803
+CORISCO                       CT-7000 V3                    V3.1      060804
+CORISCO                       CT-7000 V3                    V4.00     060805
+CORISCO                       CT-7000 V3                    V4.01     060806
+CORISCO                       CT-7000 V3                    V4.02     060807
+CORISCO                       KIT CT-7000 V2                V4.00     060901
+CORISCO                       KIT CT-7000 V2                V4.01     060902
+CORISCO                       KIT CT-7000 V2                V3.10     060903
+COSMOPOLITAN                  COSMOS/1EFM                   3.00      070101
+COSMOPOLITAN                  COSMOS/2EFC                   1.00      070201
+DARUMA                        FS-2000                       1.00      080101
+DARUMA                        FS-2000                       1.01      080102
+DARUMA                        FS-2000                       1.02      080103
+DARUMA                        FS-2100T                      01.00.00  080201
+DARUMA                        FS-2100T                      01.02.00  080202
+DARUMA                        FS-2100T                      01.03.00  080203
+DARUMA                        FS-2100T                      01.04.00  080204
+DARUMA                        FS-2100T                      01.05.00  080205
+DARUMA                        FS-318                        V1.00     080301
+DARUMA                        FS-318                        1.10      080302
+DARUMA                        FS-318                        1.20      080303
+DARUMA                        FS-335                        1.00      080401
+DARUMA                        FS-345                        1.00      080501
+DARUMA                        FS-345                        V1.10     080502
+DARUMA                        FS-345                        1.11      080503
+DARUMA                        FS-345                        1.20      080504
+DARUMA                        FS-345                        1.22      080505
+DARUMA                        FS-420                        1.00      080601
+DARUMA                        FS-420                        V1.10     080602
+DARUMA                        FS-420                        1.21      080603
+DARUMA                        FS-420                        1.30      080604
+DARUMA                        FS-500                        1.00      080701
+DARUMA                        FS-600                        01.01.00  080801
+DARUMA                        FS-600                        01.02.00  080802
+DARUMA                        FS-600                        010300    080803
+DARUMA                        FS-600                        010400    080804
+DARUMA                        FS-600                        010500    080805
+DARUMA                        FS600USB                      010000    080901
+DARUMA                        FS700L                        010000    081001
+DARUMA                        FS700M                        010100    081101
+DARUMA                        FS700H                        010100    081201
+DARUMA                        MACH 1                        01.00.00  081301
+DARUMA                        MACH 2                        01.00.00  081401
+DARUMA                        MACH 3                        01.00.00  081501
+DATAREGIS                     1Q-EP                         04.02     090101
+DATAREGIS                     1Q-EP                         04.02b    090102
+DATAREGIS                     675-EP                        01.00.00  090201
+DATAREGIS                     BABY                          1.01      090301
+DATAREGIS                     BABY                          01.02     090302
+DATAREGIS                     BABY                          01.03     090303
+DATAREGIS                     DT-12000                      01.00     090401
+DATAREGIS                     DT-12000                      01.01     090402
+DATAREGIS                     DT-12000 TEF                  02.00     090501
+DATAREGIS                     DT-12000 TEF                  02.01     090502
+DATAREGIS                     DT-4000                       05.03     090601
+DATAREGIS                     DT 4000                       05.04     090602
+DATAREGIS                     DT-4000                       05.05     090603
+DATAREGIS                     DT-4000                       05.06     090604
+DATAREGIS                     DT-560                        5.0       090701
+DATAREGIS                     IF 1Q                         04.01     090801
+DATAREGIS                     IF/1                          10.07     090901
+DATAREGIS                     IF/1                          10.09     090902
+DATAREGIS                     IF/1N                         11.07     091001
+DATAREGIS                     IF/1N                         11.09     091002
+DATAREGIS                     IF/2                          09.07     091101
+DATAREGIS                     IF/2                          09.09     091102
+DATAREGIS                     IF/2                          09.10     091103
+DATAREGIS                     IF300-EP                      01.01     091201
+DATAREGIS                     IF300-EP                      01.02     091202
+DATAREGIS                     IF300-EP                      01.02b    091203
+DATAREGIS                     IF300-EP                      01.03     091204
+DATAREGIS                     IF300-EP                      01.04     091205
+DATAREGIS                     IF300-EP                      01.05     091206
+DATAREGIS                     IF300-EP                      01.06     091207
+DATAREGIS                     IF375-EP                      02.01     091301
+DATAREGIS                     IF375-EP                      02.02     091302
+DATAREGIS                     IF375-EP                      02.02b    091303
+DATAREGIS                     IF375-EP                      02.03     091304
+DATAREGIS                     IF375-EP                      02.04     091305
+DATAREGIS                     IF375-EP                      02.05     091306
+DATAREGIS                     IF375-EP                      02.06     091307
+DATAREGIS                     IF950-EP                      03.01     091401
+DATAREGIS                     IF950-EP                      03.02     091402
+DATAREGIS                     IF950-EP                      03.02b    091403
+DATAREGIS                     IF950-EP                      03.03     091404
+DATAREGIS                     LITE                          01.00     091501
+DATAREGIS                     3202-DT                       01.00.00  091601
+DATAREGIS                     3202-DT                       01.00.01  091602
+DATAREGIS                     3202-DT                       01.00.15  091603
+DATAREGIS                     3202-DT                       01.00.16  091604
+DATAREGIS                     3202-DT                       01.00.25  091605
+DATAREGIS                     3202-DT                       01.00.73  091606
+DATAREGIS                     6000-EP                       01.00.00  091701
+DATAREGIS                     6000-EP                       01.00.03  091702
+DATAREGIS                     6000-EP                       01.03.19  091703
+DATAREGIS                     6000-EP                       01.03.22  091704
+DATAREGIS                     6000-EP                       01.03.31  091705
+DATAREGIS                     100-OT                        01.00.00  091801
+DATAREGIS                     MT100                         01.00.47  091901
+DATAREGIS                     MT100                         01.00.77  091902
+DIGIARTE                      2E                            FPE-301   100101
+DIGIARTE                      DGIARTE 1E                    FCP-201   100201
+DIGIARTE                      DIGIARTE 1                    FCP-201   100301
+DIGIARTE                      DIGIARTE 1                    FCP-500   100302
+DIGISAT                       1E                            FCP-201   110101
+DIGISAT                       1E                            FCP-500   110102
+DISMAC                        2001-I                        2.00      120101
+DISMAC                        2001-II                       V:01r00   120201
+DISMAC                        2001-II                       V:01r01   120202
+DISMAC                        404                           VER01.000 120301
+DISMAC                        408i                          VER:01.000120401
+DISMAC                        5020                          1.1       120501
+DISMAC                        5020                          2.4       120502
+DISMAC                        540                           1.0       120601
+DISMAC                        620                           VER: 1.00 120701
+DISMAC                        640                           1.0       120801
+DISMAC                        650R                          VER.1.00  120901
+DISMAC                        7000                          1.2       121001
+EAGLE                         PRINTER 2000                  2.10      130101
+EAGLE                         PRINTER 2000                  2.12      130102
+EAGLE                         PRINTER 2000 II               VER.03.00 130201
+EAGLE                         PRINTER 2000 II               03.10     130202
+EAGLE                         PRINTER 2000 II               VER03.22  130203
+EAGLE                         PRINTER 2000 II               VER03.26  130204
+EAGLE                         PRINTER 2000 II               VER03.30  130205
+EAGLE                         PRINTER 2000 II               VER03.31  130206
+EAGLE                         PRINTER 2000 II R             VER03.21  130301
+EAGLE                         PRINTER 2001                  1.10      130401
+EAGLE                         PRINTER 2002 II               VER03.00  130501
+EAGLE                         PRINTER 2002 II               VER03.21  130502
+EAGLE                         PRINTER 2000 II MFD           01.00.00  130601
+EAGLE                         PRINTER 2000 II MFD           01.00.07  130602
+ELGIN                         10000-S                       V1.0      140101
+ELGIN                         10000-S                       V1.1      140102
+ELGIN                         10000-S                       V1.2      140103
+ELGIN                         10000-S                       V4.2      140104
+ELGIN                         10000-S                       V6.2      140105
+ELGIN                         10000-S                       V5.2      140106
+ELGIN                         10000-S1                      V1.3      140201
+ELGIN                         10000-S1                      V2.3      140202
+ELGIN                         10000-S1                      V3.3      140203
+ELGIN                         10000-S1                      V5.3      140204
+ELGIN                         12000-S                       V2.1      140301
+ELGIN                         12000-S                       V5.1      140302
+ELGIN                         600-2E-OL                     FPO-400   140401
+ELGIN                         800-S                         V.01.000  140501
+ELGIN                         800-S                         V.02.200  140502
+ELGIN                         800-S2                        V1.0      140601
+ELGIN                         ELGIN FIT                     01.00.00  140701
+ELGIN                         ELGIN FIT                     01.00.08  140702
+ELGIN                         IF 400 1E-EP                  FPE-301   140801
+ELGIN                         IF 400 2E                     FPE-301   140901
+ELGIN                         IF 400 2E                     FPE-302   140902
+ELGIN                         IF 500 1E                     FCP-201   141001
+ELGIN                         IF 500 1E                     FCP-500   141002
+ELGIN                         IF 6000TH                     01.00.00  141101
+ELGIN                         IF 6000TH                     01.00.08  141102
+ELGIN                         IF 6000TH                     01.04.00  141103
+ELGIN                         FX7                           01.00.07  141201
+ELGIN                         X5                            01.00.07  141301
+ELGIN                         K                             01.00.01  141401
+ELGIN                         K                             01.00.04  141402
+EPSON                         TM-H6000 FB                   01.00.00  150101
+EPSON                         TM-H6000 FB                   01.01.01  150102
+EPSON                         TM-H6000 FB                   01.02.00  150103
+EPSON                         TM-H6000 FB                   01.06.00  150104
+EPSON                         TM-T88 FB                     01.00.00  150201
+EPSON                         TM-T88 FB                     01.01.00  150202
+EPSON                         TM-T88 FB                     01.06.00  150203
+EPSON                         TM-U675 FB                    01.00.00  150301
+EPSON                         TM-T81 FBII                   01.00.00  150401
+EPSON                         TM-T81 FBII                   01.00.04  150402
+EPSON                         TM-T81 FBII                   01.02.00  150403
+EPSON                         TM-T81 FBII                   01.03.00  150404
+EPSON                         TM-T81 FBII                   01.05.00  150405
+EPSON                         TM-T81 FBII                   01.07.00  150406
+EPSON                         TM-T81 FBII                   01.10.00  150407
+EPSON                         TM-H6000 FBII                 01.02.00  150501
+EPSON                         TM-H6000 FBII                 01.03.00  150502
+EPSON                         TM-H6000 FBII                 01.05.00  150503
+EPSON                         TM-H6000 FBII                 01.07.00  150504
+EPSON                         TM-H6000 FBII                 01.10.00  150505
+EPSON                         TM-T88 FBII                   01.02.00  150601
+EPSON                         TM-T88 FBII                   01.03.00  150602
+EPSON                         TM-T88 FBII                   01.05.00  150603
+EPSON                         TM-T88 FBII                   01.07.00  150604
+EPSON                         TM-T88 FBII                   01.10.00  150605
+EPSON                         TM-T88 FBIII                  01.00.01  150701
+EPSON                         TM-T88 FBIII                  01.00.04  150702
+EPSON                         TM-T81 FBIII                  01.00.01  150801
+EPSON                         TM-T81 FBIII                  01.00.04  150802
+EPSON                         TM-H6000 FBIII                01.00.01  150901
+EPSON                         TM-H6000 FBIII                01.00.04  150902
+GENERAL                       G-3900                        1.0       160101
+GENERAL                       G-3900                        2.0       160102
+GENERAL                       G-3900                        1.1       160103
+GENERAL                       G-3900                        2.1       160104
+GENERAL                       G-880                         V1.0      160201
+GENERAL                       G-880                         V1.1      160202
+GENERAL                       G-910                         V1.0      160301
+GENERAL                       G-910                         V1.1      160302
+GENERAL                       G-910                         V1.2      160303
+GENERAL                       G-910                         V1.3      160304
+GENERAL                       G-910E                        V1.0      160401
+GENERAL                       G-910E                        V1.1      160402
+GENERAL                       G-910E                        V1.2      160403
+GENERAL                       G-910E                        V1.3      160404
+GENERAL                       G-930                         V1.0      160501
+GENERAL                       G-930                         V1.1      160502
+GENERAL                       G-930                         V1.2      160503
+GENERAL                       G-930                         V2.0      160504
+GENERAL                       G-930E                        V1.0      160601
+GENERAL                       G-930E                        V1.1      160602
+GENERAL                       G-930E                        V1.2      160603
+GENERAL                       G-930E                        V2.0      160604
+GENERAL                       G-980                         V1.0      160701
+GENERAL                       G-980                         V1.1      160702
+GENERAL                       GP-2000                       V1.0      160801
+GOLD                          1220/20i                      1.00      170101
+GOLD                          1220/50R                      VER: 1.00 170201
+GOLD                          1220/70TR                     1.2       170301
+GOLD                          1220/8i                       VER. 01.00170401
+IBM                           4610-KR4                      01.00.00  180101
+IBM                           4610-KR4                      01.01.02  180102
+IBM                           4610-KR4                      01.03.02  180103
+IBM                           4610-KR4                      01.03.03  180104
+IBM                           4610-KR4                      01.03.04  180105
+IBM                           ECF 4614-001                  TS01.00   180201
+IBM                           4679-3B4                      01.00.00  180301
+IBM                           4679-3BM                      7E        180401
+IBM                           4679-3BM                      85        180402
+IBM                           4679-3BM                      8C        180403
+IBM                           4679-3BS                      7E        180501
+IBM                           4679-3BS                      85        180502
+IBM                           4679-3BS                      8C        180503
+IBM                           4679-3FB                      4B        180601
+IBM                           4679-3FB                      V60       180602
+IBM                           IB-20 FI II                   VER.03.00 180701
+IBM                           IB 20 FI II                   03.05     180702
+IBM                           IB-20 FI II                   03.10     180703
+IBM                           IB-20 FI II                   VER03.22  180704
+IBM                           IB-20 FI II                   VER03.26  180705
+IBM                           IB-20 FI II                   VER03.31  180706
+IBM                           IB-20 FI II R                 VER03.21  180801
+IBM                           IB-40 FI II                   VER.03.00 180901
+IBM                           IB 40 FI II                   03.05     180902
+IBM                           IB-40 FI II                   03.10     180903
+IBM                           IB-40 FI II                   VER03.21  180904
+IBM                           POS ENTRY                     FCP-201   181001
+IBM                           KIT ECF 4614-001              TS01.00   181101
+IBM                           4610-KN4                      01.00.01  181201
+IBM                           4610-KN4                      01.00.02  181202
+IBM                           4610-SJ6                      01.00.01  181301
+IBM                           4610-KJ4                      01.00.02  181401
+iCASH                         IF-II                         01.00.00  190101
+INFOTÉCNICA                   EXCELER 1E                    FCP-201   200101
+INFOTÉCNICA                   EXCELER 2E                    FPE-301   200201
+IONICS                        IONICS 1E                     FCP-201   210101
+IONICS                        IONICS 1E                     FCP-400   210102
+IONICS                        IONICS 2E                     FPE-301   210201
+ITAUTEC                       INFOWAY 1E T1                 01.00.00  220101
+ITAUTEC                       INFOWAY 1E T1                 01.01.00  220102
+ITAUTEC                       INFOWAY 1E T1                 01.01.02  220103
+ITAUTEC                       INFOWAY 1E T1                 01.01.04  220104
+ITAUTEC                       INFOWAY 1E T1                 01.01.05  220105
+ITAUTEC                       INFOWAY 1E T1                 01.02.03  220106
+ITAUTEC                       POS 4000 1E                   V6.00     220201
+ITAUTEC                       POS 4000 3E                   V6.00     220301
+ITAUTEC                       POS 4000 3E BR                V6.00     220401
+ITAUTEC                       POS 4000 IF/1E                V6.01     220501
+ITAUTEC                       POS 4000 IF/1E                V6.02     220502
+ITAUTEC                       POS 4000 IF/1E                V6.03     220503
+ITAUTEC                       POS 4000 IF/1E BR             V6.01     220601
+ITAUTEC                       POS 4000 IF/1E BR             V7.00     220602
+ITAUTEC                       POS 4000 IF/1E II             V1.00     220701
+ITAUTEC                       POS 4000 IF/3E                V6.01     220801
+ITAUTEC                       POS 4000 IF/3E                V6.02     220802
+ITAUTEC                       POS 4000 IF/3E                V6.03     220803
+ITAUTEC                       POS 4000 IF/3E BR             V6.01     220901
+ITAUTEC                       POS 4000 IF/3E BR             V7.00     220902
+ITAUTEC                       POS 4000 IF/3E II             V1.00     221001
+ITAUTEC                       POS ECF IF/1E M               FCP-201   221101
+ITAUTEC                       POS ECF IF/2E M               FPE-301   221201
+ITAUTEC                       POS-4000 IF/3                 5.1       221301
+ITAUTEC                       KIT ECF-IF/3E                 V6.00     221401
+ITAUTEC                       KIT ECF-IF/1E                 V6.00     221501
+ITAUTEC                       KIT POS 4000 ECF-IF/1E        V6.01     221601
+ITAUTEC                       KIT POS 4000 ECF-IF/1E        V6.02     221602
+ITAUTEC                       KIT POS 4000 ECF-IF/3E        V6.01     221701
+ITAUTEC                       KIT POS 4000 ECF-IF/3E        V6.02     221702
+ITAUTEC                       QW PRINTER 1E T3              01.00.01  221801
+ITAUTEC                       INFOWAY 1E T2                 01.00.05  221901
+ITAUTEC                       INFOWAY 1E T2                 01.01.03  221902
+ITAUTEC                       KUBUS 1EF                     01.00.05  222001
+ITAUTEC                       KUBUS 1EF                     01.01.03  222002
+ITAUTEC                       QW PRINTER 6000 MT2           01.00.05  222101
+ITAUTEC                       QW PRINTER 6000 MT2           01.01.03  222102
+MECAF                         1E-3001                       FPE-301   230101
+MECAF                         1E-3001                       FPE-003   230102
+MECAF                         1E-3001                       FPE-002   230103
+MECAF                         2E-3002                       FPE-301   230201
+MECAF                         2E-3002                       FPE-003   230202
+MECAF                         2E-3002                       FPE-002   230203
+MECAF                         2E-3002                       FPE-302   230204
+MECAF                         2E-4002                       FPO-302   230301
+MECAF                         2E-4002                       FPO-400   230302
+MECAF                         COMPACT FCR                   FCP-400   230401
+MECAF                         COMPACT FCR                   FCP-402   230402
+MECAF                         COMPACT FCR                   FCP-500   230403
+MECAF                         COMPACT FISCAL                FCP0000.00230501
+MECAF                         COMPACT FISCAL                FCP-000   230502
+MECAF                         COMPACT FISCAL                FCP-001   230503
+MECAF                         COMPACT FISCAL                FCP-002   230504
+MECAF                         COMPACT FISCAL                FCP-101   230505
+MECAF                         COMPACT FISCAL                FCP-201   230506
+MICROMAN                      MICROMAN 1E                   FCP-201   240101
+MICROMAN                      MICROMAN 2E                   FPE-301   240201
+MICROTEC                      EXATTO ECF                    3.01      250101
+NCR                           ECF-IF 7141                   02.10     260101
+NCR                           ECF-IF 7141                   02.11     260102
+NCR                           ECF-IF 7141                   V:02.12   260103
+NCR                           ECF-IF 7141A                  V03.00    260201
+NCR                           7167                          01.00.00  260301
+NCR                           7167                          01.02.13  260302
+NCR                           7167                          02.01.29  260303
+NCR                           7167                          03.01.01  260304
+NCR                           7197                          01.00.00  260401
+NCR                           7197                          01.02.13  260402
+NCR                           7197                          02.01.29  260403
+NCR                           7197                          03.01.01  260404
+NCR                           72EPS-01                      01.00     260501
+NCR                           72EPS-01                      01.01     260502
+NCR                           72EPS-01                      01.02     260503
+NCR                           72EPS-02                      01.00     260601
+NCR                           72EPS-02                      01.01     260602
+NCR                           72EPS-02                      01.02     260603
+NCR                           7424E2I                       01.00.00  260701
+NCR                           7424E2I                       01.01.00  260702
+NCR                           7445                          01.00     260801
+NCR                           7445                          01.01     260802
+NCR                           7445                          01.02     260803
+NCR                           IF 02-01                      02.00     260901
+NCR                           IF 02-01                      02.01     260902
+NCR                           IF 02-01                      02.02     260903
+NCR                           IF 03-02                      02.00     261001
+NCR                           IF 03-02                      02.01     261002
+NCR                           IF 03-02                      02.02     261003
+NCR                           NCR2003                       V1.00     261101
+NCR                           NCR2050                       V1.00     261201
+OLIVETTI                      PR4/F                         1.00      270101
+OLIVETTI                      PR4/F                         1.10      270102
+OLIVETTI                      PR4/F                         1.20      270103
+OLIVETTI                      PR4/FB                        03.10     270201
+OLIVETTI                      PR4/FSW                       1.0       270301
+OLIVETTI                      PR4/FZ                        03.10     270401
+PERTO                         PERTOCHEK FP                  V2.10     280101
+PERTO                         PERTOCHEK FP                  03.00.00  280102
+PERTO                         PERTOCHEK FP                  03.03.01  280103
+PERTO                         PERTOCHEK FP                  03.03.02  280104
+PERTO                         PERTOCHEK POS FP              V2.10     280201
+PERTO                         PERTOCHEK POS FP              03.00.00  280202
+PERTO                         PERTOPAY 2020                 2.79      280301
+PERTO                         PERTOPAY 2020                 2.63      280302
+PERTO                         PERTOPAY 2040                 2.63      280401
+PERTO                         PERTOPRINTER 1EF              01.00.00  280501
+PERTO                         PERTOPRINTER 1EF              01.00.04  280502
+PERTO                         PERTOPRINTER II 1EF           01.00.18  280601
+PERTO                         PERTOPRINTER II 1EF           01.01.01  280602
+PROCOMP                       2001                          FPE-002   290101
+PROCOMP                       2001                          FPE-003   290102
+PROCOMP                       2001                          FPE-301   290103
+PROCOMP                       2002                          FPE-001   290201
+PROCOMP                       2002                          FPE-002   290202
+PROCOMP                       2002                          FPE-003   290203
+PROCOMP                       2002                          FPE-301   290204
+PROCOMP                       2002                          FPE-302   290205
+PROCOMP                       2003                          FPO-400   290301
+PROCOMP                       2011                          FCP-001   290401
+PROCOMP                       2011                          FCP-002   290402
+PROCOMP                       2011                          FCP-101   290403
+PROCOMP                       2011                          FCP-201   290404
+PROCOMP                       2011                          FCP-500   290405
+PROCOMP                       2021                          FCP-402   290501
+PROCOMP                       2023                          FPO-400   290601
+QUALID                        CASH TOP ECF-IF               2.00      300101
+QUALID                        CASH TOP ECF-PDV              2.00      300201
+QUATTRO                       EASY APF                      01.00     310101
+QUATTRO                       EASY APF                      01.02     310102
+QUATTRO                       EASY APF                      01.03     310103
+QUATTRO                       EASY APF                      01.04     310104
+QUATTRO                       EASY APF                      02.00     310105
+QUATTRO                       EASY IIF                      02.00     310201
+QUATTRO                       TKT40                         01.00.00  310301
+ROBOMARKET                    IF S-7000 I                   2.0       320101
+ROBOMARKET                    IF S-7000 II                  2.0       320201
+ROBOMARKET                    IF S-7000 III                 2.0       320301
+ROBOMARKET                    RM 1                          FCP-002   320401
+ROBOMARKET                    RM 1                          FCP-201   320402
+ROBOMARKET                    RM 1E                         FPE-003   320501
+ROBOMARKET                    RM 1E                         FPE-301   320502
+ROBOMARKET                    RM 2E                         FPE-003   320601
+ROBOMARKET                    RM 2E                         FPE-301   320602
+ROBOMARKET                    S-2050                        2.0       320701
+ROR                           IF ROR 1E                     FCP-001   330101
+ROR                           IF ROR 1E                     FCP-002   330102
+ROR                           IF ROR 1E                     FCP-101   330103
+ROR                           IF ROR 1E                     FCP-201   330104
+SCHALTER                      D-PRINT                       V.2.03    340101
+SCHALTER                      D-PRINT                       2.04      340102
+SCHALTER                      D-PRINT ECF                   3.00      340201
+SCHALTER                      D-PRINT ECF                   3.01      340202
+SCHALTER                      D PRINT ECF                   3.03      340203
+SCHALTER                      SCFI-1E                       3.01      340301
+SCHALTER                      SCFI 1E                       3.03      340302
+SCHALTER                      SCFI 1E                       3.05      340303
+SCHALTER                      SCFI-1E                       3.06      340304
+SCHALTER                      S-PRINT                       2.00      340401
+SCHALTER                      S-PRINT                       2.01      340402
+SCHALTER                      S-PRINT                       V2.02     340403
+SCHALTER                      S-PRINT                       V2.03     340404
+SCHALTER                      S-PRINT                       2.04      340405
+SCHALTER                      S-PRINT ECF                   3.00      340501
+SCHALTER                      S-PRINT ECF                   3.01      340502
+SCHALTER                      S PRINT ECF                   3.03      340503
+SCHALTER                      T-PRINT                       2.00      340601
+SCHALTER                      T-PRINT                       2.01      340602
+SCHALTER                      T-PRINT                       V2.02     340603
+SCHALTER                      T-PRINT                       V2.03     340604
+SCHALTER                      T-PRINT                       2.04      340605
+SID                           ECF-PDV 6001                  2.01      350101
+SID                           ECF-PDV 6001                  V2.02     350102
+SID                           ECF-PDV 6001                  V2.03     350103
+SID                           ECF-PDV 6001                  2.04      350104
+SID                           6002                          3.00      350201
+SID                           6404                          2.00      350301
+SID                           6404                          2.01      350302
+SID                           6404                          2.02      350303
+SID                           6404                          2.03      350304
+SID                           6404                          2.04      350305
+SID                           6417                          2.00      350401
+SID                           6417                          2.01      350402
+SID                           6417                          V2.02     350403
+SID                           6417                          V2.03     350404
+SID                           6417                          2.04      350405
+SID                           6454 PRINT PLUS FS-200G       3.0       350501
+SID                           6457                          3.00      350601
+SID                           6458                          3.00      350701
+SID                           6459                          FSC-000   350801
+SID                           6459                          FSC-001   350802
+SID                           6460                          FSE-001   350901
+SID                           6460                          FSE-002   350902
+SID                           6460                          FSE-201   350903
+SID                           6461                          V.2.03    351001
+SID                           PR-45                         01.00     351101
+SID                           ECF SID PR-45                 01.00     351201
+SID                           ECF SID PR-45                 01.01     351202
+SID                           ECF SID PR-45                 01.02     351203
+SID                           KIT ECF-PDV 6001              V2.03     351301
+SID                           KIT ECF-PDV 6001              V2.04     351302
+SIGTRON                       FS-110                        2.0       360101
+SIGTRON                       FS-317                        1.00      360201
+SIGTRON                       FS-367                        1.00      360301
+SIGTRON                       PRINT PLUS FS-100             2.00      360401
+SIGTRON                       PRINT PLUS FS-200             3.00      360501
+SIGTRON                       PRINT PLUS FS-200G            3.00      360601
+SIGTRON                       PRINT PLUS FS-210             3.00      360701
+SIGTRON                       PRINT PLUS FS-215             3.00      360801
+SIGTRON                       PRINT PLUS FS-220             1.00      360901
+SIGTRON                       PRINT PLUS FS-220             1.01      360902
+SIGTRON                       PRINT PLUS FS-225             1.0       361001
+SIGTRON                       PRINT PLUS FS-225             1.01      361002
+SIGTRON                       PRINT PLUS FS-250             3.0       361101
+SIGTRON                       PRINT PLUS FS-250G            3.0       361201
+SIGTRON                       PRINT PLUS FS-265             3.00      361301
+SIGTRON                       PRINT PLUS FS-300             1.00      361401
+SIGTRON                       PRINT PLUS FS-315             1.00      361501
+SIGTRON                       PRINT PLUS FS-320             1.00      361601
+SIGTRON                       PRINT PLUS FS-325             1.00      361701
+SIGTRON                       PRINT PLUS FS-350             1.00      361801
+SIGTRON                       PRINT PLUS FS-365             1.00      361901
+SIGTRON                       PRINT PLUS FS-368             V1.00     362001
+SIGTRON                       PRINT PLUS FS-370             1.00      362101
+SIGTRON                       PRINT PLUS FS-375             1.00      362201
+SIGTRON                       PRINT PLUS FS-385             1.00      362301
+SIGTRON                       PRINT PLUS FS-395             V1.00     362401
+SONDA                         SIM-67                        01.00.00  370101
+SONDA                         SIM-67                        01.02.13  370102
+SONDA                         SIM-67                        02.01.29  370103
+SONDA                         SIM-67                        03.01.01  370104
+SONDA                         SIM-97                        01.00.00  370201
+SONDA                         SIM-97                        01.02.13  370202
+SONDA                         SIM-97                        02.01.29  370203
+SONDA                         SIM-97                        03.01.01  370204
+SWEDA                         MR 2550                       V.0036    380101
+SWEDA                         MR 2550                       V.3065    380102
+SWEDA                         MR 2570                       B         380201
+SWEDA                         MR 2570                       C         380202
+SWEDA                         MR 2570                       A         380203
+SWEDA                         MR-2571                       A         380301
+SWEDA                         MR-2571                       B         380302
+SWEDA                         MR-2590                       1.02      380401
+SWEDA                         MR-2590                       1.18      380402
+SWEDA                         S-2050                        V02       380501
+SWEDA                         S-2050                        V03       380502
+SWEDA                         S-2070                        V01       380601
+SWEDA                         S-2070                        1.0       380602
+SWEDA                         IF S-7000 I                   V02       380701
+SWEDA                         IF S-7000 I                   V03       380702
+SWEDA                         IF S-7000 I                   V04       380703
+SWEDA                         IF S-7000 I                   1.0       380704
+SWEDA                         IF S-7000 I                   1.5       380705
+SWEDA                         IF S-7000 I                   1.6       380706
+SWEDA                         IF S-7000 IE                  V03       380801
+SWEDA                         IF S-7000 IE                  V04       380802
+SWEDA                         IF S-7000 IE                  1.0       380803
+SWEDA                         IF S-7000 IE                  1.A       380804
+SWEDA                         IF S-7000 IE                  1.5       380805
+SWEDA                         IF S-7000 IE                  1.6       380806
+SWEDA                         IF S-7000 II                  V02       380901
+SWEDA                         IF S-7000 II                  V03       380902
+SWEDA                         IF S-7000 II                  V04       380903
+SWEDA                         IF S-7000 II                  1.0       380904
+SWEDA                         IF S-7000 II                  1.5       380905
+SWEDA                         IF S-7000 II                  1.6       380906
+SWEDA                         IF S-7000 III                 V02       381001
+SWEDA                         IF S-9000 I                   1.1       381101
+SWEDA                         IF S-9000 I                   1.7       381102
+SWEDA                         IF S-9000 IE                  1.1       381201
+SWEDA                         IF S-9000 IE                  1.7       381202
+SWEDA                         IF S-9000 II                  1.0       381301
+SWEDA                         IF S-9000 II                  1.1       381302
+SWEDA                         IF S-9000 IIE                 1.1       381401
+SWEDA                         IF S-9000 IIIE                1.0       381501
+SWEDA                         IF S-9000 IIIE                1.7       381502
+SWEDA                         IF S-9000 PR                  1.10      381601
+SWEDA                         IF ST100                      01.00.03  381701
+SWEDA                         IF ST100                      01.00.04  381702
+SWEDA                         IF ST100                      02.00.00  381703
+SWEDA                         IF ST100                      02.00.01  381704
+SWEDA                         IF ST1000                     01.00.03  381801
+SWEDA                         IF ST1000                     01.00.04  381802
+SWEDA                         IF ST1000                     02.00.03  381803
+SWEDA                         IF ST200                      01.00.01  381901
+SWEDA                         IF ST200                      01.00.05  381902
+SWEDA                         IF ST120                      01.00.01  382001
+SWEDA                         IF ST120                      01.00.05  382002
+SWEDA                         IF ST2000                     01.00.01  382101
+SWEDA                         IF ST2000                     02.00.02  382102
+SWEDA                         IF ST2500                     01.00.05  382201
+SYSDATA                       IF SYSPRINT                   FCP-001   390101
+SYSDATA                       IF SYSPRINT                   FCP-002   390102
+SYSDATA                       IF SYSPRINT                   FCP-101   390103
+SYSDATA                       IF SYSPRINT                   FCP-201   390104
+TERMOPRINTER                  TPF1001                       01.00.00  400101
+TERMOPRINTER                  TPF2001                       01.00.00  400201
+TERMOPRINTER                  TPF2001                       01.00.03  400202
+TERMOPRINTER                  TPF-1002                      01.00.00  400301
+TERMOPRINTER                  TPF-1002                      01.00.01  400302
+TERMOPRINTER                  TPF-1002                      01.00.15  400303
+TERMOPRINTER                  TPF-1002                      01.00.16  400304
+TERMOPRINTER                  TPF-1002                      01.00.25  400305
+TERMOPRINTER                  TPF-1002                      01.00.73  400306
+TERMOPRINTER                  TPF-2002                      01.00.00  400401
+TERMOPRINTER                  TPF-2002                      01.00.03  400402
+TERMOPRINTER                  TPF-2002                      01.03.19  400403
+TERMOPRINTER                  TPF-2002                      01.03.22  400404
+TERMOPRINTER                  TPF-2002                      01.03.31  400405
+TERMOPRINTER                  TPF-1003                      01.00.47  400501
+TERMOPRINTER                  TPF-1004                      01.00.47  400601
+TERMOPRINTER                  TPF-1004                      01.00.77  400602
+TESC                          TS-101                        1.0       410101
+TRENDS                        TRENDS 1.0E                   FCP-201   420101
+TRENDS                        TRENDS 1.0E                   FCP-402   420102
+TRENDS                        TRENDS 1.0E                   FCP-500   420103
+TRENDS                        TRENDS 1.1E                   3.01      420201
+TRENDS                        TRENDS 2.0E                   FPO-400   420301
+TRIX                          FISC-FI R                     VER03.21  430101
+TRIX                          TRIX FISC-FI                  VER03.15  430201
+UNIGRAPH                      UN-FI                         FCP-201   440101
+UNIGRAPH                      UN-FI                         FCP-500   440102
+UNIGRAPH                      UN–FI 2E                      FPO-400   440201
+UNISYS                        BEETLE 4/61 MF                11.07/BR  450101
+UNISYS                        BEETLE 4/61 MF                13.08/BR  450102
+UNISYS                        BEETLE 4/61 MF                11.08/BR  450103
+UNISYS                        BEETLE 4/61-MF                15.09     450104
+UNISYS                        BEETLE 4/61-MF                13.09/BR  450105
+UNISYS                        BEETLE 4/61-MF                15.10     450106
+UNISYS                        KIT BEETLE 4/61-MF            13.08/BR  450201
+UNISYS                        KIT BEETLE 4/61-MF            15.09     450202
+UNISYS                        KIT BEETLE 4/61-MF            13.09/BR  450203
+UNISYS                        KIT BEETLE 4/61-MF            15.10     450204
+UNISYS                        BR400 IF                      VER03.21  450301
+UNISYS                        BR401-IF                      03.10     450401
+UNISYS                        BRB375                        2.12      450501
+UNISYS                        BRB375                        2.13      450502
+UNISYS                        BR-20                         2.10      450601
+UNISYS                        BR-20                         2.12      450602
+UNISYS                        BR-20 IF2                     VER.03.00 450701
+UNISYS                        BR-20 IF2                     03.10     450702
+UNISYS                        BR-20 IF2                     VER03.22  450703
+UNISYS                        BR-20 IF2                     VER03.26  450704
+UNISYS                        BR-20 IF2                     VER03.31  450705
+UNISYS                        BR-40 IF2                     VER.03.00 450801
+UNISYS                        BR-40 IF2                     03.10     450802
+UNISYS                        BR-40 IF2                     VER03.21  450803
+UNISYS                        BR1000-FIM                    2.20      450901
+UNISYS                        BR1001-FIT                    2.20      451001
+UNISYS                        BR1001-FIT                    03.00.00  451002
+UNISYS                        BR1002-EFC                    2.20      451101
+UNISYS                        BR1002-EFC                    03.00.00  451102
+UNISYS                        BR-20 TH                      01.00.00  451201
+UNISYS                        BR-6000 TH                    01.00.00  451301
+URANO                         ZPM/1EF                       1.00      460101
+URANO                         ZPM/1EF                       2.00      460102
+URANO                         ZPM/1EF                       3.00      460103
+URANO                         ZPM/1EF                       3.01      460104
+URANO                         ZPM/1EF                       2.01      460105
+URANO                         ZPM/1EF                       2.02      460106
+URANO                         ZPM/1EF                       4.00      460107
+URANO                         ZPM/1EF                       5.0       460108
+URANO                         URANO/2EFE                    1.00      460201
+URANO                         URANO/2EFE                    1.10      460202
+URANO                         URANO/1EFNF                   1.00      460301
+URANO                         URANO/1EFREST                 1.00      460401
+URANO                         URANO/1EFREST                 2.00      460402
+URANO                         URANO/1EFREST                 3.00      460403
+URANO                         URANO/2EFCR                   1.00      460501
+URANO                         URANO/1EFA                    1.00      460601
+URANO                         URANO/2EFC                    1.00      460701
+URANO                         URANO/2EFC                    2.01      460702
+URANO                         URANO/2EFC                    3.00      460703
+URANO                         KIT URANO EFC/2EFC            4.41      460801
+URANO                         KIT URANO/2EFC                1.00      460901
+URANO                         KIT URANO/2EFC                4.41      460902
+URANO                         KIT URANO/2EFC                2.01      460903
+URANO                         KIT URANO/2EFC                3.00      460904
+URANO                         URANO/1E LOGGER               1.00      461001
+URANO                         URANO/2E LOGGER               1.00      461101
+URANO                         URANO/1FIT LOGGER             2.00      461201
+URANO                         URANO/1FIT LOGGER             2.63      461202
+URANO                         URANO/1FIT LOGGER             03.00.00  461203
+URANO                         URANO/1FIT LOGGER             03.02.00  461204
+URANO                         URANO/1FIT LOGGER             03.02.01  461205
+URANO                         URANO/1FIT LOGGER             03.03.00  461206
+URANO                         URANO/1FIT LOGGER             03.03.04  461207
+URANO                         URANO/2EFC LOGGER             2.00      461301
+URANO                         URANO/1FIM LOGGER             2.00      461401
+URANO                         KIT UR/2EFC LOGGER            2.00      461501
+URANO                         URANO/2EA LOGGER              2.20      461601
+URANO                         KIT UR/2EA LOGGER             2.20      461701
+URANO                         KIT UR/2EF LOGGER             2.63      461801
+URANO                         URANO/3EF LOGGER              V2.10     461901
+URANO                         URANO/3EFC LOGGER             V2.10     462001
+URANO                         URANO/2FTMA LOGGER            2.20      462101
+URANO                         URANO/2FMMO LOGGER            2.20      462201
+URANO                         URANO/1EFC                    3.00      462301
+URANO                         URANO/1EFC                    4.00      462302
+URANO                         URANO/1EFC                    7.00      462303
+URANO                         URANO/1FIREST                 3.00      462401
+URANO                         URANO/1FIREST                 5.04      462402
+URANO                         URANO/2EFCO                   4.00      462501
+URANO                         KIT ECF-IF URANO/1EFNF        1.00      462601
+YANCO                         6000                          1.0       470101
+YANCO                         6000                          V2.1      470102
+YANCO                         6000                          2.0       470103
+YANCO                         6000 PLUS                     V3.0      470201
+YANCO                         6000 PLUS                     V4.0      470202
+YANCO                         6000 PLUS                     V4.1      470203
+YANCO                         6000 PLUS                     V4.2      470204
+YANCO                         6000 PLUS                     V5.0      470205
+YANCO                         6000 PLUS                     V.6.0     470206
+YANCO                         6000 PLUS                     V6.1      470207
+YANCO                         6000 PLUS                     6.1B      470208
+YANCO                         6000 PLUS                     V7.0      470209
+YANCO                         6000I                         1.0I      470301
+YANCO                         6000I                         2.0I      470302
+YANCO                         7000-8                        4.0       470401
+YANCO                         7000-8                        4.0 I     470402
+YANCO                         7000-8                        4.1       470403
+YANCO                         7000-8                        4.1 I     470404
+YANCO                         IF YANCO 8000                 V1.0      470501
+YANCO                         IF YANCO 8000                 V1.1      470502
+YANCO                         IF YANCO 8000                 2.0       470503
+YANCO                         IF YANCO 8000                 2.1       470504
+YANCO                         YANCO 2000                    V1.0      470601
+YANCO                         YANCO 2000                    V2.0      470602
+YANCO                         YANCO 8500                    V2.0      470701
+ZANTHUS                       Z-6100                        01.10     480101
+ZANTHUS                       1E                            01.00     480201
+ZANTHUS                       1E                            01.10     480202
+ZANTHUS                       3E                            01.00     480301
+ZANTHUS                       3E                            01.10     480302
+ZANTHUS                       2E-ECF                        1.20      480401
+ZANTHUS                       2E-ECF                        01.60     480402
+ZANTHUS                       2E-ECF                        01.61     480403
+ZANTHUS                       IZ-10                         02.00     480501
+ZANTHUS                       IZ-11                         03.00     480601
+ZANTHUS                       IZ-20                         02.00     480701
+ZANTHUS                       IZ-21                         03.00     480801
+ZANTHUS                       IZ-21                         03.50     480802
+ZANTHUS                       IZ-22                         04.10     480901
+ZANTHUS                       IZ-41                         03.10     481001
+ZANTHUS                       IZ-51                         04.00     481101
+ZANTHUS                       PRZ4                          1.10      481201
+ZANTHUS                       QZ-1000                       01.02     481301
+ZANTHUS                       QZ-1000                       01.03     481302
+ZANTHUS                       QZ-1000                       01.04     481303
+ZANTHUS                       QZ-1000                       02.00     481304
+ZANTHUS                       QZ-1001                       FCP-500   481401
+ZANTHUS                       QZ-2000                       02.00     481501
+ZPM                           ZPM/1EF                       1.00      490101
+ZPM                           ZPM/1EFM                      1.00      490201
+ZPM                           ZPM/1EFM                      2.00      490202
+ZPM                           ZPM/1EFM                      3.00      490203
+ZPM                           ZPM/1EFM                      2.01      490204
+ZPM                           ZPM/1EFM                      3.01      490205
+ZPM                           ZPM/1EFM                      4.00      490206
+ZPM                           ZPM/1EFM                      5.00      490207
+ZPM                           ZPM/2EFE                      1.00      490301
+ZPM                           ZPM/1EFNF                     1.00      490401
+ZPM                           ZPM/1EFREST                   1.00      490501
+ZPM                           ZPM/1EFREST                   2.00      490502
+ZPM                           ZPM/1EFREST                   3.00      490503
+ZPM                           ZPM/2EFCR                     1.00      490601
+ZPM                           ZPM/1EFA                      1.00      490701
+ZPM                           ZPM/2EFC                      1.00      490801
+ZPM                           ZPM/2EFC                      2.01      490802
+ZPM                           ZPM/2EFC                      3.00      490803
+ZPM                           KIT ZPM/2EFC                  1.00      490901
+ZPM                           KIT ZPM/2EFC                  2.01      490902
+ZPM                           KIT ZPM/2EFC                  3.00      490903
+ZPM                           ZPM/1E LOGGER                 1.00      491001
+ZPM                           ZPM/2E LOGGER                 1.00      491101
+ZPM                           ZPM/1FIT LOGGER               2.00      491201
+ZPM                           ZPM/1FIT LOGGER               03.00.00  491202
+ZPM                           ZPM/1FIT LOGGER               03.02.00  491203
+ZPM                           ZPM/1FIT LOGGER               03.02.01  491204
+ZPM                           ZPM/1FIT LOGGER               03.03.00  491205
+ZPM                           ZPM/1FIT LOGGER               03.03.02  491206
+ZPM                           ZPM/1FIT LOGGER               03.03.04  491207
+ZPM                           ZPM/2EFC LOGGER               2.00      491301
+ZPM                           ZPM/2EFC LOGGER               03.00.00  491302
+ZPM                           ZPM/2EFC LOGGER               03.02.00  491303
+ZPM                           ZPM/2EFC LOGGER               03.02.01  491304
+ZPM                           ZPM/2EFC LOGGER               03.03.00  491305
+ZPM                           ZPM/2EFC LOGGER               03.03.02  491306
+ZPM                           ZPM/2EFC LOGGER               03.03.04  491307
+ZPM                           ZPM/2ECF LOGGER               03.04.00  491308
+ZPM                           ZPM/1FIM LOGGER               2.00      491401
+ZPM                           KIT 2EFC LOGGER               2.00      491501
+ZPM                           ZPM/2EA LOGGER                2.20      491601
+ZPM                           KIT 2EA LOGGER                2.20      491701
+ZPM                           ZPM/3EF LOGGER                V2.10     491801
+ZPM                           ZPM/3EF LOGGER                03.00.00  491802
+ZPM                           ZPM/3EF LOGGER                03.03.01  491803
+ZPM                           ZPM/3EF LOGGER                03.03.02  491804
+ZPM                           ZPM/3EFC LOGGER               V2.10     491901
+ZPM                           ZPM/3EFC LOGGER               03.00.00  491902
+ZPM                           ZPM/2FTMA LOGGER              2.20      492001
+ZPM                           ZPM/2FMMO LOGGER              2.20      492101
+ZPM                           ZPM/1EFC                      3.00      492201
+ZPM                           ZPM/1EFC                      4.00      492202
+ZPM                           ZPM/1EFC                      7.00      492203
+ZPM                           ZPM/1FIREST                   3.00      492301
+ZPM                           ZPM/2EFCO                     4.00      492401
+ZPM                           KIT ECF-IF ZPM/1EFNF          1.00      492501
+ZPM                           ZPM-200                       01.02.03  492601
+ZPM                           ZPM-200                       01.03.00  492602
+ZPM                           ZPM-200                       01.04.03  492603
+ZPM                           ZPM-300                       01.02.03  492701
+ZPM                           ZPM-300                       01.03.00  492702
+ZPM                           ZPM-300                       01.04.00  492703
+ZPM                           ZPM-400                       01.02.03  492801
+ZPM                           ZPM-400                       01.03.00  492802
+ZPM                           ZPM-400                       01.04.00  492803
+ZPM                           ZPM-500                       01.00.06  492901
+INTERWAY                      PRT-100 FI                    01.00.00  500101
+INTERWAY                      PRT-100 FI                    01.00.07  500102
+INTERWAY                      PRT-100 FI                    01.01.00  500103
+PERCEPTION                    P01                           01.00.00  510101
+PERCEPTION                    P01                           01.00.07  510102
+APB                           MSD 6600 IF                   01.00.01  520101
+APB                           MSD 6600 IF                   01.00.04  520102
+AABLAZE                       A400                          01.00.47  530101
+AABLAZE                       S400                          01.00.47  530201
+STRATEMA                      STRFIS                        01.00.04  540101

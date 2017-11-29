@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2013/11/19 19:07:52.000.455,C:\Users\Koplin\Documents\RAD Studio\Projects\Project1.dproj=E:\PROJETOSXE4\VALIDA\softlock.dproj</Transaction>
+    <Transaction>2013/11/19 19:08:38.000.656,=E:\PROJETOSXE4\GERENCIAL\uDM.pas</Transaction>
+    <Transaction>2013/11/19 19:09:06.000.662,=E:\PROJETOSXE4\COMUM\uAutocomConsts.pas</Transaction>
+    <Transaction>2013/11/19 19:09:06.000.610,=E:\PROJETOSXE4\COMUM\soap_server.pas</Transaction>
+    <Transaction>2013/11/19 19:09:06.000.773,=E:\PROJETOSXE4\COMUM\uMD5Print.pas</Transaction>
+    <Transaction>2013/11/19 19:09:06.000.724,=E:\PROJETOSXE4\COMUM\uFuncoes.pas</Transaction>
+    <Transaction>2013/11/19 19:16:50.000.945,=E:\PROJETOSXE4\COMUM\uTraducao.pas</Transaction>
+    <Transaction>2013/11/19 19:16:50.000.910,=E:\PROJETOSXE4\COMUM\udm_ini.pas</Transaction>
+    <Transaction>2013/11/19 22:51:39.000.387,=E:\PROJETOSXE4\VALIDA\Unit2.pas</Transaction>
+    <Transaction>2013/11/19 22:51:59.000.920,E:\PROJETOSXE4\VALIDA\Unit2.dfm=E:\PROJETOSXE4\VALIDA\uLibera.dfm</Transaction>
+    <Transaction>2013/11/19 22:51:59.000.920,E:\PROJETOSXE4\VALIDA\Unit2.pas=E:\PROJETOSXE4\VALIDA\uLibera.pas</Transaction>
+    <Transaction>2016/02/12 19:27:50.000.033,=Z:\E\PROJETOSXE5\COMUM\uViews.pas</Transaction>
+  </Transactions>
+</BorlandProject>

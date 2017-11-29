@@ -1,0 +1,5 @@
+[TfrmMain]
+FormVersion=0
+w=1034
+h=584
+data_atu=28/11/2017

@@ -1,0 +1,9 @@
+[TfrmCadPlanoContas]
+FormVersion=0
+tbvplano_Tag=1
+tbvnivel_Tag=0
+tbvdescricao_Tag=0
+tbvconta_Tag=0
+tbvabrev_Tag=0
+w=0
+h=0

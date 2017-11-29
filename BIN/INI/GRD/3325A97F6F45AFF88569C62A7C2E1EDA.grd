@@ -1,0 +1,77 @@
+﻿[Main]
+Version=2
+
+[frmCadAliq.tbv: TcxGridDBTableView]
+=
+Footer="False"
+GroupByBox="False"
+GroupFooters=0
+NewItemRow="False"
+Version=1
+
+[frmCadAliq.tbv/tbvid: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=36
+AlignmentHorz=2
+Index=0
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmCadAliq.tbv/tbvnome: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=144
+AlignmentHorz=0
+Index=1
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmCadAliq.tbv/tbvcod_if: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=67
+AlignmentHorz=2
+Index=2
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmCadAliq.tbv/tbvicms: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=74
+AlignmentHorz=1
+Index=3
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmCadAliq.tbv/tbvcod_prod: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=74
+AlignmentHorz=1
+Index=4
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmCadAliq.tbv/tbvusa: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=57
+AlignmentHorz=2
+Index=5
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+

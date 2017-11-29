@@ -1,0 +1,6 @@
+[TfrmPesqProd]
+FormVersion=0
+tbvnome_Tag=1
+tbvcod_gtin_Tag=0
+w=0
+h=0

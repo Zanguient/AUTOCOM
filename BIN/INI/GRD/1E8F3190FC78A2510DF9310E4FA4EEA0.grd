@@ -1,0 +1,66 @@
+﻿[Main]
+Version=2
+
+[frmMain.tbvSaiMed: TcxGridDBTableView]
+=
+Footer="False"
+GroupByBox="False"
+GroupFooters=0
+NewItemRow="False"
+Version=1
+
+[frmMain.tbvSaiMed/tbvSaiMedid: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=40
+AlignmentHorz=1
+Index=0
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmMain.tbvSaiMed/tbvSaiMedean: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=103
+AlignmentHorz=0
+Index=1
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmMain.tbvSaiMed/tbvSaiMednome: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=282
+AlignmentHorz=0
+Index=2
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmMain.tbvSaiMed/tbvSaiMedlote: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=79
+AlignmentHorz=0
+Index=3
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+
+[frmMain.tbvSaiMed/tbvSaiMedquant: TcxGridDBColumn]
+=
+GroupIndex=-1
+Width=51
+AlignmentHorz=1
+Index=4
+Visible="True"
+SortOrder="soNone"
+SortIndex=-1
+WasVisibleBeforeGrouping="False"
+

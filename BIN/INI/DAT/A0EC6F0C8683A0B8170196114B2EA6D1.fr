@@ -1,0 +1,8 @@
+[TfrmCadModeloNF]
+FormVersion=0
+tbvnome_Tag=0
+tbvmodelo_Tag=0
+tbvid_Tag=0
+tbvcom_itens_Tag=0
+w=0
+h=0

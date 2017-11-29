@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2013/11/08 14:56:13.000.284,=C:\Documents and Settings\Administrador\Meus documentos\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2015/04/18 14:40:49.000.118,Z:\E\PROJETOSXE2\K-VENDAS2008\PRJ\FARMA\VIDALINK\LeProdutoLoja.dproj=C:\Documents and Settings\Administrador\Meus documentos\RAD Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2015/04/18 21:40:48.000.793,=Z:\E\PROJETOSXE2\K-VENDAS2008\PRJ\DM\uDM1.pas</Transaction>
+    <Transaction>2015/04/18 22:10:45.000.005,=Z:\E\PROJETOSXE2\COMUM\Ping.pas</Transaction>
+    <Transaction>2015/04/18 22:10:46.000.395,=Z:\E\PROJETOSXE2\COMUM\uCfg.pas</Transaction>
+    <Transaction>2015/04/18 22:16:10.000.429,=Z:\E\PROJETOSXE2\COMUM\uFuncoes.pas</Transaction>
+    <Transaction>2015/04/18 22:16:36.000.788,=Z:\E\PROJETOSXE2\COMUM\uMD5Print.pas</Transaction>
+    <Transaction>2015/09/02 19:59:10.000.338,=Z:\E\PROJETOSXE2\K-VENDAS2008\PRJ\DM\FastShareMem.pas</Transaction>
+    <Transaction>2015/09/03 16:37:39.000.332,=Z:\E\PROJETOSXE5\COMUM\FastShareMem.pas</Transaction>
+    <Transaction>2015/09/03 16:37:39.000.785,=Z:\E\PROJETOSXE5\COMUM\uMD5Print.pas</Transaction>
+    <Transaction>2015/09/03 16:37:39.000.597,=Z:\E\PROJETOSXE5\COMUM\udm_ini.pas</Transaction>
+    <Transaction>2015/09/03 16:37:39.000.698,=Z:\E\PROJETOSXE5\COMUM\uFuncoes.pas</Transaction>
+    <Transaction>2015/09/03 16:39:09.000.960,=Z:\E\PROJETOSXE5\GERENCIAL\uDM.pas</Transaction>
+    <Transaction>2015/09/03 17:01:27.000.781,=Z:\E\PROJETOSXE5\COMUM\uAutocomConsts.pas</Transaction>
+    <Transaction>2015/09/03 17:01:27.000.854,=Z:\E\PROJETOSXE5\COMUM\uConsts.pas</Transaction>
+    <Transaction>2015/09/03 17:01:27.000.925,=Z:\E\PROJETOSXE5\COMUM\uPing.pas</Transaction>
+    <Transaction>2015/09/03 17:01:28.000.006,=Z:\E\PROJETOSXE5\COMUM\uTraducao.pas</Transaction>
+    <Transaction>2015/09/03 17:02:55.000.496,Z:\E\PROJETOSXE5\COMUM\uPing.pas=</Transaction>
+  </Transactions>
+</BorlandProject>
