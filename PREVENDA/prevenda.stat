@@ -1,9 +1,17 @@
 [Stats]
+<<<<<<< .mine
 EditorSecs=1121
 DesignerSecs=58
 InspectorSecs=13
 CompileSecs=173489
 OtherSecs=789
+=======
+EditorSecs=1110
+DesignerSecs=39
+InspectorSecs=12
+CompileSecs=157932
+OtherSecs=744
+>>>>>>> .theirs
 StartTime=28/11/2017 21:13:36
 RealKeys=0
 EffectiveKeys=0

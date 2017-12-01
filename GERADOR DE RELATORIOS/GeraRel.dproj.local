@@ -10,11 +10,20 @@
     <Transaction>2013/03/12 14:46:11.000.107,C:\Users\koplin\Documents\RAD Studio\Projects\Unit1.pas=E:\PROJETOS\GERADOR DE RELATORIOS\uMain.pas</Transaction>
     <Transaction>2013/03/12 14:46:40.000.196,C:\Users\koplin\Documents\RAD Studio\Projects\Project1.dproj=E:\PROJETOS\GERADOR DE RELATORIOS\GeraRel.dproj</Transaction>
     <Transaction>2013/03/12 14:47:42.000.092,=E:\PROJETOS\COMUM\uAutocomConsts.pas</Transaction>
+<<<<<<< .mine
     <Transaction>2013/03/12 14:47:42.000.239,=E:\PROJETOS\COMUM\uTraducao.pas</Transaction>
     <Transaction>2013/03/12 14:47:42.000.155,=E:\PROJETOS\COMUM\uMD5Print.pas</Transaction>
+=======
+    <Transaction>2013/03/12 14:47:42.000.239,=E:\PROJETOS\COMUM\uTraducao.pas</Transaction>
+
+>>>>>>> .theirs
     <Transaction>2013/03/12 14:47:42.000.062,=E:\PROJETOS\COMUM\FastShareMem.pas</Transaction>
     <Transaction>2013/03/12 14:47:42.000.022,=E:\PROJETOS\COMUM\Extensos.pas</Transaction>
+<<<<<<< .mine
     <Transaction>2013/03/12 14:47:42.000.128,=E:\PROJETOS\COMUM\uFuncoes.pas</Transaction>
+=======
+    <Transaction>2013/03/12 14:47:42.000.155,=E:\PROJETOS\COMUM\uMD5Print.pas</Transaction>
+>>>>>>> .theirs
     <Transaction>2013/03/12 14:50:40.000.097,=E:\PROJETOS\GERADOR DE RELATORIOS\uDM.pas</Transaction>
     <Transaction>2013/03/12 15:01:03.000.392,=E:\PROJETOS\GERADOR DE RELATORIOS\uVisual.pas</Transaction>
     <Transaction>2013/03/12 15:09:30.000.546,=E:\PROJETOS\GERADOR DE RELATORIOS\uprn.pas</Transaction>
