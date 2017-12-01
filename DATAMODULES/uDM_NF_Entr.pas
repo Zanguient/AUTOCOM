@@ -9,7 +9,8 @@ uses
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
   FireDAC.UI.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Phys,
   FireDAC.Stan.ExprFuncs, FireDAC.Phys.SQLite, FireDAC.Comp.Client,
-  FireDAC.Comp.DataSet, ACBrBase, ACBrDFe, pcnConversao;
+  FireDAC.Comp.DataSet, ACBrBase, ACBrDFe, pcnConversao, FireDAC.Phys.SQLiteDef,
+  FireDAC.ConsoleUI.Wait;
 
 type
   TDM_NF_Entr = class(TDataModule)
@@ -833,7 +834,8 @@ implementation
 
 {%CLASSGROUP 'System.Classes.TPersistent'}
 
-uses uDM, uFuncoes, uAutocomConsts, udm_ini, uConverteEmitInform, uDadosItemNF;
+uses uDM, uFuncoes, uAutocomConsts, udm_ini, uConverteEmitInform, uDadosItemNF,
+  uDM_Conn;
 
 {$R *.dfm}
 
@@ -1221,24 +1223,24 @@ begin
       if Length(s) = 14 then //remove o 0 no inicio, se houver
          s := copy(s,2,13);
 
-      DM.Q1.Open('select count(*) from estoque where cod_gtin=' + Texto_Mysql(s));
+      DMConn.Q1.Open('select count(*) from estoque where cod_gtin=' + Texto_Mysql(s));
 
-      if DM.Q1.Fields[0].AsInteger > 1 then
+      if DMConn.Q1.Fields[0].AsInteger > 1 then
          raise Exception.Create('Há mais de um produto cadastrado com o código ' + s);
 
-      DM.Q1.Open('select fn_id_prod(' + Texto_Mysql(s) + ');');//localiza o id do produto
-      i := DM.Q1.Fields[0].AsInteger;
+      DMConn.Q1.Open('select fn_id_prod(' + Texto_Mysql(s) + ');');//localiza o id do produto
+      i := DMConn.Q1.Fields[0].AsInteger;
    end;
 
    if i= 0 then  //se nao achou, procura na tabela prod_nf_forn
    begin
       try
-         DM.Q1.Open('select fn_id_prod_forn('  +
+         DMConn.Q1.Open('select fn_id_prod_forn('  +
                              Texto_Mysql(DM_NF_Entr.cdNF_ItemcProd.AsString) + ',' +
                              Texto_Mysql(cdNFEmit_CNPJCPF.AsString) + ');'
 
          );
-         i := DM.Q1.Fields[0].AsInteger;
+         i := DMConn.Q1.Fields[0].AsInteger;
       except
          i := 0;
       end;
@@ -1248,12 +1250,12 @@ begin
 
    if i > 0 then // se achou
    begin
-      DM.Q1.Open('select * from vw_estoque where id=' + Texto_Mysql(i));
+      DMConn.Q1.Open('select * from vw_estoque where id=' + Texto_Mysql(i));
 
       //insere os valores de venda e ultimo custo
-      cdNF_ItemVR_VENDA.Value   := DM.Q1.FieldByName('vrvenda_vista').AsCurrency;
-      cdNF_ItemULT_CUSTO.Value  := DM.Q1.FieldByName('vrcusto_real').AsCurrency;
-      cdNF_ItemPIS_codrec.Value := DM.Q1.FieldByName('cod_receita').AsInteger;
+      cdNF_ItemVR_VENDA.Value   := DMConn.Q1.FieldByName('vrvenda_vista').AsCurrency;
+      cdNF_ItemULT_CUSTO.Value  := DMConn.Q1.FieldByName('vrcusto_real').AsCurrency;
+      cdNF_ItemPIS_codrec.Value := DMConn.Q1.FieldByName('cod_receita').AsInteger;
    end;
 end;
 
@@ -1352,23 +1354,23 @@ begin
       begin
          if cdNF_Itemid_prod.Value > 0 then
          begin
-            DM.Q1.Open('select * from vw_estoque where id=' + QuotedStr(cdNF_Itemid_prod.AsString));//pesquisa o estoque
-            cdNF_ItemICMS_orig_inform.Value  := DM.Q1.FieldByName('origem').Value;
+            DMConn.Q1.Open('select * from vw_estoque where id=' + QuotedStr(cdNF_Itemid_prod.AsString));//pesquisa o estoque
+            cdNF_ItemICMS_orig_inform.Value  := DMConn.Q1.FieldByName('origem').Value;
 
             if DM.QEmpresaindativ.Value > 1 then
             begin
-               cdNF_ItemICMS_CST_inform.Value   := DM.Q1.FieldByName('acbr_cst').Value;
+               cdNF_ItemICMS_CST_inform.Value   := DMConn.Q1.FieldByName('acbr_cst').Value;
                cdNF_ItemICMS_CSOSN_inform.Value := Integer(csosnVazio);
             end
             else
             begin
-               cdNF_ItemICMS_CSOSN_inform.Value := DM.Q1.FieldByName('acbr_cst').Value;
+               cdNF_ItemICMS_CSOSN_inform.Value := DMConn.Q1.FieldByName('acbr_cst').Value;
                cdNF_ItemICMS_CST_inform.Value   := integer(cstVazio);
             end;
 
-            cdNF_ItemIPI_CST_inform.Value    := DM.Q1.FieldByName('cst_ipi_ent').Value;
-            cdNF_ItemPIS_CST_inform.Value    := DM.Q1.FieldByName('cst_pis_ent').Value;
-            cdNF_ItemCOFINS_CST_inform.Value := DM.Q1.FieldByName('cst_cofins_ent').Value;
+            cdNF_ItemIPI_CST_inform.Value    := DMConn.Q1.FieldByName('cst_ipi_ent').Value;
+            cdNF_ItemPIS_CST_inform.Value    := DMConn.Q1.FieldByName('cst_pis_ent').Value;
+            cdNF_ItemCOFINS_CST_inform.Value := DMConn.Q1.FieldByName('cst_cofins_ent').Value;
 
             if DM_INI.ini.StoredValue['debug'] then
                log('nf_entr','INFORMADO DADOS DO PRODUTO (ORIG, CST, IPI, PIS, COFINS)',
@@ -1386,10 +1388,10 @@ begin
    cdNF_Item.Tag := 0;
    if cdNF_Itemid_prod.Value > 0 then
    begin
-      DM.Q2.Open(C_SQL89 + QuotedStr(cdNF_ItemIPI_CST_inform.AsString));//pesquisa o cst ipi
-      DM.Q1.Open('select * from vw_estoque where id=' + QuotedStr(cdNF_Itemid_prod.AsString));//pesquisa o estoque
+      DMConn.Q2.Open(C_SQL89 + QuotedStr(cdNF_ItemIPI_CST_inform.AsString));//pesquisa o cst ipi
+      DMConn.Q1.Open('select * from vw_estoque where id=' + QuotedStr(cdNF_Itemid_prod.AsString));//pesquisa o estoque
 
-      if DM.Q2.FieldByName('destaca_valor').AsString = 'S' then
+      if DMConn.Q2.FieldByName('destaca_valor').AsString = 'S' then
       begin
          cdNF_ItemIPI_vBC_inform.Value  := cdNF_ItemIPI_vBC.Value;
          cdNF_ItemIPI_pIPI_inform.Value := cdNF_ItemIPI_pIPI.Value;
@@ -1403,11 +1405,11 @@ begin
       end;
 
       //pis
-      DM.Q2.Open(C_SQL90 + QuotedStr(cdNF_ItemPIS_CST_inform.AsString));//pesquisa o cst pis
-      if DM.Q2.FieldByName('destaca_valor').AsString = 'S' then
+      DMConn.Q2.Open(C_SQL90 + QuotedStr(cdNF_ItemPIS_CST_inform.AsString));//pesquisa o cst pis
+      if DMConn.Q2.FieldByName('destaca_valor').AsString = 'S' then
       begin
          cdNF_ItemPIS_vBC_inform.Value  := cdNF_ItemPIS_vBC.Value;
-         cdNF_ItemPIS_pPIS_inform.Value := DM.Q1.FieldByName('pis_pc').AsCurrency;
+         cdNF_ItemPIS_pPIS_inform.Value := DMConn.Q1.FieldByName('pis_pc').AsCurrency;
          cdNF_ItemPIS_vPIS_inform.Value := Arredonda((cdNF_ItemPIS_vBC_inform.Value * cdNF_ItemPIS_pPIS_inform.Value)/100,2);
       end
       else
@@ -1418,11 +1420,11 @@ begin
       end;
 
       //cofins
-      DM.Q2.Open(C_SQL91 + QuotedStr(cdNF_ItemCOFINS_CST_inform.AsString));//pesquisa o cst cofins
-      if DM.Q2.FieldByName('destaca_valor').AsString = 'S' then
+      DMConn.Q2.Open(C_SQL91 + QuotedStr(cdNF_ItemCOFINS_CST_inform.AsString));//pesquisa o cst cofins
+      if DMConn.Q2.FieldByName('destaca_valor').AsString = 'S' then
       begin
          cdNF_ItemCOFINS_vBC_inform.Value     := cdNF_ItemCOFINS_vBC.Value;
-         cdNF_ItemCOFINS_pCOFINS_inform.Value := DM.Q1.FieldByName('cofins_pc').AsCurrency;
+         cdNF_ItemCOFINS_pCOFINS_inform.Value := DMConn.Q1.FieldByName('cofins_pc').AsCurrency;
          cdNF_ItemCOFINS_vCOFINS_inform.Value := Arredonda((cdNF_ItemCOFINS_vBC_inform.Value * cdNF_ItemCOFINS_pCOFINS_inform.Value)/100,2);
       end
       else
@@ -1629,9 +1631,9 @@ end;
 
 function TDM_NF_Entr.ValidarCFOP(cfop: string): boolean;
 begin
-   DM.Q6.Open('select id from cfop where cfop = '+ Texto_Mysql(cfop));
-   Result := not DM.Q6.Fields[0].IsNull;
-   DM.Q6.Close;
+   DMConn.Q6.Open('select id from cfop where cfop = '+ Texto_Mysql(cfop));
+   Result := not DMConn.Q6.Fields[0].IsNull;
+   DMConn.Q6.Close;
 end;
 
 function TDM_NF_Entr.ValidarRegra: boolean;

@@ -352,9 +352,6 @@ inherited frmCadPlanoContas: TfrmCadPlanoContas
     end
     inherited TabPesq: TcxTabSheet
       OnHide = TabPesqHide
-      ExplicitLeft = 0
-      ExplicitWidth = 640
-      ExplicitHeight = 294
       inherited grd: TcxGrid
         inherited tbv: TcxGridDBTableView
           OptionsData.Deleting = True
@@ -397,8 +394,6 @@ inherited frmCadPlanoContas: TfrmCadPlanoContas
         end
       end
       inherited pnlPesq: TPanel
-        ExplicitTop = 248
-        ExplicitWidth = 640
         inherited edPesq: TcxTextEdit
           Properties.OnChange = edPesqPropertiesChange
         end
@@ -407,7 +402,7 @@ inherited frmCadPlanoContas: TfrmCadPlanoContas
         end
         object cxButton1: TcxButton
           AlignWithMargins = True
-          Left = 572
+          Left = 564
           Top = 2
           Width = 66
           Height = 42
@@ -423,7 +418,6 @@ inherited frmCadPlanoContas: TfrmCadPlanoContas
           TabOrder = 2
           TabStop = False
           OnClick = cxButton1Click
-          ExplicitLeft = 564
         end
       end
     end
@@ -431,6 +425,7 @@ inherited frmCadPlanoContas: TfrmCadPlanoContas
       Caption = 'TabNovo'
       ImageIndex = 2
       OnShow = TabNovoShow
+      ExplicitLeft = 0
       ExplicitTop = 0
       ExplicitWidth = 0
       ExplicitHeight = 0

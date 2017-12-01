@@ -13,7 +13,9 @@ uses
   cxGrid, cxNavigator, cxDBNavigator, cxPC, dxStatusBar, cxButtons, Vcl.ExtCtrls,
   cxDropDownEdit,FireDAC.Comp.Client, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
-  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet;
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  dxSkinsCore, dxSkinCaramel, dxSkinsdxStatusBarPainter, dxSkinscxPCPainter,
+  dxBarBuiltInMenu;
 
 type
   TfrmCadMovi = class(TfrmCad)
@@ -56,7 +58,7 @@ implementation
 
 {$R *.dfm}
 
-uses uDM, uAutocomConsts, uCadPlanoContas, uAssoc, uFuncoes;
+uses uDM, uAutocomConsts, uCadPlanoContas, uAssoc, uFuncoes, uDM_Conn;
 
 procedure TfrmCadMovi.AssociarPlanodeContas1Click(Sender: TObject);
 begin
@@ -108,18 +110,18 @@ end;
 
 procedure TfrmCadMovi.QMovimAfterPost(DataSet: TDataSet);
 begin
-   DM.Q5.Open('select id from finan_banco_conta where id<>' + Texto_Mysql(iConta));
+   DMConn.Q5.Open('select id from finan_banco_conta where id<>' + Texto_Mysql(iConta));
 
-   if (not DM.Q5.IsEmpty)and(MessageBox(0, 'Deseja associar este movimento com todas as contas?', C_237,
+   if (not DMConn.Q5.IsEmpty)and(MessageBox(0, 'Deseja associar este movimento com todas as contas?', C_237,
                                             MB_ICONQUESTION or MB_OKCANCEL) = IDOK) then
    begin
-      while not DM.Q5.Eof do
+      while not DMConn.Q5.Eof do
       begin
          DM.ExecSQL('replace into finan_banco_codigos (cod,conta,tipo,descricao,sistema)(select cod,' +
-                    Texto_Mysql(DM.Q5.Fields[0].AsString) +
+                    Texto_Mysql(DMConn.Q5.Fields[0].AsString) +
                     ',tipo,descricao,sistema from finan_banco_codigos)'
          );
-         DM.Q5.Next;
+         DMConn.Q5.Next;
       end;
    end;
 end;
@@ -129,9 +131,9 @@ begin
    if QMovimsistema.Value = 'S' then
       raise Exception.Create('Este movimento é interno do sistema e não pode ser excluído.');
 
-   DM.Q5.Open('select count(*) from finan_banco_movi where cod=' + Texto_Mysql(QMovimcod.AsString));
+   DMConn.Q5.Open('select count(*) from finan_banco_movi where cod=' + Texto_Mysql(QMovimcod.AsString));
 
-   if (DM.Q5.Fields[0].AsInteger > 0) then
+   if (DMConn.Q5.Fields[0].AsInteger > 0) then
       raise Exception.Create(C_297);
 end;
 

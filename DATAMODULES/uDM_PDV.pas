@@ -689,7 +689,7 @@ uses uDM, uAutocomConsts
 {$IFDEF PDV}
 , uDMecf, updv
 {$ENDIF}
-, uProgress, udm_ini, uViews;
+, uProgress, udm_ini, uViews, uDM_Conn;
 
 {$R *.dfm}
 
@@ -929,16 +929,16 @@ begin
       if DM.Conectar then
       begin
          //atualiza a bd remota
-         DM.Q1.Open('select id from paf_r04 where r02=' +
+         DMConn.Q1.Open('select id from paf_r04 where r02=' +
                      Texto_Mysql(TPAF_R02id.Value) +
                     ' and coo=' + Texto_Mysql(i_coo) +
                     ' and ccf=' + Texto_Mysql(i_ccf)
          );
 
-         if DM.Q1.Fields[0].AsString <> C_ST_VAZIO then
+         if DMConn.Q1.Fields[0].AsString <> C_ST_VAZIO then
          begin
-            DM.DB.ExecSQL('update paf_r04 set hash=' + Texto_Mysql(DM.id_Term)+ ',canc="S" where id=' + Texto_Mysql(DM.Q1.Fields[0].AsInteger));
-            DM.DB.ExecSQL('update paf_r07 set hash=' + Texto_Mysql(DM.id_Term)+ ',extorno="S",valor_extorno=valor where r04=' + Texto_Mysql(DM.Q1.Fields[0].AsInteger));
+            DM.ExecSQL('update paf_r04 set hash=' + Texto_Mysql(DM.id_Term)+ ',canc="S" where id=' + Texto_Mysql(DMConn.Q1.Fields[0].AsInteger));
+            DM.ExecSQL('update paf_r07 set hash=' + Texto_Mysql(DM.id_Term)+ ',extorno="S",valor_extorno=valor where r04=' + Texto_Mysql(DMConn.Q1.Fields[0].AsInteger));
             DM.Atu_Hash;
          end;
       end;
@@ -992,11 +992,11 @@ begin
 
   b3 := False;
 
-   DM.Q1.Open('select group_concat(id_reg) from pdv_alterados where num_ecf="' + DM_ECF.st_ECF_Num +
+   DMConn.Q1.Open('select group_concat(id_reg) from pdv_alterados where num_ecf="' + DM_ECF.st_ECF_Num +
               '" and tabela="estoque";'
    );
 
-   s := DM.Q1.Fields[0].AsString;
+   s := DMConn.Q1.Fields[0].AsString;
 
    if s <> '' then
    begin
@@ -1005,39 +1005,39 @@ begin
      DM_ECF.TEF.BloquearMouseTeclado(True);
      AbreForm(Tfrmprogress,frmprogress, False);
 
-     DM.Q1.Open('select id,cod_gtin,cod_interno,cod_aux,nome,vrcusto_real,vrvenda_vista,vrvenda_prz,medicam_pmc,aliq_icms,' +
+     DMConn.Q1.Open('select id,cod_gtin,cod_interno,cod_aux,nome,vrcusto_real,vrvenda_vista,vrvenda_prz,medicam_pmc,aliq_icms,' +
                 'mg_lucro,qt_caixa,sigla_unid,cod_cst,aliq_ecf,balanca,medic_qtcaixa,medic_fracao,medicam_vrms,ncm,' +
                 'cst_pis_sai,cst_cofins_sai,origem, producao_propria, fracionavel, md5, suspenso from vw_estoque where ' +
                 'destinacao="00 Mercadoria para Revenda" and id in("' + s + '")'
      );
 
-     DM.Q1.FetchAll;
+     DMConn.Q1.FetchAll;
      TProd.Close;
      TProd.Open;
      TProd.IndexFieldNames := 'id';
-     frmprogress.bar1.Properties.Max := DM.Q1.RecordCount;
+     frmprogress.bar1.Properties.Max := DMConn.Q1.RecordCount;
 
      i  := 0;
      b1 := False;
 
      try
-        while not DM.Q1.Eof do
+        while not DMConn.Q1.Eof do
         begin
            inc(i);
            frmprogress.bar1.Position := i;
            Application.ProcessMessages;
-           b := TProd.Locate('id', DM.Q1.FieldByName('id').AsInteger, []);
+           b := TProd.Locate('id', DMConn.Q1.FieldByName('id').AsInteger, []);
 
            if b then //se localizou
            begin
-              if DM.Q1.FieldByName('suspenso').AsString = 'S' then //se suspenso deleta
+              if DMConn.Q1.FieldByName('suspenso').AsString = 'S' then //se suspenso deleta
               begin
                  TProd.Delete;
-                 DM.Q1.Next;
+                 DMConn.Q1.Next;
                  Continue;//retoma o loop
               end;
 
-              b1 := TProdmd5.AsString = DM.Q1.FieldByName('md5').AsString;
+              b1 := TProdmd5.AsString = DMConn.Q1.FieldByName('md5').AsString;
            end;
 
            if (not b) then
@@ -1048,11 +1048,11 @@ begin
 
            if TProd.State in [dsEdit, dsInsert] then
            begin
-              TProd.CopyRecord(DM.Q1);
+              TProd.CopyRecord(DMConn.Q1);
               TProd.Post;
            end;
 
-           DM.Q1.Next;
+           DMConn.Q1.Next;
         end;
      finally
         frmprogress.btnSair.Click;
@@ -1060,15 +1060,15 @@ begin
         if Assigned(frmprogress) then
            FreeAndNil(frmprogress);
 
-        Log('Carga_Robo','Prod', IntToStr(DM.Q1.RecordCount) + ' Registros');
+        Log('Carga_Robo','Prod', IntToStr(DMConn.Q1.RecordCount) + ' Registros');
      end;
    end;
 
-   DM.Q1.Open('select group_concat(id_reg) from pdv_alterados where num_ecf="' + DM_ECF.st_ECF_Num +
+   DMConn.Q1.Open('select group_concat(id_reg) from pdv_alterados where num_ecf="' + DM_ECF.st_ECF_Num +
               '" and tabela="cliente";'
    );
 
-   s := DM.Q1.Fields[0].AsString;
+   s := DMConn.Q1.Fields[0].AsString;
 
    if s <> '' then
    begin
@@ -1077,35 +1077,35 @@ begin
      DM_ECF.TEF.BloquearMouseTeclado(True);
      AbreForm(Tfrmprogress,frmprogress, False);
 
-     DM.Q1.Open('select * from cliente where id in(' + s + ')');
+     DMConn.Q1.Open('select * from cliente where id in(' + s + ')');
 
-     DM.Q1.FetchAll;
+     DMConn.Q1.FetchAll;
      TCli.Close;
      TCli.Open;
      TCli.IndexFieldNames := 'id';
-     frmprogress.bar1.Properties.Max := DM.Q1.RecordCount;
+     frmprogress.bar1.Properties.Max := DMConn.Q1.RecordCount;
      i := 0;
     // b := False;
      b1 := False;
 
      try
-        while not DM.Q1.Eof do
+        while not DMConn.Q1.Eof do
         begin
            inc(i);
            frmprogress.bar1.Position := i;
            Application.ProcessMessages;
 
-           b := TCli.Locate('id', DM.Q1.FieldByName('id').AsInteger, []);
+           b := TCli.Locate('id', DMConn.Q1.FieldByName('id').AsInteger, []);
 
            if b then
            begin
-              if DM.Q1.FieldByName('suspenso').AsString = 'S' then //se suspenso deleta
+              if DMConn.Q1.FieldByName('suspenso').AsString = 'S' then //se suspenso deleta
               begin
                  TCli.Delete;
-                 DM.Q1.Next;
+                 DMConn.Q1.Next;
                  Continue;//retoma o loop
               end;
-              b1 := TClimd5.AsString = DM.Q1.FieldByName('md5').AsString;
+              b1 := TClimd5.AsString = DMConn.Q1.FieldByName('md5').AsString;
            end;
 
            if (not b) then
@@ -1116,11 +1116,11 @@ begin
 
            if TCli.State in [dsEdit, dsInsert] then
            begin
-              TCli.CopyRecord(DM.Q1);
+              TCli.CopyRecord(DMConn.Q1);
               TCli.Post;
            end;
 
-           DM.Q1.Next;
+           DMConn.Q1.Next;
         end;
      finally
         frmprogress.btnSair.Click;
@@ -1128,7 +1128,7 @@ begin
         if Assigned(frmprogress) then
            FreeAndNil(frmprogress);
 
-        Log('Carga_Robo','CLI', IntToStr(DM.Q1.RecordCount) + ' Registros');
+        Log('Carga_Robo','CLI', IntToStr(DMConn.Q1.RecordCount) + ' Registros');
      end;
    end;
 
@@ -1147,38 +1147,38 @@ begin
 
    if not Limpar_BD_Local then
    begin
-     DM.Q2.Open('select group_concat(id) from cliente where suspenso="S"');
+     DMConn.Q2.Open('select group_concat(id) from cliente where suspenso="S"');
 
      //remove os suspensos da base local
-     if DM.Q2.Fields[0].AsString <> C_ST_VAZIO then
-        DB.ExecSQL('delete from cliente where id in(' + DM.Q2.Fields[0].AsString + ')');
+     if DMConn.Q2.Fields[0].AsString <> C_ST_VAZIO then
+        DB.ExecSQL('delete from cliente where id in(' + DMConn.Q2.Fields[0].AsString + ')');
    end
    else
    begin
       DB.ExecSQL('delete from cliente;');
    end;
 
-   DM.Q1.Open('select * from cliente where suspenso="N"');
-   DM.Q1.FetchAll;
+   DMConn.Q1.Open('select * from cliente where suspenso="N"');
+   DMConn.Q1.FetchAll;
    TCli.Close;
    TCli.Open;
 
-   frmprogress.bar1.Properties.Max := DM.Q1.RecordCount;
+   frmprogress.bar1.Properties.Max := DMConn.Q1.RecordCount;
    i := 0;
   // b := False;
    b1 := False;
 
    try
-      while not DM.Q1.Eof do
+      while not DMConn.Q1.Eof do
       begin
          inc(i);
          frmprogress.bar1.Position := i;
          Application.ProcessMessages;
 
-         b := TCli.Locate('id', DM.Q1.FieldByName('id').AsInteger, []);
+         b := TCli.Locate('id', DMConn.Q1.FieldByName('id').AsInteger, []);
 
          if b then
-            b1 := TClimd5.AsString = DM.Q1.FieldByName('md5').AsString;
+            b1 := TClimd5.AsString = DMConn.Q1.FieldByName('md5').AsString;
 
          if (not b) then
             TCli.Append
@@ -1188,11 +1188,11 @@ begin
 
          if TCli.State in [dsEdit, dsInsert] then
          begin
-            TCli.CopyRecord(DM.Q1);
+            TCli.CopyRecord(DMConn.Q1);
             TCli.Post;
          end;
 
-         DM.Q1.Next;
+         DMConn.Q1.Next;
       end;
 
    finally
@@ -1209,17 +1209,17 @@ end;
 
 procedure TDM_PDV.Carga_Empresa;
 begin
-   DM.Q1.Open('select * from empresa limit 1');
+   DMConn.Q1.Open('select * from empresa limit 1');
    DB.ExecSQL('delete from empresa;');//apaga a tabela local
    TEmpresa.Open;
 
    try
-      while not DM.Q1.Eof do
+      while not DMConn.Q1.Eof do
       begin
          TEmpresa.Append;
-         TEmpresa.CopyRecord(DM.Q1);
+         TEmpresa.CopyRecord(DMConn.Q1);
          TEmpresa.Post;
-         DM.Q1.Next;
+         DMConn.Q1.Next;
       end;
 
    finally
@@ -1229,10 +1229,10 @@ end;
 
 procedure TDM_PDV.Carga_FPag;
 begin
- //  DM.Q1.Open('select * from fpag');
+ //  DMConn.Q1.Open('select * from fpag');
 //   TFPag.Open;
 //   frmPDV.Popup('Carga FPag...');
-  // TFPag.CopyDataSet(DM.Q1,[coRestart, coEdit, coAppend]);
+  // TFPag.CopyDataSet(DMConn.Q1,[coRestart, coEdit, coAppend]);
  //  Log('Carga_INI','FPag', IntToStr(TFPag.RecordCount) + ' Registros');
 end;
 
@@ -1284,26 +1284,26 @@ begin
  {$IFDEF PDV}
    frmPDV.Popup('Carga IBPTax...');
  {$ENDIF}
-   DM.Q1.Open('select * from ibptax');
-   DM.Q1.FetchAll;
+   DMConn.Q1.Open('select * from ibptax');
+   DMConn.Q1.FetchAll;
    TIBPTax.Open;
 
-   frmprogress.bar1.Properties.Max := DM.Q1.RecordCount;
+   frmprogress.bar1.Properties.Max := DMConn.Q1.RecordCount;
    i := 0;
  //  b := False;
    b1 := False;
 
    try
-      while not DM.Q1.Eof do
+      while not DMConn.Q1.Eof do
       begin
          inc(i);
          frmprogress.bar1.Position := i;
          Application.ProcessMessages;
 
-         b := TIBPTax.Locate('id', DM.Q1.FieldByName('id').AsInteger, []);
+         b := TIBPTax.Locate('id', DMConn.Q1.FieldByName('id').AsInteger, []);
 
          if b then
-            b1 := TIBPTaxmd5.AsString = DM.Q1.FieldByName('md5').AsString;
+            b1 := TIBPTaxmd5.AsString = DMConn.Q1.FieldByName('md5').AsString;
 
          if (not b) then
             TIBPTax.Append
@@ -1313,10 +1313,10 @@ begin
 
          if TIBPTax.State in [dsEdit, dsInsert] then
          begin
-            TIBPTax.CopyRecord(DM.Q1);
+            TIBPTax.CopyRecord(DMConn.Q1);
             TIBPTax.Post;
          end;
-         DM.Q1.Next;
+         DMConn.Q1.Next;
       end;
    finally
       Log('Carga_INI','IBPTax', IntToStr(TIBPTax.RecordCount) + ' Registros');
@@ -1325,26 +1325,26 @@ begin
  {$IFDEF PDV}
    frmPDV.Popup('Carga IBPTax_Itens...');
  {$ENDIF}
-   DM.Q1.Open('select * from ibptax_itens');
-   DM.Q1.FetchAll;
+   DMConn.Q1.Open('select * from ibptax_itens');
+   DMConn.Q1.FetchAll;
    TIBPTax_Itens.Open;
 
-   frmprogress.bar1.Properties.Max := DM.Q1.RecordCount;
+   frmprogress.bar1.Properties.Max := DMConn.Q1.RecordCount;
    i := 0;
  //  b := False;
    b1 := False;
 
    try
-      while not DM.Q1.Eof do
+      while not DMConn.Q1.Eof do
       begin
          inc(i);
          frmprogress.bar1.Position := i;
          Application.ProcessMessages;
 
-         b := TIBPTax_Itens.Locate('id', DM.Q1.FieldByName('id').AsInteger, []);
+         b := TIBPTax_Itens.Locate('id', DMConn.Q1.FieldByName('id').AsInteger, []);
 
          if b then
-            b1 := TIBPTax_Itensmd5.AsString = DM.Q1.FieldByName('md5').AsString;
+            b1 := TIBPTax_Itensmd5.AsString = DMConn.Q1.FieldByName('md5').AsString;
 
          if (not b) then
             TIBPTax_Itens.Append
@@ -1354,11 +1354,11 @@ begin
 
          if TIBPTax_Itens.State in [dsEdit, dsInsert] then
          begin
-            TIBPTax_Itens.CopyRecord(DM.Q1);
+            TIBPTax_Itens.CopyRecord(DMConn.Q1);
             TIBPTax_Itens.Post;
          end;
 
-         DM.Q1.Next;
+         DMConn.Q1.Next;
       end;
    finally
       frmprogress.btnSair.Click;
@@ -1378,23 +1378,23 @@ var
 begin
    frmPDV.Popup('Carga Operador...');
    AbreForm(Tfrmprogress,frmprogress, False);
-   DM.Q1.Open('select * from operador');
+   DMConn.Q1.Open('select * from operador');
    DB.ExecSQL('delete from operador');//apaga a tabela local
 
-   frmprogress.bar1.Properties.Max := DM.Q1.RecordCount;
+   frmprogress.bar1.Properties.Max := DMConn.Q1.RecordCount;
    i := 0;
    TOperador.Open;
 
    try
-      while not DM.Q1.Eof do
+      while not DMConn.Q1.Eof do
       begin
          inc(i);
          frmprogress.bar1.Position := i;
          Application.ProcessMessages;
          TOperador.Append;
-         TOperador.CopyRecord(DM.Q1);
+         TOperador.CopyRecord(DMConn.Q1);
          TOperador.Post;
-         DM.Q1.Next;
+         DMConn.Q1.Next;
       end;
    finally
       frmprogress.btnSair.Click;
@@ -1412,23 +1412,23 @@ var
 begin
    frmPDV.Popup('Carga Vendedor...');
    AbreForm(Tfrmprogress,frmprogress, False);
-   DM.Q1.Open('select id,nome,comissao,senha,nomered from vendedor');
+   DMConn.Q1.Open('select id,nome,comissao,senha,nomered from vendedor');
    DB.ExecSQL('delete from vendedor;');//apaga a tabela local
 
-   frmprogress.bar1.Properties.Max := DM.Q1.RecordCount;
+   frmprogress.bar1.Properties.Max := DMConn.Q1.RecordCount;
    i := 0;
    TVendedor.Open;
 
    try
-      while not DM.Q1.Eof do
+      while not DMConn.Q1.Eof do
       begin
          inc(i);
          frmprogress.bar1.Position := i;
          Application.ProcessMessages;
          TVendedor.Append;
-         TVendedor.CopyRecord(DM.Q1);
+         TVendedor.CopyRecord(DMConn.Q1);
          TVendedor.Post;
-         DM.Q1.Next;
+         DMConn.Q1.Next;
       end;
    finally
       frmprogress.btnSair.Click;
@@ -1447,23 +1447,23 @@ var
 begin
    frmPDV.Popup('Carga Operadora CRT...');
    AbreForm(Tfrmprogress,frmprogress, False);
-   DM.Q1.Open('select * from oper_crt');
+   DMConn.Q1.Open('select * from oper_crt');
    DB.ExecSQL('delete from oper_crt');//apaga a tabela local
 
-   frmprogress.bar1.Properties.Max := DM.Q1.RecordCount;
+   frmprogress.bar1.Properties.Max := DMConn.Q1.RecordCount;
    i := 0;
    TOper_CRT.Open;
 
    try
-      while not DM.Q1.Eof do
+      while not DMConn.Q1.Eof do
       begin
          inc(i);
          frmprogress.bar1.Position := i;
          Application.ProcessMessages;
          TOper_CRT.Append;
-         TOper_CRT.CopyRecord(DM.Q1);
+         TOper_CRT.CopyRecord(DMConn.Q1);
          TOper_CRT.Post;
-         DM.Q1.Next;
+         DMConn.Q1.Next;
       end;
    finally
       frmprogress.btnSair.Click;
@@ -1490,12 +1490,12 @@ begin
 
    if not Limpar_BD_Local then
    begin
-      DM.Q2.Open('select group_concat(id) from estoque where suspenso="S"');
+      DMConn.Q2.Open('select group_concat(id) from estoque where suspenso="S"');
       //remove os suspensos da base local
-      if DM.Q2.Fields[0].AsString <> C_ST_VAZIO then
+      if DMConn.Q2.Fields[0].AsString <> C_ST_VAZIO then
       begin
-        if Copy(DM.Q2.Fields[0].AsString, length(DM.Q2.Fields[0].AsString),1)=',' then
-         s := Copy(DM.Q2.Fields[0].AsString,1,length(DM.Q2.Fields[0].AsString)-1);//remove a ultima virgula do group concat
+        if Copy(DMConn.Q2.Fields[0].AsString, length(DMConn.Q2.Fields[0].AsString),1)=',' then
+         s := Copy(DMConn.Q2.Fields[0].AsString,1,length(DMConn.Q2.Fields[0].AsString)-1);//remove a ultima virgula do group concat
          s := 'delete from estoque where id in(' + s + ')';                       //ela retorna algo como 1,2,3,
          Log('Carga_INI','Prod', s);
          DB.ExecSQL(s);
@@ -1509,28 +1509,28 @@ begin
    TProd.Close;
    TProd.Open;
 
-   DM.Q1.Open(vwEstoque + WherevwEstoque1);
+   DMConn.Q1.Open(vwEstoque + WherevwEstoque1);
 
-   DM.Q1.FetchAll;
+   DMConn.Q1.FetchAll;
 
    TProd.IndexFieldNames := 'id';
 
-   frmprogress.bar1.Properties.Max := DM.Q1.RecordCount;
+   frmprogress.bar1.Properties.Max := DMConn.Q1.RecordCount;
 
    i  := 0;
   // b1 := False;
 
    try
-      while not DM.Q1.Eof do
+      while not DMConn.Q1.Eof do
       begin
          inc(i);
          frmprogress.bar1.Position := i;
          Application.ProcessMessages;
-         b := TProd.Locate('id', DM.Q1.FieldByName('id').AsInteger, []);
+         b := TProd.Locate('id', DMConn.Q1.FieldByName('id').AsInteger, []);
 
          if b then
          begin
-            b1 := TProdmd5.AsString = DM.Q1.FieldByName('md5').AsString;
+            b1 := TProdmd5.AsString = DMConn.Q1.FieldByName('md5').AsString;
 
             if not b1 then
                TProd.Edit;
@@ -1540,11 +1540,11 @@ begin
 
          if TProd.State in [dsEdit, dsInsert] then
          begin
-            TProd.CopyRecord(DM.Q1);
+            TProd.CopyRecord(DMConn.Q1);
             TProd.Post;
          end;
 
-         DM.Q1.Next;
+         DMConn.Q1.Next;
       end;
    finally
       frmprogress.btnSair.Click;
@@ -1910,7 +1910,7 @@ begin
    //apaga o rollback
    Log('Carga_server','Final', 'Rollback');
    frmprogress.Caption := 'Progresso: rollback';
-   DM.DB.ExecSQL('delete from estoque_atu where terminal=' + Texto_Mysql(DM_ECF.st_ECF_Num) + ';');
+   DM.ExecSQL('delete from estoque_atu where terminal=' + Texto_Mysql(DM_ECF.st_ECF_Num) + ';');
    frmprogress.bar1.Position := 8;
    Application.ProcessMessages;
 
@@ -2356,28 +2356,28 @@ begin
       TPAF_E3hora_estoque.Value := TimeOf(DM_ECF.Relogio);
       TPAF_E3.Post;
       //busca os dados da tabela do estoque no server
-      DM.Q1.Open('select * from vw_estoque where suspenso="N" and quant<>0');
-      DM.Q1.First;
-      DM.Q1.FetchAll;
-      frmprogress.bar1.Properties.Max := DM.Q1.RecordCount;
+      DMConn.Q1.Open('select * from vw_estoque where suspenso="N" and quant<>0');
+      DMConn.Q1.First;
+      DMConn.Q1.FetchAll;
+      frmprogress.bar1.Properties.Max := DMConn.Q1.RecordCount;
 
       try
-         while not DM.Q1.Eof do
+         while not DMConn.Q1.Eof do
          begin
-            frmprogress.bar1.Position := DM.Q1.RecNo;
+            frmprogress.bar1.Position := DMConn.Q1.RecNo;
             TPAF_E2.Insert;
             TPAF_E2e3.Value            := TPAF_E3id.Value;
-            TPAF_E2cProd.Value         := DM.Q1.FieldByName('id').AsInteger;
-            TPAF_E2codigo.AsString     := DM.Q1.FieldByName('cod_gtin').AsString;
-            TPAF_E2nome.AsString       := DM.Q1.FieldByName('nome').AsString;
-            TPAF_E2mensuracao.AsString := Iif(DM.Q1.FieldByName('quant').AsCurrency > 0,'+','-');
-            TPAF_E2unid.AsString       := DM.Q1.FieldByName('sigla_unid').AsString;
-            TPAF_E2qtd.Value           := Iif(DM.Q1.FieldByName('quant').AsCurrency > 0,
-                                              DM.Q1.FieldByName('quant').AsCurrency,
-                                              DM.Q1.FieldByName('quant').AsCurrency * -1);
+            TPAF_E2cProd.Value         := DMConn.Q1.FieldByName('id').AsInteger;
+            TPAF_E2codigo.AsString     := DMConn.Q1.FieldByName('cod_gtin').AsString;
+            TPAF_E2nome.AsString       := DMConn.Q1.FieldByName('nome').AsString;
+            TPAF_E2mensuracao.AsString := Iif(DMConn.Q1.FieldByName('quant').AsCurrency > 0,'+','-');
+            TPAF_E2unid.AsString       := DMConn.Q1.FieldByName('sigla_unid').AsString;
+            TPAF_E2qtd.Value           := Iif(DMConn.Q1.FieldByName('quant').AsCurrency > 0,
+                                              DMConn.Q1.FieldByName('quant').AsCurrency,
+                                              DMConn.Q1.FieldByName('quant').AsCurrency * -1);
             TPAF_E2.Post;
             Application.ProcessMessages;
-            DM.Q1.Next;
+            DMConn.Q1.Next;
          end;
          TPAF_E2.ApplyUpdates;
 
@@ -2902,21 +2902,21 @@ begin
          for i := 8 downto 4 do
          begin
              s := copy(TVenda_ItemNCM.AsString, 1, i);
-             DM.Q1.Open('select * from ibptax_itens where NCM="' + s + '"');
+             DMConn.Q1.Open('select * from ibptax_itens where NCM="' + s + '"');
 
-             if not DM.Q1.IsEmpty then
+             if not DMConn.Q1.IsEmpty then
                 Break;
          end;
 
-         if not DM.Q1.IsEmpty then
+         if not DMConn.Q1.IsEmpty then
          begin
             if TVenda_ItemICMS_orig.Value in [0,2,3,4,5] then
-               IBPTaxF := IBPTaxF + (TVenda_ItemvProd.Value *  DM.Q1.FieldByName('nacional').AsCurrency)/100
+               IBPTaxF := IBPTaxF + (TVenda_ItemvProd.Value *  DMConn.Q1.FieldByName('nacional').AsCurrency)/100
             else
-               IBPTaxF := IBPTaxF + (TVenda_ItemvProd.Value *  DM.Q1.FieldByName('importado').AsCurrency)/100;
+               IBPTaxF := IBPTaxF + (TVenda_ItemvProd.Value *  DMConn.Q1.FieldByName('importado').AsCurrency)/100;
 
-            IBPTaxE := IBPTaxE + (TVenda_ItemvProd.Value *  DM.Q1.FieldByName('estadual').AsCurrency)/100;
-            IBPTaxM := IBPTaxM + (TVenda_ItemvProd.Value *  DM.Q1.FieldByName('municipal').AsCurrency)/100;
+            IBPTaxE := IBPTaxE + (TVenda_ItemvProd.Value *  DMConn.Q1.FieldByName('estadual').AsCurrency)/100;
+            IBPTaxM := IBPTaxM + (TVenda_ItemvProd.Value *  DMConn.Q1.FieldByName('municipal').AsCurrency)/100;
          end;
       end;
       TVenda_Item.Next;

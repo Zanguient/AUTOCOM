@@ -241,41 +241,41 @@ implementation
 {$R *.dfm}
 
 uses uAutocomConsts, uDM, uFuncoes, uMD5Print, uMain, uPesqNCM, uCadSpedTabelas,
-  udm_ini, uReplica, uRegras_Imposto;
+  udm_ini, uReplica, uRegras_Imposto, uDM_Conn;
 
 procedure TfrmCadEstoque.Achar_Medic;
 var
    prc_custo: currency;
    s: string;
 begin
-   DM.Q1.Open('select * from farma_unipreco where codbar=' + QuotedStr(DM.QEstoquecod_gtin.AsString));
+   DMConn.Q1.Open('select * from farma_unipreco where codbar=' + QuotedStr(DM.QEstoquecod_gtin.AsString));
 
-   if DM.Q1.IsEmpty then
-      DM.Q1.Open('select * from farma_unipreco where codbar2=' + QuotedStr(DM.QEstoquecod_gtin.AsString));
+   if DMConn.Q1.IsEmpty then
+      DMConn.Q1.Open('select * from farma_unipreco where codbar2=' + QuotedStr(DM.QEstoquecod_gtin.AsString));
 
-   if DM.Q1.IsEmpty then
-      DM.Q1.Open('select * from farma_unipreco where codbar3=' + QuotedStr(DM.QEstoquecod_gtin.AsString));
+   if DMConn.Q1.IsEmpty then
+      DMConn.Q1.Open('select * from farma_unipreco where codbar3=' + QuotedStr(DM.QEstoquecod_gtin.AsString));
 
-   if DM.Q1.IsEmpty then
-      DM.Q1.Open('select * from farma_unipreco where codbar4=' + QuotedStr(DM.QEstoquecod_gtin.AsString));
+   if DMConn.Q1.IsEmpty then
+      DMConn.Q1.Open('select * from farma_unipreco where codbar4=' + QuotedStr(DM.QEstoquecod_gtin.AsString));
 
-   if not DM.Q1.IsEmpty then
+   if not DMConn.Q1.IsEmpty then
    begin
-      DM.QEstoquemedicam_apresentacao.AsString  := DM.Q1.FieldByName('APRESENT').AsString;
-      DM.QEstoquemedicam_principio_atv.AsString := DM.Q1.FieldByName('PRINATVNOM').AsString;
-      DM.QEstoquemedicam_nomelab.AsString       := DM.Q1.FieldByName('NOMELAB').AsString;
-      DM.QEstoquemedicam_portaria.AsString      := BuscaTroca(DM.Q1.FieldByName('PORTARIA').AsString,'-','');
+      DM.QEstoquemedicam_apresentacao.AsString  := DMConn.Q1.FieldByName('APRESENT').AsString;
+      DM.QEstoquemedicam_principio_atv.AsString := DMConn.Q1.FieldByName('PRINATVNOM').AsString;
+      DM.QEstoquemedicam_nomelab.AsString       := DMConn.Q1.FieldByName('NOMELAB').AsString;
+      DM.QEstoquemedicam_portaria.AsString      := BuscaTroca(DMConn.Q1.FieldByName('PORTARIA').AsString,'-','');
 
-      DM.QEstoquenome.AsString := copy(DM.Q1.FieldByName('DESCRICAO').AsString + ' ' +
-                                       DM.Q1.FieldByName('APRESENT').AsString + ' ' +
-                                       DM.Q1.FieldByName('NOMELAB').AsString, 1, 100);
+      DM.QEstoquenome.AsString := copy(DMConn.Q1.FieldByName('DESCRICAO').AsString + ' ' +
+                                       DMConn.Q1.FieldByName('APRESENT').AsString + ' ' +
+                                       DMConn.Q1.FieldByName('NOMELAB').AsString, 1, 100);
 
       if cmbCst.Properties.DataController.DataSet.Locate('cst',60,[]) then
       begin
          DM.QEstoquecst.AsInteger := cmbCst.Properties.DataController.DataSet.FieldByName('id').AsInteger;
       end;
 
-      s := DM.Q1.FieldByName('PRCCUSTO18').AsString;
+      s := DMConn.Q1.FieldByName('PRCCUSTO18').AsString;
       s := copy(s, 1, pos('.', s)+2);
       s := number(s);
       prc_custo := Arredonda(StrToFloatDef(s,0)/100,2);
@@ -283,10 +283,10 @@ begin
       DM.QEstoquevrcusto.AsCurrency      := prc_custo;
       DM.QEstoquevrcusto_real.AsCurrency := prc_custo;
 
-      DM.QEstoquevrvenda_vista.AsCurrency := DM.Q1.FieldByName('max_preco').AsCurrency;
-      DM.QEstoquevrvenda_prz.AsCurrency   := DM.Q1.FieldByName('max_preco').AsCurrency;
-      DM.QEstoquevrvenda_old.AsCurrency   := DM.Q1.FieldByName('max_preco').AsCurrency;
-      DM.QEstoquemedicam_pmc.AsCurrency   := DM.Q1.FieldByName('max_preco').AsCurrency;
+      DM.QEstoquevrvenda_vista.AsCurrency := DMConn.Q1.FieldByName('max_preco').AsCurrency;
+      DM.QEstoquevrvenda_prz.AsCurrency   := DMConn.Q1.FieldByName('max_preco').AsCurrency;
+      DM.QEstoquevrvenda_old.AsCurrency   := DMConn.Q1.FieldByName('max_preco').AsCurrency;
+      DM.QEstoquemedicam_pmc.AsCurrency   := DMConn.Q1.FieldByName('max_preco').AsCurrency;
       DM.QEstoquemedic_fracao.Value       := 1;
       DM.QEstoquemedic_atualizar_web.AsString := 'S';
    end;
@@ -666,12 +666,12 @@ begin
    end;
 
    //popula o cmbSessaoPesq
-   DM.Q1.Open('select concat(nome," (",id, ")") from sessao order by nome');
+   DMConn.Q1.Open('select concat(nome," (",id, ")") from sessao order by nome');
 
-   while not DM.Q1.Eof do
+   while not DMConn.Q1.Eof do
    begin
-      cmbSessaoPesq.Properties.Items.Add(DM.Q1.Fields[0].AsString);
-      DM.Q1.Next;
+      cmbSessaoPesq.Properties.Items.Add(DMConn.Q1.Fields[0].AsString);
+      DMConn.Q1.Next;
    end;
 
    cmbSessaoPesq.Text := cmbSessaoPesq.Properties.Items[0];

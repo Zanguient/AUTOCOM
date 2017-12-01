@@ -13,7 +13,8 @@ uses
   cxGridLevel, cxClasses, cxGridCustomView,
   cxGrid, cxCheckBox, Vcl.DBCtrls, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
-  FireDAC.DApt.Intf, FireDAC.Comp.DataSet;
+  FireDAC.DApt.Intf, FireDAC.Comp.DataSet, dxSkinsCore, dxSkinCaramel,
+  dxSkinscxPCPainter;
 
 type
   TfrmQuita = class(Tfrm)
@@ -107,7 +108,7 @@ implementation
 
 {$R *.dfm}
 
-uses uAutocomConsts, uDM, uFuncoes, uGestaoReceber, uParcelamento;
+uses uAutocomConsts, uDM, uFuncoes, uGestaoReceber, uParcelamento, uDM_Conn;
 
 procedure TfrmQuita.cbjurosClick(Sender: TObject);
 begin
@@ -328,13 +329,13 @@ begin
                           'Juros sobre o valor da quitação de ' + edjuros.Text
          );
 
-      DM.DB.ExecSQL('update finan_debito set dt_baixa = curdate(), hora_baixa=' +
+      DM.ExecSQL('update finan_debito set dt_baixa = curdate(), hora_baixa=' +
                      Texto_Mysql(FormatDateTime('hh:mm', now)) +
                     ', valor_pg=valor where id in' + s
       );
 
       if juros > 0 then
-         DM.DB.ExecSQL('update finan_debito set dt_baixa = curdate(), hora_baixa=' +
+         DM.ExecSQL('update finan_debito set dt_baixa = curdate(), hora_baixa=' +
                        Texto_Mysql(FormatDateTime('hh:mm', now)) +
                        ', valor_pg=valor where id_cli=' +
                        Texto_Mysql(id_cli) +
@@ -359,15 +360,15 @@ begin
       frmParcelamento.Tipo_Movi     := s;
       frmParcelamento.id_cli        := id_cli;
       frmParcelamento.id_movim      := 0;
-      DM.Q1.Open('select count(*) from finan_debito where id_movi=0');
-      frmParcelamento.nmro_doc      := 'DP' + FormatFloat('0000', DM.Q1.Fields[0].AsInteger+1);
+      DMConn.Q1.Open('select count(*) from finan_debito where id_movi=0');
+      frmParcelamento.nmro_doc      := 'DP' + FormatFloat('0000', DMConn.Q1.Fields[0].AsInteger+1);
       frmParcelamento.ShowModal;
       FreeAndNil(frmParcelamento);
       DM.QFinanDeb.Refresh;
    end;
 
 //se houver credito faz a movimentação
-   DM.DB.ExecSQL('update finan_credito set baixa="B" where cliente=' + IntToStr(id_cli));
+   DM.ExecSQL('update finan_credito set baixa="B" where cliente=' + IntToStr(id_cli));
 
    if haver > (deb + juros - edDesc.Value) then //se haver > debito grava o remanescente
    begin

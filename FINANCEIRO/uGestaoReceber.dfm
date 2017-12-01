@@ -54,6 +54,10 @@ inherited frmGestaoReceber: TfrmGestaoReceber
       Caption = 'BOLETOS'
       ImageIndex = 0
       OnShow = TabBolShow
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object grd: TcxGrid
         Left = 0
         Top = 0
@@ -220,6 +224,10 @@ inherited frmGestaoReceber: TfrmGestaoReceber
         object cxTabSheet3: TcxTabSheet
           Caption = 'DETALHES'
           ImageIndex = 2
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object Label1: TLabel
             Left = 8
             Top = -2
@@ -426,6 +434,10 @@ inherited frmGestaoReceber: TfrmGestaoReceber
         object TabPesqBol: TcxTabSheet
           Caption = 'PESQUISA'
           ImageIndex = 0
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object rcb1: TcxRadioGroup
             Left = 610
             Top = 0
@@ -481,6 +493,10 @@ inherited frmGestaoReceber: TfrmGestaoReceber
             object TabDataBol: TcxTabSheet
               Caption = 'POR DATA'
               ImageIndex = 0
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object Label8: TLabel
                 Left = 3
                 Top = 1
@@ -553,10 +569,14 @@ inherited frmGestaoReceber: TfrmGestaoReceber
             object TabSacBol: TcxTabSheet
               Caption = 'POR SACADO'
               ImageIndex = 1
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object Label10: TLabel
                 Left = 0
                 Top = 0
-                Width = 602
+                Width = 102
                 Height = 13
                 Align = alTop
                 Caption = 'NOME/RAZ'#195'O SOCIAL'
@@ -566,7 +586,6 @@ inherited frmGestaoReceber: TfrmGestaoReceber
                 Font.Name = 'Comic Sans MS'
                 Font.Style = []
                 ParentFont = False
-                ExplicitWidth = 102
               end
               object cmb1: TcxComboBox
                 AlignWithMargins = True
@@ -585,6 +604,10 @@ inherited frmGestaoReceber: TfrmGestaoReceber
             object TabnmroBol: TcxTabSheet
               Caption = 'POR N'#186' OU VALOR'
               ImageIndex = 2
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object Label16: TLabel
                 Left = 151
                 Top = 10
@@ -815,6 +838,10 @@ inherited frmGestaoReceber: TfrmGestaoReceber
           Caption = 'Baixa por Arquivo Retorno'
           ImageIndex = 3
           OnEnter = tbBaixaArqEnter
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object cmbBoleto: TcxLookupComboBox
             Left = 444
             Top = 25
@@ -958,6 +985,10 @@ inherited frmGestaoReceber: TfrmGestaoReceber
       Caption = 'FATURAS'
       ImageIndex = 2
       OnShow = TabCarneShow
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object GrdCarne: TcxGrid
         Left = 0
         Top = 0
@@ -1101,6 +1132,10 @@ inherited frmGestaoReceber: TfrmGestaoReceber
           Caption = 'DETALHES'
           ImageIndex = 2
           OnShow = TabDetCarneShow
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object Label21: TLabel
             Left = 8
             Top = -2
@@ -1287,6 +1322,10 @@ inherited frmGestaoReceber: TfrmGestaoReceber
         object TabPesqCarne: TcxTabSheet
           Caption = 'PESQUISA'
           ImageIndex = 0
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object rcb2: TcxRadioGroup
             Left = 610
             Top = 0
@@ -1338,6 +1377,10 @@ inherited frmGestaoReceber: TfrmGestaoReceber
             object TabDataCarne: TcxTabSheet
               Caption = 'POR DATA'
               ImageIndex = 0
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object Label28: TLabel
                 Left = 3
                 Top = 1
@@ -1410,10 +1453,14 @@ inherited frmGestaoReceber: TfrmGestaoReceber
             object TabSacCarne: TcxTabSheet
               Caption = 'POR SACADO'
               ImageIndex = 1
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object Label30: TLabel
                 Left = 0
                 Top = 0
-                Width = 602
+                Width = 102
                 Height = 13
                 Align = alTop
                 Caption = 'NOME/RAZ'#195'O SOCIAL'
@@ -1423,7 +1470,6 @@ inherited frmGestaoReceber: TfrmGestaoReceber
                 Font.Name = 'Comic Sans MS'
                 Font.Style = []
                 ParentFont = False
-                ExplicitWidth = 102
               end
               object cmb2: TcxImageComboBox
                 AlignWithMargins = True
@@ -1442,6 +1488,10 @@ inherited frmGestaoReceber: TfrmGestaoReceber
               Caption = 'POR N'#186' OU VALOR'
               ImageIndex = 2
               OnShow = TabNmroCarneShow
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object Label31: TLabel
                 Left = 151
                 Top = 10
@@ -2082,6 +2132,7 @@ inherited frmGestaoReceber: TfrmGestaoReceber
           Properties.Alignment.Horz = taCenter
           Properties.Alignment.Vert = taVCenter
           OnClick = cxLabel3Click
+          ExplicitTop = 126
           AnchorX = 101
           AnchorY = 138
         end
@@ -2101,6 +2152,7 @@ inherited frmGestaoReceber: TfrmGestaoReceber
           Properties.Alignment.Horz = taCenter
           Properties.Alignment.Vert = taVCenter
           OnClick = cxLabel4Click
+          ExplicitTop = 107
           AnchorX = 101
           AnchorY = 119
         end
@@ -2128,7 +2180,6 @@ inherited frmGestaoReceber: TfrmGestaoReceber
   object Q1: TFDQuery
     MasterSource = DM.DSFinan_bol_Emit
     MasterFields = 'boleto'
-    Connection = DM.DB
     SQL.Strings = (
       'select b.nomebanco, concat(a.agencia,'#39'-'#39', a.dig) as agencia, '
       'concat(c.conta, '#39'-'#39', c.dig) as conta, bl.id '
@@ -2246,7 +2297,6 @@ inherited frmGestaoReceber: TfrmGestaoReceber
   object QCliCarne: TFDQuery
     MasterSource = DM.DSFinan_Carne
     MasterFields = 'sacado'
-    Connection = DM.DB
     SQL.Strings = (
       'select * from cliente where id=:sacado')
     Left = 184

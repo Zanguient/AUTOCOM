@@ -6,7 +6,7 @@ inherited frmPDV: TfrmPDV
   ClientWidth = 790
   WindowState = wsMaximized
   ExplicitWidth = 806
-  ExplicitHeight = 599
+  ExplicitHeight = 600
   PixelsPerInch = 96
   TextHeight = 15
   inherited TPA: TPanel
@@ -136,8 +136,9 @@ inherited frmPDV: TfrmPDV
     TabOrder = 3
     Properties.ActivePage = TabLogin
     Properties.CustomButtons.Buttons = <>
-    ClientRectBottom = 378
-    ClientRectRight = 241
+    ClientRectBottom = 374
+    ClientRectLeft = 4
+    ClientRectRight = 237
     ClientRectTop = 26
     object TabLogin: TcxTabSheet
       Caption = 'TabLogin'
@@ -163,12 +164,12 @@ inherited frmPDV: TfrmPDV
         Properties.LabelStyle = cxlsRaised
         Properties.WordWrap = True
         Transparent = True
-        Width = 241
+        Width = 233
       end
       object pnlLogin: TPanel
         Left = 0
-        Top = 297
-        Width = 241
+        Top = 293
+        Width = 233
         Height = 55
         Align = alBottom
         BevelInner = bvLowered
@@ -210,7 +211,7 @@ inherited frmPDV: TfrmPDV
         end
         object btnLogin: TcxButton
           AlignWithMargins = True
-          Left = 193
+          Left = 185
           Top = 3
           Width = 45
           Height = 49
@@ -2677,23 +2678,26 @@ inherited frmPDV: TfrmPDV
           6F52B3FF3F77026A9E4DB66743219564CEA292A514474E895D643E9A04F1854A
           AD286FA0193BCDBC2EA43940C103E4439A8DF9952FC22EC8F9A175168779C8F4
           F1E3C7ABB17F83FF01EEADA10824B215510000000049454E44AE426082}
+        Properties.FitMode = ifmProportionalStretch
         Properties.GraphicClassName = 'TdxPNGImage'
         Properties.GraphicTransparency = gtTransparent
         Properties.ReadOnly = True
         Properties.ShowFocusRect = False
-        Properties.Stretch = True
         Style.BorderStyle = ebsNone
         Style.Edges = []
         TabOrder = 2
         Transparent = True
-        Height = 291
-        Width = 235
+        Height = 287
+        Width = 227
       end
     end
     object TabVenda: TcxTabSheet
       Caption = 'TabVenda'
       ImageIndex = 1
       OnShow = TabVendaShow
+      ExplicitLeft = 0
+      ExplicitWidth = 241
+      ExplicitHeight = 352
       object cxLabel7: TcxLabel
         Left = 0
         Top = 164
@@ -2715,8 +2719,10 @@ inherited frmPDV: TfrmPDV
         Properties.LabelStyle = cxlsRaised
         Properties.WordWrap = True
         Transparent = True
-        Width = 241
-        AnchorY = 308
+        ExplicitWidth = 241
+        ExplicitHeight = 161
+        Width = 233
+        AnchorY = 304
       end
       object cxImage2: TcxImage
         AlignWithMargins = True
@@ -5170,26 +5176,29 @@ inherited frmPDV: TfrmPDV
           6F52B3FF3F77026A9E4DB66743219564CEA292A514474E895D643E9A04F1854A
           AD286FA0193BCDBC2EA43940C103E4439A8DF9952FC22EC8F9A175168779C8F4
           F1E3C7ABB17F83FF01EEADA10824B215510000000049454E44AE426082}
+        Properties.FitMode = ifmProportionalStretch
         Properties.GraphicClassName = 'TdxPNGImage'
         Properties.GraphicTransparency = gtTransparent
         Properties.ReadOnly = True
         Properties.ShowFocusRect = False
-        Properties.Stretch = True
         Style.BorderStyle = ebsNone
         Style.Edges = []
         TabOrder = 4
         Transparent = True
-        Height = 138
-        Width = 235
+        ExplicitWidth = 235
+        ExplicitHeight = 138
+        Height = 134
+        Width = 227
       end
       object Panel2: TPanel
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 235
+        Width = 227
         Height = 73
         Align = alTop
         TabOrder = 0
+        ExplicitWidth = 235
         object edCod: TcxTextEdit
           Left = 1
           Top = 18
@@ -5208,8 +5217,9 @@ inherited frmPDV: TfrmPDV
           OnExit = edCodExit
           OnKeyDown = edCodKeyDown
           OnKeyPress = edCodKeyPress
+          ExplicitWidth = 233
           ExplicitHeight = 21
-          Width = 233
+          Width = 225
         end
         object cxLabel1: TcxLabel
           Left = 1
@@ -5217,23 +5227,26 @@ inherited frmPDV: TfrmPDV
           Align = alTop
           Caption = 'C'#211'DIGO (tecle "ENTER" p/pesquisar)'
           ParentFont = False
+          ExplicitWidth = 233
         end
       end
       object pnlQtd: TPanel
         AlignWithMargins = True
         Left = 3
         Top = 82
-        Width = 235
+        Width = 227
         Height = 79
         Align = alTop
         TabOrder = 1
         Visible = False
+        ExplicitWidth = 235
         object cxLabel3: TcxLabel
           Left = 1
           Top = 1
           Align = alTop
           Caption = 'QUANTIDADE (tecle "D" p/ desconto)'
           ParentFont = False
+          ExplicitWidth = 233
         end
         object edQtd: TcxCurrencyEdit
           Left = 1
@@ -5256,25 +5269,29 @@ inherited frmPDV: TfrmPDV
           OnEnter = edQtdEnter
           OnExit = edQtdExit
           OnKeyDown = edQtdKeyDown
+          ExplicitWidth = 233
           ExplicitHeight = 21
-          Width = 233
+          Width = 225
         end
       end
       object pnlDetItem: TPanel
         AlignWithMargins = True
         Left = 3
         Top = 167
-        Width = 235
-        Height = 138
+        Width = 227
+        Height = 134
         Align = alClient
         TabOrder = 2
         Visible = False
+        ExplicitWidth = 235
+        ExplicitHeight = 155
         object cxLabel4: TcxLabel
           Left = 1
           Top = 1
           Align = alTop
           Caption = 'Descri'#231#227'o'
           ParentFont = False
+          ExplicitWidth = 233
         end
         object cxDBLabel1: TcxDBLabel
           AlignWithMargins = True
@@ -5284,8 +5301,9 @@ inherited frmPDV: TfrmPDV
           DataBinding.DataField = 'nome'
           DataBinding.DataSource = DM_PDV.DSProd
           ParentFont = False
+          ExplicitWidth = 227
           Height = 21
-          Width = 227
+          Width = 219
         end
         object dblblvrcusto: TcxDBLabel
           AlignWithMargins = True
@@ -5296,8 +5314,10 @@ inherited frmPDV: TfrmPDV
           DataBinding.DataSource = DM_PDV.DSProd
           ParentFont = False
           Properties.LineOptions.Visible = True
+          ExplicitTop = 115
+          ExplicitWidth = 227
           Height = 21
-          Width = 227
+          Width = 219
         end
         object lblVrCusto: TcxLabel
           Left = 1
@@ -5305,6 +5325,7 @@ inherited frmPDV: TfrmPDV
           Align = alTop
           Caption = 'VR. CUSTO'
           ParentFont = False
+          ExplicitWidth = 233
         end
         object cxDBLabel3: TcxDBLabel
           AlignWithMargins = True
@@ -5315,8 +5336,9 @@ inherited frmPDV: TfrmPDV
           DataBinding.DataSource = DM_PDV.DSProd
           ParentFont = False
           Properties.LineOptions.Visible = True
+          ExplicitWidth = 227
           Height = 21
-          Width = 227
+          Width = 219
         end
         object cxLabel6: TcxLabel
           Left = 1
@@ -5325,14 +5347,15 @@ inherited frmPDV: TfrmPDV
           AutoSize = False
           Caption = 'VR. UNIT'#193'RIO'
           ParentFont = False
+          ExplicitWidth = 233
           Height = 19
-          Width = 233
+          Width = 225
         end
       end
       object lblccd: TcxLabel
         AlignWithMargins = True
         Left = 3
-        Top = 311
+        Top = 307
         Align = alBottom
         Caption = '8'
         ParentFont = False
@@ -5358,8 +5381,10 @@ inherited frmPDV: TfrmPDV
         Properties.LabelEffect = cxleExtrude
         Properties.LabelStyle = cxlsLowered
         Properties.Orientation = cxoLeftBottom
-        AnchorX = 121
-        AnchorY = 330
+        ExplicitTop = 328
+        ExplicitWidth = 235
+        AnchorX = 117
+        AnchorY = 326
       end
     end
   end
@@ -5372,8 +5397,9 @@ inherited frmPDV: TfrmPDV
     TabOrder = 4
     Properties.ActivePage = TabIni
     Properties.CustomButtons.Buttons = <>
-    ClientRectBottom = 378
-    ClientRectRight = 549
+    ClientRectBottom = 374
+    ClientRectLeft = 4
+    ClientRectRight = 545
     ClientRectTop = 26
     object TabIni: TcxTabSheet
       Caption = 'TabIni'
@@ -5383,8 +5409,8 @@ inherited frmPDV: TfrmPDV
         Top = 0
         Align = alClient
         TabOrder = 1
-        Height = 352
-        Width = 549
+        Height = 348
+        Width = 541
       end
       object lblAviso: TcxLabel
         Left = 0
@@ -5405,14 +5431,15 @@ inherited frmPDV: TfrmPDV
         Properties.LabelStyle = cxlsRaised
         Properties.WordWrap = True
         Transparent = True
-        Width = 549
-        AnchorX = 275
-        AnchorY = 176
+        Width = 541
+        AnchorX = 271
+        AnchorY = 174
       end
     end
     object TabItens: TcxTabSheet
       Caption = 'TabItens'
       ImageIndex = 1
+      ExplicitLeft = 0
       ExplicitTop = 0
       ExplicitWidth = 0
       ExplicitHeight = 0

@@ -16,7 +16,8 @@ uses
   cxCurrencyEdit, cxCheckBox, Vcl.ComCtrls, dxCore, cxDateUtils, FireDAC.Comp.Client,
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
-  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet;
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, dxSkinsCore,
+  dxSkinCaramel, dxSkinsdxStatusBarPainter, dxSkinscxPCPainter, dxBarBuiltInMenu;
 
 type
   TfrmMovBanc = class(TfrmCad)
@@ -189,7 +190,7 @@ implementation
 {$R *.dfm}
 
 uses uDM, udm_ini, uFuncoes, uMD5Print, uAutocomConsts, uCadMovim,
-  uCadPlanoContas, uAssoc;
+  uCadPlanoContas, uAssoc, uDM_Conn;
 
 
 procedure TfrmMovBanc.btnTalDelClick(Sender: TObject);
@@ -275,17 +276,17 @@ begin
       raise Exception.Create('Informe o nº do cheque no campo documento.');
 
    if RbDC.ItemIndex = 0 then
-      DM.Q1.Open('select id from finan_talonario where cancelado="N" and usado="N" and nmro=' +
+      DMConn.Q1.Open('select id from finan_talonario where cancelado="N" and usado="N" and nmro=' +
                          Texto_Mysql(QMovidocumento.AsString) +
                          ' and conta=' + Texto_Mysql(QContasid.Value)
       )
    else
-      DM.Q1.Open('select id from finan_talonario where cancelado="N" and usado="S" and nmro=' +
+      DMConn.Q1.Open('select id from finan_talonario where cancelado="N" and usado="S" and nmro=' +
                          Texto_Mysql(QMovidocumento.AsString) +
                          ' and conta=' + Texto_Mysql(QContasid.Value)
       );
 
-   if DM.Q1.IsEmpty then
+   if DMConn.Q1.IsEmpty then
       ShowMessage('O cheque nº ' + QMovidocumento.AsString + ' não foi encontrado.')
    else
    begin
@@ -304,12 +305,12 @@ begin
    if (edTalIni.Value <=0) or (edTalFim.Value < edTalIni.Value) then
       raise Exception.Create('Valores informados incorretamente.');
 
-   DM.Q1.Open('select count(*) from finan_talonario where nmro BETWEEN ' +
+   DMConn.Q1.Open('select count(*) from finan_talonario where nmro BETWEEN ' +
                         Texto_Mysql(edTalIni.Value) + ' and ' + Texto_Mysql(edTalFim.Value) +
                        ' and conta=' + Texto_Mysql(QContasid.Value)
    );
 
-   if DM.Q1.Fields[0].AsInteger > 0 then
+   if DMConn.Q1.Fields[0].AsInteger > 0 then
       raise Exception.Create('A faixa informada já contém itens cadastrados');
 
    QTal.DisableControls;
@@ -396,26 +397,26 @@ begin
    if QContasid.Value = QContasDid.Value then
       raise Exception.Create('Não é possível uma transferência para a mesma conta.');
 
-   DM.Q1.Open('select * from finan_banco_movi limit 1');
-   DM.Q2.Open('select * from finan_banco_movi limit 1');
+   DMConn.Q1.Open('select * from finan_banco_movi limit 1');
+   DMConn.Q2.Open('select * from finan_banco_movi limit 1');
    //faz o credito na conta destino
-   DM.Q1.Insert;
-   DM.Q1.FieldByName('conta').Value     := QContasDid.Value;
-   DM.Q1.FieldByName('cod').Value       := 'TBC';
-   DM.Q1.FieldByName('tipo').Value      := 'C';
-   DM.Q1.FieldByName('valor').Value     := edVrTrf.Value;
-   DM.Q1.FieldByName('data').Value      := dtTrf.Date;
-   DM.Q1.FieldByName('documento').Value := QContasconta_res.AsString;
-   DM.Q1.FieldByName('descricao').Value := 'Transfer. oriunda da conta ' + QContasconta_res.AsString;
-   DM.Q1.Post;
+   DMConn.Q1.Insert;
+   DMConn.Q1.FieldByName('conta').Value     := QContasDid.Value;
+   DMConn.Q1.FieldByName('cod').Value       := 'TBC';
+   DMConn.Q1.FieldByName('tipo').Value      := 'C';
+   DMConn.Q1.FieldByName('valor').Value     := edVrTrf.Value;
+   DMConn.Q1.FieldByName('data').Value      := dtTrf.Date;
+   DMConn.Q1.FieldByName('documento').Value := QContasconta_res.AsString;
+   DMConn.Q1.FieldByName('descricao').Value := 'Transfer. oriunda da conta ' + QContasconta_res.AsString;
+   DMConn.Q1.Post;
 
    //informe ao plano de contas
-   DM.Q3.Open('select * from finan_centro_custo_assoc where operacao=' + Texto_Mysql('MBC' + QContasDid.AsString + 'TBC'));
+   DMConn.Q3.Open('select * from finan_centro_custo_assoc where operacao=' + Texto_Mysql('MBC' + QContasDid.AsString + 'TBC'));
 
-   if not DM.Q2.IsEmpty then
-      DM.Inserir_Plano_de_contas(DM.Q3.FieldByName('codigo').AsString,
+   if not DMConn.Q2.IsEmpty then
+      DM.Inserir_Plano_de_contas(DMConn.Q3.FieldByName('codigo').AsString,
                                  QContasconta_res.AsString,
-                                 DM.Q3.FieldByName('descricao').AsString + '(' + QContasconta_res.AsString + ')',
+                                 DMConn.Q3.FieldByName('descricao').AsString + '(' + QContasconta_res.AsString + ')',
                                  dtTrf.Date,
                                  dtTrf.Date,
                                  edVrTrf.Value,
@@ -424,23 +425,23 @@ begin
 
    //faz o debito na conta origem
 
-   DM.Q2.Insert;
-   DM.Q2.FieldByName('conta').Value     := QContasid.Value;
-   DM.Q2.FieldByName('cod').Value       := 'TBR';
-   DM.Q2.FieldByName('tipo').Value      := 'D';
-   DM.Q2.FieldByName('valor').Value     := 0 - edVrTrf.Value;
-   DM.Q2.FieldByName('data').Value      := dtTrf.Date;
-   DM.Q2.FieldByName('documento').Value := QContasDconta_res.AsString;
-   DM.Q2.FieldByName('descricao').Value := 'Transfer. em favor da conta ' + QContasDconta_res.AsString;
-   DM.Q2.Post;
+   DMConn.Q2.Insert;
+   DMConn.Q2.FieldByName('conta').Value     := QContasid.Value;
+   DMConn.Q2.FieldByName('cod').Value       := 'TBR';
+   DMConn.Q2.FieldByName('tipo').Value      := 'D';
+   DMConn.Q2.FieldByName('valor').Value     := 0 - edVrTrf.Value;
+   DMConn.Q2.FieldByName('data').Value      := dtTrf.Date;
+   DMConn.Q2.FieldByName('documento').Value := QContasDconta_res.AsString;
+   DMConn.Q2.FieldByName('descricao').Value := 'Transfer. em favor da conta ' + QContasDconta_res.AsString;
+   DMConn.Q2.Post;
 
    //informe ao plano de contas
-   DM.Q3.Open('select * from finan_centro_custo_assoc where operacao=' + Texto_Mysql('MBD' + QContasid.AsString + 'TBR'));
+   DMConn.Q3.Open('select * from finan_centro_custo_assoc where operacao=' + Texto_Mysql('MBD' + QContasid.AsString + 'TBR'));
 
-   if not DM.Q2.IsEmpty then
-      DM.Inserir_Plano_de_contas(DM.Q3.FieldByName('codigo').AsString,
+   if not DMConn.Q2.IsEmpty then
+      DM.Inserir_Plano_de_contas(DMConn.Q3.FieldByName('codigo').AsString,
                                  QContasDconta_res.AsString,
-                                 DM.Q3.FieldByName('descricao').AsString + '(' + QContasDconta_res.AsString + ')',
+                                 DMConn.Q3.FieldByName('descricao').AsString + '(' + QContasDconta_res.AsString + ')',
                                  dtTrf.Date,
                                  dtTrf.Date,
                                  edVrTrf.Value,
@@ -511,14 +512,14 @@ begin
       DataSet.Tag := 0;
       DataSet.Refresh;
          //informe ao plano de contas
-      DM.Q2.Open('select * from finan_centro_custo_assoc where operacao=' +
+      DMConn.Q2.Open('select * from finan_centro_custo_assoc where operacao=' +
                           Texto_Mysql('MB' + QMovitipo.AsString +  QMoviconta.AsString + QMovicod.AsString)
       );
 
-      if not DM.Q2.IsEmpty then
-         DM.Inserir_Plano_de_contas(DM.Q2.FieldByName('codigo').AsString,
+      if not DMConn.Q2.IsEmpty then
+         DM.Inserir_Plano_de_contas(DMConn.Q2.FieldByName('codigo').AsString,
                                     QMovidocumento.AsString,
-                                    DM.Q2.FieldByName('descricao').AsString,
+                                    DMConn.Q2.FieldByName('descricao').AsString,
                                     QMovidata.Value,
                                     QMovidata.Value,
                                     QMovivalor.Value,

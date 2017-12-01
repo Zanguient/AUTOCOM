@@ -2,6 +2,7 @@ inherited frmCadMovi: TfrmCadMovi
   Caption = 'frmCadMovi'
   ClientWidth = 517
   ExplicitWidth = 523
+  ExplicitHeight = 240
   PixelsPerInch = 96
   TextHeight = 15
   inherited TPA: TPanel
@@ -26,9 +27,8 @@ inherited frmCadMovi: TfrmCadMovi
   end
   inherited pgCad: TcxPageControl
     Width = 517
-    Properties.ActivePage = TabPesq
     ExplicitWidth = 517
-    ClientRectRight = 517
+    ClientRectRight = 513
     inherited TabCad: TcxTabSheet
       TabVisible = False
       ExplicitWidth = 517
@@ -39,10 +39,10 @@ inherited frmCadMovi: TfrmCadMovi
     end
     inherited TabPesq: TcxTabSheet
       Caption = ''
-      ExplicitWidth = 517
+      ExplicitWidth = 513
       inherited grd: TcxGrid
-        Width = 517
-        Height = 225
+        Width = 509
+        Height = 221
         ExplicitWidth = 517
         ExplicitHeight = 225
         inherited tbv: TcxGridDBTableView
@@ -81,19 +81,19 @@ inherited frmCadMovi: TfrmCadMovi
         end
       end
       inherited pnlPesq: TPanel
-        Top = 225
-        Width = 517
+        Top = 221
+        Width = 509
         Visible = False
-        ExplicitTop = 225
-        ExplicitWidth = 517
+        ExplicitTop = 221
+        ExplicitWidth = 513
         inherited lblPesq: TcxLabel
           Style.IsFontAssigned = True
         end
       end
       object Panel1: TPanel
         Left = 0
-        Top = 271
-        Width = 517
+        Top = 267
+        Width = 509
         Height = 23
         Align = alBottom
         Color = 12189695
@@ -107,17 +107,19 @@ inherited frmCadMovi: TfrmCadMovi
           ParentFont = False
           Properties.Alignment.Horz = taCenter
           Properties.WordWrap = True
-          Width = 390
-          AnchorX = 196
+          ExplicitWidth = 386
+          Width = 382
+          AnchorX = 192
         end
         object cxLabel2: TcxLabel
-          Left = 391
+          Left = 383
           Top = 1
           Cursor = crHandPoint
           Align = alRight
           Caption = 'Associar Plano de Contas'
           ParentFont = False
           OnClick = cxLabel2Click
+          ExplicitLeft = 387
         end
       end
     end
@@ -132,7 +134,6 @@ inherited frmCadMovi: TfrmCadMovi
     AfterInsert = QMovimAfterInsert
     AfterPost = QMovimAfterPost
     BeforeDelete = QMovimBeforeDelete
-    Connection = DM.DB
     SQL.Strings = (
       'select * from finan_banco_codigos')
     Left = 40

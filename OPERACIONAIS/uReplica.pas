@@ -13,7 +13,7 @@ uses
   cxDBLabel, cxProgressBar, dxSkinsCore, dxSkinscxPCPainter, cxNavigator, cxImageComboBox,
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, dxSkinCaramel;
 
 type
   TfrmReplica = class(Tfrm)
@@ -57,7 +57,7 @@ implementation
 
 {$R *.dfm}
 
-uses uAutocomConsts, uDM, uFuncoes, uCadEstoque, udm_ini;
+uses uAutocomConsts, uDM, uFuncoes, uCadEstoque, udm_ini, uDM_Conn;
 
 procedure TfrmReplica.cd1AfterDelete(DataSet: TDataSet);
 begin
@@ -130,7 +130,7 @@ begin
       exit;
 
    cd1.First;
-   DM.Q5.Open(C_SQL33 + Texto_Mysql(DM.QEstoqueid.Value));//obtem os dados do estoque
+   DMConn.Q5.Open(C_SQL33 + Texto_Mysql(DM.QEstoqueid.Value));//obtem os dados do estoque
    bar2.Visible := True;
    bar2.Properties.Max := cd1.RecordCount;
    DM.QEstoque.DisableControls;
@@ -156,7 +156,7 @@ begin
          (DM.QEstoque.Fields[i].FieldName <> 'cod_gtin')and
          (DM.QEstoque.Fields[i].FieldName <> 'nome')and
          (DM.QEstoque.Fields[i].FieldName <> 'quant')then
-         DM.QEstoque.Fields[i].value := DM.Q5.FieldByName(DM.QEstoque.Fields[i].FieldName).Value;
+         DM.QEstoque.Fields[i].value := DMConn.Q5.FieldByName(DM.QEstoque.Fields[i].FieldName).Value;
 
       DM.QEstoquenome.Value  := cd1nome.Value;
       DM.QEstoquequant.Value := cd1qtd.Value;

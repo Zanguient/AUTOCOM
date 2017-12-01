@@ -11,7 +11,11 @@ uses
   ACBrBase, ACBrEnterTab, Easysize, RxPlacemnt,
   Vcl.StdCtrls, cxLabel, cxTextEdit, cxGridLevel, cxClasses, cxGridCustomView,
   cxGrid, cxNavigator, cxDBNavigator, cxPC, dxStatusBar, cxButtons, Vcl.ExtCtrls,
-  Datasnap.DBClient, FireDAC.Comp.Client;
+  Datasnap.DBClient, FireDAC.Comp.Client, dxSkinsCore, dxSkinCaramel,
+  dxSkinsdxStatusBarPainter, dxSkinscxPCPainter, dxBarBuiltInMenu,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet;
 
 type
   TfrmCadPlanoContasAssoc = class(TfrmCad)
@@ -56,7 +60,7 @@ implementation
 
 {$R *.dfm}
 
-uses uAutocomConsts, uDM, uFuncoes;
+uses uAutocomConsts, uDM, uFuncoes, uDM_Conn;
 
 procedure TfrmCadPlanoContasAssoc.FormCreate(Sender: TObject);
 begin
@@ -86,7 +90,7 @@ const
    var
    i: integer;
    begin
-      DM.Q1.Open(sql + texto_mysql(s));
+      DMConn.Q1.Open(sql + texto_mysql(s));
       TOpSis.DisableControls;
       TOpSis.Append;
 
@@ -97,15 +101,15 @@ const
          break;
       end;
 
-      if DM.Q1.IsEmpty then
+      if DMConn.Q1.IsEmpty then
       begin
           TOpSisplano.Value := '-';
           TOpSisdescricao.AsString := 'Sem associação. ' + descr;
       end
       else
       begin
-          TOpSisplano.AsString     := DM.Q1.FieldByName('codigo').AsString;
-          TOpSisdescricao.AsString := DM.Q1.FieldByName('descricao').AsString + ' ' + descr;
+          TOpSisplano.AsString     := DMConn.Q1.FieldByName('codigo').AsString;
+          TOpSisdescricao.AsString := DMConn.Q1.FieldByName('descricao').AsString + ' ' + descr;
       end;
 
       TOpSis.Post;
@@ -116,15 +120,15 @@ begin
     Insere('BF');
     Insere('CR');
     //insere as contas bancarias se houver
-    DM.Q2.Open('select id, concat (conta,"-",dig) from finan_banco_conta');
+    DMConn.Q2.Open('select id, concat (conta,"-",dig) from finan_banco_conta');
 
-    while not DM.Q2.Eof do
+    while not DMConn.Q2.Eof do
     begin
-        insere(format('MB%dTBR',[DM.Q2.Fields[0].AsInteger]), 'conta ' + DM.Q2.Fields[1].AsString);
-        insere(format('MB%dTBC',[DM.Q2.Fields[0].AsInteger]), 'conta ' + DM.Q2.Fields[1].AsString);
+        insere(format('MB%dTBR',[DMConn.Q2.Fields[0].AsInteger]), 'conta ' + DMConn.Q2.Fields[1].AsString);
+        insere(format('MB%dTBC',[DMConn.Q2.Fields[0].AsInteger]), 'conta ' + DMConn.Q2.Fields[1].AsString);
         //insere(format('MB%dEBL',[DM.Q2.Fields[0].AsInteger]), 'conta ' + DM.Q2.Fields[1].AsString);
-        insere(format('MB%dBOL',[DM.Q2.Fields[0].AsInteger]), 'conta ' + DM.Q2.Fields[1].AsString);
-        DM.Q2.Next;
+        insere(format('MB%dBOL',[DMConn.Q2.Fields[0].AsInteger]), 'conta ' + DMConn.Q2.Fields[1].AsString);
+        DMConn.Q2.Next;
     end;
 end;
 

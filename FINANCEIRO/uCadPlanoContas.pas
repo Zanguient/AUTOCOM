@@ -11,7 +11,8 @@ uses
   cxLabel, cxTextEdit, cxGridLevel, cxClasses, cxGridCustomView, FireDAC.Comp.Client,
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGrid,
   cxNavigator, cxDBNavigator, cxPC, dxStatusBar, cxButtons, Vcl.ExtCtrls,
-  cxMaskEdit, cxDropDownEdit, cxImageComboBox;
+  cxMaskEdit, cxDropDownEdit, cxImageComboBox, dxSkinsCore, dxSkinCaramel,
+  dxSkinsdxStatusBarPainter, dxSkinscxPCPainter, dxBarBuiltInMenu;
 
 type
   TfrmCadPlanoContas = class(TfrmCad)
@@ -86,7 +87,7 @@ implementation
 
 {$R *.dfm}
 
-uses uAutocomConsts, uDM, uFuncoes;
+uses uAutocomConsts, uDM, uFuncoes, uDM_Conn;
 
 procedure TfrmCadPlanoContas.btnAdd1Click(Sender: TObject);
 begin
@@ -140,9 +141,9 @@ var
 begin
    s := lblcod.Caption + Number(edcod.Text);
 
-   DM.Q1.Open('select * from finan_centro_custo where plano=' + Texto_Mysql(s));
+   DMConn.Q1.Open('select * from finan_centro_custo where plano=' + Texto_Mysql(s));
 
-   if not DM.Q1.IsEmpty then
+   if not DMConn.Q1.IsEmpty then
       raise Exception.Create('Este plano de contas já existe (' + s + ').');
 
    if Trim(edconta.Text) = C_ST_VAZIO then
@@ -186,7 +187,7 @@ begin
             if Tag = TcxButton(Sender).tag -1 then
             begin
                lblcod.Caption := Properties.Items[SelectedItem].Value + '.';
-               DM.Q1.Open('select max(plano) from finan_centro_custo where nivel=' +
+               DMConn.Q1.Open('select max(plano) from finan_centro_custo where nivel=' +
                                     Texto_Mysql(TcxButton(Sender).tag) +
                                     ' and plano like ' +
                                     Texto_Mysql(lblcod.Caption + '%')
@@ -196,7 +197,7 @@ begin
       end;
    end;
 
-   s := Number(DM.Q1.Fields[0].AsString);
+   s := Number(DMConn.Q1.Fields[0].AsString);
 
    if s = C_ST_VAZIO then
       s := '0';
@@ -299,7 +300,7 @@ begin
    if filtro <> C_ST_VAZIO then
       filtro := ' and plano like ' + Texto_Mysql(filtro + '%');
 
-   DM.Q1.Open('select * from finan_centro_custo where nivel=' + Texto_Mysql(nivel) + filtro);
+   DMConn.Q1.Open('select * from finan_centro_custo where nivel=' + Texto_Mysql(nivel) + filtro);
 
    for i := 0 to ComponentCount -1 do
    if (Components[i] is TcxImageComboBox) then
@@ -314,20 +315,20 @@ begin
 
          if tag = nivel then
          begin
-            while not DM.Q1.Eof do
+            while not DMConn.Q1.Eof do
             begin
                with Properties.Items.Add do
                begin
-                   Description := DM.Q1.FieldByName('descricao').AsString;
-                   Value       := DM.Q1.FieldByName('plano').AsString;
+                   Description := DMConn.Q1.FieldByName('descricao').AsString;
+                   Value       := DMConn.Q1.FieldByName('plano').AsString;
 
-                   if DM.Q1.FieldByName('tipo').AsString = 'D' then
+                   if DMConn.Q1.FieldByName('tipo').AsString = 'D' then
                       tag := 1;
                end;
-               DM.Q1.Next;
+               DMConn.Q1.Next;
             end;
-            Enabled := not DM.Q1.IsEmpty;
-            btnAss.visible := (btnAss.Tag = 100)and(nivel > 1)and((DM.Q1.IsEmpty)or(nivel = 6));
+            Enabled := not DMConn.Q1.IsEmpty;
+            btnAss.visible := (btnAss.Tag = 100)and(nivel > 1)and((DMConn.Q1.IsEmpty)or(nivel = 6));
          end;
       end;
    end;

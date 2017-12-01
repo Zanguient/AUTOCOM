@@ -74,10 +74,7 @@ uses
   ucfop_devol in '..\OPERACIONAIS\ucfop_devol.pas' {frmAss_CFOP_Devol},
   uAnaliseVendas in '..\OPERACIONAIS\uAnaliseVendas.pas' {frmAnaliseVendas},
   uAnaliseVendas_itens in '..\OPERACIONAIS\uAnaliseVendas_itens.pas' {frmAnaliseVendas_itens},
-  uDM_Sintegra in '..\COMUM\uDM_Sintegra.pas' {DM_Sintegra: TDataModule},
-  uDM_SPED in '..\COMUM\uDM_SPED.pas' {DM_Sped: TDataModule},
   uSintegra in '..\FISCAL\uSintegra.pas' {frmSintegra},
-  uDMecf in '..\PTI\uDMecf.pas' {DM_ECF: TDataModule},
   uProgress in '..\PTI\uProgress.pas' {frmprogress},
   uSpedFiscal in '..\FISCAL\uSpedFiscal.pas' {frmSpedFiscal},
   uLancar_apagar in '..\FINANCEIRO\uLancar_apagar.pas' {frmLancar_apagar},
@@ -93,7 +90,6 @@ uses
   uBalancaCom in '..\OPERACIONAIS\uBalancaCom.pas',
   uIntegraBalanca in '..\OPERACIONAIS\uIntegraBalanca.pas' {frmIntBal},
   uSpedpis in '..\FISCAL\uSpedpis.pas' {frmSpedPIS},
-  uDM_SPED_PIS in '..\COMUM\uDM_SPED_PIS.pas' {DM_SPED_PIS: TDataModule},
   uRegras_Imposto in '..\OPERACIONAIS\uRegras_Imposto.pas' {frmRegras_Imposto},
   uAtuIPBTax in '..\FISCAL\uAtuIPBTax.pas' {frmAtuIPBTax},
   uCadBal in '..\CADASTROS\uCadBal.pas' {frmCadBal},
@@ -106,7 +102,12 @@ uses
   uViews in '..\COMUM\uViews.pas',
   udm_ini in '..\DATAMODULES\udm_ini.pas' {DM_INI: TDataModule},
   uDM in '..\DATAMODULES\uDM.pas' {DM: TDataModule},
-  uDM_NF_Entr in '..\DATAMODULES\uDM_NF_Entr.pas' {DM_NF_Entr: TDataModule};
+  uDM_NF_Entr in '..\DATAMODULES\uDM_NF_Entr.pas' {DM_NF_Entr: TDataModule},
+  uDM_Conn in '..\DATAMODULES\uDM_Conn.pas' {DMConn: TDataModule},
+  uDM_Sintegra in '..\DATAMODULES\uDM_Sintegra.pas' {DM_Sintegra: TDataModule},
+  uDM_SPED in '..\DATAMODULES\uDM_SPED.pas' {DM_Sped: TDataModule},
+  uDM_SPED_PIS in '..\DATAMODULES\uDM_SPED_PIS.pas' {DM_SPED_PIS: TDataModule},
+  uDMecf in '..\DATAMODULES\uDMecf.pas' {DM_ECF: TDataModule};
 
 {$R *.res}
 
@@ -130,14 +131,7 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.Title := 'AUTOCOM GERENCIAL';
   Application.CreateForm(TfrmMain, frmMain);
-  Application.CreateForm(TfrmManu, frmManu);
-  Application.CreateForm(TDM_NFE, DM_NFE);
-  Application.CreateForm(TfrmValidacao, frmValidacao);
-  Application.CreateForm(TfrmStatus, frmStatus);
-  Application.CreateForm(TfrmCad_Estoque_Inicial, frmCad_Estoque_Inicial);
-  Application.CreateForm(TDM_INI, DM_INI);
-  Application.CreateForm(TDM, DM);
-  Application.CreateForm(TDM_NF_Entr, DM_NF_Entr);
+  Application.CreateForm(TDM_ECF, DM_ECF);
   Application.Run;
   CloseHandle(MutexHandle);
 end.

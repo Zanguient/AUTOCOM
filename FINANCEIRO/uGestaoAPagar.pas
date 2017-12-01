@@ -12,7 +12,8 @@ uses
   cxRadioGroup, cxMaskEdit, cxCalendar, cxGroupBox, cxPC, cxStyles,
   cxCustomData, cxFilter, cxData, cxDataStorage, cxNavigator, Data.DB, cxDBData,
   cxGridLevel, cxClasses, cxGridCustomView, cxGridCustomTableView,
-  cxGridTableView, cxGridDBTableView, cxGrid;
+  cxGridTableView, cxGridDBTableView, cxGrid, dxSkinsCore, dxSkinCaramel,
+  dxSkinscxPCPainter, dxBarBuiltInMenu;
 
 type
   TfrmGestaoAPagar = class(Tfrm)
@@ -107,7 +108,7 @@ implementation
 {$R *.dfm}
 
 uses uAutocomConsts, uDM, udm_ini, uFuncoes, uMD5Print, uCadPlanoContas, uAssoc,
-  ubaixa_cp;
+  ubaixa_cp, uDM_Conn;
 
 procedure TfrmGestaoAPagar.btnBaixaClick(Sender: TObject);
 begin
@@ -214,15 +215,15 @@ procedure TfrmGestaoAPagar.FormCreate(Sender: TObject);
 begin
    inherited;
    CAPTION := 'AUTOCOM GERENCIAL GESTÃO DE CONTAS A PAGAR' + C_117;
-   DM.Q1.Open(C_SQL105);
+   DMConn.Q1.Open(C_SQL105);
 
-   while not DM.Q1.Eof do
+   while not DMConn.Q1.Eof do
    begin
-      cmb1.Properties.Items.Append(DM.Q1.Fields[0].AsString);
-      DM.Q1.Next;
+      cmb1.Properties.Items.Append(DMConn.Q1.Fields[0].AsString);
+      DMConn.Q1.Next;
    end;
 
-   DM.Q1.Close;
+   DMConn.Q1.Close;
    pgDetBol.ActivePage := TabPesqBol;
 end;
 

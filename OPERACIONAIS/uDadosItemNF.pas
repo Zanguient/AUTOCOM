@@ -9,7 +9,7 @@ uses
   Vcl.StdCtrls, cxButtons, Vcl.ExtCtrls, cxControls, cxContainer, cxEdit,
   cxMaskEdit, cxDropDownEdit, cxCalc, cxDBEdit, cxTextEdit, cxGroupBox, cxLabel,
   cxDBLabel, Data.DB, Datasnap.DBClient, cxLookupEdit, cxDBLookupEdit,
-  cxDBLookupComboBox;
+  cxDBLookupComboBox, dxSkinsCore, dxSkinCaramel;
 
 type
   TfrmdadosItemNF = class(Tfrm)
@@ -166,7 +166,7 @@ implementation
 
 {$R *.dfm}
 
-uses uAutocomConsts, uDM, uDM_NF_Entr, uFuncoes;
+uses uAutocomConsts, uDM, uDM_NF_Entr, uFuncoes, uDM_Conn;
 
 procedure TfrmdadosItemNF.btnCancelarClick(Sender: TObject);
 begin
@@ -185,9 +185,9 @@ begin
       exit;
    end;
 
-   DM.Q6.Open('select id from ibptax_itens where ncm=' + Texto_Mysql(Number(DM_NF_Entr.cdNF_ItemNCM.AsString)));
+   DMConn.Q6.Open('select id from ibptax_itens where ncm=' + Texto_Mysql(Number(DM_NF_Entr.cdNF_ItemNCM.AsString)));
 
-   if DM.Q6.Fields[0].IsNull then
+   if DMConn.Q6.Fields[0].IsNull then
    begin
       ShowMessage('NCM não encontrado na tabela IBPTax.');
       exit;
@@ -281,17 +281,17 @@ begin
 
   if DM_NF_Entr.cdNFEmit_EnderEmit_UF.AsString <> DM.QEmpresauf.AsString then
   begin
-     DM.Q1.Open('select cfop from cfop where cfop BETWEEN 6000 and 6999');
+     DMConn.Q1.Open('select cfop from cfop where cfop BETWEEN 6000 and 6999');
   end
   else
   begin
-     DM.Q1.Open('select cfop from cfop where cfop BETWEEN 5000 and 5999');
+     DMConn.Q1.Open('select cfop from cfop where cfop BETWEEN 5000 and 5999');
   end;
 
-  while not DM.Q1.Eof do
+  while not DMConn.Q1.Eof do
   begin
-     cmbCFOP.Properties.Items.Append(DM.Q1.Fields[0].asstring);
-     DM.Q1.Next;
+     cmbCFOP.Properties.Items.Append(DMConn.Q1.Fields[0].asstring);
+     DMConn.Q1.Next;
   end;
 
   DM.QCST.Open('select * from cst where simplesnacional = "N"');

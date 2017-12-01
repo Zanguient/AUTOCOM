@@ -12,7 +12,7 @@ uses
   cxGridTableView, cxGridDBTableView, cxGrid, cxNavigator, cxDBNavigator, cxPC,
   dxStatusBar, cxButtons, Vcl.ExtCtrls, cxDropDownEdit, cxDBEdit, cxMaskEdit,
   cxSpinEdit, cxDBLabel, cxCheckBox, dxSkinsCore, dxSkinsdxStatusBarPainter,
-  dxSkinscxPCPainter;
+  dxSkinscxPCPainter, dxSkinCaramel, dxBarBuiltInMenu;
 
 type
   TfrmCadOperador = class(TfrmCad)
@@ -68,7 +68,7 @@ implementation
 
 {$R *.dfm}
 
-uses uAutocomConsts, uDM, uFuncoes, uPesqCidade, uMain;
+uses uAutocomConsts, uDM, uFuncoes, uPesqCidade, uMain, uDM_Conn;
 
 procedure TfrmCadOperador.cmbCidadeKeyPress(Sender: TObject; var Key: Char);
 begin
@@ -158,22 +158,22 @@ begin
  //  begin
        DM.QSegur.Close;  //atualiza qsegur em função do operador
        DM.QSegur.Open;
-       DM.Q1.Open('select * from segur where operador=' + Texto_Mysql(DM.QOperadorid.Value));
+       DMConn.Q1.Open('select * from segur where operador=' + Texto_Mysql(DM.QOperadorid.Value));
        amenu := frmMain.Menu1; //assume o menu1 do gerencial
 
        for i := 0 to amenu.Items.Count - 1 do //varre o menu e grava o registro, se nao achar
        begin
           if not DM.QSegur.Locate('menu',amenu.Items[i].Name,[])then
           begin
-              DM.Q1.Insert;
-              DM.Q1.FieldByName('operador').Value := DM.QOperadorid.Value;
-              DM.Q1.FieldByName('menu').AsString  := amenu.Items[i].Name;
+              DMConn.Q1.Insert;
+              DMConn.Q1.FieldByName('operador').Value := DM.QOperadorid.Value;
+              DMConn.Q1.FieldByName('menu').AsString  := amenu.Items[i].Name;
               s := amenu.Items[i].Caption;
               s := FindReplaceStr('&','', s);
-              DM.Q1.FieldByName('caption').AsString := AnsiUpperCase(s);
-              DM.Q1.FieldByName('chave').Value   := 'S';
-              DM.Q1.FieldByName('botao').Value   := 0;
-              DM.Q1.Post;
+              DMConn.Q1.FieldByName('caption').AsString := AnsiUpperCase(s);
+              DMConn.Q1.FieldByName('chave').Value   := 'S';
+              DMConn.Q1.FieldByName('botao').Value   := 0;
+              DMConn.Q1.Post;
           end;
 
           if amenu.Items[i].Count > 0 then  //faz o mesmo com o sub menu se tiver
@@ -181,30 +181,30 @@ begin
           begin
              if not DM.QSegur.Locate('menu',amenu.Items[i].Items[j].Name,[])then
              begin
-                 DM.Q1.Insert;
-                 DM.Q1.FieldByName('operador').Value := DM.QOperadorid.Value;
-                 DM.Q1.FieldByName('menu').AsString  := amenu.Items[i].Items[j].Name;
+                 DMConn.Q1.Insert;
+                 DMConn.Q1.FieldByName('operador').Value := DM.QOperadorid.Value;
+                 DMConn.Q1.FieldByName('menu').AsString  := amenu.Items[i].Items[j].Name;
                  s := amenu.Items[i].Items[j].Caption;
                  s := FindReplaceStr('&','', s);
-                 DM.Q1.FieldByName('caption').AsString := '    ' + s; //4 espaços
-                 DM.Q1.FieldByName('chave').Value   := 'S';
-                 DM.Q1.FieldByName('botao').Value   := 0;
-                 DM.Q1.Post;
+                 DMConn.Q1.FieldByName('caption').AsString := '    ' + s; //4 espaços
+                 DMConn.Q1.FieldByName('chave').Value   := 'S';
+                 DMConn.Q1.FieldByName('botao').Value   := 0;
+                 DMConn.Q1.Post;
              end;
 
              if amenu.Items[i].Items[j].Count > 0 then //faz o mesmo para o 2º sub menu se houver
              for k := 0 to amenu.Items[i].Items[j].Count - 1 do
              if not DM.QSegur.Locate('menu',amenu.Items[i].Items[j].Items[k].Name,[])then
              begin
-                 DM.Q1.Insert;
-                 DM.Q1.FieldByName('operador').Value := DM.QOperadorid.Value;
-                 DM.Q1.FieldByName('menu').AsString  := amenu.Items[i].Items[j].Items[k].Name;
+                 DMConn.Q1.Insert;
+                 DMConn.Q1.FieldByName('operador').Value := DM.QOperadorid.Value;
+                 DMConn.Q1.FieldByName('menu').AsString  := amenu.Items[i].Items[j].Items[k].Name;
                  s := amenu.Items[i].Items[j].Items[k].Caption;
                  s := FindReplaceStr('&','', s);
-                 DM.Q1.FieldByName('caption').AsString := '        ' + s; //8 espaços
-                 DM.Q1.FieldByName('chave').Value   := 'S';
-                 DM.Q1.FieldByName('botao').Value   := 0;
-                 DM.Q1.Post;
+                 DMConn.Q1.FieldByName('caption').AsString := '        ' + s; //8 espaços
+                 DMConn.Q1.FieldByName('chave').Value   := 'S';
+                 DMConn.Q1.FieldByName('botao').Value   := 0;
+                 DMConn.Q1.Post;
              end;
           end;
        end;

@@ -2,6 +2,7 @@ inherited frmCadPlanoContasAssoc: TfrmCadPlanoContasAssoc
   Caption = 'frmCadPlanoContasAssoc'
   ClientWidth = 432
   ExplicitWidth = 438
+  ExplicitHeight = 240
   PixelsPerInch = 96
   TextHeight = 15
   inherited TPA: TPanel
@@ -105,6 +106,10 @@ inherited frmCadPlanoContasAssoc: TfrmCadPlanoContasAssoc
       Caption = 'OPERA'#199#213'ES DO SISTEMA ASSOCIADOS'
       ImageIndex = 1
       OnShow = TabSisShow
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object grdOpSis: TcxGrid
         Left = 0
         Top = 0
@@ -183,9 +188,11 @@ inherited frmCadPlanoContasAssoc: TfrmCadPlanoContasAssoc
     Left = 16
     Top = 216
   end
+  inherited cxStyleRepository2: TcxStyleRepository
+    PixelsPerInch = 96
+  end
   object Q1: TFDQuery
     BeforeInsert = Q1BeforeInsert
-    Connection = DM.DB
     SQL.Strings = (
       'select * from finan_centro_custo_assoc')
     Left = 16

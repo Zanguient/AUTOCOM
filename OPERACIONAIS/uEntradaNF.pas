@@ -14,7 +14,8 @@ uses
   cxData, cxDataStorage, cxDBData, cxClasses, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxGridLevel, cxGridCustomView, cxGrid,
   cxCalc, cxPC, cxDBLabel, cxMemo, pcnAuxiliar, dxSkinsCore, dxSkinscxPCPainter,
-  dxSkinsdxStatusBarPainter, cxNavigator, cxImageComboBox, cxCurrencyEdit;
+  dxSkinsdxStatusBarPainter, cxNavigator, cxImageComboBox, cxCurrencyEdit,
+  dxSkinCaramel, dxBarBuiltInMenu;
 
 type
   TfrmEntradaNF = class(Tfrm)
@@ -283,7 +284,8 @@ implementation
 uses uAutocomConsts, uDM, uDM_NF_Entr, uFuncoes, uMD5Print, uDetProd, uAssCadProdNF,
      uCadForn, uMain, uListaEmitentes, uCadEstoque, uDadosItemNF, udm_ini,
   uConverteEmitInform, uPrecificacao, uPesqNatOper, uEntradaNFTotais, uEntradaNFTransp, uEntradaNFVolumes,
-  uEntradaNFDuplic, uEntradaNFDocArr, uAssoc, uCadPlanoContas, uPesqNF;
+  uEntradaNFDuplic, uEntradaNFDocArr, uAssoc, uCadPlanoContas, uPesqNF,
+  uDM_Conn;
 
 procedure TfrmEntradaNF.AssistentedePrecificao1Click(Sender: TObject);
 begin
@@ -385,7 +387,7 @@ begin
 
 //   --------------------   apaga a NF se ja existir no BD
 
-   DM.DB.ExecSQL('delete from nf_entr where Ide_nNF=' +
+   DMConn.DB.ExecSQL('delete from nf_entr where Ide_nNF=' +
                   Texto_Mysql(DM_NF_Entr.cdNFIde_nNF.Value) +
                  ' and Ide_serie=' +
                  Texto_Mysql(DM_NF_Entr.cdNFIde_serie.Value) +
@@ -1071,16 +1073,16 @@ begin
       exit;
    end;
 
-   DM.Q5.Open('select entrada from cfop_converte where saida=' + Texto_Mysql(CFOP));
-   s := DM.Q5.Fields[0].AsString;
+   DMConn.Q5.Open('select entrada from cfop_converte where saida=' + Texto_Mysql(CFOP));
+   s := DMConn.Q5.Fields[0].AsString;
 
    if Number(s) = '' then
    repeat
       s := InputBox('CFOP não encontrado', 'Informe o CFOP correspondente ao CFOP ' + CFOP, s);
 
-      DM.Q5.Open('select id from cfop where cfop=' + Texto_Mysql(s));
+      DMConn.Q5.Open('select id from cfop where cfop=' + Texto_Mysql(s));
 
-      b := DM.Q5.Fields[0].AsInteger > 0;
+      b := DMConn.Q5.Fields[0].AsInteger > 0;
 
       if b then
       begin
@@ -1502,7 +1504,7 @@ begin
 
    DM_NF_Entr := TDM_NF_Entr.Create(self);
 
-   DM.DB.connected := False;
+   DMConn.DB.connected := False;
    pg1.ActivePage := TabTotais;
 end;
 
@@ -1834,7 +1836,7 @@ begin
                with NFE1.NotasFiscais.Items[n].NFe.Det.Items[I].Prod do
                begin
                   repeat
-                     DM.Q1.Open('select cfop,cst,csosn,cst_pis_sai,cst_ipi_sai,cst_cofins_sai from cfop_cst_csosn where ' +
+                     DMConn.Q1.Open('select cfop,cst,csosn,cst_pis_sai,cst_ipi_sai,cst_cofins_sai from cfop_cst_csosn where ' +
                                 'cfop=' + Texto_Mysql(NFE1.NotasFiscais.Items[n].NFe.Det.Items[I].Prod.CFOP) +
                                 ' and cst=' + (st_cst) +
                                 ' and csosn =' + (st_csosn) +
@@ -1843,7 +1845,7 @@ begin
                                 ' and cst_cofins_sai=' + Texto_Mysql(Integer(NFE1.NotasFiscais.Items[n].NFe.Det.Items[I].Imposto.COFINS.CST))
                      );
 
-                     if DM.Q1.IsEmpty then
+                     if DMConn.Q1.IsEmpty then
                      begin
                         b := False;
 
@@ -2066,9 +2068,9 @@ var
 begin
    s := BuscaTroca(C_SQL83, C_SOH, IntToStr(nnf));
    s := BuscaTroca(s, C_ETX, cnpj);
-   DM.Q1.Open(s);
+   DMConn.Q1.Open(s);
 
-   Result := DM.Q1.Fields[0].AsInteger > 0;
+   Result := DMConn.Q1.Fields[0].AsInteger > 0;
 end;
 
 procedure TfrmEntradaNF.Novo_Fornecedor;

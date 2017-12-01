@@ -120,7 +120,8 @@ implementation
 
 {$R *.dfm}
 
-uses uAutocomConsts, {$IFDEF PDV}updv, uDM_PDV, uFPag, uTabRG, {$ENDIF} uDMecf, uFuncoes, uDM, uProgress, uDM_Sintegra, uDM_SPED;
+uses uAutocomConsts, {$IFDEF PDV}updv, uDM_PDV, uFPag, uTabRG, {$ENDIF} uDMecf, uFuncoes, uDM, uProgress, uDM_Sintegra, uDM_SPED,
+  uDM_Conn;
 
 
 procedure TfrmMenuFisc.AMF;
@@ -340,21 +341,21 @@ begin
 
    if RgTipoProd.ItemIndex = 0 then//por codigo
    begin
-      DM.Q1.Open('select id from estoque where cod_gtin=' + Texto_Mysql(EdEstoque.Text));
+      DMConn.Q1.Open('select id from estoque where cod_gtin=' + Texto_Mysql(EdEstoque.Text));
    end
    else //por descrição exata
    begin
-      DM.Q1.Open('select id from estoque where nome=' + Texto_Mysql(EdEstoque.Text));
+      DMConn.Q1.Open('select id from estoque where nome=' + Texto_Mysql(EdEstoque.Text));
    end;
 
-   if DM.Q1.IsEmpty then
+   if DMConn.Q1.IsEmpty then
       raise Exception.Create('Nenhum produto encontrado.');
 
-   if T1.Locate('id', DM.Q1.Fields[0].AsInteger, []) then
+   if T1.Locate('id', DMConn.Q1.Fields[0].AsInteger, []) then
       raise Exception.Create('Produto já informado.');
 
    T1.Append;
-   T1id.Value := DM.Q1.Fields[0].AsInteger;
+   T1id.Value := DMConn.Q1.Fields[0].AsInteger;
    T1.Post;
 
    EdEstoque.Clear;
@@ -837,13 +838,13 @@ begin
   //lista os A2
 // Log('Gerar_REQUISITO_XXVI','A2', 'Listando...');
 
-  DM.Q1.Open('select group_concat(id) from paf_r02 where num_ecf=' +
+  DMConn.Q1.Open('select group_concat(id) from paf_r02 where num_ecf=' +
               Texto_Mysql(DM_ECF.st_ECF_Num) + ' and dt_movi between ' +
               data_My(data) + ' and ' + data_My(data)
   );
 //  Log('Gerar_REQUISITO_XXVI','A2', 'filtrando...');
 
-  DM.TPAF_A2.Open('select * from paf_a2 where r02 in(' + DM.Q1.Fields[0].AsString + ')');
+  DM.TPAF_A2.Open('select * from paf_a2 where r02 in(' + DMConn.Q1.Fields[0].AsString + ')');
   DM.TPAF_A2.FetchAll;
 
   frmprogress.bar1.Properties.Max := DM.TPAF_A2.RecordCount;
@@ -862,8 +863,8 @@ begin
         MEIO_PGTO := DM.TPAF_A2fpag.AsString;
         TIPO_DOC  := DM.TPAF_A2tipo.AsString; //1-CupomFiscal, 2-CNF, 3-Nota Fiscal
         VL        := DM.TPAF_A2valor.Value;
-      //  DM.Q1.Open('select fn_reg_valido("A2",' + DM.TPAF_A2id.AsString + ',' + Texto_Mysql(_C) + ')');
-        RegistroValido:= True;//DM.Q1.Fields[0].AsInteger = 1;
+      //  DMConn.Q1.Open('select fn_reg_valido("A2",' + DM.TPAF_A2id.AsString + ',' + Texto_Mysql(_C) + ')');
+        RegistroValido:= True;//DMConn.Q1.Fields[0].AsInteger = 1;
      end;
      DM.TPAF_A2.Next;
   end;
@@ -871,36 +872,36 @@ begin
   //P2
 //  Log('Gerar_REQUISITO_XXVI','P2', 'Obtendo registros...');
 
-  DM.Q5.Open('select id, cod_gtin,nome,calculo_por_arredondamento,producao_propria,' +
+  DMConn.Q5.Open('select id, cod_gtin,nome,calculo_por_arredondamento,producao_propria,' +
              'aliq_ecf,vrvenda_vista,sigla_unid from vw_estoque where suspenso ="N"');
 
-  DM.Q5.FetchAll;
-  frmprogress.bar1.Properties.Max := DM.Q5.RecordCount;
+  DMConn.Q5.FetchAll;
+  frmprogress.bar1.Properties.Max := DMConn.Q5.RecordCount;
   DM_ECF.PAF.PAF_P.RegistroP2.Clear;
 
 //  Log('Gerar_REQUISITO_XXVI','P2', 'gravando registros...');
 
-  while not DM.Q5.Eof do
+  while not DMConn.Q5.Eof do
   begin
-      frmprogress.bar1.Position := DM.Q5.RecNo;
+      frmprogress.bar1.Position := DMConn.Q5.RecNo;
       Application.ProcessMessages;
 
       with DM_ECF.PAF.PAF_P.RegistroP2.New do
       begin
-        COD_MERC_SERV := DM.Q5.FieldByName('cod_gtin').AsString;
-        DESC_MERC_SERV:= DM.Q5.FieldByName('nome').AsString;
-        UN_MED        := DM.Q5.FieldByName('sigla_unid').AsString;
-        IAT           := Iif(DM.Q5.FieldByName('calculo_por_arredondamento').AsString ='S','A','T');
-        IPPT          := Iif(DM.Q5.FieldByName('producao_propria').AsString ='S','P','T');
-        ST            := Iif(Number(DM.Q5.FieldByName('aliq_ecf').AsString) <> '', 'T', Copy(DM.Q5.FieldByName('aliq_ecf').AsString,1,1));
-        ALIQ          := StrToFloatDef(DM.Q5.FieldByName('aliq_ecf').AsString,0)/100;
-        VL_UNIT       := DM.Q5.FieldByName('vrvenda_vista').AsCurrency;
+        COD_MERC_SERV := DMConn.Q5.FieldByName('cod_gtin').AsString;
+        DESC_MERC_SERV:= DMConn.Q5.FieldByName('nome').AsString;
+        UN_MED        := DMConn.Q5.FieldByName('sigla_unid').AsString;
+        IAT           := Iif(DMConn.Q5.FieldByName('calculo_por_arredondamento').AsString ='S','A','T');
+        IPPT          := Iif(DMConn.Q5.FieldByName('producao_propria').AsString ='S','P','T');
+        ST            := Iif(Number(DMConn.Q5.FieldByName('aliq_ecf').AsString) <> '', 'T', Copy(DMConn.Q5.FieldByName('aliq_ecf').AsString,1,1));
+        ALIQ          := StrToFloatDef(DMConn.Q5.FieldByName('aliq_ecf').AsString,0)/100;
+        VL_UNIT       := DMConn.Q5.FieldByName('vrvenda_vista').AsCurrency;
 
-      //  DM.Q1.Open('select fn_reg_valido("ESTOQUE",' + DM.Q5.FieldByName('id').AsString + ',' + Texto_Mysql(_C) + ')');
-        RegistroValido:= True;//DM.Q1.Fields[0].AsInteger = 1;
+      //  DMConn.Q1.Open('select fn_reg_valido("ESTOQUE",' + DMConn.Q5.FieldByName('id').AsString + ',' + Texto_Mysql(_C) + ')');
+        RegistroValido:= True;//DMConn.Q1.Fields[0].AsInteger = 1;
      end;
 
-     DM.Q5.Next;
+     DMConn.Q5.Next;
   end;
 
 //  Log('Gerar_REQUISITO_XXVI','E2', 'Obtendo registros...');
@@ -926,8 +927,8 @@ begin
         UN_MED   := DM.TPAF_E2unid.AsString;
         QTDE_EST := DM.TPAF_E2qtd.Value;
 
-       // DM.Q1.Open('select fn_reg_valido("E2",' + DM.TPAF_E2id.AsString + ',' + Texto_Mysql(_C) + ')');
-        RegistroValido:= True;//DM.Q1.Fields[0].AsInteger = 1;
+       // DMConn.Q1.Open('select fn_reg_valido("E2",' + DM.TPAF_E2id.AsString + ',' + Texto_Mysql(_C) + ')');
+        RegistroValido:= True;//DMConn.Q1.Fields[0].AsInteger = 1;
      end;
      DM.TPAF_E2.Next;
   end;
@@ -949,8 +950,8 @@ begin
      MODELO_ECF   := DM.TPAF_E3mod_ecd.AsString;
      DT_EST       := DM.TPAF_E3data_estoque.Value + DM.TPAF_E3hora_estoque.Value;
 
-    // DM.Q1.Open('select fn_reg_valido("E3",' + DM.TPAF_E3id.AsString + ',' + Texto_Mysql(_C) + ')');
-     RegistroValido:= True;//DM.Q1.Fields[0].AsInteger = 1;
+    // DMConn.Q1.Open('select fn_reg_valido("E3",' + DM.TPAF_E3id.AsString + ',' + Texto_Mysql(_C) + ')');
+     RegistroValido:= True;//DMConn.Q1.Fields[0].AsInteger = 1;
   end;
 
   // Registro R1 - Identificação do ECF, do Usuário, do PAF-ECF e da Empresa Desenvolvedora e Dados do Arquivo
@@ -982,8 +983,8 @@ begin
        DT_FIN      := data;
        ER_PAF_ECF  := DM_ECF.PAF.AAC.IdentPAF.VersaoER;
 
-      // DM.Q1.Open('select fn_reg_valido("R01",' + DM.TPAF_R01id.AsString + ',' + Texto_Mysql(_C) + ')');
-       RegistroValido:= True;//DM.Q1.Fields[0].AsInteger = 1;
+      // DMConn.Q1.Open('select fn_reg_valido("R01",' + DM.TPAF_R01id.AsString + ',' + Texto_Mysql(_C) + ')');
+       RegistroValido:= True;//DMConn.Q1.Fields[0].AsInteger = 1;
 
        Log('Gerar_REQUISITO_XXVI','R02', 'Obtendo registros...');
        // Registro R02 - Relação de Reduções Z  e R03 - Detalhe da Redução Z
@@ -1023,8 +1024,8 @@ begin
                 begin
                    TOT_PARCIAL := DM.TPAF_R03cod_tot_parcial.AsString;
                    VL_ACUM     := DM.TPAF_R03valor_tot_parcial.Value;
-                  // DM.Q1.Open('select fn_reg_valido("R03",' + DM.TPAF_R03id.AsString + ',' + Texto_Mysql(_C) + ')');
-                   RegistroValido:= True;//DM.Q1.Fields[0].AsInteger = 1;
+                  // DMConn.Q1.Open('select fn_reg_valido("R03",' + DM.TPAF_R03id.AsString + ',' + Texto_Mysql(_C) + ')');
+                   RegistroValido:= True;//DMConn.Q1.Fields[0].AsInteger = 1;
                 end;
                 DM.TPAF_R03.Next;
               end;//fim loop r03
@@ -1064,8 +1065,8 @@ begin
                     CNPJ_CPF    := Number(DM.TPAF_R04cnpj_cliente.AsString);
                  end;
 
-                // DM.Q1.Open('select fn_reg_valido("R04",' + DM.TPAF_R04id.AsString + ',' + Texto_Mysql(_C) + ')');
-                 RegistroValido:= True;//DM.Q1.Fields[0].AsInteger = 1;
+                // DMConn.Q1.Open('select fn_reg_valido("R04",' + DM.TPAF_R04id.AsString + ',' + Texto_Mysql(_C) + ')');
+                 RegistroValido:= True;//DMConn.Q1.Fields[0].AsInteger = 1;
 
             //     Log('Gerar_REQUISITO_XXVI','    R05', 'Obtendo registros...');
 
@@ -1096,8 +1097,8 @@ begin
                        IPPT         := DM.TPAF_R05ippt.AsString;
                        QTDE_DECIMAL := DM.TPAF_R05casas_dec_qtd.AsInteger;
                        VL_DECIMAL   := DM.TPAF_R05casas_dec_vrunit.AsInteger;
-                      // DM.Q1.Open('select fn_reg_valido("R05",' + DM.TPAF_R05id.AsString + ',' + Texto_Mysql(_C) + ')');
-                       RegistroValido:= True;//DM.Q1.Fields[0].AsInteger = 1;
+                      // DMConn.Q1.Open('select fn_reg_valido("R05",' + DM.TPAF_R05id.AsString + ',' + Texto_Mysql(_C) + ')');
+                       RegistroValido:= True;//DMConn.Q1.Fields[0].AsInteger = 1;
                     end;
                     DM.TPAF_R05.Next;
                  end;
@@ -1118,8 +1119,8 @@ begin
                        VL_PAGTO := DM.TPAF_R07valor.Value;
                        IND_EST  := DM.TPAF_R07extorno.AsString;
                        VL_EST   := DM.TPAF_R07valor_extorno.Value;
-                       //DM.Q1.Open('select fn_reg_valido("R07",' + DM.TPAF_R07id.AsString + ',' + Texto_Mysql(_C) + ')');
-                       RegistroValido:= True;//DM.Q1.Fields[0].AsInteger = 1;
+                       //DMConn.Q1.Open('select fn_reg_valido("R07",' + DM.TPAF_R07id.AsString + ',' + Texto_Mysql(_C) + ')');
+                       RegistroValido:= True;//DMConn.Q1.Fields[0].AsInteger = 1;
                     end;
                     DM.TPAF_R07.Next;
                  end;//loop R07 fim
@@ -1147,8 +1148,8 @@ begin
                   DENOM       := DM.TPAF_R06denominacao.AsString;
                   DT_FIN      := DM.TPAF_R06dt_emissao.Value;
                   HR_FIN      := DM.TPAF_R06hora_em.Value;
-                // DM.Q1.Open('select fn_reg_valido("R06",' + DM.TPAF_R06id.AsString + ',' + Texto_Mysql(_C) + ')');
-                  RegistroValido:= True;//DM.Q1.Fields[0].AsInteger = 1;
+                // DMConn.Q1.Open('select fn_reg_valido("R06",' + DM.TPAF_R06id.AsString + ',' + Texto_Mysql(_C) + ')');
+                  RegistroValido:= True;//DMConn.Q1.Fields[0].AsInteger = 1;
 
            //       Log('Gerar_REQUISITO_XXVI','        R07', 'Obtendo registros...');
 
@@ -1165,8 +1166,8 @@ begin
                         VL_PAGTO    := DM.TPAF_R07valor.Value;
                         IND_EST     := DM.TPAF_R07extorno.AsString;
                         VL_EST      := DM.TPAF_R07valor_extorno.Value;
-                       // DM.Q1.Open('select fn_reg_valido("R07",' + DM.TPAF_R07id.AsString + ',' + Texto_Mysql(_C) + ')');
-                        RegistroValido:= True;//DM.Q1.Fields[0].AsInteger = 1;
+                       // DMConn.Q1.Open('select fn_reg_valido("R07",' + DM.TPAF_R07id.AsString + ',' + Texto_Mysql(_C) + ')');
+                        RegistroValido:= True;//DMConn.Q1.Fields[0].AsInteger = 1;
                      end;
                      DM.TPAF_R07.Next;
                   end;//loop TPafR07 fim
@@ -1221,8 +1222,8 @@ begin
   PreencherHeader(DM_ECF.PAF.PAF_E.RegistroE1); // preencher header do arquivo
 
   //inclusao exclusao no U1
-  DM.Q1.Open('select count(*) from paf_incl_excl where registros <0 ');
-  DM_ECF.PAF.PAF_U.RegistroU1.InclusaoExclusao := Iif(DM.Q1.Fields[0].AsInteger >0, True, false);
+  DMConn.Q1.Open('select count(*) from paf_incl_excl where registros <0 ');
+  DM_ECF.PAF.PAF_U.RegistroU1.InclusaoExclusao := Iif(DMConn.Q1.Fields[0].AsInteger >0, True, false);
 
   //pesquisa dos dados
   DM.TPAF_R01.Open('select * from paf_r01 order by nmro');
@@ -1236,13 +1237,13 @@ begin
   AbreForm(Tfrmprogress,frmprogress, False);
 
   //lista os A2
-  DM.Q1.Open('select group_concat(id) from paf_r02 where dt_movi between ' +
+  DMConn.Q1.Open('select group_concat(id) from paf_r02 where dt_movi between ' +
               data_My(DtInicial.Date) + ' and ' + data_My(DtFinal.Date)
   );
 
-  if DM.Q1.Fields[0].AsString <> '' then
+  if DMConn.Q1.Fields[0].AsString <> '' then
   begin
-     DM.TPAF_A2.Open('select * from paf_a2 where r02 in(' + DM.Q1.Fields[0].AsString + ')');
+     DM.TPAF_A2.Open('select * from paf_a2 where r02 in(' + DMConn.Q1.Fields[0].AsString + ')');
      DM.TPAF_A2.FetchAll;
 
      frmprogress.bar1.Properties.Max := DM.TPAF_A2.RecordCount;
@@ -1259,30 +1260,30 @@ begin
            MEIO_PGTO := DM.TPAF_A2fpag.AsString;
            TIPO_DOC  := DM.TPAF_A2tipo.AsString; //1-CupomFiscal, 2-CNF, 3-Nota Fiscal
            VL        := DM.TPAF_A2valor.Value;
-           DM.Q1.Open('select fn_reg_valido("A2",' + DM.TPAF_A2id.AsString + ',' + Texto_Mysql(_C) + ')');
-           RegistroValido:= True;//DM.Q1.Fields[0].AsInteger = 1;
+           DMConn.Q1.Open('select fn_reg_valido("A2",' + DM.TPAF_A2id.AsString + ',' + Texto_Mysql(_C) + ')');
+           RegistroValido:= True;//DMConn.Q1.Fields[0].AsInteger = 1;
         end;
         DM.TPAF_A2.Next;
      end;
   end;
 
   //lista os A2  - NF
-  DM.Q1.Open('select group_concat(id) from nf where Ide_dSaiEnt between ' +
+  DMConn.Q1.Open('select group_concat(id) from nf where Ide_dSaiEnt between ' +
               data_My(DtInicial.Date) + ' and ' + data_My(DtFinal.Date));
 
-  if DM.Q1.Fields[0].AsString <> '' then
+  if DMConn.Q1.Fields[0].AsString <> '' then
   begin
-     DM.Q1.Open('select Ide_dSaiEnt, sum(ICMSTot_vNF) as valor ' +
-                'from nf where id in(' + DM.Q1.Fields[0].AsString + ') group by Ide_dSaiEnt');
-     DM.Q1.FetchAll;
+     DMConn.Q1.Open('select Ide_dSaiEnt, sum(ICMSTot_vNF) as valor ' +
+                'from nf where id in(' + DMConn.Q1.Fields[0].AsString + ') group by Ide_dSaiEnt');
+     DMConn.Q1.FetchAll;
      DM.ExecSQL('delete from paf_a2 where tipo=3 and data between' +
                  data_My(DtInicial.Date) + ' and ' + data_My(DtFinal.Date));
 
-     frmprogress.bar1.Properties.Max := DM.Q1.RecordCount;
+     frmprogress.bar1.Properties.Max := DMConn.Q1.RecordCount;
 
-     while not DM.Q1.Eof do
+     while not DMConn.Q1.Eof do
      begin
-        frmprogress.bar1.Position := DM.Q1.RecNo;
+        frmprogress.bar1.Position := DMConn.Q1.RecNo;
         Application.ProcessMessages;                           //ICMSTot_vNF
 
          DM.TPaf_A2.Open;
@@ -1290,14 +1291,14 @@ begin
          DM.TPaf_A2.insert;
          DM.TPaf_A2ecf.Value        := 0;
          DM.TPaf_A2tipo.Value       := 3;
-         DM.TPAF_A2data.Value       := Trunc(DM.Q1.FieldByName('Ide_dSaiEnt').AsDateTime);
+         DM.TPAF_A2data.Value       := Trunc(DMConn.Q1.FieldByName('Ide_dSaiEnt').AsDateTime);
          DM.TPAF_A2r02.Value        := 0;//valor inicial
          DM.TPAF_A2cod_fpag.Value   := 1;
          DM.TPAF_A2fpag.AsString    := 'Dinheiro';
-         DM.TPaf_A2valor.Value      := DM.Q1.FieldByName('valor').AsCurrency;
+         DM.TPaf_A2valor.Value      := DMConn.Q1.FieldByName('valor').AsCurrency;
          DM.TPaf_A2valor_canc.Value := 0; //grava o valor como referencia para abater se cancelar
          DM.TPaf_A2.Post;
-         DM.Q1.Next;
+         DMConn.Q1.Next;
      end;
      DM.Atu_Hash;
   end;
@@ -1320,50 +1321,50 @@ begin
         MEIO_PGTO := DM.TPAF_A2fpag.AsString;
         TIPO_DOC  := DM.TPAF_A2tipo.AsString; //1-CupomFiscal, 2-CNF, 3-Nota Fiscal
         VL        := DM.TPAF_A2valor.Value;
-        DM.Q1.Open('select fn_reg_valido("A2",' + DM.TPAF_A2id.AsString + ',' + Texto_Mysql(_C) + ')');
-        RegistroValido:= True;//DM.Q1.Fields[0].AsInteger = 1;
+        DMConn.Q1.Open('select fn_reg_valido("A2",' + DM.TPAF_A2id.AsString + ',' + Texto_Mysql(_C) + ')');
+        RegistroValido:= True;//DMConn.Q1.Fields[0].AsInteger = 1;
      end;
      DM.TPAF_A2.Next;
   end;
 
 
   //P2
-  DM.Q5.Open('select id, cod_gtin,nome,calculo_por_arredondamento,producao_propria,' +
+  DMConn.Q5.Open('select id, cod_gtin,nome,calculo_por_arredondamento,producao_propria,' +
              'aliq_ecf,vrvenda_vista,sigla_unid from vw_estoque where suspenso ="N"');
 
-  DM.Q5.FetchAll;
-  frmprogress.bar1.Properties.Max := DM.Q5.RecordCount;
+  DMConn.Q5.FetchAll;
+  frmprogress.bar1.Properties.Max := DMConn.Q5.RecordCount;
   DM_ECF.PAF.PAF_P.RegistroP2.Clear;
 
-  while not DM.Q5.Eof do
+  while not DMConn.Q5.Eof do
   begin
-      frmprogress.bar1.Position := DM.Q5.RecNo;
+      frmprogress.bar1.Position := DMConn.Q5.RecNo;
       Application.ProcessMessages;
 
       with DM_ECF.PAF.PAF_P.RegistroP2.New do
       begin
-        COD_MERC_SERV := DM.Q5.FieldByName('cod_gtin').AsString;
-        DESC_MERC_SERV:= DM.Q5.FieldByName('nome').AsString;
-        UN_MED        := DM.Q5.FieldByName('sigla_unid').AsString;
-        IAT           := Iif(DM.Q5.FieldByName('calculo_por_arredondamento').AsString ='S','A','T');
-        IPPT          := Iif(DM.Q5.FieldByName('producao_propria').AsString ='S','P','T');
-        ST            := Iif(Number(DM.Q5.FieldByName('aliq_ecf').AsString) <> '', 'T', Copy(DM.Q5.FieldByName('aliq_ecf').AsString,1,1));
+        COD_MERC_SERV := DMConn.Q5.FieldByName('cod_gtin').AsString;
+        DESC_MERC_SERV:= DMConn.Q5.FieldByName('nome').AsString;
+        UN_MED        := DMConn.Q5.FieldByName('sigla_unid').AsString;
+        IAT           := Iif(DMConn.Q5.FieldByName('calculo_por_arredondamento').AsString ='S','A','T');
+        IPPT          := Iif(DMConn.Q5.FieldByName('producao_propria').AsString ='S','P','T');
+        ST            := Iif(Number(DMConn.Q5.FieldByName('aliq_ecf').AsString) <> '', 'T', Copy(DMConn.Q5.FieldByName('aliq_ecf').AsString,1,1));
 
-        ALIQ          := StrToFloatDef(DM.Q5.FieldByName('aliq_ecf').AsString,0)/100;
-        VL_UNIT       := DM.Q5.FieldByName('vrvenda_vista').AsCurrency;
+        ALIQ          := StrToFloatDef(DMConn.Q5.FieldByName('aliq_ecf').AsString,0)/100;
+        VL_UNIT       := DMConn.Q5.FieldByName('vrvenda_vista').AsCurrency;
 
-        DM.Q1.Open('select fn_reg_valido("ESTOQUE",' + DM.Q5.FieldByName('id').AsString + ',' + Texto_Mysql(_C) + ')');
-        RegistroValido:= True;//DM.Q1.Fields[0].AsInteger = 1;
+        DMConn.Q1.Open('select fn_reg_valido("ESTOQUE",' + DMConn.Q5.FieldByName('id').AsString + ',' + Texto_Mysql(_C) + ')');
+        RegistroValido:= True;//DMConn.Q1.Fields[0].AsInteger = 1;
 
      {   if RegistroValido then
         begin
-           DM.Q1.Open('select id from empresa');
-           DM.Q1.Open('select fn_reg_valido("EMPRESA",' + DM.Q1.FieldByName('id').AsString + ',' + Texto_Mysql(_C) + ')');
-           RegistroValido:= DM.Q1.Fields[0].AsInteger = 1;
+           DMConn.Q1.Open('select id from empresa');
+           DMConn.Q1.Open('select fn_reg_valido("EMPRESA",' + DMConn.Q1.FieldByName('id').AsString + ',' + Texto_Mysql(_C) + ')');
+           RegistroValido:= DMConn.Q1.Fields[0].AsInteger = 1;
         end; }
 
      end;
-     DM.Q5.Next;
+     DMConn.Q5.Next;
   end;
 
   //E2
@@ -1402,14 +1403,14 @@ begin
         UN_MED   := DM.TPAF_E2unid.AsString;
         QTDE_EST := DM.TPAF_E2qtd.Value;
 
-        DM.Q1.Open('select fn_reg_valido("E2",' + DM.TPAF_E2id.AsString + ',' + Texto_Mysql(_C) + ')');
-        RegistroValido:= True;//DM.Q1.Fields[0].AsInteger = 1;
+        DMConn.Q1.Open('select fn_reg_valido("E2",' + DM.TPAF_E2id.AsString + ',' + Texto_Mysql(_C) + ')');
+        RegistroValido:= True;//DMConn.Q1.Fields[0].AsInteger = 1;
 
        { if RegistroValido then
         begin
-           DM.Q1.Open('select id from empresa');
-           DM.Q1.Open('select fn_reg_valido("EMPRESA",' + DM.Q1.FieldByName('id').AsString + ',' + Texto_Mysql(_C) + ')');
-           RegistroValido:= DM.Q1.Fields[0].AsInteger = 1;
+           DMConn.Q1.Open('select id from empresa');
+           DMConn.Q1.Open('select fn_reg_valido("EMPRESA",' + DMConn.Q1.FieldByName('id').AsString + ',' + Texto_Mysql(_C) + ')');
+           RegistroValido:= DMConn.Q1.Fields[0].AsInteger = 1;
         end;}
      end;
      DM.TPAF_E2.Next;
@@ -1429,8 +1430,8 @@ begin
         MODELO_ECF   := DM.TPAF_E3mod_ecd.AsString;
         DT_EST       := DM.TPAF_E3data_estoque.Value + DM.TPAF_E3hora_estoque.Value;
 
-        DM.Q1.Open('select fn_reg_valido("E3",' + DM.TPAF_E3id.AsString + ',' + Texto_Mysql(_C) + ')');
-        RegistroValido:= True;//DM.Q1.Fields[0].AsInteger = 1;
+        DMConn.Q1.Open('select fn_reg_valido("E3",' + DM.TPAF_E3id.AsString + ',' + Texto_Mysql(_C) + ')');
+        RegistroValido:= True;//DMConn.Q1.Fields[0].AsInteger = 1;
      end;
      DM.TPAF_E3.Next;
   end;
@@ -1463,16 +1464,16 @@ begin
        DT_FIN      := DtFinal.Date;
        ER_PAF_ECF  := Number(DM_ECF.PAF.AAC.IdentPAF.VersaoER);
 
-       DM.Q1.Open('select fn_reg_valido("R01",' + DM.TPAF_R01id.AsString + ',' + Texto_Mysql(_C) + ')');
-       RegistroValido:= True;//DM.Q1.Fields[0].AsInteger = 1;
+       DMConn.Q1.Open('select fn_reg_valido("R01",' + DM.TPAF_R01id.AsString + ',' + Texto_Mysql(_C) + ')');
+       RegistroValido:= True;//DMConn.Q1.Fields[0].AsInteger = 1;
 
       { b := RegistroValido;
 
        if RegistroValido then
        begin
-          DM.Q1.Open('select id from empresa');
-          DM.Q1.Open('select fn_reg_valido("EMPRESA",' + DM.Q1.FieldByName('id').AsString + ',' + Texto_Mysql(_C) + ')');
-          RegistroValido:= DM.Q1.Fields[0].AsInteger = 1;
+          DMConn.Q1.Open('select id from empresa');
+          DMConn.Q1.Open('select fn_reg_valido("EMPRESA",' + DMConn.Q1.FieldByName('id').AsString + ',' + Texto_Mysql(_C) + ')');
+          RegistroValido:= DMConn.Q1.Fields[0].AsInteger = 1;
        end;}
 
        // Registro R02 - Relação de Reduções Z  e R03 - Detalhe da Redução Z
@@ -1501,8 +1502,8 @@ begin
               RegistroValido  := True;//b;
                {if b then
                begin
-                 DM.Q1.Open('select fn_reg_valido("R02",' + DM.TPAF_R02id.AsString + ',' + Texto_Mysql(_C) + ')');
-                 RegistroValido:= DM.Q1.Fields[0].AsInteger = 1;
+                 DMConn.Q1.Open('select fn_reg_valido("R02",' + DM.TPAF_R02id.AsString + ',' + Texto_Mysql(_C) + ')');
+                 RegistroValido:= DMConn.Q1.Fields[0].AsInteger = 1;
                  bb := RegistroValido;
                end;   }
 
@@ -1519,8 +1520,8 @@ begin
                    RegistroValido:= True;//bb;
                   { if RegistroValido then
                    begin
-                      DM.Q1.Open('select fn_reg_valido("R03",' + DM.TPAF_R03id.AsString + ',' + Texto_Mysql(_C) + ')');
-                      RegistroValido:= DM.Q1.Fields[0].AsInteger = 1;
+                      DMConn.Q1.Open('select fn_reg_valido("R03",' + DM.TPAF_R03id.AsString + ',' + Texto_Mysql(_C) + ')');
+                      RegistroValido:= DMConn.Q1.Fields[0].AsInteger = 1;
                    end;}
                 end;
                 DM.TPAF_R03.Next;
@@ -1559,8 +1560,8 @@ begin
 
                if bb then
                begin
-                 DM.Q1.Open('select fn_reg_valido("R04",' + DM.TPAF_R04id.AsString + ',' + Texto_Mysql(_C) + ')');
-                 RegistroValido:= DM.Q1.Fields[0].AsInteger = 1;
+                 DMConn.Q1.Open('select fn_reg_valido("R04",' + DM.TPAF_R04id.AsString + ',' + Texto_Mysql(_C) + ')');
+                 RegistroValido:= DMConn.Q1.Fields[0].AsInteger = 1;
                  b4 := RegistroValido;
                end;}
 
@@ -1601,8 +1602,8 @@ begin
 
                if b4 then
                begin
-                       DM.Q1.Open('select fn_reg_valido("R05",' + DM.TPAF_R05id.AsString + ',' + Texto_Mysql(_C) + ')');
-                       RegistroValido:= DM.Q1.Fields[0].AsInteger = 1;
+                       DMConn.Q1.Open('select fn_reg_valido("R05",' + DM.TPAF_R05id.AsString + ',' + Texto_Mysql(_C) + ')');
+                       RegistroValido:= DMConn.Q1.Fields[0].AsInteger = 1;
                        b5 := RegistroValido;
                end; }
                     end;
@@ -1637,8 +1638,8 @@ begin
 
                if b5 then
                begin
-                       DM.Q1.Open('select fn_reg_valido("R07",' + DM.TPAF_R07id.AsString + ',' + Texto_Mysql(_C) + ')');
-                       RegistroValido:= DM.Q1.Fields[0].AsInteger = 1;
+                       DMConn.Q1.Open('select fn_reg_valido("R07",' + DM.TPAF_R07id.AsString + ',' + Texto_Mysql(_C) + ')');
+                       RegistroValido:= DMConn.Q1.Fields[0].AsInteger = 1;
                end;}
                     end;
                     DM.TPAF_R07.Next;
@@ -1675,8 +1676,8 @@ begin
                 b4 := True;
                if b4 then
                begin
-                  DM.Q1.Open('select fn_reg_valido("R06",' + DM.TPAF_R06id.AsString + ',' + Texto_Mysql(_C) + ')');
-                  RegistroValido:= DM.Q1.Fields[0].AsInteger = 1;
+                  DMConn.Q1.Open('select fn_reg_valido("R06",' + DM.TPAF_R06id.AsString + ',' + Texto_Mysql(_C) + ')');
+                  RegistroValido:= DMConn.Q1.Fields[0].AsInteger = 1;
                   b6 := RegistroValido;
                end; }
 
@@ -1693,22 +1694,22 @@ begin
                         IND_EST     := DM.TPAF_R07extorno.AsString;
                         VL_EST      := DM.TPAF_R07valor_extorno.Value;
 
-               RegistroValido  := True;//b;
+                        RegistroValido  := True;//b;
 
-              { if b then
-                  RegistroValido  := bb;
+                        { if b then
+                            RegistroValido  := bb;
 
-               if bb then
-                  RegistroValido  := b4;
+                         if bb then
+                            RegistroValido  := b4;
 
-               if b4 then
-                  RegistroValido  := b6;
-               b6 := true;
-               if b6 then
-               begin
-                  DM.Q1.Open('select fn_reg_valido("R07",' + DM.TPAF_R07id.AsString + ',' + Texto_Mysql(_C) + ')');
-                  RegistroValido:= DM.Q1.Fields[0].AsInteger = 1;
-               end; }
+                         if b4 then
+                            RegistroValido  := b6;
+                         b6 := true;
+                         if b6 then
+                         begin
+                            DMConn.Q1.Open('select fn_reg_valido("R07",' + DM.TPAF_R07id.AsString + ',' + Texto_Mysql(_C) + ')');
+                            RegistroValido:= DMConn.Q1.Fields[0].AsInteger = 1;
+                         end; }
                      end;
                      DM.TPAF_R07.Next;
                   end;//loop TPafR07 fim

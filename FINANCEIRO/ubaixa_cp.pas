@@ -14,7 +14,8 @@ uses
   cxGrid, cxMaskEdit, cxImageComboBox, cxLabel, cxTextEdit, cxCurrencyEdit, cxPC,
   cxDBLabel,FireDAC.Comp.Client, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
-  FireDAC.DApt.Intf, FireDAC.Comp.DataSet;
+  FireDAC.DApt.Intf, FireDAC.Comp.DataSet, dxSkinsCore, dxSkinCaramel,
+  dxSkinscxPCPainter, dxBarBuiltInMenu;
 
 type
   Tfrmbaixa_cp = class(Tfrm)
@@ -119,7 +120,7 @@ implementation
 
 {$R *.dfm}
 
-uses uDM, uFuncoes, uGestaoAPagar, uAutocomConsts;
+uses uDM, uFuncoes, uGestaoAPagar, uAutocomConsts, uDM_Conn;
 
 procedure Tfrmbaixa_cp.AtuCmbBanco;
 begin
@@ -178,18 +179,18 @@ procedure Tfrmbaixa_cp.AtuCmbMovi;
 begin
    cmbMovi.Properties.Items.Clear;
    DM.QContas.Locate('id', cmbConta.Properties.Items[cmbConta.ItemIndex].Value);
-   DM.Q1.Open('select id, cod, descricao from finan_banco_codigos where tipo="D" and conta=' +
+   DMConn.Q1.Open('select id, cod, descricao from finan_banco_codigos where tipo="D" and conta=' +
                Texto_Mysql(DM.QContasid.Value) + ' order by descricao');
 
-   while not DM.Q1.Eof do
+   while not DMConn.Q1.Eof do
    begin
       with cmbMovi.Properties.Items.Add do
       begin
-         Description := DM.Q1.FieldByName('descricao').AsString;
-         Value       := DM.Q1.FieldByName('cod').AsString;
-         Tag         := DM.Q1.FieldByName('id').AsInteger;
+         Description := DMConn.Q1.FieldByName('descricao').AsString;
+         Value       := DMConn.Q1.FieldByName('cod').AsString;
+         Tag         := DMConn.Q1.FieldByName('id').AsInteger;
       end;
-      DM.Q1.Next;
+      DMConn.Q1.Next;
    end;
 end;
 
@@ -228,17 +229,17 @@ begin
 
    if cmbChq.Visible then
    begin
-      DM.Q1.Open('select id, nmro from finan_talonario where cancelado="N" and usado="N" and conta=' +
+      DMConn.Q1.Open('select id, nmro from finan_talonario where cancelado="N" and usado="N" and conta=' +
                   Texto_Mysql(DM.QContasid.Value) + ' order by nmro');
 
-      while not DM.Q1.Eof do
+      while not DMConn.Q1.Eof do
       begin
          with cmbChq.Properties.Items.Add do
          begin
-            Description := DM.Q1.FieldByName('nmro').AsString;
-            Value       := DM.Q1.FieldByName('id').AsInteger;
+            Description := DMConn.Q1.FieldByName('nmro').AsString;
+            Value       := DMConn.Q1.FieldByName('id').AsInteger;
          end;
-         DM.Q1.Next;
+         DMConn.Q1.Next;
       end;
    end;
 end;
@@ -395,16 +396,16 @@ begin
    DM.QContas.Open;
    dtEm.Date := Date;
    AtuCmbBanco;
-   DM.Q1.Open('select * from finan_chq_terceiro where status="C" order by valor');
+   DMConn.Q1.Open('select * from finan_chq_terceiro where status="C" order by valor');
 
-   while not DM.Q1.Eof do
+   while not DMConn.Q1.Eof do
    begin
       with cmbchqTerc.Properties.Items.Add do
       begin
-         Description := DM.Q1.FieldByName('nmro').AsString;
-         Value       := DM.Q1.FieldByName('id').AsInteger;
+         Description := DMConn.Q1.FieldByName('nmro').AsString;
+         Value       := DMConn.Q1.FieldByName('id').AsInteger;
       end;
-      DM.Q1.Next;
+      DMConn.Q1.Next;
    end;
 end;
 

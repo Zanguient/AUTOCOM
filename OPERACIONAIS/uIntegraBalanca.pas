@@ -13,7 +13,7 @@ uses
   RXCtrls, ACBrBase, ACBrEnterTab, cxNavigator, Easysize, FireDAC.Comp.Script,
   FireDAC.Comp.DataSet, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
-  FireDAC.DApt.Intf, FireDAC.Comp.Client;
+  FireDAC.DApt.Intf, FireDAC.Comp.Client, dxSkinCaramel, dxSkinscxPCPainter;
 
 type
   TfrmIntBal = class(Tfrm)
@@ -93,7 +93,7 @@ var
 
 implementation
 
-uses uBalancaCom, uDM, uAutocomConsts, uMain;
+uses uBalancaCom, uDM, uAutocomConsts, uMain, uDM_Conn;
 
 {$R *.dfm}
 
@@ -113,7 +113,7 @@ begin
                    ' where id=' + Texto_Mysql(T2id.Value)+';');
          T2.Next;
       end;
-      DM.DB.ExecSQL(lista.Text);
+      DMConn.DB.ExecSQL(lista.Text);
       lista.Free;
    end;
    T3.Tag := 0;//reseta o T3.tag
@@ -164,7 +164,7 @@ begin
          DM.QBalanca.Locate('sessao', T1balanca.Value, []);
          DM.QSessao.Locate('nome', T1sessao.Value, []);
 
-         DM.Q1.Open('select e.id, e.cod_gtin,e.nome, e.vrvenda_vista, ' +
+         DMConn.Q1.Open('select e.id, e.cod_gtin,e.nome, e.vrvenda_vista, ' +
                     'u.fracionavel, s.nome as nsessao, receita, nutricional, ' +
                     'e.validade, e.teclado from estoque e, unidade u, sessao s ' +
                      'where u.id = e.unidade and e.suspenso = "N" and e.balanca="S" and e.suspenso = "N" and e.sessao = ' +
@@ -207,28 +207,28 @@ begin
          with balanca do
           begin
             try
-              while not DM.Q1.Eof do
+              while not DMConn.Q1.Eof do
               begin
                 with Produtos.New do
                 begin
                   Setor.Codigo    := T1balanca.AsInteger;
-                  Setor.Descricao := DM.Q1.FieldByName('nsessao').AsString;
+                  Setor.Descricao := DMConn.Q1.FieldByName('nsessao').AsString;
                   ModeloEtiqueta  := 0;           // COLOCAR UMA FORMA DE CONFIGURAR
-                  s               := Trim(copy(DM.Q1.FieldByName('cod_gtin').AsString,2,6));
+                  s               := Trim(copy(DMConn.Q1.FieldByName('cod_gtin').AsString,2,6));
                   Codigo          := strtoint(s);
-                  ValorVenda      := DM.Q1.FieldByName('vrvenda_vista').AsCurrency;
-                  Validade        := DM.Q1.FieldByName('validade').AsInteger;
-                  Descricao       := DM.Q1.FieldByName('nome').AsString;
-                  Receita         := DM.Q1.FieldByName('receita').value;
-                  Tecla           := DM.Q1.FieldByName('teclado').value;
+                  ValorVenda      := DMConn.Q1.FieldByName('vrvenda_vista').AsCurrency;
+                  Validade        := DMConn.Q1.FieldByName('validade').AsInteger;
+                  Descricao       := DMConn.Q1.FieldByName('nome').AsString;
+                  Receita         := DMConn.Q1.FieldByName('receita').value;
+                  Tecla           := DMConn.Q1.FieldByName('teclado').value;
 
-                  if DM.Q1.FieldByName('fracionavel').AsString= 'S' then
+                  if DMConn.Q1.FieldByName('fracionavel').AsString= 'S' then
                     Tipo := tpvPeso
                   else
                     Tipo := tpvUnidade;
                 end;
 
-                DM.Q1.Next;
+                DMConn.Q1.Next;
               end;
             finally
             end;
@@ -237,33 +237,33 @@ begin
       T1.Next;
    end;
 
-   DM.DB.ExecSQL('CREATE TABLE if not exists balanca_path (marca varchar(30) NULL DEFAULT null,' +
+   DMConn.DB.ExecSQL('CREATE TABLE if not exists balanca_path (marca varchar(30) NULL DEFAULT null,' +
                  'path varchar(250) NULL DEFAULT NULL,path_exe varchar(250) NULL DEFAULT NULL);'
    );
 
-   DM.Q5.OPen('select * from balanca_path');
+   DMConn.Q5.OPen('select * from balanca_path');
 
-   if DM.Q5.IsEmpty then
+   if DMConn.Q5.IsEmpty then
    begin
       s := DirProgramFiles;
       s := BuscaTroca(s,'\','|');
       s := BuscaTroca(s,'|','\\');
       s := BuscaTroca(s,'|','\\');
 
-      DM.DB.ExecSQL('INSERT INTO balanca_path SET marca="FILIZOLA", path="C:\\FILIZOLA", path_exe="C:\\Filizola\\SmartEditor\\SmartEditor.exe";' +
+      DMConn.DB.ExecSQL('INSERT INTO balanca_path SET marca="FILIZOLA", path="C:\\FILIZOLA", path_exe="C:\\Filizola\\SmartEditor\\SmartEditor.exe";' +
                     'INSERT INTO balanca_path SET marca="TOLEDO", path="' + s + 'Toledo\\MGV5' + '", path_exe="' + s + 'Toledo\\MGV5\\MGV5.exe' + '";' +
                     'INSERT INTO balanca_path SET marca="URANO", path="C:\\URANO", path_exe="C:\\URANO";' +
                     'INSERT INTO balanca_path SET marca="MAGNA", path="C:\\MAGNA", path_exe="C:\\MAGNA";'
       );
    end;
 
-   DM.Q5.OPen('select * from balanca_path where marca="' + DM.QBalancamarca.Value + '"');
+   DMConn.Q5.OPen('select * from balanca_path where marca="' + DM.QBalancamarca.Value + '"');
 
-   s := DM.Q5.FieldByName('path').AsString;
+   s := DMConn.Q5.FieldByName('path').AsString;
 
    if balanca.GerarArquivo(s) then
    begin
-      s := DM.Q5.FieldByName('path_exe').AsString;
+      s := DMConn.Q5.FieldByName('path_exe').AsString;
       ExecFile(s ,'open','');
       Close;
    end
@@ -353,13 +353,13 @@ begin
 
 {
                   ModeloEtiqueta  := 0;           // COLOCAR UMA FORMA DE CONFIGURAR
-                  s               := copy(DM.Q1.FieldByName('cod_barra').AsString,2,6);
+                  s               := copy(DMConn.Q1.FieldByName('cod_barra').AsString,2,6);
                   Codigo          := strtoint(s);
-                  ValorVenda      := DM.Q1.FieldByName('vrvenda').AsCurrency;
-                  Validade        := DM.Q1.FieldByName('validade').AsInteger;
-                  Descricao       := DM.Q1.FieldByName('nome').AsString;
-                  Receita         := DM.Q1.FieldByName('receita').value;
-                  Tecla           := DM.Q1.FieldByName('teclado').value;
+                  ValorVenda      := DMConn.Q1.FieldByName('vrvenda').AsCurrency;
+                  Validade        := DMConn.Q1.FieldByName('validade').AsInteger;
+                  Descricao       := DMConn.Q1.FieldByName('nome').AsString;
+                  Receita         := DMConn.Q1.FieldByName('receita').value;
+                  Tecla           := DMConn.Q1.FieldByName('teclado').value;
 }
 
     // gerar os arquivos para o diretório, informe somente o caminho do diretório
@@ -388,28 +388,28 @@ begin
 
   while not DM.QSessao.Eof do
   begin
-     DM.Q1.OPen('select distinct(serie) from balanca where marca = "' + cmb1.Text + '" and sessao = "' + DM.QSessaoid.AsString + '"');
+     DMConn.Q1.OPen('select distinct(serie) from balanca where marca = "' + cmb1.Text + '" and sessao = "' + DM.QSessaoid.AsString + '"');
 
-     while not DM.q1.Eof do
+     while not DMConn.Q1.Eof do
      begin
         T1.Insert;
         T1sessao.Value     := DM.QSessaonome.Value;
 
         if DM.QBalanca.Locate('sessao;serie',
-               VarArrayOf([DM.QSessaoid.AsString, DM.Q1.fields[0].AsString]) , []) then
-           T1balanca.Value := DM.Q1.fields[0].AsString;//DM.QBalancasessao.Value;
+               VarArrayOf([DM.QSessaoid.AsString, DMConn.Q1.fields[0].AsString]) , []) then
+           T1balanca.Value := DMConn.Q1.fields[0].AsString;//DM.QBalancasessao.Value;
 
         T1id.Value         := DM.QSessaoid.Value;
         T1transferir.Value := False;
 
-        if DM.q1.RecordCount = 1 then
+        if DMConn.Q1.RecordCount = 1 then
         begin
           // T1balanca.Value := DM.QBalancasessao.Value;
            T1transferir.Value := True;
         end;
 
         T1.Post;
-        DM.q1.Next;
+        DMConn.Q1.Next;
      end;
      DM.QSessao.Next;
   end;
@@ -462,16 +462,16 @@ end;
 
 procedure TfrmIntBal.Popula_CMB;
 begin
-  DM.Q1.OPen('select distinct marca from balanca order by marca');
+  DMConn.Q1.OPen('select distinct marca from balanca order by marca');
   cmb1.Items.Clear;
 
-  while not DM.Q1.Eof do  //preenche cmb1
+  while not DMConn.Q1.Eof do  //preenche cmb1
   begin
-     cmb1.Items.Add(DM.Q1.Fields[0].asstring);
-     DM.Q1.Next;
+     cmb1.Items.Add(DMConn.Q1.Fields[0].asstring);
+     DMConn.Q1.Next;
   end;
   cmb1.Text := '';
-  DM.Q1.Close;
+  DMConn.Q1.Close;
 end;
 
 procedure TfrmIntBal.PreencheG1;

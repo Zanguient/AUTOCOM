@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrm, cxGraphics, cxLookAndFeels,
   cxLookAndFeelPainters, Vcl.Menus, ACBrBase, ACBrEnterTab, Easysize,
   RxPlacemnt, Vcl.StdCtrls, cxButtons, Vcl.ExtCtrls, cxControls, cxContainer,
-  cxEdit, cxTextEdit;
+  cxEdit, cxTextEdit, dxSkinsCore, dxSkinCaramel;
 
 type
   TfrmAssoc = class(Tfrm)
@@ -32,7 +32,7 @@ implementation
 
 {$R *.dfm}
 
-uses uAutocomConsts, uDM, uFuncoes;
+uses uAutocomConsts, uDM, uFuncoes, uDM_Conn;
 
 procedure TfrmAssoc.btnAssClick(Sender: TObject);
 begin
@@ -60,12 +60,12 @@ begin
    CAPTION := 'Associar Plano de contas ' + C_117;
    label1.Caption := Label1.Caption + Operacao;
 
-   DM.Q1.Open('select * from finan_centro_custo_assoc where operacao=' + Texto_Mysql(Operacao));
+   DMConn.Q1.Open('select * from finan_centro_custo_assoc where operacao=' + Texto_Mysql(Operacao));
 
-   if DM.Q1.IsEmpty then
+   if DMConn.Q1.IsEmpty then
       Label3.Caption := 'Associação atual: Nenhum'
    else
-      Label3.Caption := 'Associação atual: ' + DM.Q1.FieldByName('codigo').AsString;
+      Label3.Caption := 'Associação atual: ' + DMConn.Q1.FieldByName('codigo').AsString;
 end;
 
 end.

@@ -97,12 +97,16 @@ inherited frmbaixa_cp: Tfrmbaixa_cp
     TabOrder = 2
     Properties.ActivePage = Tab1
     Properties.CustomButtons.Buttons = <>
-    ClientRectBottom = 292
-    ClientRectRight = 351
+    ClientRectBottom = 288
+    ClientRectLeft = 4
+    ClientRectRight = 347
     ClientRectTop = 26
     object Tab1: TcxTabSheet
       Caption = 'MOVIMENTA'#199#195'O BANC'#193'RIA'
       ImageIndex = 0
+      ExplicitLeft = 0
+      ExplicitWidth = 351
+      ExplicitHeight = 266
       object Label5: TLabel
         Left = 110
         Top = 99
@@ -150,7 +154,7 @@ inherited frmbaixa_cp: Tfrmbaixa_cp
         Top = 68
         Properties.Items = <>
         Properties.OnChange = cmbMoviPropertiesChange
-        TabOrder = 7
+        TabOrder = 6
         Width = 231
       end
       object cxLabel5: TcxLabel
@@ -173,7 +177,7 @@ inherited frmbaixa_cp: Tfrmbaixa_cp
         Left = 238
         Top = 68
         Properties.Items = <>
-        TabOrder = 8
+        TabOrder = 7
         Width = 102
       end
       object cxLabel7: TcxLabel
@@ -185,13 +189,13 @@ inherited frmbaixa_cp: Tfrmbaixa_cp
         Left = 110
         Top = 115
         Properties.DateButtons = []
-        TabOrder = 12
+        TabOrder = 11
         Width = 102
       end
       object grd1: TcxGrid
         Left = 0
-        Top = 148
-        Width = 351
+        Top = 144
+        Width = 343
         Height = 118
         Align = alBottom
         TabOrder = 15
@@ -199,6 +203,8 @@ inherited frmbaixa_cp: Tfrmbaixa_cp
         LevelTabs.Style = 6
         LookAndFeel.Kind = lfStandard
         LookAndFeel.NativeStyle = False
+        ExplicitTop = 148
+        ExplicitWidth = 351
         object tbv1: TcxGridDBTableView
           PopupMenu = pop1
           Navigator.Buttons.CustomButtons = <>
@@ -287,7 +293,7 @@ inherited frmbaixa_cp: Tfrmbaixa_cp
         Caption = '>>'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 10
+        TabOrder = 9
         TabStop = False
         OnClick = btnLancaChqClick
       end
@@ -295,13 +301,16 @@ inherited frmbaixa_cp: Tfrmbaixa_cp
         Left = 3
         Top = 115
         Properties.DateButtons = []
-        TabOrder = 11
+        TabOrder = 10
         Width = 102
       end
     end
     object Tab2: TcxTabSheet
       Caption = 'CHEQUE 3'#186
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitWidth = 351
+      ExplicitHeight = 266
       object cmbchqTerc: TcxImageComboBox
         Left = 214
         Top = 22
@@ -373,8 +382,8 @@ inherited frmbaixa_cp: Tfrmbaixa_cp
       end
       object grd: TcxGrid
         Left = 0
-        Top = 71
-        Width = 351
+        Top = 67
+        Width = 343
         Height = 195
         Align = alBottom
         TabOrder = 4
@@ -382,6 +391,8 @@ inherited frmbaixa_cp: Tfrmbaixa_cp
         LevelTabs.Style = 6
         LookAndFeel.Kind = lfStandard
         LookAndFeel.NativeStyle = False
+        ExplicitTop = 71
+        ExplicitWidth = 351
         object tbv: TcxGridDBTableView
           PopupMenu = pop1
           Navigator.Buttons.CustomButtons = <>
@@ -452,6 +463,9 @@ inherited frmbaixa_cp: Tfrmbaixa_cp
     object Tab3: TcxTabSheet
       Caption = 'CASH'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitWidth = 351
+      ExplicitHeight = 266
       object edvr_cash: TcxCurrencyEdit
         Left = 109
         Top = 123
@@ -469,7 +483,6 @@ inherited frmbaixa_cp: Tfrmbaixa_cp
         Caption = 'Incluir no movim. do caixa'
         State = cbsChecked
         TabOrder = 2
-        Width = 164
       end
       object cxButton2: TcxButton
         Left = 240

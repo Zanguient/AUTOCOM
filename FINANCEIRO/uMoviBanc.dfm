@@ -33,15 +33,16 @@ inherited frmMovBanc: TfrmMovBanc
     Height = 487
     ExplicitWidth = 813
     ExplicitHeight = 487
-    ClientRectBottom = 487
-    ClientRectRight = 813
+    ClientRectBottom = 483
+    ClientRectRight = 809
     inherited TabCad: TcxTabSheet
+      ExplicitLeft = 4
       ExplicitTop = 26
-      ExplicitWidth = 813
-      ExplicitHeight = 461
+      ExplicitWidth = 805
+      ExplicitHeight = 457
       inherited dbNav: TcxDBNavigator
-        Top = 408
-        Width = 807
+        Top = 404
+        Width = 799
         Height = 50
         ExplicitTop = 408
         ExplicitWidth = 807
@@ -245,12 +246,12 @@ inherited frmMovBanc: TfrmMovBanc
       end
     end
     inherited TabPesq: TcxTabSheet
-      ExplicitWidth = 813
+      ExplicitWidth = 809
       ExplicitHeight = 461
       inherited grd: TcxGrid
         Top = 48
-        Width = 813
-        Height = 367
+        Width = 805
+        Height = 363
         ExplicitTop = 48
         ExplicitWidth = 813
         ExplicitHeight = 367
@@ -298,10 +299,10 @@ inherited frmMovBanc: TfrmMovBanc
         end
       end
       inherited pnlPesq: TPanel
-        Top = 415
-        Width = 813
+        Top = 411
+        Width = 805
         ExplicitTop = 415
-        ExplicitWidth = 813
+        ExplicitWidth = 809
         inherited edPesq: TcxTextEdit
           Visible = False
           ExplicitWidth = 5
@@ -478,7 +479,7 @@ inherited frmMovBanc: TfrmMovBanc
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 813
+        Width = 805
         Height = 48
         Align = alTop
         TabOrder = 2
@@ -650,7 +651,7 @@ inherited frmMovBanc: TfrmMovBanc
         Caption = 'CADASTRAMENTO DE TALON'#193'RIO'
         ParentFont = False
         TabOrder = 0
-        Height = 413
+        Height = 409
         Width = 217
         object edTalIni: TcxCurrencyEdit
           Left = 46
@@ -743,7 +744,7 @@ inherited frmMovBanc: TfrmMovBanc
         object rgFiltroTal: TcxRadioGroup
           AlignWithMargins = True
           Left = 5
-          Top = 263
+          Top = 259
           TabStop = False
           Align = alBottom
           Caption = 'FILTRO'
@@ -763,6 +764,7 @@ inherited frmMovBanc: TfrmMovBanc
             end>
           TabOrder = 6
           OnClick = rgFiltroTalClick
+          ExplicitTop = 263
           Height = 145
           Width = 207
         end
@@ -810,14 +812,16 @@ inherited frmMovBanc: TfrmMovBanc
       object grdTal: TcxGrid
         Left = 217
         Top = 48
-        Width = 596
-        Height = 413
+        Width = 588
+        Height = 409
         Align = alClient
         TabOrder = 1
         LevelTabs.Slants.Kind = skCutCorner
         LevelTabs.Style = 6
         LookAndFeel.Kind = lfStandard
         LookAndFeel.NativeStyle = False
+        ExplicitWidth = 596
+        ExplicitHeight = 413
         object tbcTal: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           FilterBox.Visible = fvNever
@@ -892,7 +896,7 @@ inherited frmMovBanc: TfrmMovBanc
       object Panel4: TPanel
         Left = 0
         Top = 0
-        Width = 813
+        Width = 805
         Height = 48
         Align = alTop
         TabOrder = 2
@@ -955,7 +959,6 @@ inherited frmMovBanc: TfrmMovBanc
     PixelsPerInch = 96
   end
   object QContas: TFDQuery
-    Connection = DM.DB
     SQL.Strings = (
       'select c.id, '
       'concat(b.nomebanco, '
@@ -1007,7 +1010,6 @@ inherited frmMovBanc: TfrmMovBanc
   end
   object QSaldo_Ant: TFDQuery
     DetailFields = 'id'
-    Connection = DM.DB
     SQL.Strings = (
       'select '
       
@@ -1046,7 +1048,6 @@ inherited frmMovBanc: TfrmMovBanc
     Top = 488
   end
   object QSaldo_Atual: TFDQuery
-    Connection = DM.DB
     SQL.Strings = (
       'select '
       'sum(if(m.tipo='#39'C'#39', 0, 0 - m.valor)) as debito,'
@@ -1098,7 +1099,6 @@ inherited frmMovBanc: TfrmMovBanc
     Top = 488
   end
   object QContasD: TFDQuery
-    Connection = DM.DB
     SQL.Strings = (
       'select c.id, '
       'concat(b.nomebanco, '
@@ -1173,7 +1173,6 @@ inherited frmMovBanc: TfrmMovBanc
     end
   end
   object QTal: TFDQuery
-    Connection = DM.DB
     SQL.Strings = (
       'select * from finan_talonario')
     Left = 448
@@ -1225,7 +1224,6 @@ inherited frmMovBanc: TfrmMovBanc
     BeforeDelete = QMoviBeforeDelete
     MasterSource = DSContas
     MasterFields = 'id'
-    Connection = DM.DB
     SQL.Strings = (
       'select * from finan_banco_movi'
       'where conta=:id')
@@ -1296,7 +1294,6 @@ inherited frmMovBanc: TfrmMovBanc
   object QCod: TFDQuery
     MasterSource = DSContas
     MasterFields = 'id'
-    Connection = DM.DB
     SQL.Strings = (
       'select * from finan_banco_codigos'
       'where conta=:id')

@@ -11,7 +11,9 @@ uses
   cxImage, cxPC, dxStatusBar, cxLabel, ACBrECF, ACBrRFD, ACBrDevice,
   ACBrECFClass, ACBrConsts, Vcl.Grids, Vcl.DBGrids, cxStyles, cxCustomData, cxFilter, cxData, cxDataStorage,
   cxNavigator, cxDBData, cxGridLevel, cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxClasses,
-  cxGridCustomView, cxGrid, cxCurrencyEdit, cxDBLabel, FireDac.Stan.Param;
+  cxGridCustomView, cxGrid, cxCurrencyEdit, cxDBLabel, FireDac.Stan.Param,
+  dxSkinsCore, dxSkinCaramel, dxSkinscxPCPainter, dxBarBuiltInMenu,
+  dxSkinsdxStatusBarPainter;
 
 type
   ModoTela = (moDesativado, moLivre, moInicial, moVenda, moPgto, moTEF, moDiaNaoAberto, moDiaFechado, moTEFAdm);
@@ -176,7 +178,7 @@ implementation
 
 uses udm_ini, uAutocomConsts, uFuncoes, uMD5Print, dmSkins, uSkinDLL, uMenu,
   uDM, uDMecf, uDM_PDV, uPesqProd, uConcluir, uProdNotFound, MMSystem, uPV, uSplash, uDesconto, uMenuFisc, uMenuConv,
-  upfp, uFarmaPop2, utrn, uVendedor, uViews;
+  upfp, uFarmaPop2, utrn, uVendedor, uViews, uDM_Conn;
 
 procedure TfrmPDV.TrataErros(Sender : TObject; E : Exception);
 var
@@ -229,11 +231,11 @@ begin
          DM_PDV.TECFdt_carga.Value := DM_ECF.Relogio;
          DM_PDV.TECF.Post;
       end;
-      bar1.Panels[0].Text := DM.DB.Params.Values['Server'];
+      bar1.Panels[0].Text := DMConn.DB.Params.Values['Server'];
    end
    else  //se esta offline
    begin
-      bar1.Panels[0].Text := DM.DB.Params.Values['Server'] + '(off)';
+      bar1.Panels[0].Text := DMConn.DB.Params.Values['Server'] + '(off)';
    end;//offline fim
 
    Carregar;//carrega as tabelas locais
@@ -280,7 +282,7 @@ begin
    if DM_ECF.TEF.GPAtual <> gpnenhum then
       Bar1.Panels[1].Text := 'F2-TEF ADM'
    else
-      bar1.Panels[1].Text := DM.DB.Params.Values['Database'];
+      bar1.Panels[1].Text := DMConn.DB.Params.Values['Database'];
    //valida o login
    if not DM_PDV.Procurar_Operador(edLogin.Text, edSenha.Text) then
    begin
@@ -504,9 +506,9 @@ begin
       //cancelamento das pré-vendas do dia anterior
       if (DM_INI.ini.StoredValue['paf_pre_venda_caixa']) and (DM.Conectar) then
       begin
-         DM.Q1.Open('select count(*) from venda where tipo="PV" and data<' + Texto_Mysql(Trunc(DM_ECF.Relogio)));
+         DMConn.Q1.Open('select count(*) from venda where tipo="PV" and data<' + Texto_Mysql(Trunc(DM_ECF.Relogio)));
 
-         if DM.Q1.Fields[0].AsInteger >0 then
+         if DMConn.Q1.Fields[0].AsInteger >0 then
          begin
             frmpv := Tfrmpv.Create(self);
             frmpv.Popular_T1(-1);
@@ -552,10 +554,10 @@ begin
          Popup('Verificando estoque...');
          if DM.Conectar then
          begin
-            DM.Q1.Open(vwEstoqueQuantByID + DM_PDV.TProdid.AsString);
-            if (DM.Q1.Fields[0].AsCurrency - Qtd) <0 then
+            DMConn.Q1.Open(vwEstoqueQuantByID + DM_PDV.TProdid.AsString);
+            if (DMConn.Q1.Fields[0].AsCurrency - Qtd) <0 then
             begin
-               raise Exception.Create('Estoque insuficiente (' + FloatToStrF(DM.Q1.Fields[0].AsCurrency, ffnumber,15,2) + ').');
+               raise Exception.Create('Estoque insuficiente (' + FloatToStrF(DMConn.Q1.Fields[0].AsCurrency, ffnumber,15,2) + ').');
             end;
          end;
       end;
@@ -1874,6 +1876,7 @@ begin //grava as cfg da grid
 
    FreeAndNil(DM);
    FreeAndNil(DM_INI);
+   FreeAndNil(DMConn);
    FreeAndNil(DM_ECF);
    action := cafree;
    Release;
@@ -1895,6 +1898,8 @@ begin
    CAPTION := 'AUTOCOM PDV - ' + C_117;
    frmSplash.Msg('Carregando Ini...');
    DM_INI := TDM_INI.Create(self);
+
+   DMConn := TDMConn.Create(self);
 
    frmSplash.Msg('Carregando módulo de dados...');
    DM     := TDM.Create(self);
@@ -2350,9 +2355,9 @@ begin
          Display('Processando PV pendente.',0);
          Log('PDV','prevenda pendente', 'inicio...');
          //verifica sem tem pv com 2 ou mais dias
-         DM.Q1.Open('select count(*) from venda where tipo="PV" and data<' + Texto_Mysql(DM_ECF.Relogio -1));
+         DMConn.Q1.Open('select count(*) from venda where tipo="PV" and data<' + Texto_Mysql(DM_ECF.Relogio -1));
 
-         if DM.Q1.fields[0].AsInteger > 0 then
+         if DMConn.Q1.fields[0].AsInteger > 0 then
          begin
             frmpv := Tfrmpv.Create(self);
             frmpv.Popular_T1(-2); //preenche a tabela com as PV com data < (atual - 1)

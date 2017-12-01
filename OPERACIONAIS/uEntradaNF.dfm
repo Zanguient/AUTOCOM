@@ -154,12 +154,16 @@ inherited frmEntradaNF: TfrmEntradaNF
       TabOrder = 2
       Properties.ActivePage = TabTotais
       Properties.CustomButtons.Buttons = <>
-      ClientRectBottom = 114
-      ClientRectRight = 710
+      ClientRectBottom = 110
+      ClientRectLeft = 4
+      ClientRectRight = 706
       ClientRectTop = 26
       object TabTotais: TcxTabSheet
         Caption = 'TOTAIS DA N.F.'
         ImageIndex = 0
+        ExplicitLeft = 0
+        ExplicitWidth = 710
+        ExplicitHeight = 88
         object Label44: TLabel
           Left = 3
           Top = 72
@@ -472,12 +476,14 @@ inherited frmEntradaNF: TfrmEntradaNF
           Width = 78
         end
         object Panel1: TPanel
-          Left = 664
+          Left = 656
           Top = 0
           Width = 46
-          Height = 88
+          Height = 84
           Align = alRight
           TabOrder = 0
+          ExplicitLeft = 664
+          ExplicitHeight = 88
           object btnTotNF: TcxButton
             Tag = 4
             AlignWithMargins = True
@@ -500,6 +506,9 @@ inherited frmEntradaNF: TfrmEntradaNF
       object cxTabSheet3: TcxTabSheet
         Caption = 'RETEN'#199#213'ES'
         ImageIndex = 2
+        ExplicitLeft = 0
+        ExplicitWidth = 710
+        ExplicitHeight = 88
         object Label27: TcxLabel
           Left = 60
           Top = 20
@@ -634,12 +643,14 @@ inherited frmEntradaNF: TfrmEntradaNF
           Width = 78
         end
         object Panel2: TPanel
-          Left = 664
+          Left = 656
           Top = 0
           Width = 46
-          Height = 88
+          Height = 84
           Align = alRight
           TabOrder = 14
+          ExplicitLeft = 664
+          ExplicitHeight = 88
           object btnTotNF2: TcxButton
             Tag = 4
             AlignWithMargins = True
@@ -662,6 +673,10 @@ inherited frmEntradaNF: TfrmEntradaNF
       object cxTabSheet6: TcxTabSheet
         Caption = 'INF. COMPLEM.'
         ImageIndex = 6
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object cxDBMemo1: TcxDBMemo
           Left = 0
           Top = 0
@@ -678,16 +693,20 @@ inherited frmEntradaNF: TfrmEntradaNF
           Style.Font.Style = []
           Style.IsFontAssigned = True
           TabOrder = 0
-          Height = 53
-          Width = 664
+          ExplicitWidth = 664
+          ExplicitHeight = 53
+          Height = 49
+          Width = 656
         end
         object Panel4: TPanel
-          Left = 664
+          Left = 656
           Top = 0
           Width = 46
-          Height = 53
+          Height = 49
           Align = alRight
           TabOrder = 1
+          ExplicitLeft = 664
+          ExplicitHeight = 53
           object btnTotNF3: TcxButton
             Tag = 4
             AlignWithMargins = True
@@ -709,7 +728,7 @@ inherited frmEntradaNF: TfrmEntradaNF
         object cxDBMemo2: TcxDBMemo
           AlignWithMargins = True
           Left = 3
-          Top = 56
+          Top = 52
           Align = alBottom
           DataBinding.DataField = 'infAdFisco'
           DataBinding.DataSource = DM_NF_Entr.DScdNF
@@ -722,13 +741,18 @@ inherited frmEntradaNF: TfrmEntradaNF
           Style.Font.Style = []
           Style.IsFontAssigned = True
           TabOrder = 2
+          ExplicitTop = 56
+          ExplicitWidth = 704
           Height = 29
-          Width = 704
+          Width = 696
         end
       end
       object cxTabSheet4: TcxTabSheet
         Caption = 'TRANSPORTE'
         ImageIndex = 3
+        ExplicitLeft = 0
+        ExplicitWidth = 710
+        ExplicitHeight = 88
         object Label34: TcxLabel
           Left = 5
           Top = 2
@@ -844,12 +868,14 @@ inherited frmEntradaNF: TfrmEntradaNF
           Width = 30
         end
         object Panel5: TPanel
-          Left = 664
+          Left = 656
           Top = 0
           Width = 46
-          Height = 88
+          Height = 84
           Align = alRight
           TabOrder = 12
+          ExplicitLeft = 664
+          ExplicitHeight = 88
           object btnTransp: TcxButton
             Tag = 4
             AlignWithMargins = True
@@ -872,6 +898,10 @@ inherited frmEntradaNF: TfrmEntradaNF
       object cxTabSheet5: TcxTabSheet
         Caption = 'VOLUMES'
         ImageIndex = 4
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object grd: TcxGrid
           Left = 0
           Top = 0
@@ -973,6 +1003,9 @@ inherited frmEntradaNF: TfrmEntradaNF
       object cxTabSheet1: TcxTabSheet
         Caption = 'DUPLICATAS'
         ImageIndex = 5
+        ExplicitLeft = 0
+        ExplicitWidth = 710
+        ExplicitHeight = 88
         object Label40: TLabel
           Left = 8
           Top = 0
@@ -1006,14 +1039,16 @@ inherited frmEntradaNF: TfrmEntradaNF
           FocusControl = cxDBCalcEdit25
         end
         object grdDup: TcxGrid
-          Left = 230
+          Left = 222
           Top = 0
           Width = 434
-          Height = 88
+          Height = 84
           Align = alRight
           TabOrder = 0
           LevelTabs.Slants.Kind = skCutCorner
           LevelTabs.Style = 6
+          ExplicitLeft = 230
+          ExplicitHeight = 88
           object tbvDup: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
             FilterBox.Visible = fvNever
@@ -1107,12 +1142,14 @@ inherited frmEntradaNF: TfrmEntradaNF
           Width = 78
         end
         object Panel8: TPanel
-          Left = 664
+          Left = 656
           Top = 0
           Width = 46
-          Height = 88
+          Height = 84
           Align = alRight
           TabOrder = 5
+          ExplicitLeft = 664
+          ExplicitHeight = 88
           object btnFat: TcxButton
             Tag = 4
             AlignWithMargins = True
@@ -1135,6 +1172,10 @@ inherited frmEntradaNF: TfrmEntradaNF
       object TabMed: TcxTabSheet
         Caption = 'MEDICAM.'
         ImageIndex = 7
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object GMed: TcxGrid
           Left = 0
           Top = 0
@@ -1200,6 +1241,10 @@ inherited frmEntradaNF: TfrmEntradaNF
       object cxTabSheet7: TcxTabSheet
         Caption = 'DOC. ARREC.'
         ImageIndex = 8
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object cxGrid1: TcxGrid
           Left = 0
           Top = 0

@@ -7,7 +7,7 @@ uses
   Vcl.Forms, FireDAC.Stan.Intf,
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
-  FireDAC.Comp.Client;
+  FireDAC.Comp.Client, ACBrBase;
 
 type
   TDM_Sintegra = class(TDataModule)
@@ -211,7 +211,7 @@ implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
-uses uAutocomConsts, uDM, uFuncoes, uProgress, uDMecf, udm_ini;
+uses uAutocomConsts, uDM, uFuncoes, uProgress, uDMecf, udm_ini, uDM_Conn;
 
 {$R *.dfm}
 
@@ -253,7 +253,7 @@ end;
 procedure TDM_Sintegra.GerarRegistro10(cod_conv: string = '3'; NatInf: string = '3'; finalid: string='1');
 begin
   AbreForm(Tfrmprogress,frmprogress, False);
-  DM.DB.Connected := False;
+  DMConn.DB.Connected := False;
   DM.QEmpresa.Open;
   Sintegra.LimparRegistros;
   Sintegra.FileName                       := st_fileName;

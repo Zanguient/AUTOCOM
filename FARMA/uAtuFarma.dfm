@@ -85,6 +85,7 @@ inherited frmAtu_Farma: TfrmAtu_Farma
     Top = 5
   end
   object T1: TRxMemoryData
+    FieldDefs = <>
     Left = 121
     Top = 9
   end

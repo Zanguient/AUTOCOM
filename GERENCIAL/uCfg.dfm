@@ -62,6 +62,7 @@ object frmCfg: TfrmCfg
       Caption = 'PATHS'
       Collapsed = True
       TabOrder = 0
+      ExplicitWidth = 563
       object rel_path: TcxTextEdit
         Left = 7
         Top = 29
@@ -95,6 +96,7 @@ object frmCfg: TfrmCfg
       Color = 15326170
       Collapsed = True
       TabOrder = 1
+      ExplicitWidth = 563
       ExpandedHeight = 101
       object finan_boleto: TCheckBox
         Left = 22
@@ -151,6 +153,7 @@ object frmCfg: TfrmCfg
       Color = 13428454
       Collapsed = True
       TabOrder = 2
+      ExplicitWidth = 563
       ExpandedHeight = 82
       object cxLabel39: TcxLabel
         Left = 5
@@ -183,6 +186,7 @@ object frmCfg: TfrmCfg
       Color = 12378080
       Collapsed = True
       TabOrder = 3
+      ExplicitWidth = 563
       ExpandedHeight = 166
       object nome_nfe_rec: TcxRadioGroup
         Left = 5
@@ -252,6 +256,7 @@ object frmCfg: TfrmCfg
       Color = 13551795
       Collapsed = True
       TabOrder = 4
+      ExplicitWidth = 563
       ExpandedHeight = 109
       object cxLabel3: TcxLabel
         Left = 22
@@ -327,6 +332,7 @@ object frmCfg: TfrmCfg
       Color = 14803440
       Collapsed = True
       TabOrder = 5
+      ExplicitWidth = 185
       ExpandedHeight = 120
       object nfmod2_serie: TComboBox
         Left = 9
@@ -386,6 +392,7 @@ object frmCfg: TfrmCfg
       Color = 14019286
       Collapsed = True
       TabOrder = 6
+      ExplicitWidth = 185
       ExpandedHeight = 131
       object RGBalancacheckout: TGroupBox
         Left = 0
@@ -681,6 +688,7 @@ object frmCfg: TfrmCfg
       Color = 14280447
       Collapsed = True
       TabOrder = 7
+      ExplicitWidth = 563
       ExpandedHeight = 233
       object gp_serv: TGroupBox
         Left = 0
@@ -984,6 +992,7 @@ object frmCfg: TfrmCfg
       Color = 13428454
       Collapsed = True
       TabOrder = 8
+      ExplicitWidth = 563
       ExpandedHeight = 100
       object cxLabel2: TcxLabel
         Left = 8
@@ -1048,6 +1057,7 @@ object frmCfg: TfrmCfg
       Collapsed = True
       TabOrder = 9
       OnExpand = CategoryPanel3Expand
+      ExplicitWidth = 185
       ExpandedHeight = 380
       object GPECF: TGroupBox
         AlignWithMargins = True
@@ -1346,6 +1356,7 @@ object frmCfg: TfrmCfg
         Height = 100
         Align = alBottom
         TabOrder = 2
+        ExplicitWidth = 561
         object ecf_rodape_linha1: TcxTextEdit
           Left = 37
           Top = 23
@@ -1409,6 +1420,7 @@ object frmCfg: TfrmCfg
         Height = 47
         Align = alBottom
         TabOrder = 3
+        ExplicitWidth = 561
         object url_cniee: TcxTextEdit
           Left = 37
           Top = 18
@@ -1598,6 +1610,7 @@ object frmCfg: TfrmCfg
       Caption = 'CONFIGURA'#199#213'ES RELATIVAS AO FUNCIONAMENTO DO SISTEMA'
       Color = 15326170
       TabOrder = 10
+      ExplicitWidth = 563
       object Panel5: TPanel
         Left = 296
         Top = 0
@@ -2750,6 +2763,7 @@ object frmCfg: TfrmCfg
       Caption = 'CONFIGURA'#199#213'ES RELATIVAS A VENDA'
       Color = 13434879
       TabOrder = 11
+      ExplicitWidth = 563
       object Panel3: TPanel
         Left = 0
         Top = 0

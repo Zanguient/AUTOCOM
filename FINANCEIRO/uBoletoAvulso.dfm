@@ -32,7 +32,6 @@ inherited frmBoletoAvulso: TfrmBoletoAvulso
         Caption = 'Imprimir'
         TabOrder = 1
         ExplicitHeight = 0
-        Width = 79
       end
       object crFormato: TcxRadioGroup
         Left = 157

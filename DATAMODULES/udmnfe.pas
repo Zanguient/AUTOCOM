@@ -14,7 +14,7 @@ uses
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Stan.ExprFuncs,
   FireDAC.UI.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Phys,
   FireDAC.Comp.Client, FireDAC.Phys.SQLite, FireDAC.Comp.DataSet,
-  ACBrNFeDANFEFRDM, ACBrDFe
+  ACBrNFeDANFEFRDM, ACBrDFe, FireDAC.Phys.SQLiteDef, FireDAC.VCLUI.Wait
   {$IFDEF GER}
    , uCadEstoque, FireDAC.Phys.SQLiteDef, FireDAC.VCLUI.Wait
   {$ENDIF}
@@ -547,7 +547,7 @@ var
 
 implementation
 
-uses uValidacao, uStatus, IdAttachmentFile, dmSkins, uDM;
+uses uValidacao, uStatus, IdAttachmentFile, dmSkins, uDM, uDM_Conn;
 
 {$R *.dfm}
 
@@ -1137,14 +1137,14 @@ procedure TDM_NFE.Delete_NF_Local;
 begin
    if DM_NFE.QNF.Active then
    begin
-      DM.Q1.Open('select id from nf where Ide_nNF=' + Texto_Mysql(DM_NFE.QNFIde_nNF.Value) +
+      DMConn.Q1.Open('select id from nf where Ide_nNF=' + Texto_Mysql(DM_NFE.QNFIde_nNF.Value) +
                  ' and Ide_serie=' + Texto_Mysql(DM_NFE.QNFIde_serie.Value)
       );
 
       if (DM_NFE.QNFstatus.Value in [0, 99, 100, 150]) then
          DM_NFE.QNF.Delete
       else
-      if (DM.Q1.Fields[0].AsInteger>0) then
+      if (DMConn.Q1.Fields[0].AsInteger>0) then
       begin
          DM_NFE.QNF.Edit;
          DM_NFE.QNFstatus.Value := 105;
@@ -1907,7 +1907,7 @@ var
    i: integer;
    s: string;
 begin
-   DM.DB.ExecSQL('delete from nf where Ide_nNF=' +
+   DMConn.DB.ExecSQL('delete from nf where Ide_nNF=' +
                   Texto_Mysql(DM_NFE.QNFIde_nNF.Value) +
                  ' and Ide_serie=' +
                  Texto_Mysql(DM_NFE.QNFIde_serie.Value)
@@ -1957,7 +1957,7 @@ begin
 
       //faz a baixa das perdas na primeira passada, pois a NF foi de perda.
       if (DM_NFE.QNF_Item.Bof)and(DM_NFE.QNF_ItemCFOP.Value = '5927') then
-         DM.DB.ExecSQL('update estoque_perda set baixa = "S" where baixa = "N";');
+         DMConn.DB.ExecSQL('update estoque_perda set baixa = "S" where baixa = "N";');
 
       for i := 0 to Pred(DM_NFE.QNF_Item.FieldCount) do
       begin

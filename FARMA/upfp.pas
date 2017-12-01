@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, ShellAPI,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrm, cxGraphics, cxLookAndFeels, cxLookAndFeelPainters, Vcl.Menus, ACBrBase,
   ACBrEnterTab, Easysize, RxPlacemnt, Vcl.StdCtrls, cxButtons, Vcl.ExtCtrls, cxControls, cxContainer, cxEdit,
-  Vcl.ComCtrls, dxCore, cxDateUtils, cxDropDownEdit, cxMaskEdit, cxTextEdit, cxCalendar, ACBrValidador;
+  Vcl.ComCtrls, dxCore, cxDateUtils, cxDropDownEdit, cxMaskEdit, cxTextEdit, cxCalendar, ACBrValidador,
+  dxSkinsCore, dxSkinCaramel;
 
 type
   Tfrmpfp = class(Tfrm)
@@ -46,7 +47,7 @@ implementation
 
 {$R *.dfm}
 
-uses uDM, uFuncoes, uDM_PDV, uScanner, uPesqCli;
+uses uDM, uFuncoes, uDM_PDV, uScanner, uPesqCli, uDM_Conn;
 
 procedure Tfrmpfp.btnDigiClick(Sender: TObject);
 var
@@ -190,14 +191,14 @@ end;
 procedure Tfrmpfp.FormCreate(Sender: TObject);
 begin
   inherited;
-  DM.Q1.Open('select distinct(crm) from pfp order by crm');
+  DMConn.Q1.Open('select distinct(crm) from pfp order by crm');
 
-  while not DM.Q1.Eof do
+  while not DMConn.Q1.Eof do
   begin
-    cmb1.Properties.Items.Add(DM.Q1.Fields[0].AsString);
-    DM.Q1.Next;
+    cmb1.Properties.Items.Add(DMConn.Q1.Fields[0].AsString);
+    DMConn.Q1.Next;
   end;
-  DM.Q1.Close;
+  DMConn.Q1.Close;
   DM_PDV.DB.ExecSQL('delete from pfp where hora_recdadosconf is null;');//apaga qqr registro existente
 end;
 

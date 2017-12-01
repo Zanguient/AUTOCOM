@@ -1,15 +1,14 @@
 object DM_NF_Entr: TDM_NF_Entr
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Height = 657
-  Width = 531
+  Height = 527
+  Width = 574
   object QNF: TFDQuery
     AfterOpen = QNFAfterOpen
-    Connection = DM.DB
     SQL.Strings = (
       'select * from nf_entr order by id desc limit 1;')
-    Left = 24
-    Top = 12
+    Left = 108
+    Top = 8
     object QNFid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -705,13 +704,12 @@ object DM_NF_Entr: TDM_NF_Entr
     MasterSource = DSNF
     MasterFields = 'id'
     DetailFields = 'nf'
-    Connection = DM.DB
     FetchOptions.AssignedValues = [evCache]
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
       'select * from nf_item_entr where nf=:id')
-    Left = 36
-    Top = 64
+    Left = 108
+    Top = 60
     ParamData = <
       item
         Name = 'ID'
@@ -1593,13 +1591,13 @@ object DM_NF_Entr: TDM_NF_Entr
   end
   object DSNF_Item: TDataSource
     DataSet = QNF_Item
-    Left = 116
-    Top = 64
+    Left = 204
+    Top = 60
   end
   object DSNF: TDataSource
     DataSet = QNF
-    Left = 116
-    Top = 12
+    Left = 204
+    Top = 8
   end
   object QNF_Duplicata: TFDQuery
     AfterInsert = QNF_DuplicataAfterInsert
@@ -1607,13 +1605,12 @@ object DM_NF_Entr: TDM_NF_Entr
     MasterSource = DSNF
     MasterFields = 'id'
     DetailFields = 'nf'
-    Connection = DM.DB
     FetchOptions.AssignedValues = [evCache]
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
       'select * from nf_duplicata_entr where nf=:id')
-    Left = 36
-    Top = 200
+    Left = 108
+    Top = 175
     ParamData = <
       item
         Name = 'ID'
@@ -1656,13 +1653,12 @@ object DM_NF_Entr: TDM_NF_Entr
     MasterSource = DSNF
     MasterFields = 'id'
     DetailFields = 'nf'
-    Connection = DM.DB
     FetchOptions.AssignedValues = [evCache]
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
       'select * from nf_reboque_entr where nf=:id')
-    Left = 36
-    Top = 260
+    Left = 108
+    Top = 223
     ParamData = <
       item
         Name = 'ID'
@@ -1715,13 +1711,12 @@ object DM_NF_Entr: TDM_NF_Entr
     MasterSource = DSNF
     MasterFields = 'id'
     DetailFields = 'nf'
-    Connection = DM.DB
     FetchOptions.AssignedValues = [evCache]
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
       'select * from nf_referenciada_entr where nf=:id')
-    Left = 36
-    Top = 312
+    Left = 108
+    Top = 271
     ParamData = <
       item
         Name = 'ID'
@@ -1854,13 +1849,12 @@ object DM_NF_Entr: TDM_NF_Entr
     MasterSource = DSNF
     MasterFields = 'id'
     DetailFields = 'nf'
-    Connection = DM.DB
     FetchOptions.AssignedValues = [evCache]
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
       'select * from nf_volumes_entr where nf=:id')
-    Left = 36
-    Top = 376
+    Left = 108
+    Top = 318
     ParamData = <
       item
         Name = 'ID'
@@ -1919,13 +1913,12 @@ object DM_NF_Entr: TDM_NF_Entr
     MasterSource = DSNF_Volume
     MasterFields = 'id'
     DetailFields = 'vol'
-    Connection = DM.DB
     FetchOptions.AssignedValues = [evCache]
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
       'select * from nf_vol_lacre_entr where vol=:id')
-    Left = 36
-    Top = 432
+    Left = 108
+    Top = 367
     ParamData = <
       item
         Name = 'ID'
@@ -1954,56 +1947,55 @@ object DM_NF_Entr: TDM_NF_Entr
   end
   object DSNF_Volume: TDataSource
     DataSet = QNF_Volume
-    Left = 112
-    Top = 376
+    Left = 204
+    Top = 318
   end
   object DScdNF: TDataSource
     DataSet = cdNF
-    Left = 374
-    Top = 20
+    Left = 462
+    Top = 8
   end
   object DScdNF_Item: TDataSource
     DataSet = cdNF_Item
-    Left = 374
-    Top = 72
+    Left = 462
+    Top = 60
   end
   object DScdNF_Duplicata: TDataSource
     DataSet = cdNF_Duplicata
-    Left = 374
-    Top = 208
+    Left = 462
+    Top = 175
   end
   object DScdNF_Referenciada: TDataSource
     DataSet = cdNF_Reboque
-    Left = 406
-    Top = 320
+    Left = 462
+    Top = 271
   end
   object DScdNF_Reboque: TDataSource
     DataSet = cdNF_Reboque
-    Left = 374
-    Top = 268
+    Left = 462
+    Top = 223
   end
   object DScdNF_Lacre: TDataSource
     DataSet = cdNF_Lacre
-    Left = 374
-    Top = 440
+    Left = 462
+    Top = 367
   end
   object DScdNF_Volume: TDataSource
     DataSet = cdNF_Volume
-    Left = 422
-    Top = 384
+    Left = 462
+    Top = 318
   end
   object QNF_Chave: TFDQuery
     AfterInsert = QNF_ChaveAfterInsert
     MasterSource = DSNF
     MasterFields = 'id'
     DetailFields = 'nf'
-    Connection = DM.DB
     FetchOptions.AssignedValues = [evCache]
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
       'select * from nf_chave_entr where nf=:id')
-    Left = 36
-    Top = 496
+    Left = 108
+    Top = 419
     ParamData = <
       item
         Name = 'ID'
@@ -2055,36 +2047,39 @@ object DM_NF_Entr: TDM_NF_Entr
   end
   object DScdNF_Chave: TDataSource
     DataSet = cdNF_Chave
-    Left = 374
-    Top = 504
+    Left = 462
+    Top = 419
   end
   object NFE1: TACBrNFe
     Configuracoes.Geral.SSLLib = libCapicomDelphiSoap
+    Configuracoes.Geral.SSLCryptLib = cryCapicom
+    Configuracoes.Geral.SSLHttpLib = httpIndy
+    Configuracoes.Geral.SSLXmlSignLib = xsMsXmlCapicom
     Configuracoes.Geral.FormatoAlerta = 'TAG:%TAGNIVEL% ID:%ID%/%TAG%(%DESCRICAO%) - %MSG%.'
     Configuracoes.Geral.IncluirQRCodeXMLNFCe = False
+    Configuracoes.Arquivos.OrdenacaoPath = <>
     Configuracoes.WebServices.UF = 'SP'
     Configuracoes.WebServices.AguardarConsultaRet = 0
     Configuracoes.WebServices.QuebradeLinha = '|'
-    Left = 208
-    Top = 24
+    Left = 20
+    Top = 120
   end
   object DSNF_Chave: TDataSource
     DataSet = QNF_Chave
-    Left = 104
-    Top = 496
+    Left = 204
+    Top = 419
   end
   object QNF_Item_Med: TFDQuery
     AfterInsert = QNF_Item_MedAfterInsert
     MasterSource = DSNF_Item
     MasterFields = 'id'
     DetailFields = 'item'
-    Connection = DM.DB
     FetchOptions.AssignedValues = [evCache]
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
       'select * from nf_item_med_entr where item=:id')
-    Left = 40
-    Top = 116
+    Left = 108
+    Top = 120
     ParamData = <
       item
         Name = 'ID'
@@ -2134,31 +2129,30 @@ object DM_NF_Entr: TDM_NF_Entr
   end
   object DSNF_Item_Med: TDataSource
     DataSet = QNF_Item
-    Left = 116
-    Top = 132
+    Left = 204
+    Top = 120
   end
   object DScdNF_Item_Med: TDataSource
     DataSet = cdNF_Item_Med
-    Left = 374
-    Top = 136
+    Left = 462
+    Top = 120
   end
   object DScdNF_Guia_Arrec: TDataSource
     DataSet = cdNF_Guia_Arrec
-    Left = 374
-    Top = 568
+    Left = 462
+    Top = 468
   end
   object QNF_Guia_Arrec: TFDQuery
     AfterInsert = QNF_Guia_ArrecAfterInsert
     MasterSource = DSNF
     MasterFields = 'id'
     DetailFields = 'nf'
-    Connection = DM.DB
     FetchOptions.AssignedValues = [evCache]
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
       'select * from nf_guia_arrec_entr where nf=:id')
-    Left = 36
-    Top = 552
+    Left = 112
+    Top = 468
     ParamData = <
       item
         Name = 'ID'
@@ -2222,8 +2216,8 @@ object DM_NF_Entr: TDM_NF_Entr
   end
   object DSNF_Guia_Arrec: TDataSource
     DataSet = QNF_Guia_Arrec
-    Left = 104
-    Top = 552
+    Left = 204
+    Top = 468
   end
   object cdNF: TFDQuery
     AfterInsert = cdNFAfterInsert
@@ -2231,8 +2225,8 @@ object DM_NF_Entr: TDM_NF_Entr
     Connection = DB
     SQL.Strings = (
       'select * from nf order by id desc limit 1;')
-    Left = 280
-    Top = 20
+    Left = 352
+    Top = 8
     object cdNFid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -2815,8 +2809,8 @@ object DM_NF_Entr: TDM_NF_Entr
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
       'select * from nf_item where nf=:id')
-    Left = 280
-    Top = 72
+    Left = 352
+    Top = 60
     ParamData = <
       item
         Name = 'ID'
@@ -3605,8 +3599,8 @@ object DM_NF_Entr: TDM_NF_Entr
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
       'select * from nf_duplicata where nf=:id')
-    Left = 280
-    Top = 200
+    Left = 352
+    Top = 175
     ParamData = <
       item
         Name = 'ID'
@@ -3649,8 +3643,8 @@ object DM_NF_Entr: TDM_NF_Entr
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
       'select * from nf_reboque where nf=:id')
-    Left = 280
-    Top = 268
+    Left = 352
+    Top = 223
     ParamData = <
       item
         Name = 'ID'
@@ -3701,8 +3695,8 @@ object DM_NF_Entr: TDM_NF_Entr
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
       'select * from nf_referenciada where nf=:id')
-    Left = 280
-    Top = 320
+    Left = 352
+    Top = 271
     ParamData = <
       item
         Name = 'ID'
@@ -3817,8 +3811,8 @@ object DM_NF_Entr: TDM_NF_Entr
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
       'select * from nf_volumes where nf=:id')
-    Left = 280
-    Top = 384
+    Left = 352
+    Top = 318
     ParamData = <
       item
         Name = 'ID'
@@ -3877,8 +3871,8 @@ object DM_NF_Entr: TDM_NF_Entr
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
       'select * from nf_vol_lacre where vol=:id')
-    Left = 280
-    Top = 440
+    Left = 352
+    Top = 367
     ParamData = <
       item
         Name = 'ID'
@@ -3913,8 +3907,8 @@ object DM_NF_Entr: TDM_NF_Entr
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
       'select * from nf_chave where nf=:id')
-    Left = 280
-    Top = 504
+    Left = 352
+    Top = 419
     ParamData = <
       item
         Name = 'ID'
@@ -3966,8 +3960,8 @@ object DM_NF_Entr: TDM_NF_Entr
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
       'select * from nf_item_med where item=:id')
-    Left = 280
-    Top = 124
+    Left = 352
+    Top = 120
     ParamData = <
       item
         Name = 'ID'
@@ -4015,8 +4009,8 @@ object DM_NF_Entr: TDM_NF_Entr
     Connection = DB
     SQL.Strings = (
       'select * from nf_guia_arrec where nf=:id')
-    Left = 280
-    Top = 568
+    Left = 352
+    Top = 468
     ParamData = <
       item
         Name = 'ID'
@@ -4076,16 +4070,16 @@ object DM_NF_Entr: TDM_NF_Entr
     ResourceOptions.AssignedValues = [rvAutoReconnect]
     ResourceOptions.AutoReconnect = True
     LoginPrompt = False
-    Left = 456
-    Top = 26
+    Left = 20
+    Top = 8
   end
   object SQLIteLink: TFDPhysSQLiteDriverLink
-    Left = 456
-    Top = 74
+    Left = 20
+    Top = 60
   end
   object DSNF_Duplicata: TDataSource
     DataSet = QNF_Duplicata
-    Left = 118
-    Top = 200
+    Left = 204
+    Top = 175
   end
 end

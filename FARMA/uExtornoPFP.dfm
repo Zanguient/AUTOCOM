@@ -91,12 +91,14 @@ inherited frmExtorno: TfrmExtorno
     ExplicitTop = 40
     ExplicitWidth = 289
     ExplicitHeight = 193
-    ClientRectBottom = 339
-    ClientRectRight = 602
+    ClientRectBottom = 335
+    ClientRectLeft = 4
+    ClientRectRight = 598
     ClientRectTop = 26
     object Tab1: TcxTabSheet
       Caption = 'VENDAS'
       ImageIndex = 0
+      ExplicitLeft = 0
       ExplicitTop = 0
       ExplicitWidth = 0
       ExplicitHeight = 0
@@ -199,17 +201,17 @@ inherited frmExtorno: TfrmExtorno
       Caption = 'EXTORNO MANUAL'
       ImageIndex = 1
       OnShow = Tab2Show
-      ExplicitLeft = 4
-      ExplicitWidth = 594
-      ExplicitHeight = 309
+      ExplicitLeft = 0
+      ExplicitWidth = 602
+      ExplicitHeight = 313
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 602
+        Width = 594
         Height = 41
         Align = alTop
         TabOrder = 0
-        ExplicitWidth = 594
+        ExplicitWidth = 602
         object edcod: TcxTextEdit
           Left = 248
           Top = 9
@@ -225,8 +227,8 @@ inherited frmExtorno: TfrmExtorno
       object cxGrid1: TcxGrid
         Left = 0
         Top = 41
-        Width = 602
-        Height = 272
+        Width = 594
+        Height = 268
         Align = alClient
         TabOrder = 1
         TabStop = False

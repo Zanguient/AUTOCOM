@@ -8,7 +8,7 @@ uses
   cxLookAndFeelPainters, Vcl.Menus, ACBrBase, ACBrEnterTab, Easysize, Dateutils,
   RxPlacemnt, Vcl.StdCtrls, cxButtons, Vcl.ExtCtrls, cxControls, cxContainer,
   cxEdit, Vcl.ComCtrls, dxCore, cxDateUtils, cxLabel, cxTextEdit, cxMaskEdit,
-  cxDropDownEdit, cxCalendar, cxCheckBox, cxGroupBox;
+  cxDropDownEdit, cxCalendar, cxCheckBox, cxGroupBox, dxSkinsCore, dxSkinCaramel;
 
 type
   TfrmSintegra = class(Tfrm)
@@ -43,7 +43,7 @@ implementation
 
 {$R *.dfm}
 
-uses uDM_Sintegra, uFuncoes, uDM;
+uses uDM_Sintegra, uFuncoes, uDM, uDM_Conn;
 
 procedure TfrmSintegra.btnGerarClick(Sender: TObject);
 var
@@ -130,15 +130,15 @@ begin
    D1.Date := data;
    DM_Sintegra := TDM_Sintegra.Create(self);
 
-   DM.Q1.Open('select distinct(data) from balanco order by data desc');
+   DMConn.Q1.Open('select distinct(data) from balanco order by data desc');
 
-   while not DM.Q1.Eof do
+   while not DMConn.Q1.Eof do
    begin
-      cmb1.Properties.Items.Add(DateToStr(DM.Q1.Fields[0].AsDateTime));
-      DM.Q1.Next;
+      cmb1.Properties.Items.Add(DateToStr(DMConn.Q1.Fields[0].AsDateTime));
+      DMConn.Q1.Next;
    end;
 
-   DM.Q1.Close;
+   DMConn.Q1.Close;
 end;
 
 end.

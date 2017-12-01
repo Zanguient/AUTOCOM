@@ -3,7 +3,6 @@ object DM_Sped: TDM_Sped
   Height = 621
   Width = 762
   object Q1: TFDQuery
-    Connection = DM.DB
     Left = 42
     Top = 12
   end
@@ -16,7 +15,6 @@ object DM_Sped: TDM_Sped
     Top = 68
   end
   object Q0150: TFDQuery
-    Connection = DM.DB
     SQL.Strings = (
       'select distinct(Emit_CNPJCPF),'
       'Emit_IE,'
@@ -128,7 +126,6 @@ object DM_Sped: TDM_Sped
   object Q0175: TFDQuery
     MasterSource = DS0150
     MasterFields = 'Emit_CNPJCPF'
-    Connection = DM.DB
     SQL.Strings = (
       'select distinct(campo), max(data) as data,valor_anter '
       'from sped_alteracoes s, vw_dest_nf v '
@@ -179,7 +176,6 @@ object DM_Sped: TDM_Sped
     end
   end
   object Q0190: TFDQuery
-    Connection = DM.DB
     SQL.Strings = (
       'select distinct(unid) as unid'
       'from paf_r05 r5, paf_r04 r4, paf_r02 r2'
@@ -227,7 +223,6 @@ object DM_Sped: TDM_Sped
     end
   end
   object Q0200: TFDQuery
-    Connection = DM.DB
     SQL.Strings = (
       'select distinct(e.id) as id ,'
       'e.cod_gtin,'
@@ -340,7 +335,6 @@ object DM_Sped: TDM_Sped
     end
   end
   object QC100: TFDQuery
-    Connection = DM.DB
     SQL.Strings = (
       'select '#39'E'#39' as tipo,ch.chave, ch.cstat as status, nf.* from '
       'nf_entr nf'
@@ -1275,7 +1269,6 @@ object DM_Sped: TDM_Sped
   object QC112: TFDQuery
     MasterSource = DSC100
     MasterFields = 'id'
-    Connection = DM.DB
     SQL.Strings = (
       'select * from nf_guia_arrec_entr where nf=:id')
     Left = 208
@@ -1348,7 +1341,6 @@ object DM_Sped: TDM_Sped
   object QC113E: TFDQuery
     MasterSource = DSC100
     MasterFields = 'id'
-    Connection = DM.DB
     SQL.Strings = (
       
         'select * from nf_referenciada_entr where nf= :id and RefECF_mode' +
@@ -1474,7 +1466,6 @@ object DM_Sped: TDM_Sped
   object QC114: TFDQuery
     MasterSource = DSC100
     MasterFields = 'id'
-    Connection = DM.DB
     SQL.Strings = (
       'select * from nf_referenciada where nf= :id and RefECF_nECF > 0')
     Left = 208
@@ -1529,7 +1520,6 @@ object DM_Sped: TDM_Sped
   object QC113S: TFDQuery
     MasterSource = DSC100
     MasterFields = 'id'
-    Connection = DM.DB
     SQL.Strings = (
       
         'select * from nf_referenciada where nf= :id and RefECF_modelo <=' +
@@ -1655,7 +1645,6 @@ object DM_Sped: TDM_Sped
   object QC170E: TFDQuery
     MasterSource = DSC100
     MasterFields = 'id'
-    Connection = DM.DB
     SQL.Strings = (
       'select * from nf_item_entr where nf= :id')
     Left = 208
@@ -2431,7 +2420,6 @@ object DM_Sped: TDM_Sped
   object QC170S: TFDQuery
     MasterSource = DSC100
     MasterFields = 'id'
-    Connection = DM.DB
     SQL.Strings = (
       'select * from nf_item where nf= :id')
     Left = 208
@@ -3226,7 +3214,6 @@ object DM_Sped: TDM_Sped
   object QC190E: TFDQuery
     MasterSource = DSC100
     MasterFields = 'id'
-    Connection = DM.DB
     SQL.Strings = (
       'select 0 as ICMS_CSOSN, '
       'ICMS_CST_inform as ICMS_CST, '
@@ -3360,7 +3347,6 @@ object DM_Sped: TDM_Sped
   object QC190S: TFDQuery
     MasterSource = DSC100
     MasterFields = 'id'
-    Connection = DM.DB
     SQL.Strings = (
       'select 0 as ICMS_CSOSN, '
       'ICMS_CST, '
@@ -3495,7 +3481,6 @@ object DM_Sped: TDM_Sped
     end
   end
   object QC300: TFDQuery
-    Connection = DM.DB
     SQL.Strings = (
       'select dt_movi, '
       'min(serie_d) as nmro_nf_ini,  '
@@ -3565,7 +3550,6 @@ object DM_Sped: TDM_Sped
   object QC310: TFDQuery
     MasterSource = DSC300
     MasterFields = 'dt_movi'
-    Connection = DM.DB
     SQL.Strings = (
       'select v.serie_d as nmro_nf'
       'from'
@@ -3600,7 +3584,6 @@ object DM_Sped: TDM_Sped
   object QC320: TFDQuery
     MasterSource = DSC300
     MasterFields = 'dt_movi'
-    Connection = DM.DB
     SQL.Strings = (
       'select r4.id, r5.id as idr5, '
       'if(vi.ICMS_CSOSN>0,vi.ICMS_CSOSN,vi.ICMS_CST) as cst, '
@@ -3704,7 +3687,6 @@ object DM_Sped: TDM_Sped
   object QC321: TFDQuery
     MasterSource = DSC320
     MasterFields = 'id;cst;cfop'
-    Connection = DM.DB
     SQL.Strings = (
       
         'select r5.cProd as codigo, sum(r5.qtd) as qtd, r5.unid, sum(r5.t' +
@@ -3818,7 +3800,6 @@ object DM_Sped: TDM_Sped
     end
   end
   object QC350: TFDQuery
-    Connection = DM.DB
     SQL.Strings = (
       'select r4.id as id,'
       'v.serie_d as nmro_nf, '
@@ -3940,7 +3921,6 @@ object DM_Sped: TDM_Sped
   object QC370: TFDQuery
     MasterSource = DSC350
     MasterFields = 'id'
-    Connection = DM.DB
     SQL.Strings = (
       
         'select r5.item, r5.cProd as codigo, r5.qtd, r5.unid, r5.total,r5' +
@@ -4010,7 +3990,6 @@ object DM_Sped: TDM_Sped
   object QC390: TFDQuery
     MasterSource = DSC350
     MasterFields = 'id'
-    Connection = DM.DB
     SQL.Strings = (
       'select if(vi.ICMS_CSOSN>0,vi.ICMS_CSOSN,vi.ICMS_CST) as cst, '
       'vi.CFOP as cfop,'
@@ -4084,7 +4063,6 @@ object DM_Sped: TDM_Sped
     end
   end
   object QC400: TFDQuery
-    Connection = DM.DB
     SQL.Strings = (
       'select * from paf_r01 order by nmro')
     Left = 572
@@ -4155,7 +4133,6 @@ object DM_Sped: TDM_Sped
   object QC405: TFDQuery
     MasterSource = DSC400
     MasterFields = 'nmro'
-    Connection = DM.DB
     SQL.Strings = (
       'select * from paf_r02 '
       'where '
@@ -4271,7 +4248,6 @@ object DM_Sped: TDM_Sped
   object QC410: TFDQuery
     MasterSource = DSC405
     MasterFields = 'id'
-    Connection = DM.DB
     SQL.Strings = (
       'select '
       'sum(vi.PIS_vPIS) as vpis, '
@@ -4316,7 +4292,6 @@ object DM_Sped: TDM_Sped
   object QC420: TFDQuery
     MasterSource = DSC405
     MasterFields = 'id'
-    Connection = DM.DB
     SQL.Strings = (
       'select * from paf_r03 where r02=:id'
       'order by cod_tot_parcial')
@@ -4355,7 +4330,6 @@ object DM_Sped: TDM_Sped
   object QC425: TFDQuery
     MasterSource = DSC405
     MasterFields = 'id'
-    Connection = DM.DB
     SQL.Strings = (
       'select r5.cProd as codigo,'
       'r5.unid,'
@@ -4430,7 +4404,6 @@ object DM_Sped: TDM_Sped
   object QC460: TFDQuery
     MasterSource = DSC405
     MasterFields = 'id'
-    Connection = DM.DB
     SQL.Strings = (
       'select r4.id,'
       #39'2D'#39' as cod_mod,'
@@ -4539,7 +4512,6 @@ object DM_Sped: TDM_Sped
   object QC470: TFDQuery
     MasterSource = DSC460
     MasterFields = 'id'
-    Connection = DM.DB
     SQL.Strings = (
       'use autocom;'
       ''
@@ -4648,7 +4620,6 @@ object DM_Sped: TDM_Sped
   object QC490: TFDQuery
     MasterSource = DSC405
     MasterFields = 'id'
-    Connection = DM.DB
     SQL.Strings = (
       'select if(vi.ICMS_CSOSN>0,vi.ICMS_CSOSN,vi.ICMS_CST) as cst, '
       'vi.CFOP as cfop,'
@@ -4719,7 +4690,6 @@ object DM_Sped: TDM_Sped
     end
   end
   object Q1600: TFDQuery
-    Connection = DM.DB
     SQL.Strings = (
       'select v.oper_crt, '
       'if(v.tipo_crt='#39'C'#39',sum(v.vr_card),0) as vr_cred, '

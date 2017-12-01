@@ -11,7 +11,6 @@ object DM_SPED_PIS: TDM_SPED_PIS
     Top = 16
   end
   object QNf: TFDQuery
-    Connection = DM.DB
     SQL.Strings = (
       'select * from vw_sped_pis_nf where Ide_dEmi between :d1 and :d2')
     Left = 144
@@ -699,7 +698,6 @@ object DM_SPED_PIS: TDM_SPED_PIS
   object Qnf_Itens: TFDQuery
     MasterSource = DSNF
     MasterFields = 'id'
-    Connection = DM.DB
     SQL.Strings = (
       'select * from vw_sped_pis_nf_itens where nf=:id')
     Left = 144
@@ -1503,7 +1501,6 @@ object DM_SPED_PIS: TDM_SPED_PIS
   object QNF_Chave: TFDQuery
     MasterSource = DSNF
     MasterFields = 'id'
-    Connection = DM.DB
     SQL.Strings = (
       'select * from nf_chave where nf=:id')
     Left = 144

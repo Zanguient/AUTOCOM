@@ -213,7 +213,7 @@ uses uFuncoes, uDM, uCfg, uMD5Print, uCadEmpresa, uPesqCidade, uCadConvenio,
   uTeste, uCadOper_CRT, uCadAssCfopEmissao, ucfop_devol, uAnaliseVendas,
   uSintegra, uSpedFiscal, uEstoque_perda, uIntegraBalanca, uSpedpis,
   uConverteEmitInform{, uAtu_Farma}, uAtuIPBTax{, uCadBalancas}, uCadBal,
-  uAtuFarma, uManut, uEstoque_Inicial;
+  uAtuFarma, uManut, uEstoque_Inicial, uDM_Conn;
 
 
 function Validar: Integer; stdcall; external 'softlock.dll';
@@ -348,7 +348,7 @@ begin
    for i := 0 to bar1.Panels.Count - 1 do
        bar1.Panels[i].Text := C_ST_VAZIO;
 
-   DM.DB.Connected := False;
+   DMConn.DB.Connected := False;
    pnlLogin.Show;
    edLogin.SetFocus;
 end;
@@ -449,13 +449,13 @@ begin
    begin
       btnLogin.Enabled := True;
       ShowMessage('Erro ao autenticar o sistema. Verifique sua conexão com a internet ou solicite suporte.');
-      DM.DB.Connected := False;
+      DMConn.DB.Connected := False;
       Application.Terminate;
       exit;
    end;
 
-   bar1.Panels[0].Text := DM.DB.Params.Values['Server'];
-   bar1.Panels[1].Text := DM.DB.Params.Values['Database'];
+   bar1.Panels[0].Text := DMConn.DB.Params.Values['Server'];
+   bar1.Panels[1].Text := DMConn.DB.Params.Values['Database'];
 
    if DM_INI.ini.StoredValue['idTerm'] = '00' then
    begin
@@ -556,6 +556,7 @@ begin
    ini.SaveFormPlacement;
    DM_INI.INI.SaveFormPlacement;
    FreeAndNil(DM);
+   FreeAndNil(DMConn);
    FreeAndNil(DM_INI);
 end;
 
@@ -565,6 +566,7 @@ var
 begin
    CAPTION := 'AUTOCOM GERENCIAL ' + C_117;
    DM_INI := TDM_INI.Create(self);
+   DMConn := TDMConn.Create(self);
    DM := TDM.Create(self);
    //ini do frmMain
    ini.inifilename := Aqui(C_DAT_FILE, MD5_Str(Application.ExeName + TForm(sender).Name) + '.fr');
@@ -837,21 +839,21 @@ procedure TfrmMain.Verificar_Vigencia_IBPTax;
 var
    i: integer;
 begin
-   DM.Q1.Open('select versao,dt_vigencia_fim,chave from ibptax');
+   DMConn.Q1.Open('select versao,dt_vigencia_fim,chave from ibptax');
 
-   if DM.Q1.IsEmpty then
+   if DMConn.Q1.IsEmpty then
    begin
       ShowMessage('Providencie a atualização da tabela IBPTax.');
       exit;
    end;
 
-   i := Trunc(DM.Q1.FieldByName('dt_vigencia_fim').AsDateTime) - Trunc(date);
+   i := Trunc(DMConn.Q1.FieldByName('dt_vigencia_fim').AsDateTime) - Trunc(date);
 
    if (i > 0) and (i < 7) then
-      ShowMessage(Format('A tabela IBPTax versao "%s", chave "%s" expira em %s dias.'#10#13'Acesse o site do IBPTax e baixe o arquivo de atualização.', [DM.Q1.FieldByName('versao').AsString, DM.Q1.FieldByName('chave').AsString, IntToStr(i)]))
+      ShowMessage(Format('A tabela IBPTax versao "%s", chave "%s" expira em %s dias.'#10#13'Acesse o site do IBPTax e baixe o arquivo de atualização.', [DMConn.Q1.FieldByName('versao').AsString, DMConn.Q1.FieldByName('chave').AsString, IntToStr(i)]))
    else
    if i <=0 then
-      ShowMessage(Format('A tabela IBPTax versao "%s", chave "%s" expirou a %s dias.'#10#13'Acesse o site do IBPTax e baixe o arquivo de atualização.', [DM.Q1.FieldByName('versao').AsString, DM.Q1.FieldByName('chave').AsString, IntToStr(i)]));
+      ShowMessage(Format('A tabela IBPTax versao "%s", chave "%s" expirou a %s dias.'#10#13'Acesse o site do IBPTax e baixe o arquivo de atualização.', [DMConn.Q1.FieldByName('versao').AsString, DMConn.Q1.FieldByName('chave').AsString, IntToStr(i)]));
 end;
 
 end.

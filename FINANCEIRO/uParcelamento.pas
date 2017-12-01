@@ -15,7 +15,7 @@ uses
   cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox, Vcl.ComCtrls, dxCore, cxDateUtils, cxNavigator,FireDAC.Comp.Client,
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
-  FireDAC.Comp.DataSet;
+  FireDAC.Comp.DataSet, dxSkinsCore, dxSkinCaramel, dxSkinscxPCPainter;
 
 type
   TfrmParcelamento = class(Tfrm)
@@ -82,7 +82,7 @@ implementation
 
 {$R *.dfm}
 
-uses uAutocomConsts, uDM, uFuncoes, udm_ini, uMD5Print, uEnvioBol;
+uses uAutocomConsts, uDM, uFuncoes, udm_ini, uMD5Print, uEnvioBol, uDM_Conn;
 
 procedure TfrmParcelamento.btnCalcClick(Sender: TObject);
 var
@@ -284,7 +284,7 @@ begin
          DM.QFinanDeb.Delete//apaga o movimento antigo que foi parcelado
       else
          if pos(')', Tipo_Movi)>0 then
-            DM.DB.ExecSQL('delete from finan_debito where id in' + Tipo_Movi + ';');
+            DM.ExecSQL('delete from finan_debito where id in' + Tipo_Movi + ';');
 
          //exporta PDF
 
@@ -354,12 +354,12 @@ begin
    cmbBoleto.Properties.ListSource := DM.DSvwBoleto;
    cbCarne.Enabled                 := cbBoleto.Visible;
 
-   DM.Q1.Open('select distinct plano from finan_parcelas order by plano');
+   DMConn.Q1.Open('select distinct plano from finan_parcelas order by plano');
 
-   while not DM.Q1.Eof do
+   while not DMConn.Q1.Eof do
    begin
-      cmbPlano.Properties.Items.Add(DM.Q1.Fields[0].AsString);
-      DM.Q1.Next;
+      cmbPlano.Properties.Items.Add(DMConn.Q1.Fields[0].AsString);
+      DMConn.Q1.Next;
    end;
 
    if cmbPlano.Properties.Items.Count >0 then

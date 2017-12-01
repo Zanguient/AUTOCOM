@@ -18,10 +18,8 @@ uses
   uSkinDLL in '..\BASE\uSkinDLL.pas',
   uMenu in 'uMenu.pas' {frmMenu},
   ucallMenuFiscal in 'ucallMenuFiscal.pas' {frmCall_MenuFiscal},
-  uDMecf in 'uDMecf.pas' {DM_ECF: TDataModule},
   uMenuFisc in 'uMenuFisc.pas' {frmMenuFisc},
   uMsgECF in 'uMsgECF.pas' {frmMsg},
-  uDM_PDV in 'uDM_PDV.pas' {DM_PDV: TDataModule},
   uFPag in 'uFPag.pas' {frmFPgto},
   uPesqCli in 'uPesqCli.pas' {frmPesqCli},
   uPesqProd in 'uPesqProd.pas' {frmPesqProd},
@@ -39,8 +37,6 @@ uses
   uSplash in '..\COMUM\uSplash.pas' {frmsplash},
   uDesconto in 'uDesconto.pas' {frmDesconto},
   uSerieD in 'uSerieD.pas' {frmSerieD},
-  uDM_Sintegra in '..\COMUM\uDM_Sintegra.pas' {DM_Sintegra: TDataModule},
-  uDM_SPED in '..\COMUM\uDM_SPED.pas' {DM_Sped: TDataModule},
   uMenuConv in '..\FARMA\uMenuConv.pas' {frmMenu_Convenio},
   upfp in '..\FARMA\upfp.pas' {frmpfp},
   uScanner in '..\FARMA\uScanner.pas' {frmScanner},
@@ -59,7 +55,14 @@ uses
   uStatus in '..\NFE_new\uStatus.pas' {frmStatus},
   uRegras_Imposto in '..\OPERACIONAIS\uRegras_Imposto.pas' {frmRegras_Imposto},
   udm_ini in '..\DATAMODULES\udm_ini.pas' {DM_INI: TDataModule},
-  uDM in '..\DATAMODULES\uDM.pas' {DM: TDataModule};
+  uDM in '..\DATAMODULES\uDM.pas' {DM: TDataModule},
+  uDM_Conn in '..\DATAMODULES\uDM_Conn.pas' {DMConn: TDataModule},
+  uDM_PDV in '..\DATAMODULES\uDM_PDV.pas' {DM_PDV: TDataModule},
+  uDMecf in '..\DATAMODULES\uDMecf.pas' {DM_ECF: TDataModule},
+  udmnfe in '..\DATAMODULES\udmnfe.pas' {DM_NFE: TDataModule},
+  uValidacao in '..\NFE_new\uValidacao.pas' {frmValidacao},
+  uDM_Sintegra in '..\DATAMODULES\uDM_Sintegra.pas' {DM_Sintegra: TDataModule},
+  uDM_SPED in '..\DATAMODULES\uDM_SPED.pas' {DM_Sped: TDataModule};
 
 {$R *.res}
 {$R UAC.res}
@@ -97,15 +100,14 @@ Begin
      frmSplash :=TfrmSplash.Create(nil);
      frmSplash.Show;
      frmSplash.Update;
-     Application.CreateForm(TDMSkin, DMSkin);
-  Application.CreateForm(TfrmPDV, frmPDV);
+     Application.CreateForm(TfrmPDV, frmPDV);
+  Application.CreateForm(TDMConn, DMConn);
+  Application.CreateForm(TDM_PDV, DM_PDV);
+  Application.CreateForm(TDM_ECF, DM_ECF);
+  Application.CreateForm(TDM_NFE, DM_NFE);
+  Application.CreateForm(TfrmValidacao, frmValidacao);
   Application.CreateForm(TDM_Sintegra, DM_Sintegra);
   Application.CreateForm(TDM_Sped, DM_Sped);
-  Application.CreateForm(TfrmCfg, frmCfg);
-  Application.CreateForm(TfrmStatus, frmStatus);
-  Application.CreateForm(TfrmRegras_Imposto, frmRegras_Imposto);
-  Application.CreateForm(TDM_INI, DM_INI);
-  Application.CreateForm(TDM, DM);
   Application.Run;
      CloseHandle(MutexHandle);
   End;

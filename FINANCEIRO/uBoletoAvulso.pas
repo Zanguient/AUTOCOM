@@ -9,7 +9,8 @@ uses
   RxPlacemnt, Vcl.StdCtrls, cxButtons, Vcl.ExtCtrls, cxControls, cxContainer,
   cxEdit, cxMemo, cxDBEdit, cxGroupBox, cxCalc, cxTextEdit, cxMaskEdit,
   cxDropDownEdit, cxCalendar, cxCurrencyEdit, cxNavigator, cxDBNavigator,
-  cxLabel, cxDBLabel, cxCheckBox, cxRadioGroup, dxStatusBar, Vcl.ComCtrls, dxCore, cxDateUtils;
+  cxLabel, cxDBLabel, cxCheckBox, cxRadioGroup, dxStatusBar, Vcl.ComCtrls, dxCore, cxDateUtils,
+  dxSkinsCore, dxSkinCaramel, dxSkinsdxStatusBarPainter;
 
 type
   TfrmBoletoAvulso = class(Tfrm)
@@ -95,7 +96,7 @@ implementation
 
 {$R *.dfm}
 
-uses uDM, uFuncoes, uAutocomConsts, uListaEmitentes;
+uses uDM, uFuncoes, uAutocomConsts, uListaEmitentes, uDM_Conn;
 
 procedure TfrmBoletoAvulso.btnCadClick(Sender: TObject);
 begin
@@ -128,10 +129,10 @@ begin
          edmail.Text       := DM.QvwDest_nfemail.AsString;
          dtDoc.Date        := Date;
          //associa a tag do botão para gerar o débito se for cliente...
-         DM.Q1.Open('select id from cliente where ' + NumberSQL('cnpj') + '=' +
+         DMConn.Q1.Open('select id from cliente where ' + NumberSQL('cnpj') + '=' +
                               QuotedStr(Number(DM.QvwDest_nfCNPJ.AsString)));
 
-         btnCad.Tag := DM.Q1.Fields[0].AsInteger;
+         btnCad.Tag := DMConn.Q1.Fields[0].AsInteger;
       end;
    end;
 end;

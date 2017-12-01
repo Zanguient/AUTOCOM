@@ -363,7 +363,7 @@ implementation
 {$R *.dfm}
 
 uses uAutocomConsts, uDM, uFuncoes, uMD5Print, uBoletoAvulso, udm_ini,
-  uCadPlanoContas, uAssoc, uEnvioBol, uParcelamento, uQuita;
+  uCadPlanoContas, uAssoc, uEnvioBol, uParcelamento, uQuita, uDM_Conn;
 
 procedure TfrmGestaoReceber.BaixarDoc1Click(Sender: TObject);
 begin
@@ -480,12 +480,12 @@ begin
       begin
          DM.Inserir_Caixa('QBL', DM.QFinan_bol_Emitnossonmro.AsString, DM.QFinan_bol_Emitvalor_pg.Value, DM.QFinan_bol_Emitid.Value);
          //informe ao plano de contas
-         DM.Q2.Open('select * from finan_centro_custo_assoc where operacao=''BC''');
+         DMConn.Q2.Open('select * from finan_centro_custo_assoc where operacao=''BC''');
 
-         if not DM.Q2.IsEmpty then
-            DM.Inserir_Plano_de_contas(DM.Q2.FieldByName('codigo').AsString,
+         if not DMConn.Q2.IsEmpty then
+            DM.Inserir_Plano_de_contas(DMConn.Q2.FieldByName('codigo').AsString,
                                        DM.QFinan_bol_Emitnossonmro.AsString,
-                                       DM.Q2.FieldByName('descricao').AsString,
+                                       DMConn.Q2.FieldByName('descricao').AsString,
                                        dt_Baixa.Date,
                                        dt_Baixa.Date,
                                        DM.QFinan_bol_Emitvalor_pg.Value,
@@ -494,10 +494,10 @@ begin
       end
       else
       begin //entra na conta bancária
-         DM.Q1.Open(C_SQL93 + QuotedStr(DM.QFinan_bol_Emitboleto.AsString));
+         DMConn.Q1.Open(C_SQL93 + QuotedStr(DM.QFinan_bol_Emitboleto.AsString));
 
          DM.Inserir_Movi_Banco(DM.QFinan_bol_Emitid.Value,
-                               DM.Q1.Fields[0].AsInteger,
+                               DMConn.Q1.Fields[0].AsInteger,
                                'BOL',
                                'C',
                                DM.QFinan_bol_Emitvalor_pg.Value,
@@ -507,17 +507,17 @@ begin
          );
       end;
       //quita o débito
-      DM.Q3.Open(C_SQL94 + QuotedStr(DM.QFinan_bol_Emitid.AsString));
+      DMConn.Q3.Open(C_SQL94 + QuotedStr(DM.QFinan_bol_Emitid.AsString));
 
-      if not DM.Q3.IsEmpty then
+      if not DMConn.Q3.IsEmpty then
       begin
-         DM.Q3.Edit;
-         DM.Q3.FieldByName('dt_baixa').AsDateTime      := dt_Baixa.Date;
-         DM.Q3.FieldByName('hora_baixa').AsString      := FormatDateTime('hh:nn', now);
-         DM.Q3.FieldByName('valor_pg').AsCurrency      := DM.QFinan_bol_Emitvalor_pg.AsCurrency;
-         DM.Q3.FieldByName('operador').AsInteger       := DM.Operador.ID;
-         DM.Q3.FieldByName('obs').AsString             := DM.QFinanDebobs.AsString + mmObs.Text;
-         DM.Q3.Post;
+         DMConn.Q3.Edit;
+         DMConn.Q3.FieldByName('dt_baixa').AsDateTime      := dt_Baixa.Date;
+         DMConn.Q3.FieldByName('hora_baixa').AsString      := FormatDateTime('hh:nn', now);
+         DMConn.Q3.FieldByName('valor_pg').AsCurrency      := DM.QFinan_bol_Emitvalor_pg.AsCurrency;
+         DMConn.Q3.FieldByName('operador').AsInteger       := DM.Operador.ID;
+         DMConn.Q3.FieldByName('obs').AsString             := DM.QFinanDebobs.AsString + mmObs.Text;
+         DMConn.Q3.Post;
       end;
       DM.QFinan_bol_Emit.Next;
    end;
@@ -629,29 +629,29 @@ begin
       //entra no caixa
       DM.Inserir_Caixa('QFT', DM.QFinan_Carnenmro.AsString, DM.QFinan_Carnevalor_pg.Value, DM.QFinan_Carneid.Value);
       //informe ao plano de contas
-      DM.Q2.Open('select * from finan_centro_custo_assoc where operacao=''BF''');
+      DMConn.Q2.Open('select * from finan_centro_custo_assoc where operacao=''BF''');
 
-      if not DM.Q2.IsEmpty then
-         DM.Inserir_Plano_de_contas(DM.Q2.FieldByName('codigo').AsString,
+      if not DMConn.Q2.IsEmpty then
+         DM.Inserir_Plano_de_contas(DMConn.Q2.FieldByName('codigo').AsString,
                                     DM.QFinan_Carnenmro.AsString,
-                                    DM.Q2.FieldByName('descricao').AsString,
+                                    DMConn.Q2.FieldByName('descricao').AsString,
                                     Dt_BAixaCarne.Date,
                                     Dt_BAixaCarne.Date,
                                     DM.QFinan_Carnevalor_pg.Value,
                                     DM.QFinan_Carneid.Value
          );
       //quita o débito
-      DM.Q3.Open(C_SQL97 + QuotedStr(DM.QFinan_Carneid.AsString));
+      DMConn.Q3.Open(C_SQL97 + QuotedStr(DM.QFinan_Carneid.AsString));
 
-      if not DM.Q3.IsEmpty then
+      if not DMConn.Q3.IsEmpty then
       begin
-         DM.Q3.Edit;
-         DM.Q3.FieldByName('dt_baixa').AsDateTime      := Dt_BAixaCarne.Date;
-         DM.Q3.FieldByName('hora_baixa').AsString      := FormatDateTime('hh:nn', now);
-         DM.Q3.FieldByName('valor_pg').AsCurrency      := DM.QFinan_Carnevalor_pg.AsCurrency;
-         DM.Q3.FieldByName('operador').AsInteger       := DM.Operador.ID;
-         DM.Q3.FieldByName('obs').AsString             := DM.QFinanDebobs.AsString + mmObsCarne.Text;
-         DM.Q3.Post;
+         DMConn.Q3.Edit;
+         DMConn.Q3.FieldByName('dt_baixa').AsDateTime      := Dt_BAixaCarne.Date;
+         DMConn.Q3.FieldByName('hora_baixa').AsString      := FormatDateTime('hh:nn', now);
+         DMConn.Q3.FieldByName('valor_pg').AsCurrency      := DM.QFinan_Carnevalor_pg.AsCurrency;
+         DMConn.Q3.FieldByName('operador').AsInteger       := DM.Operador.ID;
+         DMConn.Q3.FieldByName('obs').AsString             := DM.QFinanDebobs.AsString + mmObsCarne.Text;
+         DMConn.Q3.Post;
       end;
 
       comprovante.Append(Number(FloatToStr(DM.QFinan_Carnevalor_pg.Value * 100)) + '|' +DM.QFinan_Carnenmro.AsString);
@@ -719,17 +719,17 @@ begin
 
       //Baixa o débito
 
-      DM.Q3.Open(C_SQL97 + QuotedStr(DM.QFinan_Carneid.AsString));
+      DMConn.Q3.Open(C_SQL97 + QuotedStr(DM.QFinan_Carneid.AsString));
 
-      if not DM.Q3.IsEmpty then
+      if not DMConn.Q3.IsEmpty then
       begin
-         DM.Q3.Edit;
-         DM.Q3.FieldByName('dt_baixa').AsDateTime      := Dt_BAixaCarne.Date;
-         DM.Q3.FieldByName('hora_baixa').AsString      := FormatDateTime('hh:nn', now);
-         DM.Q3.FieldByName('valor_pg').AsCurrency      := DM.QFinan_Carnevalor_pg.AsCurrency;
-         DM.Q3.FieldByName('operador').AsInteger       := DM.Operador.ID;
-         DM.Q3.FieldByName('obs').AsString             := DM.QFinanDebobs.AsString + mmObsCarne.Text;
-         DM.Q3.Post;
+         DMConn.Q3.Edit;
+         DMConn.Q3.FieldByName('dt_baixa').AsDateTime      := Dt_BAixaCarne.Date;
+         DMConn.Q3.FieldByName('hora_baixa').AsString      := FormatDateTime('hh:nn', now);
+         DMConn.Q3.FieldByName('valor_pg').AsCurrency      := DM.QFinan_Carnevalor_pg.AsCurrency;
+         DMConn.Q3.FieldByName('operador').AsInteger       := DM.Operador.ID;
+         DMConn.Q3.FieldByName('obs').AsString             := DM.QFinanDebobs.AsString + mmObsCarne.Text;
+         DMConn.Q3.Post;
       end;
 
       DM.QFinan_Carne.Next;
@@ -792,17 +792,17 @@ begin
       DM.QFinan_bol_Emit.Post;
 
       //Baixa o débito
-      DM.Q3.Open(C_SQL94 + QuotedStr(DM.QFinan_bol_Emitid.AsString));
+      DMConn.Q3.Open(C_SQL94 + QuotedStr(DM.QFinan_bol_Emitid.AsString));
 
-      if not DM.Q3.IsEmpty then
+      if not DMConn.Q3.IsEmpty then
       begin
-         DM.Q3.Edit;
-         DM.Q3.FieldByName('dt_baixa').AsDateTime      := dt_Baixa.Date;
-         DM.Q3.FieldByName('hora_baixa').AsString      := FormatDateTime('hh:nn', now);
-         DM.Q3.FieldByName('valor_pg').AsCurrency      := 0;
-         DM.Q3.FieldByName('operador').AsInteger       := DM.Operador.ID;
-         DM.Q3.FieldByName('obs').AsString             := DM.QFinanDebobs.AsString + mmObs.Text;
-         DM.Q3.Post;
+         DMConn.Q3.Edit;
+         DMConn.Q3.FieldByName('dt_baixa').AsDateTime      := dt_Baixa.Date;
+         DMConn.Q3.FieldByName('hora_baixa').AsString      := FormatDateTime('hh:nn', now);
+         DMConn.Q3.FieldByName('valor_pg').AsCurrency      := 0;
+         DMConn.Q3.FieldByName('operador').AsInteger       := DM.Operador.ID;
+         DMConn.Q3.FieldByName('obs').AsString             := DM.QFinanDebobs.AsString + mmObs.Text;
+         DMConn.Q3.Post;
       end;
 
       DM.QFinan_bol_Emit.Next;
@@ -967,12 +967,12 @@ begin
    DM.Inserir_Caixa('CRC', '(manual)', DM.QFinanCredvalor.Value, DM.QFinanCredid.Value);
 
    //informe ao plano de contas
-   DM.Q2.Open('select * from finan_centro_custo_assoc where operacao=''CR''');
+   DMConn.Q2.Open('select * from finan_centro_custo_assoc where operacao=''CR''');
 
-   if not DM.Q2.IsEmpty then
-      DM.Inserir_Plano_de_contas(DM.Q2.FieldByName('codigo').AsString,
+   if not DMConn.Q2.IsEmpty then
+      DM.Inserir_Plano_de_contas(DMConn.Q2.FieldByName('codigo').AsString,
                                  LFill(DM.QFinanCredid.AsString,6,'0') + '-' + LFill(DM.QFinanCredcliente.AsString, 4,'0'),
-                                 DM.Q2.FieldByName('descricao').AsString,
+                                 DMConn.Q2.FieldByName('descricao').AsString,
                                  Date,
                                  Date,
                                  DM.QFinanCredvalor.Value,
@@ -1047,7 +1047,7 @@ begin
    if tbv.DataController.GetSelectedCount <> 1 then
       raise Exception.Create('Apenas um boleto pode ser processado de cada vez.');
 
-   DM.Q1.Open('select * from finan_boleto_emitido where id=' + Texto_Mysql(DM.QFinan_bol_Emitid.Value));
+   DMConn.Q1.Open('select * from finan_boleto_emitido where id=' + Texto_Mysql(DM.QFinan_bol_Emitid.Value));
 
    mmObs.Lines.Text := 'BOLETO CANCELADO E SUBSTITUIDO.';
    dt_Baixa.Date := Date;
@@ -1057,19 +1057,19 @@ begin
 
    with frmBoletoAvulso do
    begin
-      edcnpj.Text       := DM.Q1.FieldByName('sacado_cnpj').AsString;
-      ednome.Text       := DM.Q1.FieldByName('sacado_nome').AsString;
-      edlogradouro.Text := DM.Q1.FieldByName('sacado_logradouro').AsString;
-      edbairro.Text     := DM.Q1.FieldByName('sacado_bairro').AsString;
-      ednmro.Text       := DM.Q1.FieldByName('sacado_nmro').AsString;
-      edmunic.Text      := DM.Q1.FieldByName('sacado_municipio').AsString;
-      eduf.Text         := DM.Q1.FieldByName('sacado_uf').AsString;
-      edCep.Text        := DM.Q1.FieldByName('sacado_cep').AsString;
-      edmail.Text       := DM.Q1.FieldByName('sacado_email').AsString;
+      edcnpj.Text       := DMConn.Q1.FieldByName('sacado_cnpj').AsString;
+      ednome.Text       := DMConn.Q1.FieldByName('sacado_nome').AsString;
+      edlogradouro.Text := DMConn.Q1.FieldByName('sacado_logradouro').AsString;
+      edbairro.Text     := DMConn.Q1.FieldByName('sacado_bairro').AsString;
+      ednmro.Text       := DMConn.Q1.FieldByName('sacado_nmro').AsString;
+      edmunic.Text      := DMConn.Q1.FieldByName('sacado_municipio').AsString;
+      eduf.Text         := DMConn.Q1.FieldByName('sacado_uf').AsString;
+      edCep.Text        := DMConn.Q1.FieldByName('sacado_cep').AsString;
+      edmail.Text       := DMConn.Q1.FieldByName('sacado_email').AsString;
       dtDoc.Date        := Date;
-      edValor.Value     := DM.Q1.FieldByName('valor').AsCurrency;
-      edInstr1.Text     := DM.Q1.FieldByName('linha1').AsString;
-      edInstr2.Text     := DM.Q1.FieldByName('linha2').AsString;
+      edValor.Value     := DMConn.Q1.FieldByName('valor').AsCurrency;
+      edInstr1.Text     := DMConn.Q1.FieldByName('linha1').AsString;
+      edInstr2.Text     := DMConn.Q1.FieldByName('linha2').AsString;
       btnCad.Tag        := DM.QFinan_CliDebid.AsInteger; //associa a tag do botão para gerar o débito se for cliente...
       ShowModal;
    end;
@@ -1121,37 +1121,37 @@ begin
 
    //reverte debito
 
-   DM.Q3.Open(C_SQL94 + QuotedStr(DM.QFinan_bol_Emitid.AsString));
+   DMConn.Q3.Open(C_SQL94 + QuotedStr(DM.QFinan_bol_Emitid.AsString));
 
-   if not DM.Q3.IsEmpty then
+   if not DMConn.Q3.IsEmpty then
    begin
-      DM.Q3.Edit;
-      DM.Q3.FieldByName('dt_baixa').AsVariant       := null;
-      DM.Q3.FieldByName('hora_baixa').AsString      := C_ST_VAZIO;
-      DM.Q3.FieldByName('valor_pg').AsCurrency      := 0;
-      DM.Q3.FieldByName('operador').AsInteger       := DM.Operador.ID;
-      DM.Q3.Post;
+      DMConn.Q3.Edit;
+      DMConn.Q3.FieldByName('dt_baixa').AsVariant       := null;
+      DMConn.Q3.FieldByName('hora_baixa').AsString      := C_ST_VAZIO;
+      DMConn.Q3.FieldByName('valor_pg').AsCurrency      := 0;
+      DMConn.Q3.FieldByName('operador').AsInteger       := DM.Operador.ID;
+      DMConn.Q3.Post;
    end;
 
    //reverte o caixa
 
-   DM.Q1.Open(C_SQL99 + QuotedStr(DM.QFinan_bol_Emitid.AsString));
+   DMConn.Q1.Open(C_SQL99 + QuotedStr(DM.QFinan_bol_Emitid.AsString));
 
-   if not DM.Q1.IsEmpty then
+   if not DMConn.Q1.IsEmpty then
    begin
       DM.Inserir_Caixa('EQB', DM.QFinan_bol_Emitnossonmro.AsString, DM.QFinan_bol_Emitvalor_pg.Value, DM.QFinan_bol_Emitid.Value)
    end;
 
    //reverte o banco
 
-   DM.Q1.Open(C_SQL100 + QuotedStr(DM.QFinan_bol_Emitid.AsString));
+   DMConn.Q1.Open(C_SQL100 + QuotedStr(DM.QFinan_bol_Emitid.AsString));
 
-   if not DM.Q1.IsEmpty then
+   if not DMConn.Q1.IsEmpty then
    begin
-      DM.Q1.Open(C_SQL93 + QuotedStr(DM.QFinan_bol_Emitboleto.AsString));
+      DMConn.Q1.Open(C_SQL93 + QuotedStr(DM.QFinan_bol_Emitboleto.AsString));
 
       DM.Inserir_Movi_Banco(DM.QFinan_bol_Emitid.Value,
-                            DM.Q1.Fields[0].AsInteger,
+                            DMConn.Q1.Fields[0].AsInteger,
                             'EBL',
                             'D',
                             DM.QFinan_bol_Emitvalor_pg.Value,
@@ -1161,7 +1161,7 @@ begin
       );
 
       //reverte o PLANO DE CONTAS
-      DM.Reverter_Plano_de_Contas('MBC' + DM.Q1.Fields[0].AsString + 'BOL', DM.QFinan_bol_Emitid.Value);
+      DM.Reverter_Plano_de_Contas('MBC' + DMConn.Q1.Fields[0].AsString + 'BOL', DM.QFinan_bol_Emitid.Value);
    end;
 
    //reverte o PLANO DE CONTAS
@@ -1185,23 +1185,23 @@ begin
 
    //reverte debito
 
-   DM.Q3.Open(C_SQL97 + QuotedStr(DM.QFinan_Carneid.AsString));
+   DMConn.Q3.Open(C_SQL97 + QuotedStr(DM.QFinan_Carneid.AsString));
 
-   if not DM.Q3.IsEmpty then
+   if not DMConn.Q3.IsEmpty then
    begin
-      DM.Q3.Edit;
-      DM.Q3.FieldByName('dt_baixa').AsVariant       := null;
-      DM.Q3.FieldByName('hora_baixa').AsString      := C_ST_VAZIO;
-      DM.Q3.FieldByName('valor_pg').AsCurrency      := 0;
-      DM.Q3.FieldByName('operador').AsInteger       := DM.Operador.ID;
-      DM.Q3.Post;
+      DMConn.Q3.Edit;
+      DMConn.Q3.FieldByName('dt_baixa').AsVariant       := null;
+      DMConn.Q3.FieldByName('hora_baixa').AsString      := C_ST_VAZIO;
+      DMConn.Q3.FieldByName('valor_pg').AsCurrency      := 0;
+      DMConn.Q3.FieldByName('operador').AsInteger       := DM.Operador.ID;
+      DMConn.Q3.Post;
    end;
 
    //reverte o caixa
 
-   DM.Q1.Open('select * from caixa where tipo=''QFT'' and id_movi=' + Texto_Mysql(DM.QFinan_Carneid.value));
+   DMConn.Q1.Open('select * from caixa where tipo=''QFT'' and id_movi=' + Texto_Mysql(DM.QFinan_Carneid.value));
 
-   if not DM.Q1.IsEmpty then
+   if not DMConn.Q1.IsEmpty then
    begin
       DM.Inserir_Caixa('EQF', DM.QFinan_Carnenmro.AsString, DM.QFinan_Carnevalor_pg.Value, DM.QFinan_Carneid.Value)
    end;
@@ -1367,33 +1367,33 @@ begin
 
   if DM_INI.ini.StoredValue['finan_boleto'] then
   begin
-     DM.Q1.Open(C_SQL101);
+     DMConn.Q1.Open(C_SQL101);
 
-     while not DM.Q1.Eof do
+     while not DMConn.Q1.Eof do
      begin
-        cmb1.Properties.Items.Append(DM.Q1.Fields[0].AsString);
-        DM.Q1.Next;
+        cmb1.Properties.Items.Append(DMConn.Q1.Fields[0].AsString);
+        DMConn.Q1.Next;
      end;
 
-     DM.Q1.Close;
+     DMConn.Q1.Close;
      Q1.Open;
   end;
 
   if DM_INI.ini.StoredValue['finan_carne'] then
   begin
-     DM.Q1.Open(C_SQL102);
+     DMConn.Q1.Open(C_SQL102);
 
-     while not DM.Q1.Eof do
+     while not DMConn.Q1.Eof do
      begin
         with cmb2.Properties.Items.Add do
         begin
-           Description := DM.Q1.Fields[1].AsString;
-           Value       := DM.Q1.Fields[0].AsInteger;
+           Description := DMConn.Q1.Fields[1].AsString;
+           Value       := DMConn.Q1.Fields[0].AsInteger;
         end;
-        DM.Q1.Next;
+        DMConn.Q1.Next;
      end;
 
-     DM.Q1.Close;
+     DMConn.Q1.Close;
      Q1.Open;
   end;
 
@@ -1422,13 +1422,13 @@ procedure TfrmGestaoReceber.Imprimir1Click(Sender: TObject);
 begin
    if DM.QFinanDebtipo.AsString = 'C' then
    begin
-      DM.Q1.Open('select id_movi, tipo from finan_carne_emitido where id=' + Texto_Mysql(DM.QFinanDebid_movi.AsString));
+      DMConn.Q1.Open('select id_movi, tipo from finan_carne_emitido where id=' + Texto_Mysql(DM.QFinanDebid_movi.AsString));
       DM.Abrir_Central_Relat('-v',
                              'SISTEMA',
                              'FATURA',
                              QuotedDuoStr('id_cli=' + DM.QFinanDebcliente.AsString) + ' ' + //id cliente
-                             QuotedDuoStr('id_movim=' + DM.Q1.Fields[0].AsString) + ' ' + //id movi
-                             QuotedDuoStr('tipo_movi=' + DM.Q1.Fields[1].AsString)  //tipo movi
+                             QuotedDuoStr('id_movim=' + DMConn.Q1.Fields[0].AsString) + ' ' + //id movi
+                             QuotedDuoStr('tipo_movi=' + DMConn.Q1.Fields[1].AsString)  //tipo movi
       );
    end
    else

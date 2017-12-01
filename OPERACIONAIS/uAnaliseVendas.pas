@@ -230,7 +230,7 @@ implementation
 {$R *.dfm}
 
 uses uAutocomConsts, uDM, udm_ini, uFuncoes, uMD5Print, uAnaliseVendas_itens,
-  uMain, uCadCli, uCadVendedor;
+  uMain, uCadCli, uCadVendedor, uDM_Conn;
 
 procedure TfrmAnaliseVendas.btnCanClick(Sender: TObject);
 begin
@@ -241,7 +241,7 @@ begin
 
    while not QVenda_Item.Eof do
    begin
-      DM.DB.ExecSQL('update estoque set hash=' + Texto_Mysql(DM.id_Term) + ', quant=quant+' +
+      DMConn.DB.ExecSQL('update estoque set hash=' + Texto_Mysql(DM.id_Term) + ', quant=quant+' +
                      Texto_Mysql(QVenda_ItemqCom.Value) +
                     ' where id=' + Texto_Mysql(QVenda_ItemcProd.Value)
       );
@@ -249,8 +249,8 @@ begin
    end;
 
    //atualiza o hash dos registros alterados
-   DM.ExecSQL('call pr_hash("ESTOQUE",' + Texto_Mysql(_C) +',' + Texto_Mysql(DM.id_Term) +');');
-   DM.ExecSQL('delete from venda where id=' + Texto_Mysql(QVendaid.Value));
+   DMConn.DB.ExecSQL('call pr_hash("ESTOQUE",' + Texto_Mysql(_C) +',' + Texto_Mysql(DM.id_Term) +');');
+   DMConn.DB.ExecSQL('delete from venda where id=' + Texto_Mysql(QVendaid.Value));
    QVenda.Refresh;
    ShowMessage('Venda cancelada.');
 end;
@@ -296,8 +296,8 @@ procedure TfrmAnaliseVendas.btnvenClick(Sender: TObject);
 var
    n, nn: currency;
 begin
-   DM.Q1.Open('select comissao from vendedor where id=' + Texto_Mysql(QVendavendedor.Value));
-   n := DM.Q1.Fields[0].AsCurrency;
+   DMConn.Q1.Open('select comissao from vendedor where id=' + Texto_Mysql(QVendavendedor.Value));
+   n := DMConn.Q1.Fields[0].AsCurrency;
 
    frmMain.Abrir_Form('frmCadVendedor', TfrmCadVendedor);
 
@@ -323,11 +323,13 @@ begin
             else
             if DM.QVendedorcomissao.Value = 100 then //por produto
             begin
-               DM.Q1.Open('select vrcotacao from estoque where id=' + Texto_Mysql(QVenda_ItemcProd.Value));
-               n := Percentual(DM.Q1.Fields[0].AsCurrency, QVenda_ItemvProd.Value - QVenda_ItemvDesc.Value);
+               DMConn.Q1.Open('select vrcotacao from estoque where id=' + Texto_Mysql(QVenda_ItemcProd.Value));
+               n := Percentual(DMConn.Q1.Fields[0].AsCurrency,
+                               QVenda_ItemvProd.Value - QVenda_ItemvDesc.Value);
             end
             else //´por vendedor
-               n := Percentual(DM.QVendedorcomissao.Value, QVenda_ItemvProd.Value - QVenda_ItemvDesc.Value);
+               n := Percentual(DM.QVendedorcomissao.Value,
+                               QVenda_ItemvProd.Value - QVenda_ItemvDesc.Value);
 
             QVenda_Item.Edit;
             QVenda_ItemvComissao.Value := n;

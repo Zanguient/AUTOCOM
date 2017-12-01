@@ -46,15 +46,20 @@ inherited frmGestaoAPagar: TfrmGestaoAPagar
         Properties.ActivePage = TabBaixaBol
         Properties.CustomButtons.Buttons = <>
         Properties.HotTrack = True
-        ClientRectBottom = 103
-        ClientRectRight = 622
+        ClientRectBottom = 99
+        ClientRectLeft = 4
+        ClientRectRight = 618
         ClientRectTop = 26
         object TabPesqBol: TcxTabSheet
           Caption = 'PESQUISA'
           ImageIndex = 0
           OnShow = TabPesqBolShow
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object rcb1: TcxRadioGroup
-            Left = 416
+            Left = 408
             Top = 0
             TabStop = False
             Align = alRight
@@ -75,35 +80,46 @@ inherited frmGestaoAPagar: TfrmGestaoAPagar
               end>
             ItemIndex = 1
             TabOrder = 0
-            Height = 77
+            ExplicitLeft = 416
+            ExplicitHeight = 77
+            Height = 73
             Width = 122
           end
           object btnExibir1: TcxButton
             AlignWithMargins = True
-            Left = 541
+            Left = 533
             Top = 3
             Width = 78
-            Height = 71
+            Height = 67
             Align = alRight
             Caption = 'EXIBIR'
             TabOrder = 1
             OnClick = btnExibir1Click
+            ExplicitLeft = 541
+            ExplicitHeight = 71
           end
           object pgOpcBol: TcxPageControl
             Left = 0
             Top = 0
-            Width = 416
-            Height = 77
+            Width = 408
+            Height = 73
             Align = alClient
             TabOrder = 2
             Properties.ActivePage = TabDataBol
             Properties.CustomButtons.Buttons = <>
-            ClientRectBottom = 77
-            ClientRectRight = 416
+            ExplicitWidth = 416
+            ExplicitHeight = 77
+            ClientRectBottom = 69
+            ClientRectLeft = 4
+            ClientRectRight = 404
             ClientRectTop = 26
             object TabDataBol: TcxTabSheet
               Caption = 'POR DATA'
               ImageIndex = 0
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object Label8: TLabel
                 Left = 3
                 Top = 1
@@ -175,10 +191,14 @@ inherited frmGestaoAPagar: TfrmGestaoAPagar
               Caption = 'POR FAVORECIDO'
               ImageIndex = 1
               OnShow = TabSacBolShow
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object Label10: TLabel
                 Left = 0
                 Top = 0
-                Width = 416
+                Width = 102
                 Height = 13
                 Align = alTop
                 Caption = 'NOME/RAZ'#195'O SOCIAL'
@@ -188,7 +208,6 @@ inherited frmGestaoAPagar: TfrmGestaoAPagar
                 Font.Name = 'Comic Sans MS'
                 Font.Style = []
                 ParentFont = False
-                ExplicitWidth = 102
               end
               object cmb1: TcxComboBox
                 AlignWithMargins = True
@@ -206,6 +225,10 @@ inherited frmGestaoAPagar: TfrmGestaoAPagar
               Caption = 'POR N'#186' OU VALOR'
               ImageIndex = 2
               OnShow = TabnmroBolShow
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object Label16: TLabel
                 Left = 71
                 Top = 2
@@ -266,6 +289,9 @@ inherited frmGestaoAPagar: TfrmGestaoAPagar
           Caption = 'BAIXA'
           ImageIndex = 3
           OnShow = TabBaixaBolShow
+          ExplicitLeft = 0
+          ExplicitWidth = 622
+          ExplicitHeight = 77
           object Label11: TLabel
             Left = 148
             Top = 1
@@ -369,19 +395,22 @@ inherited frmGestaoAPagar: TfrmGestaoAPagar
             Width = 121
           end
           object Panel5: TPanel
-            Left = 455
+            Left = 447
             Top = 0
             Width = 167
-            Height = 77
+            Height = 73
             Align = alRight
             TabOrder = 4
+            ExplicitLeft = 455
+            ExplicitHeight = 77
             object Panel6: TPanel
               Left = 1
-              Top = 3
+              Top = -1
               Width = 165
               Height = 73
               Align = alBottom
               TabOrder = 0
+              ExplicitTop = 3
               object btnCanc: TcxButton
                 AlignWithMargins = True
                 Left = 4

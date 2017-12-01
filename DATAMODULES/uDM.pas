@@ -20,7 +20,7 @@ uses
   ACBrMail, IdTCPConnection, IdTCPClient, IdExplicitTLSClientServerBase,
   IdMessageClient, IdSMTPBase, IdSMTP, IdIOHandler, IdIOHandlerSocket,
   IdIOHandlerStack, IdSSL, IdSSLOpenSSL, IdMessage, FireDAC.Stan.Util,
-  FireDAC.Phys.MySQLDef;
+  FireDAC.Phys.MySQLDef, uDM_Conn;
 
 type
   TTipoDeb = (tdBoleto, tdCarne, tdECF, tdNF, tdJr);
@@ -36,12 +36,6 @@ type
   end;
 
   TDM = class(TDataModule)
-    SProc: TFDStoredProc;
-    Q1: TFDQuery;
-    Q2: TFDQuery;
-    Q3: TFDQuery;
-    Q4: TFDQuery;
-    Q5: TFDQuery;
     QEmpresa: TFDQuery;
     QConvenio: TFDQuery;
     QConvenioCNPJ: TStringField;
@@ -292,9 +286,6 @@ type
     QCargaFullid: TIntegerField;
     QCargaFullscript: TMemoField;
     QCargaFullnome_arq: TStringField;
-    SP: TFDScript;
-    drvMySQL: TFDPhysMySQLDriverLink;
-    ADGUIxWaitCursor1: TFDGUIxWaitCursor;
     QVendedorid: TFDAutoIncField;
     QVendedornome: TStringField;
     QVendedorcomissao: TFloatField;
@@ -374,7 +365,6 @@ type
     QEmpresafarmac_nome: TStringField;
     QCST: TFDQuery;
     QInfo_compl: TFDQuery;
-    DB: TFDConnection;
     QCSTid: TFDAutoIncField;
     QCSTnome: TStringField;
     QCSTacbr: TIntegerField;
@@ -1653,7 +1643,6 @@ type
     QEmpresaefd_contr_ativ_prep: TIntegerField;
     QBoletocodigo_cedente: TStringField;
     QNF_ItemPIS_codrec: TIntegerField;
-    Q6: TFDQuery;
     Qtrnnsu_adm_canc: TStringField;
     QRegras_Imposto: TFDQuery;
     QRegras_Impostoid: TFDAutoIncField;
@@ -2058,7 +2047,7 @@ udm_ini, uAutocomConsts, uTraducao
 //{$IFDEF GER}
 ,uRegras_Imposto, uStatus
 //{$ENDIF}
-, uViews;
+, uViews, udmnfe;
 
 
 
@@ -2113,9 +2102,9 @@ begin
 
    if QVendedorcomissao.Value = 100 then//comissão sobre o produto
    begin
-      Q1.Open(vwEstoque + WherevwEstoque2 + Texto_Mysql(QVenda_Itemid.Value));
+      DMConn.Q1.Open(vwEstoque + WherevwEstoque2 + Texto_Mysql(QVenda_Itemid.Value));
 
-      if Q1.Fields[0].AsCurrency = 0 then//produto sem comissao
+      if DMConn.Q1.Fields[0].AsCurrency = 0 then//produto sem comissao
       begin
          Result := 0;
          exit;
@@ -2124,12 +2113,12 @@ begin
       begin
          if DM_INI.ini.StoredValue['comissao_sobre_lucro'] then //se comissao sobre o lucro
          begin
-             Valor := valor - (Q1.Fields[1].AsCurrency * QVenda_ItemqCom.Value);//obtem o lucro
-             Result := Arredonda((Valor * Q1.Fields[0].AsCurrency)/100, 3);
+             Valor := valor - (DMConn.Q1.Fields[1].AsCurrency * QVenda_ItemqCom.Value);//obtem o lucro
+             Result := Arredonda((Valor * DMConn.Q1.Fields[0].AsCurrency)/100, 3);
          end
          else//comissao direta
          begin
-            Result := Arredonda((Valor * Q1.Fields[0].AsCurrency)/100, 3);
+            Result := Arredonda((Valor * DMConn.Q1.Fields[0].AsCurrency)/100, 3);
          end;
       end;
    end
@@ -2137,7 +2126,7 @@ begin
    begin //comissao fixa no vendedor
       if DM_INI.ini.StoredValue['comissao_sobre_lucro'] then //comissao sobre o lucro
       begin
-          Valor := valor - (Q1.Fields[1].AsCurrency * QVenda_ItemqCom.Value);//obtem o lucro
+          Valor := valor - (DMConn.Q1.Fields[1].AsCurrency * QVenda_ItemqCom.Value);//obtem o lucro
           Result := Arredonda((Valor * QVendedorcomissao.Value)/100, 3);
       end
       else //comissao direta
@@ -2330,7 +2319,7 @@ var
    s, s1, s2: string;
 begin
    aQuery := TFDQuery.Create(self);
-   aQuery.Connection := DB;
+   aQuery.Connection := DMConn.DB;
 
    if id <> C_ST_VAZIO then
       s := ' and id <> ' + Texto_Mysql(id);
@@ -2383,8 +2372,8 @@ end;
 
 function TDM.Indice(campo: string): currency;
 begin
-   DM.Q1.Open('select valor from indices where nome=' + Texto_Mysql(campo));
-   Result := DM.Q1.Fields[0].AsCurrency;
+   DMConn.Q1.Open('select valor from indices where nome=' + Texto_Mysql(campo));
+   Result := DMConn.Q1.Fields[0].AsCurrency;
 end;
 
 procedure TDM.Inserir_Caixa(Tipo, descricao: string; Valor: Currency; id_movi: integer; Data: TDate; Hora: TTime);
@@ -2460,12 +2449,12 @@ begin
 
 
    //informe ao plano de contas
-   Q2.Open('select * from finan_centro_custo_assoc where operacao=' + Texto_Mysql('MB' + tipo + InttoStr(conta) + cod));
+   DMConn.Q2.Open('select * from finan_centro_custo_assoc where operacao=' + Texto_Mysql('MB' + tipo + InttoStr(conta) + cod));
 
-   if not DM.Q2.IsEmpty then
-      DM.Inserir_Plano_de_contas(Q2.FieldByName('codigo').AsString,
+   if not DMConn.Q2.IsEmpty then
+      DM.Inserir_Plano_de_contas(DMConn.Q2.FieldByName('codigo').AsString,
                                  nmrodoc,
-                                 Q2.FieldByName('descricao').AsString,
+                                 DMConn.Q2.FieldByName('descricao').AsString,
                                  dtBaixa,
                                  dtBaixa,
                                  Iif(tipo = 'C', valor, Valor*-1),
@@ -2476,11 +2465,11 @@ end;
 //exclui o registro de finan_centro_custo_movi
 procedure TDM.Reverter_Plano_de_Contas(cod: string; id_mov: integer);
 begin
-   Q2.Open('select codigo from finan_centro_custo_assoc where operacao=' + Texto_Mysql(cod));
+   DMConn.Q2.Open('select codigo from finan_centro_custo_assoc where operacao=' + Texto_Mysql(cod));
 
-   if not Q2.IsEmpty then
+   if not DMConn.Q2.IsEmpty then
       ExecSQL('delete from finan_centro_custo_movi where cod=' +
-                 Texto_Mysql(Q2.Fields[0].AsString) +
+                 Texto_Mysql(DMConn.Q2.Fields[0].AsString) +
                  ' and id_movi=' + Texto_Mysql(id_mov)
       );
 end;
@@ -2528,10 +2517,10 @@ procedure TDM.Inserir_Plano_de_contas(cod, documento, descricao: string; data, d
 var
    s: string;
 begin
-   Q1.Open('select max(seq) from finan_centro_custo_movi where cod=' + Texto_Mysql(cod));
+   DMConn.Q1.Open('select max(seq) from finan_centro_custo_movi where cod=' + Texto_Mysql(cod));
 
-   if Q1.Fields[0].AsInteger > 0 then
-      s := Texto_Mysql(Q1.Fields[0].AsInteger+1)
+   if DMConn.Q1.Fields[0].AsInteger > 0 then
+      s := Texto_Mysql(DMConn.Q1.Fields[0].AsInteger+1)
    else
       s := '1';
 
@@ -2687,9 +2676,9 @@ end;
 
 procedure TDM.QBancosBeforeDelete(DataSet: TDataSet);
 begin
-   Q5.Open('select count(*) from finan_banco_agencia where banco=' + Texto_Mysql(QBancosid.value));
+   DMConn.Q5.Open('select count(*) from finan_banco_agencia where banco=' + Texto_Mysql(QBancosid.value));
 
-   if (DM.Q5.Fields[0].AsInteger > 0) then
+   if (DMConn.Q5.Fields[0].AsInteger > 0) then
       raise Exception.Create(C_297);
 end;
 
@@ -2707,9 +2696,9 @@ end;
 
 procedure TDM.QBoletoBeforeDelete(DataSet: TDataSet);
 begin
-   Q5.Open('select count(*) from finan_boleto_emitido where boleto=' + Texto_Mysql(QBoletoid.value));
+   DMConn.Q5.Open('select count(*) from finan_boleto_emitido where boleto=' + Texto_Mysql(QBoletoid.value));
 
-   if (DM.Q5.Fields[0].AsInteger > 0) then
+   if (DMConn.Q5.Fields[0].AsInteger > 0) then
       raise Exception.Create(C_297);
 end;
 
@@ -2754,29 +2743,29 @@ procedure TDM.Qcfop_cst_csosnBeforePost(DataSet: TDataSet);
 begin
    LimpaStr(DataSet);
    //verifica por registro com duplicidade
-   dm.Q1.Open('select id from cfop_cst_csosn where cfop=' + Texto_Mysql(Qcfop_cst_csosncfop.Value) +
-              ' and cst=' + Texto_Mysql(Qcfop_cst_csosncst.Value) +
-              ' and csosn=' + Texto_Mysql(Qcfop_cst_csosncsosn.Value) +
-              ' and cst_pis_sai=' + Texto_Mysql(Qcfop_cst_csosncst_pis_sai.Value) +
-              ' and cst_ipi_sai=' + Texto_Mysql(Qcfop_cst_csosncst_ipi_sai.Value) +
-              ' and cst_cofins_sai=' + Texto_Mysql(Qcfop_cst_csosncst_cofins_sai.Value)// +
-             // ' and cfop_infor=' + Texto_Mysql(Qcfop_cst_csosncfop_infor.Value) +
-             // ' and cst_infor=' + Texto_Mysql(Qcfop_cst_csosncst_infor.Value) +
-             // ' and cst_pis_ent_infor=' + Texto_Mysql(Qcfop_cst_csosncst_pis_ent_infor.Value) +
-             // ' and cst_ipi_ent_infor=' + Texto_Mysql(Qcfop_cst_csosncst_ipi_ent_infor.Value) +
-             // ' and cst_cofins_ent_infor=' + Texto_Mysql(Qcfop_cst_csosncst_cofins_ent_infor.Value) +
-             // ' and csosn_infor=' + Texto_Mysql(Qcfop_cst_csosncsosn_infor.Value)
+   DMConn.Q1.Open('select id from cfop_cst_csosn where cfop='
+                  + Texto_Mysql(Qcfop_cst_csosncfop.Value)
+                  + ' and cst='
+                  + Texto_Mysql(Qcfop_cst_csosncst.Value)
+                  + ' and csosn='
+                  + Texto_Mysql(Qcfop_cst_csosncsosn.Value)
+                  + ' and cst_pis_sai='
+                  + Texto_Mysql(Qcfop_cst_csosncst_pis_sai.Value)
+                  + ' and cst_ipi_sai='
+                  + Texto_Mysql(Qcfop_cst_csosncst_ipi_sai.Value)
+                  + ' and cst_cofins_sai='
+                  + Texto_Mysql(Qcfop_cst_csosncst_cofins_sai.Value)
    );
 
    if Qcfop_cst_csosn.State = dsInsert then
    begin
-      if Q1.Fields[0].AsInteger > 0 then
+      if DMConn.Q1.Fields[0].AsInteger > 0 then
          raise Exception.Create('Esta regra já existe.');
    end
    else
    if Qcfop_cst_csosn.State = dsedit then
    begin
-      if Q1.Fields[0].AsInteger <> Qcfop_cst_csosnid.Value then
+      if DMConn.Q1.Fields[0].AsInteger <> Qcfop_cst_csosnid.Value then
          raise Exception.Create('Esta regra já existe.');
    end;
 end;
@@ -2849,16 +2838,16 @@ end;
 
 procedure TDM.QCliAfterPost(DataSet: TDataSet);
 begin
-    DB.ExecSQL('call atu_pdv_cli(' + Texto_Mysql(QCliId.AsString)+');');
+    DMConn.DB.ExecSQL('call atu_pdv_cli(' + Texto_Mysql(QCliId.AsString)+');');
 end;
 
 procedure TDM.QCliBeforeDelete(DataSet: TDataSet);
 var
    i: integer;
 begin //função mysql que retorna a contagem dos registros em tabelas dependentes
-   Q5.Open('select fn_dep_cli(' + Texto_Mysql(QCliid.value) + ')');
+   DMConn.Q5.Open('select fn_dep_cli(' + Texto_Mysql(QCliid.value) + ')');
 
-   i := Q5.Fields[0].AsInteger;
+   i := DMConn.Q5.Fields[0].AsInteger;
 
    if i > 0 then
       raise Exception.Create(C_297);
@@ -2969,9 +2958,9 @@ end;
 
 procedure TDM.QAgenciasBeforeDelete(DataSet: TDataSet);
 begin
-   Q5.Open('select count(*) from finan_banco_conta where agencia=' + Texto_Mysql(QAgenciasid.value));
+   DMConn.Q5.Open('select count(*) from finan_banco_conta where agencia=' + Texto_Mysql(QAgenciasid.value));
 
-   if (DM.Q5.Fields[0].AsInteger > 0) then
+   if (DMConn.Q5.Fields[0].AsInteger > 0) then
       raise Exception.Create(C_297);
 end;
 
@@ -2998,48 +2987,48 @@ begin
    if DataSet.Tag = 1 then
    begin
       DataSet.Tag := 0;
-      Q1.Open('select * from finan_banco_codigos where conta=' + Texto_Mysql(QContasid.Value));
+      DMConn.Q1.Open('select * from finan_banco_codigos where conta=' + Texto_Mysql(QContasid.Value));
 
-      Q1.Insert;
-      Q1.FieldByName('cod').Value     := 'EBL';
-      Q1.FieldByName('conta').Value   := QContasid.Value;
-      Q1.FieldByName('tipo').Value    := 'D';
-      Q1.FieldByName('conta').Value   := 'Extorno Boleto';
-      Q1.FieldByName('sistema').Value := 'S';
-      Q1.Post;
+      DMConn.Q1.Insert;
+      DMConn.Q1.FieldByName('cod').Value     := 'EBL';
+      DMConn.Q1.FieldByName('conta').Value   := QContasid.Value;
+      DMConn.Q1.FieldByName('tipo').Value    := 'D';
+      DMConn.Q1.FieldByName('conta').Value   := 'Extorno Boleto';
+      DMConn.Q1.FieldByName('sistema').Value := 'S';
+      DMConn.Q1.Post;
 
-      Q1.Insert;
-      Q1.FieldByName('cod').Value     := 'BOL';
-      Q1.FieldByName('conta').Value   := QContasid.Value;
-      Q1.FieldByName('tipo').Value    := 'C';
-      Q1.FieldByName('conta').Value   := 'Crédito Recebimento Boleto';
-      Q1.FieldByName('sistema').Value := 'S';
-      Q1.Post;
+      DMConn.Q1.Insert;
+      DMConn.Q1.FieldByName('cod').Value     := 'BOL';
+      DMConn.Q1.FieldByName('conta').Value   := QContasid.Value;
+      DMConn.Q1.FieldByName('tipo').Value    := 'C';
+      DMConn.Q1.FieldByName('conta').Value   := 'Crédito Recebimento Boleto';
+      DMConn.Q1.FieldByName('sistema').Value := 'S';
+      DMConn.Q1.Post;
 
-      Q1.Insert;
-      Q1.FieldByName('cod').Value     := 'TBC';
-      Q1.FieldByName('conta').Value   := QContasid.Value;
-      Q1.FieldByName('tipo').Value    := 'C';
-      Q1.FieldByName('conta').Value   := 'Transferência bancária (crédito)';
-      Q1.FieldByName('sistema').Value := 'S';
-      Q1.Post;
+      DMConn.Q1.Insert;
+      DMConn.Q1.FieldByName('cod').Value     := 'TBC';
+      DMConn.Q1.FieldByName('conta').Value   := QContasid.Value;
+      DMConn.Q1.FieldByName('tipo').Value    := 'C';
+      DMConn.Q1.FieldByName('conta').Value   := 'Transferência bancária (crédito)';
+      DMConn.Q1.FieldByName('sistema').Value := 'S';
+      DMConn.Q1.Post;
 
-      Q1.Insert;
-      Q1.FieldByName('cod').Value     := 'TBR';
-      Q1.FieldByName('conta').Value   := QContasid.Value;
-      Q1.FieldByName('tipo').Value    := 'D';
-      Q1.FieldByName('conta').Value   := 'Transferência bancária (débito)';
-      Q1.FieldByName('sistema').Value := 'S';
-      Q1.Post;
+      DMConn.Q1.Insert;
+      DMConn.Q1.FieldByName('cod').Value     := 'TBR';
+      DMConn.Q1.FieldByName('conta').Value   := QContasid.Value;
+      DMConn.Q1.FieldByName('tipo').Value    := 'D';
+      DMConn.Q1.FieldByName('conta').Value   := 'Transferência bancária (débito)';
+      DMConn.Q1.FieldByName('sistema').Value := 'S';
+      DMConn.Q1.Post;
    end;
 end;
 
 procedure TDM.QContasBeforeDelete(DataSet: TDataSet);
 begin
-   Q5.Open('select count(*) from finan_banco_boleto where conta=' + Texto_Mysql(QContasid.value));
-   Q4.Open('select count(*) from finan_banco_movi where conta=' + Texto_Mysql(QContasid.value));
+   DMConn.Q5.Open('select count(*) from finan_banco_boleto where conta=' + Texto_Mysql(QContasid.value));
+   DMConn.Q4.Open('select count(*) from finan_banco_movi where conta=' + Texto_Mysql(QContasid.value));
 
-   if (Q5.Fields[0].AsInteger > 0)or(Q4.Fields[0].AsInteger > 0) then
+   if (DMConn.Q5.Fields[0].AsInteger > 0)or(DMConn.Q4.Fields[0].AsInteger > 0) then
       raise Exception.Create(C_297);
 
    ExecSQL('delete from finan_banco_codigos where conta=' + Texto_Mysql(QContasid.value));
@@ -3163,7 +3152,7 @@ end;
 
 procedure TDM.QEmpresaAfterPost(DataSet: TDataSet);
 begin
-   DB.ExecSQL('call pr_hash("EMPRESA",' + Texto_Mysql(_C) +',' + Texto_Mysql(id_Term) + ');');
+   DMConn.DB.ExecSQL('call pr_hash("EMPRESA",' + Texto_Mysql(_C) +',' + Texto_Mysql(id_Term) + ');');
 end;
 
 procedure TDM.QEmpresaBeforePost(DataSet: TDataSet); //valida os dados
@@ -3278,17 +3267,17 @@ end;
 
 procedure TDM.QEstoqueAfterPost(DataSet: TDataSet);
 begin
-    DB.ExecSQL('call pr_hash("ESTOQUE",' + Texto_Mysql(_C) +',' + Texto_Mysql(id_Term) +');');
-    DB.ExecSQL('call atu_pdv(' + Texto_Mysql(QEstoqueId.AsString)+');');
+    DMConn.DB.ExecSQL('call pr_hash("ESTOQUE",' + Texto_Mysql(_C) +',' + Texto_Mysql(id_Term) +');');
+    DMConn.DB.ExecSQL('call atu_pdv(' + Texto_Mysql(QEstoqueId.AsString)+');');
 end;
 
 procedure TDM.QEstoqueBeforeDelete(DataSet: TDataSet);
 var
    i: integer;
 begin //função mysql que retorna a contagem dos registros em tabelas dependentes
-   Q5.Open('select fn_dep_estoque(' + Texto_Mysql(QEstoqueid.value) + ')');
+   DMConn.Q5.Open('select fn_dep_estoque(' + Texto_Mysql(QEstoqueid.value) + ')');
 
-   i := Q5.Fields[0].AsInteger;
+   i := DMConn.Q5.Fields[0].AsInteger;
 
    if i > 0 then
       raise Exception.Create(C_297);
@@ -3441,10 +3430,10 @@ end;
 
 procedure TDM.Qfinan_centro_custoBeforeDelete(DataSet: TDataSet);
 begin
-   Q4.Open('select count(*) from finan_centro_custo where plano like ' + Texto_Mysql(Qfinan_centro_custoplano.AsString +'%'));
-   Q5.Open('select count(*) from finan_centro_custo_movi where cod=' + Texto_Mysql(Qfinan_centro_custoplano.AsString));
+   DMConn.Q4.Open('select count(*) from finan_centro_custo where plano like ' + Texto_Mysql(Qfinan_centro_custoplano.AsString +'%'));
+   DMConn.Q5.Open('select count(*) from finan_centro_custo_movi where cod=' + Texto_Mysql(Qfinan_centro_custoplano.AsString));
 
-   if (Q5.Fields[0].AsInteger > 0)or(Q4.Fields[0].AsInteger > 1) then
+   if (DMConn.Q5.Fields[0].AsInteger > 0)or(DMConn.Q4.Fields[0].AsInteger > 1) then
       raise Exception.Create(C_297);
 end;
 
@@ -3863,7 +3852,7 @@ var
    aQuery:TFDQuery;
 begin
    aQuery := TFDQuery.Create(self);
-   aQuery.Connection := DB;
+   aQuery.Connection := DMConn.DB;
 
    if CST in[10,60,70] then
    begin
@@ -3897,7 +3886,7 @@ var
    aQuery:TFDQuery;
 begin
    aQuery := TFDQuery.Create(self);
-   aQuery.Connection := DB;
+   aQuery.Connection := DMConn.DB;
    aQuery.Open('select id from cst where cst=' + Texto_Mysql(cst) + '');
    Result := aQuery.Fields[0].AsInteger;
    FreeAndNil(aQuery);
@@ -3908,7 +3897,7 @@ var
    aQuery:TFDQuery;
 begin
    aQuery := TFDQuery.Create(self);
-   aQuery.Connection := DB;
+   aQuery.Connection := DMConn.DB;
    aQuery.Open('select id from unidade where unidade like' + Texto_Mysql(Unid + '%'));
    Result := aQuery.Fields[0].AsInteger;
    FreeAndNil(aQuery);
@@ -3919,7 +3908,7 @@ var
    aQuery:TFDQuery;
 begin
    aQuery := TFDQuery.Create(self);
-   aQuery.Connection := DB;
+   aQuery.Connection := DMConn.DB;
    aQuery.Open(C_SQL13 + Texto_Mysql(Unid));
    Result := aQuery.Fields[0].AsString;
    FreeAndNil(aQuery);
@@ -3930,7 +3919,7 @@ procedure TDM.DataModuleCreate(Sender: TObject);
 var
    i: integer;
 begin
-   if db.Connected then
+   if DMConn.DB.Connected then
    begin
       ShowMessage('ERRO 24');
       raise Exception.Create('ERRO 24');
@@ -3973,7 +3962,7 @@ end;
 
 procedure TDM.DataModuleDestroy(Sender: TObject);
 begin
-   DB.Connected := False;
+   DMConn.DB.Connected := False;
 {$IFNDEF VLDLL}
    FreeAndNil(Operador);
 {$ENDIF}
@@ -3982,7 +3971,7 @@ end;
 
 procedure TDM.DBAfterConnect(Sender: TObject);
 begin
-   DB.ExecSQL('set @chave:="k";');
+   DMConn.DB.ExecSQL('set @chave:="k";');
 end;
 
 procedure TDM.DBError(ASender: TObject; const AInitiator: IFDStanObject; var AException: Exception);
@@ -3994,7 +3983,7 @@ function TDM.pingar(ip:string): boolean;
 begin
    Application.ProcessMessages;
    if ip = '' then
-      ip := db.Params.Values['Server'];
+      ip := DMConn.DB.Params.Values['Server'];
 
    Result := Ping(ip, 300);
 end;
@@ -4004,34 +3993,34 @@ var
    i: integer;
 begin
    ExecSQL('truncate table cst_ipi; truncate table cst_pis; truncate table cst_cofins;');
-   Q1.Open('select * from cst_ipi');
+   DMConn.Q1.Open('select * from cst_ipi');
 
    for i := Low(C_ARR_3) to High(C_ARR_3) do
    begin
-      Q1.Insert;
-      Q1.FieldByName('acbr').AsInteger := i;
-      Q1.FieldByName('cst').AsString := C_ARR_3[i];
-      Q1.post;
+      DMConn.Q1.Insert;
+      DMConn.Q1.FieldByName('acbr').AsInteger := i;
+      DMConn.Q1.FieldByName('cst').AsString := C_ARR_3[i];
+      DMConn.Q1.post;
    end;
 
-   Q1.Open('select * from cst_pis');
+   DMConn.Q1.Open('select * from cst_pis');
 
    for i := Low(C_ARR_9) to High(C_ARR_9) do
    begin
-      Q1.Insert;
-      Q1.FieldByName('acbr').AsInteger := i;
-      Q1.FieldByName('cst').AsString := C_ARR_9[i];
-      Q1.post;
+      DMConn.Q1.Insert;
+      DMConn.Q1.FieldByName('acbr').AsInteger := i;
+      DMConn.Q1.FieldByName('cst').AsString := C_ARR_9[i];
+      DMConn.Q1.post;
    end;
 
-   Q1.Open('select * from cst_cofins');
+   DMConn.Q1.Open('select * from cst_cofins');
 
    for i := Low(C_ARR_9) to High(C_ARR_9) do
    begin
-      Q1.Insert;
-      Q1.FieldByName('acbr').AsInteger := i;
-      Q1.FieldByName('cst').AsString := C_ARR_9[i];
-      Q1.post;
+      DMConn.Q1.Insert;
+      DMConn.Q1.FieldByName('acbr').AsInteger := i;
+      DMConn.Q1.FieldByName('cst').AsString := C_ARR_9[i];
+      DMConn.Q1.post;
    end;
 end;
 
@@ -4103,9 +4092,9 @@ procedure TDM.SPError(ASender: TObject; const AInitiator: IFDStanObject; var AEx
 var
    i: integer;
 begin
-   for i := 0 to Pred(SP.SQLScripts.Count) do
-   if pos('koplin', SP.SQLScripts[i].SQL.Text)<=0 then
-      Log(C_220,'SCRIPT ERRO', SP.SQLScripts[i].SQL.Text + C_CRLF + AException.Message);
+   for i := 0 to Pred(DMConn.SP.SQLScripts.Count) do
+   if pos('koplin', DMConn.SP.SQLScripts[i].SQL.Text)<=0 then
+      Log(C_220,'SCRIPT ERRO', DMConn.SP.SQLScripts[i].SQL.Text + C_CRLF + AException.Message);
 
    ShowMessage('Houve um erro ao executar o script SQL. Consulte o LOG.');
 end;
@@ -4113,50 +4102,50 @@ end;
 procedure TDM.Apaga_PAF;
 begin//faz o rollback das tabelas paf e venda e do estoque
    Log('Carga_server','ApagaPaf', 'Inicio');
-   DB.ExecSQL('call pr_apaga_paf(' + Texto_Mysql(id_Term)+ ');');
+   ExecSQL('call pr_apaga_paf(' + Texto_Mysql(id_Term)+ ');');
 
    Log('Carga_server','DelVenda', 'Inicio');
-   DB.ExecSQL('delete from venda where hash=' + Texto_Mysql(id_Term)+ ';');
+   ExecSQL('delete from venda where hash=' + Texto_Mysql(id_Term)+ ';');
    sleep(500);
    Log('Carga_server','Rollback Estoque', 'Inicio');
-   Q5.Open('select estoque, sum(qtd) as qtd from estoque_atu where terminal=' + Texto_Mysql(id_Term) + ' group by estoque');
+   DMConn.Q5.Open('select estoque, sum(qtd) as qtd from estoque_atu where terminal=' + Texto_Mysql(id_Term) + ' group by estoque');
 
-   Log('Carga_server','Rollback Estoque', Texto_Mysql(Q5.FieldCount) +' registros');
+   Log('Carga_server','Rollback Estoque', Texto_Mysql(DMConn.Q5.FieldCount) +' registros');
 
-   while not Q5.Eof do
+   while not DMConn.Q5.Eof do
    begin
-      DB.ExecSQL('update estoque set quant=quant+' + Texto_Mysql(Q5.Fields[1].AsCurrency) +
-                 ' where id=' + Texto_Mysql(Q5.Fields[1].AsInteger) + ';');
-      Q5.Next;
+      ExecSQL('update estoque set quant=quant+' + Texto_Mysql(DMConn.Q5.Fields[1].AsCurrency) +
+                 ' where id=' + Texto_Mysql(DMConn.Q5.Fields[1].AsInteger) + ';');
+      DMConn.Q5.Next;
    end;
 end;
 
 procedure TDM.Atu_Hash; //atualiza somente os registros novos que estao com o hash = id_term
 begin
    Log('HASH','HASH', '"R01",' + Texto_Mysql(_C) + ',' + Texto_Mysql(DM.id_Term));
-   DB.ExecSQL('call pr_hash("R01",' + Texto_Mysql(_C) + ',' + Texto_Mysql(DM.id_Term) + ');');
+   ExecSQL('call pr_hash("R01",' + Texto_Mysql(_C) + ',' + Texto_Mysql(DM.id_Term) + ');');
    Log('HASH','HASH', '"R02",' + Texto_Mysql(_C) + ',' + Texto_Mysql(DM.id_Term));
-   DB.ExecSQL('call pr_hash("R02",' + Texto_Mysql(_C) + ',' + Texto_Mysql(DM.id_Term) + ');');
+   ExecSQL('call pr_hash("R02",' + Texto_Mysql(_C) + ',' + Texto_Mysql(DM.id_Term) + ');');
    Log('HASH','HASH', '"R03",' + Texto_Mysql(_C) + ',' + Texto_Mysql(DM.id_Term));
-   DB.ExecSQL('call pr_hash("R03",' + Texto_Mysql(_C) + ',' + Texto_Mysql(DM.id_Term) + ');');
+   ExecSQL('call pr_hash("R03",' + Texto_Mysql(_C) + ',' + Texto_Mysql(DM.id_Term) + ');');
    Log('HASH','HASH', '"R04",' + Texto_Mysql(_C) + ',' + Texto_Mysql(DM.id_Term));
-   DB.ExecSQL('call pr_hash("R04",' + Texto_Mysql(_C) + ',' + Texto_Mysql(DM.id_Term) + ');');
+   ExecSQL('call pr_hash("R04",' + Texto_Mysql(_C) + ',' + Texto_Mysql(DM.id_Term) + ');');
    Log('HASH','HASH', '"R05",' + Texto_Mysql(_C) + ',' + Texto_Mysql(DM.id_Term));
-   DB.ExecSQL('call pr_hash("R05",' + Texto_Mysql(_C) + ',' + Texto_Mysql(DM.id_Term) + ');');
+   ExecSQL('call pr_hash("R05",' + Texto_Mysql(_C) + ',' + Texto_Mysql(DM.id_Term) + ');');
    Log('HASH','HASH', '"R06",' + Texto_Mysql(_C) + ',' + Texto_Mysql(DM.id_Term));
-   DB.ExecSQL('call pr_hash("R06",' + Texto_Mysql(_C) + ',' + Texto_Mysql(DM.id_Term) + ');');
+   ExecSQL('call pr_hash("R06",' + Texto_Mysql(_C) + ',' + Texto_Mysql(DM.id_Term) + ');');
    Log('HASH','HASH', '"R07",' + Texto_Mysql(_C) + ',' + Texto_Mysql(DM.id_Term));
-   DB.ExecSQL('call pr_hash("R07",' + Texto_Mysql(_C) + ',' + Texto_Mysql(DM.id_Term) + ');');
+   ExecSQL('call pr_hash("R07",' + Texto_Mysql(_C) + ',' + Texto_Mysql(DM.id_Term) + ');');
    Log('HASH','HASH', '"E3",' + Texto_Mysql(_C) + ',' + Texto_Mysql(DM.id_Term));
-   DB.ExecSQL('call pr_hash("E3",'  + Texto_Mysql(_C) + ',' + Texto_Mysql(DM.id_Term) + ');');
+   ExecSQL('call pr_hash("E3",'  + Texto_Mysql(_C) + ',' + Texto_Mysql(DM.id_Term) + ');');
    Log('HASH','HASH', '"E2",' + Texto_Mysql(_C) + ',' + Texto_Mysql(DM.id_Term));
-   DB.ExecSQL('call pr_hash("E2",'  + Texto_Mysql(_C) + ',' + Texto_Mysql(DM.id_Term) + ');');
+   ExecSQL('call pr_hash("E2",'  + Texto_Mysql(_C) + ',' + Texto_Mysql(DM.id_Term) + ');');
    Log('HASH','HASH', '"A2",' + Texto_Mysql(_C) + ',' + Texto_Mysql(DM.id_Term));
-   DB.ExecSQL('call pr_hash("A2",'  + Texto_Mysql(_C) + ',' + Texto_Mysql(DM.id_Term) + ');');
+   ExecSQL('call pr_hash("A2",'  + Texto_Mysql(_C) + ',' + Texto_Mysql(DM.id_Term) + ');');
    Log('HASH','HASH', '"CAIXA",' + Texto_Mysql(_C) + ',' + Texto_Mysql(DM.id_Term));
-   DB.ExecSQL('call pr_hash("CAIXA",' + Texto_Mysql(_C) + ',' + Texto_Mysql(DM.id_Term) + ');');
+   ExecSQL('call pr_hash("CAIXA",' + Texto_Mysql(_C) + ',' + Texto_Mysql(DM.id_Term) + ');');
    Log('HASH','HASH', '"VENDA",' + Texto_Mysql(_C) + ',' + Texto_Mysql(DM.id_Term));
-   DB.ExecSQL('call pr_hash("VENDA",' + Texto_Mysql(_C) + ',' + Texto_Mysql(DM.id_Term) + ');');
+   ExecSQL('call pr_hash("VENDA",' + Texto_Mysql(_C) + ',' + Texto_Mysql(DM.id_Term) + ');');
 end;
 
 procedure TDM.Cadastrar_PDV(num_ecf: string); //faz o cadastramento do ecf na tabela pdv do servidor
@@ -4164,11 +4153,11 @@ begin
    if StrToIntDef(num_ecf,0)=0 then
       exit;
 
-   Q1.Open('select * from pdv where num_ecf=' + Texto_Mysql(StrToInt(num_ecf)));
+   DMConn.Q1.Open('select * from pdv where num_ecf=' + Texto_Mysql(StrToInt(num_ecf)));
 
-   if Q1.IsEmpty then
+   if DMConn.Q1.IsEmpty then
    begin
-      DB.ExecSQL('insert into pdv set num_ecf=' + Texto_Mysql(StrToInt(num_ecf)));
+      ExecSQL('insert into pdv set num_ecf=' + Texto_Mysql(StrToInt(num_ecf)));
    end;
 end;
 
@@ -4197,21 +4186,21 @@ end;
 
 function TDM.Conectar: boolean;
 begin
-  if DB.Connected then
+  if DMConn.DB.Connected then
   begin
     Result := True;
     exit;
   end;
 
-   DB.Params.Clear;
-   drvMySQL.VendorLib := Aqui('LIB\32', 'libmysql.dll');
-   DB.Params.Add('Server=' + DM_INI.INI.StoredValue['serv_host']);
-   DB.Params.Add('Database=' + DM_INI.INI.StoredValue['serv_database']);
-   DB.Params.Add('User_Name=' + DM_INI.INI.StoredValue['serv_user']);
-   DB.Params.Add('Password=' + DM_INI.INI.StoredValue['serv_password']);
-   DB.Params.Add('ReadTimeout=1');
-   DB.Params.Add('WriteTimeout=1');
-   DB.Params.Add('DriverID=MySQL');
+   DMConn.DB.Params.Clear;
+   DMConn.drvMySQL.VendorLib := Aqui('LIB\32', 'libmysql.dll');
+   DMConn.DB.Params.Add('Server=' + DM_INI.INI.StoredValue['serv_host']);
+   DMConn.DB.Params.Add('Database=' + DM_INI.INI.StoredValue['serv_database']);
+   DMConn.DB.Params.Add('User_Name=' + DM_INI.INI.StoredValue['serv_user']);
+   DMConn.DB.Params.Add('Password=' + DM_INI.INI.StoredValue['serv_password']);
+   DMConn.DB.Params.Add('ReadTimeout=1');
+   DMConn.DB.Params.Add('WriteTimeout=1');
+   DMConn.DB.Params.Add('DriverID=MySQL');
 
    Result := DM_INI.INI.StoredValue['serv_host'] = '127.0.0.1';
 
@@ -4220,7 +4209,7 @@ begin
 
    if Result then
    try
-      DB.Connected := True;
+      DMConn.DB.Connected := True;
       Result := true;
    except
       on E: exception do
@@ -4746,7 +4735,7 @@ begin
    erro_script := false;
    Result := True;
 
-   with DB do
+   with DMConn.DB do
    try
       if pos('koplin',s_script)<=0 then
          Log(C_221,'SCRIPT', s_script);
@@ -4766,11 +4755,11 @@ var
    i: integer;
    s, s1: string;
 begin
-   Q1.Open('select b.nivel from finan_centro_custo_assoc a, ' +
+   DMConn.Q1.Open('select b.nivel from finan_centro_custo_assoc a, ' +
            'finan_centro_custo b where a.codigo=b.plano and a.operacao=' +
             Texto_Mysql(operacao));
 
-   if Q1.IsEmpty then
+   if DMConn.Q1.IsEmpty then
    begin
       ShowMessage('Nenhum plano de contas associado a esta operação.');
       exit;
@@ -4779,16 +4768,16 @@ begin
    s1 := C_ST_VAZIO;
    s  := s1;
 
-   for i := 1 to q1.Fields[0].AsInteger do
+   for i := 1 to DMConn.Q1.Fields[0].AsInteger do
    begin
-      Q1.Open('select b.plano, b.conta from finan_centro_custo_assoc a, finan_centro_custo b ' +
+      DMConn.Q1.Open('select b.plano, b.conta from finan_centro_custo_assoc a, finan_centro_custo b ' +
               'where substr(REPLACE(a.codigo,".",""),1,' + IntToStr(i) +
               ') = substr(REPLACE(b.plano,".",""),1,' + IntToStr(i) + ') ' +
               'and nivel=' + Texto_Mysql(i) +
               'and a.operacao=' + Texto_Mysql(operacao)
       );
 
-      s := s + s1 + Q1.FieldByName('plano').AsString + ' - ' + Q1.FieldByName('conta').AsString + C_CR;
+      s := s + s1 + DMConn.Q1.FieldByName('plano').AsString + ' - ' + DMConn.Q1.FieldByName('conta').AsString + C_CR;
       s1 := s1 + '    ';
    end;
 
@@ -4801,7 +4790,7 @@ var
    aQuery:TFDQuery;
 begin
    aQuery := TFDQuery.Create(self);
-   aQuery.Connection := DB;
+   aQuery.Connection := DMConn.DB;
    ExecSQL(C_SQL20);
 
    aQuery.Open(C_SQL21);
@@ -4816,7 +4805,7 @@ var
    aQuery:TFDQuery;
 begin
    aQuery := TFDQuery.Create(self);
-   aQuery.Connection := DB;
+   aQuery.Connection := DMConn.DB;
  //  tam := DM_INI.Ini.StoredValue['tam_cod_balanca'];
  //  prefix := DM_INI.Ini.StoredValue['prefix_cod_balanca'];
 //   prefix := RFill()
@@ -4845,7 +4834,7 @@ var
    aQuery:TFDQuery;
 begin
    aQuery := TFDQuery.Create(self);
-   aQuery.Connection := DB;
+   aQuery.Connection := DMConn.DB;
    tam := DM_INI.Ini.StoredValue['tam_min_cod_item'];
 
    aQuery.Open(C_SQL65);

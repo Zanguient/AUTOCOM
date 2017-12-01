@@ -10,7 +10,8 @@ uses
   cxData, cxDataStorage, cxNavigator, cxDBData, cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGridLevel,
   cxClasses, cxGridCustomView, cxGrid, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
-  FireDAC.DApt.Intf, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+  FireDAC.DApt.Intf, FireDAC.Comp.DataSet, FireDAC.Comp.Client, dxSkinsCore,
+  dxSkinCaramel, dxSkinscxPCPainter, dxBarBuiltInMenu;
 
 type
   TfrmExtorno = class(Tfrm)
@@ -83,7 +84,7 @@ implementation
 
 {$R *.dfm}
 
-uses uDM, udm_ini, uDM_PDV, uFuncoes, uFarmaPop2, updv;
+uses uDM, udm_ini, uDM_PDV, uFuncoes, uFarmaPop2, updv, uDM_Conn;
 
 procedure TfrmExtorno.btnViaClick(Sender: TObject);
 var
@@ -164,7 +165,7 @@ begin
       begin
          if T1local.AsString = 'R' then
          begin
-            DM.DB.ExecSQL('update pfp set dt_extorno=curdate() where cod_autoriz=' + Texto_Mysql(T1cod_autoriz.AsString));
+            DM.ExecSQL('update pfp set dt_extorno=curdate() where cod_autoriz=' + Texto_Mysql(T1cod_autoriz.AsString));
          end
          else
          if T1local.AsString = 'L' then
@@ -220,28 +221,28 @@ begin
 
    if DM.Conectar then
    begin
-      DM.Q1.Open('select v.id, v.coo, v.data, v.hora, p.nome, p.cpf_cli,' +
+      DMConn.Q1.Open('select v.id, v.coo, v.data, v.hora, p.nome, p.cpf_cli,' +
                  'p.cod_autoriz, p.dt_extorno, v.cv from venda v, pfp p where ' +
                  'p.venda=v.id order by v.id desc');
 
-      while not DM.Q1.Eof do
+      while not DMConn.Q1.Eof do
       begin
          T1.Append;
-         T1coo.Value            := DM.Q1.FieldByName('coo').AsInteger;
-         T1data.Value           := DM.Q1.FieldByName('data').AsDateTime;
-         T1hora.AsString        := DM.Q1.FieldByName('hora').AsString;
-         T1nome.AsString        := DM.Q1.FieldByName('nome').AsString;
-         T1cpf.AsString         := DM.Q1.FieldByName('cpf_cli').AsString;
-         T1cod_autoriz.AsString := DM.Q1.FieldByName('cod_autoriz').AsString;
+         T1coo.Value            := DMConn.Q1.FieldByName('coo').AsInteger;
+         T1data.Value           := DMConn.Q1.FieldByName('data').AsDateTime;
+         T1hora.AsString        := DMConn.Q1.FieldByName('hora').AsString;
+         T1nome.AsString        := DMConn.Q1.FieldByName('nome').AsString;
+         T1cpf.AsString         := DMConn.Q1.FieldByName('cpf_cli').AsString;
+         T1cod_autoriz.AsString := DMConn.Q1.FieldByName('cod_autoriz').AsString;
          T1local.AsString       := 'R';
-         T1cv.AsString          := DM.Q1.FieldByName('cv').AsString;
-         T1venda.Value          := DM.Q1.FieldByName('id').AsInteger;
+         T1cv.AsString          := DMConn.Q1.FieldByName('cv').AsString;
+         T1venda.Value          := DMConn.Q1.FieldByName('id').AsInteger;
 
-         if DM.Q1.FieldByName('dt_extorno').AsDateTime>0 then
-            T1dt_extorno.Value := DM.Q1.FieldByName('dt_extorno').AsDateTime;
+         if DMConn.Q1.FieldByName('dt_extorno').AsDateTime>0 then
+            T1dt_extorno.Value := DMConn.Q1.FieldByName('dt_extorno').AsDateTime;
 
          T1.Post;
-         DM.Q1.Next;
+         DMConn.Q1.Next;
       end;
    end;
 
@@ -298,16 +299,16 @@ begin
 
       if T1local.Value = 'R' then
       begin
-         DM.Q1.Open('select vi.cProd, cEAN, vi.xProd, vi.qCom*e.medic_qtcaixa as qtd from ' +
+         DMConn.Q1.Open('select vi.cProd, cEAN, vi.xProd, vi.qCom*e.medic_qtcaixa as qtd from ' +
                     'estoque e, venda_item vi where vi.cProd=e.id and vi.venda=' + Texto_Mysql(T1venda.Value));
-         while not DM.Q1.Eof do
+         while not DMConn.Q1.Eof do
          begin
             T2.Append;
-            T2cod_gtin.AsString := DM.Q1.FieldByName('cEAN').AsString;
-            T2nome.AsString     := DM.Q1.FieldByName('xProd').AsString;
-            T2qtd.AsCurrency    := DM.Q1.FieldByName('qtd').AsCurrency;
+            T2cod_gtin.AsString := DMConn.Q1.FieldByName('cEAN').AsString;
+            T2nome.AsString     := DMConn.Q1.FieldByName('xProd').AsString;
+            T2qtd.AsCurrency    := DMConn.Q1.FieldByName('qtd').AsCurrency;
             T2.Post;
-            DM.Q1.Next;
+            DMConn.Q1.Next;
          end;
       end
       else

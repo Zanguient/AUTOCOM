@@ -494,7 +494,6 @@ inherited frmAnaliseVendas: TfrmAnaliseVendas
   object QVenda: TFDQuery
     AfterOpen = QVendaAfterOpen
     AfterScroll = QVendaAfterScroll
-    Connection = DM.DB
     SQL.Strings = (
       'select c.nome, c.cnpj, c.tel1, c.celular, c.cidade, '
       'vd.nome as vendedor_nome, o.nome as operador_nome, '
@@ -891,7 +890,6 @@ inherited frmAnaliseVendas: TfrmAnaliseVendas
   object QVenda_Item: TFDQuery
     MasterSource = DSVenda
     MasterFields = 'id'
-    Connection = DM.DB
     SQL.Strings = (
       'select * from venda_item where'
       'ecf_aliq<>'#39'CANC'#39' and'

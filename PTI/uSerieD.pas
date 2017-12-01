@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrm, cxGraphics, cxLookAndFeels, cxLookAndFeelPainters, Vcl.Menus, cxControls,
   cxContainer, cxEdit, cxTextEdit, cxCurrencyEdit, ACBrBase, ACBrEnterTab, Easysize, RxPlacemnt, Vcl.StdCtrls,
-  cxButtons, Vcl.ExtCtrls;
+  cxButtons, Vcl.ExtCtrls, dxSkinsCore, dxSkinCaramel;
 
 type
   TfrmSerieD = class(Tfrm)
@@ -28,7 +28,7 @@ implementation
 
 {$R *.dfm}
 
-uses uDM_PDV, updv, uDM;
+uses uDM_PDV, updv, uDM, uDM_Conn;
 
 procedure TfrmSerieD.bntF11Click(Sender: TObject);
 begin
@@ -44,8 +44,8 @@ begin
    inherited;
    if DM.Conectar then
    begin
-      DM.Q1.Open('select if(max(serie_d)is null,0, max(serie_d))as seried from venda');
-      edNF.Value := DM.Q1.Fields[0].AsInteger + 1;
+      DMConn.Q1.Open('select if(max(serie_d)is null,0, max(serie_d))as seried from venda');
+      edNF.Value := DMConn.Q1.Fields[0].AsInteger + 1;
    end;
 end;
 

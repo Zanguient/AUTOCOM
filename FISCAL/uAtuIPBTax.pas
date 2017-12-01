@@ -10,7 +10,7 @@ uses
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, Data.DB, FireDAC.Comp.DataSet,
   FireDAC.Comp.Client, uFuncoes, Vcl.ComCtrls, Vcl.DBCtrls, Vcl.Grids,
-  Vcl.DBGrids, uDM;
+  Vcl.DBGrids, uDM, dxSkinsCore, dxSkinCaramel;
 
 type
   TfrmAtuIPBTax = class(Tfrm)
@@ -59,6 +59,8 @@ implementation
 
 {$R *.dfm}
 
+uses uDM_Conn;
+
 procedure TfrmAtuIPBTax.btnAbrirClick(Sender: TObject);
 var
    Lista, Itens: TstringList;
@@ -70,10 +72,10 @@ begin
       Lista.LoadFromFile(OD1.FileName);
       bar1.Max := Lista.Count;
       FormatSettings.DecimalSeparator := '.';
-      DM.Q1.Open('select versao from ibptax  order by id desc limit 1');
-      Label5.Caption := 'Versão Anterior: ' + DM.Q1.FieldByName('versao').AsString;
+      DMConn.Q1.Open('select versao from ibptax  order by id desc limit 1');
+      Label5.Caption := 'Versão Anterior: ' + DMConn.Q1.FieldByName('versao').AsString;
 
-      DM.DB.ExecSQL('truncate table ibptax; truncate table ibptax_itens;');
+      DMConn.DB.ExecSQL('truncate table ibptax; truncate table ibptax_itens;');
 
       for i := 1 to Pred(Lista.Count) do
       begin
@@ -133,8 +135,8 @@ begin
       //atualização da tabela ncm
       if not DM.TIBPTax.IsEmpty then
       begin
-         DM.DB.ExecSQL('truncate table ncm;');
-         DM.DB.ExecSQL('insert into ncm (cod_ncm,descr_ncm) (select ncm, nome from ibptax_itens);');
+         DMConn.DB.ExecSQL('truncate table ncm;');
+         DMConn.DB.ExecSQL('insert into ncm (cod_ncm,descr_ncm) (select ncm, nome from ibptax_itens);');
       end;
 
       ShowMessage('Processo concluido.');

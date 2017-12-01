@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrm, cxGraphics, cxLookAndFeels, uFuncoes,
   cxLookAndFeelPainters, Vcl.Menus, Vcl.ComCtrls, ACBrBase, ACBrEnterTab,
   Easysize, RxPlacemnt, Vcl.StdCtrls, cxButtons, Vcl.ExtCtrls, Data.DB,
-  Data.Win.ADODB, RxMemDS, uAutocomConsts;
+  Data.Win.ADODB, RxMemDS, uAutocomConsts, dxSkinsCore, dxSkinCaramel;
 
 type
   TfrmAtu_Farma = class(Tfrm)
@@ -39,7 +39,7 @@ implementation
 
 {$R *.dfm}
 
-uses udm_ini, uDM;
+uses udm_ini, uDM, uDM_Conn;
 
 procedure TfrmAtu_Farma.Atu(full: boolean);
 var
@@ -47,8 +47,8 @@ var
    preco: Currency;
 begin
    bar1.Max := ADTS.RecordCount;
-   DM.Q1.Open('select id from aliquota where cod_if="FF"');
-   Aliq := DM.Q1.Fields[0].AsInteger;
+   DMConn.Q1.Open('select id from aliquota where cod_if="FF"');
+   Aliq := DMConn.Q1.Fields[0].AsInteger;
    btnIniciar.Enabled := False;
    DM.QEstoque.Tag := 1;
 
@@ -151,25 +151,25 @@ begin
       ADTS.Next;
    end;
   {
-   DM.Q1.Open('select * from ncm_prinatv_gtin');
-   bar1.Max      := DM.Q1.RecordCount;
+   DMConn.Q1.Open('select * from ncm_prinatv_gtin');
+   bar1.Max      := DMConn.Q1.RecordCount;
    bar1.Position := 0;
    stBar1.SimpleText := 'Atualizando NCM...';
-   while not DM.Q1.Eof do
+   while not DMConn.Q1.Eof do
    begin
       bar1.Position :=  bar1.Position + 1;
-      if DM.Q1.FieldByName('prinatv').AsString <> EmptyStr then
-         DM.ExecSQL('update estoque set ncm="' + DM.Q1.FieldByName('ncm').AsString +
-                    '" where length(ncm)<2 and medicam_principio_atv="' + DM.Q1.FieldByName('prinatv').AsString + '"')
+      if DMConn.Q1.FieldByName('prinatv').AsString <> EmptyStr then
+         DM.ExecSQL('update estoque set ncm="' + DMConn.Q1.FieldByName('ncm').AsString +
+                    '" where length(ncm)<2 and medicam_principio_atv="' + DMConn.Q1.FieldByName('prinatv').AsString + '"')
       else
-      if DM.Q1.FieldByName('gtin').AsString <> EmptyStr then
-         DM.ExecSQL('update estoque set ncm="' + DM.Q1.FieldByName('ncm').AsString +
-                    '" where length(ncm)<2  and cod_gtin="' + DM.Q1.FieldByName('gtin').AsString + '"');
-      DM.Q1.Next;
+      if DMConn.Q1.FieldByName('gtin').AsString <> EmptyStr then
+         DM.ExecSQL('update estoque set ncm="' + DMConn.Q1.FieldByName('ncm').AsString +
+                    '" where length(ncm)<2  and cod_gtin="' + DMConn.Q1.FieldByName('gtin').AsString + '"');
+      DMConn.Q1.Next;
       Application.ProcessMessages;
    end; }
 
-   DM.Q1.Close;
+   DMConn.Q1.Close;
    DM.QEstoque.Close;
    DM.QEstoque.Tag := 0;
    ADTS.Close;
@@ -192,17 +192,17 @@ begin
                        ' WHERE P.NR_PRODUTO = U.NR_PRODUTO';
      ADTS.Open;
 
-     DM.Q1.Open('select id from sessao where nome LIKE "MEDICAMENTO%"');
+     DMConn.Q1.Open('select id from sessao where nome LIKE "MEDICAMENTO%"');
 
-     if DM.Q1.IsEmpty then
+     if DMConn.Q1.IsEmpty then
      begin
          ShowMessage('Sessão MEDICAMENTOS não encontrada.');
          btnIniciar.Enabled := False;
          exit;
      end;
 
-     g_iSessao := DM.Q1.Fields[0].AsInteger;
-     DM.QEstoque.Open('select * from estoque where sessao = ' + DM.Q1.Fields[0].AsString);
+     g_iSessao := DMConn.Q1.Fields[0].AsInteger;
+     DM.QEstoque.Open('select * from estoque where sessao = ' + DMConn.Q1.Fields[0].AsString);
 
      if DM.QEstoque.IsEmpty then
      begin
@@ -264,10 +264,10 @@ function TfrmAtu_Farma.GetCST: integer;
 begin
    DM.QEmpresa.Open('select * from empresa');
    if DM.qempresaindativ.AsInteger in [2,3] then
-      DM.Q1.Open('select id from CST where cst=60')
+      DMConn.Q1.Open('select id from CST where cst=60')
    else
-      DM.Q1.Open('select id from CST where cst=500');
-   Result := DM.Q1.Fields[0].AsInteger;
+      DMConn.Q1.Open('select id from CST where cst=500');
+   Result := DMConn.Q1.Fields[0].AsInteger;
 end;
 
 function TfrmAtu_Farma.GetPreco: Currency;
@@ -280,17 +280,17 @@ end;
 
 function TfrmAtu_Farma.GetRegMS: string;
 begin
-   DM.Q1.Open('select registro_ms from ncm_prinatv_gtin where gtin=' + Texto_Mysql(ADTS.FieldByName('CODBAR').AsString) + ' and length(registro_ms)=13');
-   Result := DM.Q1.Fields[0].AsString;
+   DMConn.Q1.Open('select registro_ms from ncm_prinatv_gtin where gtin=' + Texto_Mysql(ADTS.FieldByName('CODBAR').AsString) + ' and length(registro_ms)=13');
+   Result := DMConn.Q1.Fields[0].AsString;
 end;
 
 function TfrmAtu_Farma.GetUnidade(stUn: String): integer;
 begin
    if stUn = EmptyStr then
    begin
-      DM.Q1.Open('select id from unidade where unidade ="UN"');
-      if DM.Q1.Fields[0].AsInteger > 0 then
-         Result := DM.Q1.Fields[0].AsInteger
+      DMConn.Q1.Open('select id from unidade where unidade ="UN"');
+      if DMConn.Q1.Fields[0].AsInteger > 0 then
+         Result := DMConn.Q1.Fields[0].AsInteger
    end
    else
    if DM.QEstoqueunidade.AsInteger > 0 then
@@ -298,9 +298,9 @@ begin
    else
    begin
       stUn := Copy(stUn,1,2);
-      DM.Q1.Open('select id from unidade where unidade =' + Texto_Mysql(stUn));
-      if DM.Q1.Fields[0].AsInteger > 0 then
-         Result := DM.Q1.Fields[0].AsInteger
+      DMConn.Q1.Open('select id from unidade where unidade =' + Texto_Mysql(stUn));
+      if DMConn.Q1.Fields[0].AsInteger > 0 then
+         Result := DMConn.Q1.Fields[0].AsInteger
       else
       begin
          DM.QUnidade.Open('select * from unidade where unidade =' + Texto_Mysql(stUn));

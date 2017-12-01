@@ -126,7 +126,6 @@ inherited frmCadEstoque: TfrmCadEstoque
             Style.Font.Style = []
             Style.IsFontAssigned = True
             TabOrder = 1
-            ExplicitHeight = 160
             Height = 156
             Width = 132
             object cxDBCalcEdit13: TcxDBCurrencyEdit
@@ -284,7 +283,6 @@ inherited frmCadEstoque: TfrmCadEstoque
             Style.Font.Style = []
             Style.IsFontAssigned = True
             TabOrder = 2
-            ExplicitHeight = 160
             Height = 156
             Width = 133
             object cxDBCalcEdit12: TcxDBCurrencyEdit
@@ -443,7 +441,6 @@ inherited frmCadEstoque: TfrmCadEstoque
             Style.Font.Style = []
             Style.IsFontAssigned = True
             TabOrder = 0
-            ExplicitHeight = 160
             Height = 156
             Width = 131
             object cxDBCalcEdit14: TcxDBCurrencyEdit
@@ -599,8 +596,6 @@ inherited frmCadEstoque: TfrmCadEstoque
             Style.Font.Style = []
             Style.IsFontAssigned = True
             TabOrder = 3
-            ExplicitLeft = 610
-            ExplicitHeight = 160
             Height = 156
             Width = 127
             object cxLabel7: TcxLabel
@@ -692,9 +687,6 @@ inherited frmCadEstoque: TfrmCadEstoque
             object cxTabSheet1: TcxTabSheet
               Caption = 'ICMS/ISS'
               ImageIndex = 0
-              ExplicitLeft = 0
-              ExplicitWidth = 186
-              ExplicitHeight = 140
               object cxLabel9: TcxLabel
                 Left = 3
                 Top = -2
@@ -898,9 +890,6 @@ inherited frmCadEstoque: TfrmCadEstoque
             object cxTabSheet2: TcxTabSheet
               Caption = 'ICMS-ST'
               ImageIndex = 1
-              ExplicitLeft = 0
-              ExplicitWidth = 186
-              ExplicitHeight = 140
               object cxDBImageComboBox1: TcxDBImageComboBox
                 Left = 5
                 Top = 16
@@ -1102,9 +1091,6 @@ inherited frmCadEstoque: TfrmCadEstoque
         object TabMedic: TcxTabSheet
           Caption = 'MEDICAMENTO'
           ImageIndex = 1
-          ExplicitLeft = 0
-          ExplicitWidth = 740
-          ExplicitHeight = 166
           object cxDBTextEdit8: TcxDBTextEdit
             Left = 8
             Top = 24
@@ -1142,8 +1128,6 @@ inherited frmCadEstoque: TfrmCadEstoque
             Height = 162
             Align = alRight
             TabOrder = 4
-            ExplicitLeft = 361
-            ExplicitHeight = 166
             object gppfp: TPanel
               AlignWithMargins = True
               Left = 235
@@ -1161,7 +1145,6 @@ inherited frmCadEstoque: TfrmCadEstoque
               ParentColor = True
               ParentFont = False
               TabOrder = 2
-              ExplicitHeight = 158
               object cxDBSpinEdit1: TcxDBSpinEdit
                 Left = 1
                 Top = 82
@@ -1252,7 +1235,6 @@ inherited frmCadEstoque: TfrmCadEstoque
               ParentColor = True
               ParentFont = False
               TabOrder = 1
-              ExplicitHeight = 158
               object cxDBTextEdit1: TcxDBTextEdit
                 Left = 2
                 Top = 104
@@ -1334,7 +1316,6 @@ inherited frmCadEstoque: TfrmCadEstoque
               ParentColor = True
               ParentFont = False
               TabOrder = 0
-              ExplicitHeight = 158
               object cxDBCheckBox1: TcxDBCheckBox
                 Left = 4
                 Top = 36
@@ -2094,8 +2075,8 @@ inherited frmCadEstoque: TfrmCadEstoque
       end
     end
     inherited TabPesq: TcxTabSheet
-      ExplicitWidth = 736
-      ExplicitHeight = 392
+      ExplicitWidth = 732
+      ExplicitHeight = 388
       inherited grd: TcxGrid
         Width = 732
         Height = 340
@@ -2144,8 +2125,8 @@ inherited frmCadEstoque: TfrmCadEstoque
         Top = 340
         Width = 732
         Height = 48
-        ExplicitTop = 344
-        ExplicitWidth = 736
+        ExplicitTop = 340
+        ExplicitWidth = 732
         ExplicitHeight = 48
         object cbEditar: TcxCheckBox [0]
           Left = 604

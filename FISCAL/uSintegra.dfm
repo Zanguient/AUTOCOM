@@ -44,7 +44,6 @@ inherited frmSintegra: TfrmSintegra
       Caption = 'Registros 50 e 54'
       State = cbsChecked
       TabOrder = 0
-      Width = 200
     end
     object cb60: TcxCheckBox
       Left = 3
@@ -52,7 +51,6 @@ inherited frmSintegra: TfrmSintegra
       Caption = 'Registros 60 (60M, 60A, 60D)'
       State = cbsChecked
       TabOrder = 1
-      Width = 200
     end
     object cb60i: TcxCheckBox
       Left = 3
@@ -60,7 +58,6 @@ inherited frmSintegra: TfrmSintegra
       Caption = 'Registros 60I'
       State = cbsChecked
       TabOrder = 2
-      Width = 200
     end
     object cb60r: TcxCheckBox
       Left = 3
@@ -68,7 +65,6 @@ inherited frmSintegra: TfrmSintegra
       Caption = 'Registros 60R'
       State = cbsChecked
       TabOrder = 3
-      Width = 200
     end
     object cb61: TcxCheckBox
       Left = 3
@@ -76,7 +72,6 @@ inherited frmSintegra: TfrmSintegra
       Caption = 'Registros 61'
       State = cbsChecked
       TabOrder = 4
-      Width = 200
     end
     object cb74: TcxCheckBox
       Left = 3
@@ -84,7 +79,6 @@ inherited frmSintegra: TfrmSintegra
       Caption = 'Registros 74 (Invent'#225'rio)'
       TabOrder = 5
       OnClick = cb74Click
-      Width = 200
     end
     object cbarq: TcxCheckBox
       Left = 3
@@ -92,7 +86,6 @@ inherited frmSintegra: TfrmSintegra
       Caption = 'Abrir local do arquivo'
       State = cbsChecked
       TabOrder = 6
-      Width = 200
     end
     object D1: TcxDateEdit
       Left = 209

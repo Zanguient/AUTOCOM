@@ -173,9 +173,6 @@ inherited frmMenuFisc: TfrmMenuFisc
         object TabData: TcxTabSheet
           Caption = 'Emiss'#227'o por Data'
           ImageIndex = 0
-          ExplicitLeft = 0
-          ExplicitWidth = 478
-          ExplicitHeight = 62
           object DtInicial: TcxDateEdit
             Left = 29
             Top = 24
@@ -236,9 +233,6 @@ inherited frmMenuFisc: TfrmMenuFisc
         object TabDoc: TcxTabSheet
           Caption = 'Emiss'#227'o por N'#186' Doc.'
           ImageIndex = 1
-          ExplicitLeft = 0
-          ExplicitWidth = 478
-          ExplicitHeight = 62
           object Label3: TcxLabel
             Left = 16
             Top = 21
@@ -273,9 +267,6 @@ inherited frmMenuFisc: TfrmMenuFisc
         object TabProd: TcxTabSheet
           Caption = 'INFORME O PRODUTO'
           ImageIndex = 2
-          ExplicitLeft = 0
-          ExplicitWidth = 478
-          ExplicitHeight = 62
           object RgTipoProd: TRadioGroup
             Left = -2
             Top = -14
@@ -358,8 +349,8 @@ inherited frmMenuFisc: TfrmMenuFisc
     end
     inherited TabPesq: TcxTabSheet
       TabVisible = False
-      ExplicitWidth = 474
-      ExplicitHeight = 401
+      ExplicitWidth = 470
+      ExplicitHeight = 397
       inherited grd: TcxGrid
         Width = 470
         Height = 351
@@ -369,8 +360,8 @@ inherited frmMenuFisc: TfrmMenuFisc
       inherited pnlPesq: TPanel
         Top = 351
         Width = 470
-        ExplicitTop = 355
-        ExplicitWidth = 474
+        ExplicitTop = 351
+        ExplicitWidth = 470
         inherited lblPesq: TcxLabel
           Style.IsFontAssigned = True
         end
@@ -493,9 +484,6 @@ inherited frmMenuFisc: TfrmMenuFisc
           object TabFpgto: TcxTabSheet
             Caption = 'F.Pgto'
             ImageIndex = 0
-            ExplicitLeft = 0
-            ExplicitWidth = 476
-            ExplicitHeight = 53
             object edFPgto: TcxTextEdit
               Left = 2
               Top = 18
@@ -554,9 +542,6 @@ inherited frmMenuFisc: TfrmMenuFisc
           object TabAliq: TcxTabSheet
             Caption = 'Al'#237'q.'
             ImageIndex = 1
-            ExplicitLeft = 0
-            ExplicitWidth = 476
-            ExplicitHeight = 53
             object edAliq: TcxCurrencyEdit
               Left = 141
               Top = 14
@@ -608,6 +593,10 @@ inherited frmMenuFisc: TfrmMenuFisc
           object TabRel: TcxTabSheet
             Caption = 'Relat'#243'rios'
             ImageIndex = 2
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object edRelGer: TcxTextEdit
               Left = 159
               Top = 15

@@ -7,7 +7,7 @@ uses
   FireDAC.Comp.Script, FireDAC.Comp.DataSet, ACBrEPCBlocos, FireDAC.Stan.Intf,
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
-  FireDAC.Comp.Client;
+  FireDAC.Comp.Client, ACBrBase;
 
 type
   TDM_SPED_PIS = class(TDataModule)
@@ -326,7 +326,7 @@ implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
-uses uDM, uFuncoes, uAutocomConsts;
+uses uDM, uFuncoes, uAutocomConsts, uDM_Conn;
 
 {$R *.dfm}
 
@@ -336,37 +336,37 @@ function TDM_SPED_PIS.InserirRegistro0150(codigo: string): string;
 var
    s: string;
 begin
-   DM.Q5.Open('select * from vw_dest_nf where cnpj=' + Texto_Mysql(codigo));
+   DMConn.Q5.Open('select * from vw_dest_nf where cnpj=' + Texto_Mysql(codigo));
 
-   Result := DM.Q5.FieldByName('cnpj').AsString;
+   Result := DMConn.Q5.FieldByName('cnpj').AsString;
 
    if Result = EmptyStr then
       raise Exception.Create('0150 - O participante ' + codigo + ' não foi encontrado.');
 
-   if DM.Q5.FieldByName('cidade_cod').AsInteger = 0 then
+   if DMConn.Q5.FieldByName('cidade_cod').AsInteger = 0 then
       raise Exception.Create('0150 - O participante ' + codigo + 'está sem código de município.');
 
    if not ACBrSPEDPisCofins1.Bloco_0.Registro0001.Registro0140.Items[0].Registro0150.LocalizaRegistro(codigo) then
    with ACBrSPEDPisCofins1.Bloco_0.Registro0150New do //0150 - Tabela de Cadastro do Participante
    begin
       COD_PART := Number(Result);
-      NOME     := DM.Q5.FieldByName('razaosocial').AsString;
+      NOME     := DMConn.Q5.FieldByName('razaosocial').AsString;
       COD_PAIS := '01058';
 
-      s := Number(DM.Q5.FieldByName('cnpj').AsString);
+      s := Number(DMConn.Q5.FieldByName('cnpj').AsString);
 
       if length(s) = 14 then
         CNPJ := s
       else
         CPF  := s;
 
-      IE       := Number(DM.Q5.FieldByName('ie').AsString);
-      COD_MUN  := DM.Q5.FieldByName('cidade_cod').AsInteger;
+      IE       := Number(DMConn.Q5.FieldByName('ie').AsString);
+      COD_MUN  := DMConn.Q5.FieldByName('cidade_cod').AsInteger;
       SUFRAMA  := '';
-      ENDERECO := DM.Q5.FieldByName('logradouro').AsString;
-      NUM      := DM.Q5.FieldByName('nmro').AsString;
-      COMPL    := DM.Q5.FieldByName('complem').AsString;
-      BAIRRO   := DM.Q5.FieldByName('bairro').AsString;
+      ENDERECO := DMConn.Q5.FieldByName('logradouro').AsString;
+      NUM      := DMConn.Q5.FieldByName('nmro').AsString;
+      COMPL    := DMConn.Q5.FieldByName('complem').AsString;
+      BAIRRO   := DMConn.Q5.FieldByName('bairro').AsString;
    end;
 end;
 
@@ -376,9 +376,9 @@ begin
    begin
      if not Registro0140.Items[0].Registro0190.LocalizaRegistro(valor) then
      begin
-        DM.Q5.Open('select nome from unidade where unidade =' + Texto_Mysql(valor));
+        DMConn.Q5.Open('select nome from unidade where unidade =' + Texto_Mysql(valor));
 
-        if DM.Q5.Fields[0].AsString = EmptyStr then
+        if DMConn.Q5.Fields[0].AsString = EmptyStr then
         begin
            Log('SpedP','InserirRegistro0190','0190 - A unidade ' + valor + ' não está cadastrada.');
            raise Exception.Create('0190 - A unidade ' + valor + ' não está cadastrada.');
@@ -387,7 +387,7 @@ begin
         with Registro0140.Items[0].Registro0190.New(Registro0140.Items[0]) do
         begin
            UNID  := valor;
-           DESCR := DM.Q5.Fields[0].AsString;
+           DESCR := DMConn.Q5.Fields[0].AsString;
         end;
      end;
    end;
@@ -399,11 +399,11 @@ var
 begin
    with ACBrSPEDPisCofins1.Bloco_0.Registro0001 do
    begin
-      DM.Q6.Open('select * from vw_estoque where id =' + Texto_Mysql(id));
+      DMConn.Q6.Open('select * from vw_estoque where id =' + Texto_Mysql(id));
 
       if not Registro0140.Items[0].Registro0200.LocalizaRegistro(IntToStr(id)) then
       begin
-         if DM.Q6.IsEmpty then
+         if DMConn.Q6.IsEmpty then
          BEGIN
             Log('SpedP','InserirRegistro0200','O produto ' + IntToStr(id) + ' não foi localizado.');
             raise Exception.Create('O produto ' + IntToStr(id) + ' não foi localizado.');
@@ -414,26 +414,26 @@ begin
 
          with Registro0140.Items[0].Registro0200.New(Registro0140.Items[0]) do //0200 - itens
          begin
-            COD_ITEM     := DM.Q6.FieldByName('id').AsString;
-            DESCR_ITEM   := DM.SProc.FieldByName('nome').AsString;
-            COD_BARRA    := DM.Q6.FieldByName('cod_gtin').AsString;
+            COD_ITEM     := DMConn.Q6.FieldByName('id').AsString;
+            DESCR_ITEM   := DMConn.SProc.FieldByName('nome').AsString;
+            COD_BARRA    := DMConn.Q6.FieldByName('cod_gtin').AsString;
             COD_ANT_ITEM := '';
-            UNID_INV     := Copy(DM.Q6.FieldByName('sigla_unid').AsString, 1, 2);
+            UNID_INV     := Copy(DMConn.Q6.FieldByName('sigla_unid').AsString, 1, 2);
 
-            i := StrToIntDef(Number(DM.Q6.FieldByName('tipo').asstring),0);
+            i := StrToIntDef(Number(DMConn.Q6.FieldByName('tipo').asstring),0);
 
             iIf(i = 99, 11, i);
 
             TIPO_ITEM    := TACBrTipoItem(i);
-            COD_NCM      := DM.Q6.FieldByName('ncm').AsString;
+            COD_NCM      := DMConn.Q6.FieldByName('ncm').AsString;
             EX_IPI       := '';
-            COD_GEN      := copy(DM.Q6.FieldByName('ncm').AsString,1,2);
+            COD_GEN      := copy(DMConn.Q6.FieldByName('ncm').AsString,1,2);
             COD_LST      := '';
-            ALIQ_ICMS    := StrToFloatDef(number(DM.Q6.FieldByName('aliq_ecf').AsString), 0)/100;
+            ALIQ_ICMS    := StrToFloatDef(number(DMConn.Q6.FieldByName('aliq_ecf').AsString), 0)/100;
          end;
       end;
 
-      InserirRegistro0190(Copy(DM.Q6.FieldByName('sigla_unid').AsString, 1, 2));
+      InserirRegistro0190(Copy(DMConn.Q6.FieldByName('sigla_unid').AsString, 1, 2));
    end;
 end;
 
@@ -458,9 +458,9 @@ begin
       if b then
          exit;
 
-      DM.Q5.Open('select cfop, descricao from cfop where cfop=' + Texto_Mysql(cfop));
+      DMConn.Q5.Open('select cfop, descricao from cfop where cfop=' + Texto_Mysql(cfop));
 
-      if DM.Q5.IsEmpty then
+      if DMConn.Q5.IsEmpty then
       BEGIN
          Log('SpedP','InserirRegistro0400','O CFOP ' + cfop + ' não foi localizado.');
          raise Exception.Create('O CFOP ' + cfop + ' não foi localizado.');
@@ -468,8 +468,8 @@ begin
 
       with Registro0140.Items[0].Registro0400.New(Registro0140.Items[0]) do  // FILHO - REGISTRO 0400
       begin
-         COD_NAT   := DM.Q5.FieldByName('cfop').AsString;
-         DESCR_NAT := DM.Q5.FieldByName('descricao').AsString;
+         COD_NAT   := DMConn.Q5.FieldByName('cfop').AsString;
+         DESCR_NAT := DMConn.Q5.FieldByName('descricao').AsString;
       end; //0400 fim
    end;
 end;
@@ -972,8 +972,8 @@ begin
    ss := Iif(cst < 0, ' and SN="N"', ' and SN="S"');
    cst := Iif(cst<0, cst*-1,cst);
 
-   DM.Q5.Open('select cst from cst where acbr=' + Texto_Mysql(InttoStr(cst)) + ss);
-   ss := FormatFloat('00',(DM.Q5.Fields[0].AsInteger));
+   DMConn.Q5.Open('select cst from cst where acbr=' + Texto_Mysql(InttoStr(cst)) + ss);
+   ss := FormatFloat('00',(DMConn.Q5.Fields[0].AsInteger));
    cst := StrToIntDef(s + ss, 0);
 
    case cst of

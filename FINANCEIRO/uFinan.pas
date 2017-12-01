@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrm, cxGraphics, cxLookAndFeels,
   cxLookAndFeelPainters, Vcl.Menus, cxControls, cxContainer, cxEdit, cxGroupBox,
   ACBrBase, ACBrEnterTab, Easysize, RxPlacemnt, Vcl.StdCtrls, cxButtons,
-  Vcl.ExtCtrls, dxGDIPlusClasses;
+  Vcl.ExtCtrls, dxGDIPlusClasses, dxSkinsCore, dxSkinCaramel;
 
 type
   TfrmFinan = class(Tfrm)
@@ -75,13 +75,13 @@ implementation
 uses uDM, udm_ini, uFuncoes, uMD5Print, uAutocomConsts, uCadBan, uBoletoAvulso,
   uBoletoLote, uGestaoReceber, uParcelas, uMoviBanc, uCadPlanoContas,
   uCadPlanoContaAssoc, uLancar_apagar, uGestaoAPagar, uLanca_chq_terc,
-  uGestaoPlanoContas;
+  uGestaoPlanoContas, uDM_Conn;
 
 procedure TfrmFinan.alonrio1Click(Sender: TObject);
 begin
-   DM.Q1.Open('select count(*) from finan_banco_conta');
+   DMConn.Q1.Open('select count(*) from finan_banco_conta');
 
-   if DM.Q1.Fields[0].AsInteger = 0 then
+   if DMConn.Q1.Fields[0].AsInteger = 0 then
       raise Exception.Create('Não existe conta bancária cadastrada no sistema.');
 
 end;
@@ -149,9 +149,9 @@ end;
 
 procedure TfrmFinan.CONTASBANCRIAS1Click(Sender: TObject);
 begin
-   DM.Q1.Open('select count(*) from finan_banco_conta');
+   DMConn.Q1.Open('select count(*) from finan_banco_conta');
 
-   if DM.Q1.Fields[0].AsInteger = 0 then
+   if DMConn.Q1.Fields[0].AsInteger = 0 then
       raise Exception.Create('Não existe conta bancária cadastrada no sistema.');
 
    frmMovBanc := TfrmMovBanc.Create(Self);

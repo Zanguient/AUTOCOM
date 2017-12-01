@@ -274,7 +274,7 @@ implementation
 uses uDM, uAutocomConsts, uFuncoes, udm_ini, dmSkins, uSkinDLL
 {$IFDEF PDV}
 ,uDMecf
-{$ENDIF};
+{$ENDIF}, uDM_Conn;
 
 {$IFDEF PDV}
 procedure ShowAAC; stdcall; external 'LIB\32\aacXE10.dll';
@@ -628,7 +628,7 @@ begin
    else
    begin
       ShowMessage('Servidor OK.');
-      DM.DB.Connected := False;
+      DMConn.DB.Connected := False;
    end;
 end;
 

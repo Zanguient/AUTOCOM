@@ -34,14 +34,16 @@ inherited frmCadOperador: TfrmCadOperador
     Properties.ActivePage = TabCad
     ExplicitWidth = 717
     ExplicitHeight = 295
-    ClientRectBottom = 295
-    ClientRectRight = 717
+    ClientRectBottom = 291
+    ClientRectRight = 713
     inherited TabCad: TcxTabSheet
-      ExplicitWidth = 717
-      ExplicitHeight = 269
+      ExplicitLeft = 4
+      ExplicitTop = 26
+      ExplicitWidth = 709
+      ExplicitHeight = 265
       inherited dbNav: TcxDBNavigator
-        Top = 243
-        Width = 707
+        Top = 239
+        Width = 703
         Buttons.OnButtonClick = dbNavButtonsButtonClick
         ExplicitTop = 243
         ExplicitWidth = 707
@@ -190,14 +192,16 @@ inherited frmCadOperador: TfrmCadOperador
       end
       object grdSegur: TcxGrid
         AlignWithMargins = True
-        Left = 412
+        Left = 404
         Top = 3
         Width = 302
-        Height = 234
+        Height = 230
         Align = alRight
         TabOrder = 11
         LevelTabs.Slants.Kind = skCutCorner
         LevelTabs.Style = 6
+        ExplicitLeft = 412
+        ExplicitHeight = 234
         object tbvSegur: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           FilterBox.Visible = fvNever
@@ -319,11 +323,11 @@ inherited frmCadOperador: TfrmCadOperador
       end
     end
     inherited TabPesq: TcxTabSheet
-      ExplicitWidth = 717
+      ExplicitWidth = 713
       ExplicitHeight = 269
       inherited grd: TcxGrid
-        Width = 717
-        Height = 223
+        Width = 709
+        Height = 219
         ExplicitWidth = 717
         ExplicitHeight = 223
         inherited tbv: TcxGridDBTableView
@@ -346,11 +350,11 @@ inherited frmCadOperador: TfrmCadOperador
         end
       end
       inherited pnlPesq: TPanel
-        Top = 223
-        Width = 717
+        Top = 219
+        Width = 709
         Visible = False
         ExplicitTop = 223
-        ExplicitWidth = 717
+        ExplicitWidth = 713
         inherited lblPesq: TcxLabel
           Style.IsFontAssigned = True
         end

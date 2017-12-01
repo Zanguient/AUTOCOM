@@ -63,7 +63,6 @@ inherited frmParcelamento: TfrmParcelamento
         ParentShowHint = False
         ShowHint = True
         TabOrder = 2
-        Width = 80
       end
       object cbBoleto: TcxCheckBox
         Left = 0
@@ -74,7 +73,6 @@ inherited frmParcelamento: TfrmParcelamento
         ShowHint = True
         TabOrder = 0
         OnClick = cbBoletoClick
-        Width = 75
       end
       object cbCarne: TcxCheckBox
         Left = 0
@@ -85,7 +83,6 @@ inherited frmParcelamento: TfrmParcelamento
         ShowHint = True
         TabOrder = 1
         OnClick = cbCarneClick
-        Width = 75
       end
       object cbTela: TcxCheckBox
         Left = 80
@@ -95,7 +92,6 @@ inherited frmParcelamento: TfrmParcelamento
         ParentShowHint = False
         ShowHint = True
         TabOrder = 5
-        Width = 80
       end
     end
   end
@@ -243,7 +239,6 @@ inherited frmParcelamento: TfrmParcelamento
     ParentShowHint = False
     ShowHint = True
     TabOrder = 5
-    Width = 111
   end
   object pnlBol: TPanel [11]
     Left = 0

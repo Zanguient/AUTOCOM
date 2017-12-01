@@ -10,7 +10,8 @@ uses
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGridLevel, cxClasses, cxGridCustomView, cxGrid, cxLabel,
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, dxSkinsCore, dxSkinCaramel,
+  dxSkinscxPCPainter;
 
 type
   Tfrmpv = class(Tfrm)
@@ -230,7 +231,7 @@ begin
                DM_PDV.Cancelar_Venda(False); //indica que nao é atual, pois ja foi fechada
                frmPDV.ECF.CancelaCupom;
             end;  //aqui faz via sql por perder a ref com DM.Qvenda
-            DM.DB.ExecSQL('delete from venda where id=' + Texto_Mysql(i));//apaga a PV da tabela venda
+            DM.ExecSQL('delete from venda where id=' + Texto_Mysql(i));//apaga a PV da tabela venda
          end;
       end;
       //se houve erro no processo, interrompe
@@ -255,9 +256,9 @@ procedure Tfrmpv.Popular_T1(tipo: integer);
 begin
    case Tipo of //marca como cancelado
       //redução no fim do dia
-    -1: DM.DB.ExecSQL('update venda set cancelado="S" where tipo="PV" and data < ' + data_My(Trunc(DM_ECF.Relogio)) + ';');
+    -1: DM.ExecSQL('update venda set cancelado="S" where tipo="PV" and data < ' + data_My(Trunc(DM_ECF.Relogio)) + ';');
     //redução no inicio do dia
-    -2: DM.DB.ExecSQL('update venda set cancelado="S" where tipo="PV" and data < ' + data_My(Trunc(DM_ECF.Relogio)-1) + ';');
+    -2: DM.ExecSQL('update venda set cancelado="S" where tipo="PV" and data < ' + data_My(Trunc(DM_ECF.Relogio)-1) + ';');
    end;
 
    DM.QVenda.Open('select * from venda where tipo="PV"  order by coa');//seleciona as vendas PV

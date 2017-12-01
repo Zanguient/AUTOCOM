@@ -7,7 +7,7 @@ uses
   ACBrValidador, vcl.Forms, DateUtils, Dialogs, FireDAC.Stan.Intf,
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
-  FireDAC.Comp.Client;
+  FireDAC.Comp.Client, ACBrBase;
 
 type
   TDM_Sped = class(TDataModule)
@@ -712,7 +712,7 @@ implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
-uses uAutocomConsts, uDM, uFuncoes, uMD5Print, udm_ini;
+uses uAutocomConsts, uDM, uFuncoes, uMD5Print, udm_ini, uDM_Conn;
 
 {$R *.dfm}
       
@@ -2262,10 +2262,10 @@ begin
       st_ano := IntToStr(y);
       st_mes := FormatFloat('00', m);
 
-      DM.Q1.Open('select data, sum(vrcusto*quant) as valor from balanco where month(data)=' + st_mes + ' and year(data)=' + st_ano);
-      Log('Sped_F','BlocoH','RegistroH005 - ' + st_mes +'/'+st_ano + ' valor: ' + DM.Q1.FieldByName('valor').AsString);
+      DMConn.Q1.Open('select data, sum(vrcusto*quant) as valor from balanco where month(data)=' + st_mes + ' and year(data)=' + st_ano);
+      Log('Sped_F','BlocoH','RegistroH005 - ' + st_mes +'/'+st_ano + ' valor: ' + DMConn.Q1.FieldByName('valor').AsString);
 
-      data := DM.Q1.FieldByName('data').AsDateTime;
+      data := DMConn.Q1.FieldByName('data').AsDateTime;
 
       if data <=0 then
          data := EncodeDate(y,m,d);
@@ -2273,44 +2273,44 @@ begin
       with RegistroH005New do
       begin
         DT_INV  := data;
-        VL_INV  := DM.Q1.FieldByName('valor').AsCurrency;
+        VL_INV  := DMConn.Q1.FieldByName('valor').AsCurrency;
         MOT_INV := TACBrMotivoInventario(motivo);// miFinalPeriodo;
 
-        if DM.Q1.FieldByName('valor').AsCurrency > 0 then
+        if DMConn.Q1.FieldByName('valor').AsCurrency > 0 then
         begin
-           DM.Q2.Open('select b.cod_interno, b.nome, b.cod_gtin, b.ncm, b.quant, b.vrcusto, sum(b.quant*b.vrcusto) as total,b.destinacao,' +
+           DMConn.Q2.Open('select b.cod_interno, b.nome, b.cod_gtin, b.ncm, b.quant, b.vrcusto, sum(b.quant*b.vrcusto) as total,b.destinacao,' +
                       'u.unidade,a.icms from balanco b, unidade u, aliquota a WHERE b.unidade=u.id and b.aliq_icms=a.id ' +
                       'and month(data)=' + st_mes + ' and year(data)=' + st_ano + ' group by cod_interno'
            );
 
-          while not DM.Q2.Eof do
+          while not DMConn.Q2.Eof do
           begin
-             Log('Sped_F','BlocoH','RegistroH010 - ' + DM.Q2.FieldByName('cod_gtin').AsString);
+             Log('Sped_F','BlocoH','RegistroH010 - ' + DMConn.Q2.FieldByName('cod_gtin').AsString);
              with RegistroH010New do
              begin
-               COD_ITEM  := DM.Q2.FieldByName('cod_interno').AsString;
-               UNID      := Retorna_COD_UN(Clip(DM.Q2.FieldByName('unidade').AsString,2));
-               QTD       := DM.Q2.FieldByName('quant').AsCurrency;
-               VL_UNIT   := DM.Q2.FieldByName('vrcusto').AsCurrency;
-               VL_ITEM   := DM.Q2.FieldByName('total').AsCurrency;
+               COD_ITEM  := DMConn.Q2.FieldByName('cod_interno').AsString;
+               UNID      := Retorna_COD_UN(Clip(DMConn.Q2.FieldByName('unidade').AsString,2));
+               QTD       := DMConn.Q2.FieldByName('quant').AsCurrency;
+               VL_UNIT   := DMConn.Q2.FieldByName('vrcusto').AsCurrency;
+               VL_ITEM   := DMConn.Q2.FieldByName('total').AsCurrency;
                IND_PROP  := piInformante;
                COD_PART  := '';
                TXT_COMPL := '';
                COD_CTA   := DM.QEmpresaefd_fiscal_pc_cod.AsString;
              end;
 
-             if not ACBrSPEDFiscal1.Bloco_0.Registro0001.Registro0200.LocalizaRegistro(DM.Q2.FieldByName('cod_interno').AsString) then
+             if not ACBrSPEDFiscal1.Bloco_0.Registro0001.Registro0200.LocalizaRegistro(DMConn.Q2.FieldByName('cod_interno').AsString) then
              with ACBrSPEDFiscal1.Bloco_0.Registro0200New do
              begin
-                 COD_ITEM   := DM.Q2.FieldByName('cod_interno').AsString;
-                 DESCR_ITEM := DM.Q2.FieldByName('nome').AsString;
-                 COD_BARRA  := Iif(ValidaEAN(DM.Q2.FieldByName('cod_gtin').AsString), Q0200cod_gtin.AsString, '');
-                 UNID_INV   := Retorna_COD_UN(Clip(DM.Q2.FieldByName('unidade').AsString,2));
-                 COD_NCM    := DM.Q2.FieldByName('ncm').AsString;
-                 COD_GEN    := Clip(DM.Q2.FieldByName('ncm').AsString,2);
-                 ALIQ_ICMS  := DM.Q2.FieldByName('icms').AsCurrency;
+                 COD_ITEM   := DMConn.Q2.FieldByName('cod_interno').AsString;
+                 DESCR_ITEM := DMConn.Q2.FieldByName('nome').AsString;
+                 COD_BARRA  := Iif(ValidaEAN(DMConn.Q2.FieldByName('cod_gtin').AsString), Q0200cod_gtin.AsString, '');
+                 UNID_INV   := Retorna_COD_UN(Clip(DMConn.Q2.FieldByName('unidade').AsString,2));
+                 COD_NCM    := DMConn.Q2.FieldByName('ncm').AsString;
+                 COD_GEN    := Clip(DMConn.Q2.FieldByName('ncm').AsString,2);
+                 ALIQ_ICMS  := DMConn.Q2.FieldByName('icms').AsCurrency;
 
-                 d := StrToInt(Clip(DM.Q2.FieldByName('destinacao').AsString,2));
+                 d := StrToInt(Clip(DMConn.Q2.FieldByName('destinacao').AsString,2));
 
                  case d of
                     0:TIPO_ITEM  := tiMercadoriaRevenda;
@@ -2328,7 +2328,7 @@ begin
                 end;
              end;
 
-             DM.Q2.Next;
+             DMConn.Q2.Next;
           end;
         end;
       end;

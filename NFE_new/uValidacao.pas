@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ufrm, cxGraphics, cxLookAndFeels, cxLookAndFeelPainters, Menus,
   StdCtrls, cxButtons, ExtCtrls, ACBrBase, ACBrEnterTab, rxPlacemnt, Easysize,
-  dxSkinsCore;
+  dxSkinsCore, dxSkinCaramel;
 
 type
   TfrmValidacao = class(Tfrm)

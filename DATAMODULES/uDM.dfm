@@ -4,42 +4,11 @@ object DM: TDM
   OnDestroy = DataModuleDestroy
   Height = 863
   Width = 1255
-  object SProc: TFDStoredProc
-    Connection = DB
-    Left = 80
-    Top = 8
-  end
-  object Q1: TFDQuery
-    BeforeOpen = Q1BeforeOpen
-    Connection = DB
-    Left = 16
-    Top = 68
-  end
-  object Q2: TFDQuery
-    Connection = DB
-    Left = 16
-    Top = 128
-  end
-  object Q3: TFDQuery
-    Connection = DB
-    Left = 16
-    Top = 184
-  end
-  object Q4: TFDQuery
-    Connection = DB
-    Left = 16
-    Top = 240
-  end
-  object Q5: TFDQuery
-    Connection = DB
-    Left = 16
-    Top = 296
-  end
   object QEmpresa: TFDQuery
     Tag = 1
     BeforePost = QEmpresaBeforePost
     AfterPost = QEmpresaAfterPost
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from empresa limit 1')
     Left = 73
@@ -471,7 +440,7 @@ object DM: TDM
   end
   object QConvenio: TFDQuery
     BeforePost = QConvenioBeforePost
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from convenio order by id desc limit 1')
     Left = 129
@@ -604,7 +573,7 @@ object DM: TDM
     BeforeEdit = QOperadorBeforeEdit
     BeforePost = QOperadorBeforePost
     BeforeDelete = QOperadorBeforeDelete
-    Connection = DB
+    Connection = DMConn.DB
     ResourceOptions.AssignedValues = [rvPersistent, rvBackup]
     SQL.Strings = (
       'select * from operador order by nome')
@@ -691,7 +660,7 @@ object DM: TDM
   end
   object QVendedor: TFDQuery
     BeforePost = QVendedorBeforePost
-    Connection = DB
+    Connection = DMConn.DB
     ResourceOptions.AssignedValues = [rvPersistent, rvBackup]
     SQL.Strings = (
       'select * from vendedor order by nome')
@@ -780,7 +749,7 @@ object DM: TDM
   object QModNF: TFDQuery
     AfterInsert = QModNFAfterInsert
     BeforePost = QModNFBeforePost
-    Connection = DB
+    Connection = DMConn.DB
     ResourceOptions.AssignedValues = [rvPersistent, rvBackup]
     SQL.Strings = (
       'select * from nf_modelos')
@@ -821,7 +790,7 @@ object DM: TDM
     MasterSource = DSEstoque
     MasterFields = 'cst'
     DetailFields = 'cst'
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from estoque_info_complem '
       'order by icms_pc')
@@ -872,7 +841,7 @@ object DM: TDM
   end
   object QNCM: TFDQuery
     BeforePost = QNCMBeforePost
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from ncm limit 5')
     Left = 856
@@ -906,7 +875,7 @@ object DM: TDM
   end
   object QInventario: TFDQuery
     BeforePost = QInventarioBeforePost
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       
         'select s.nome as sessao, CURQ.produto, e.cod_gtin, e.nome, e.ncm' +
@@ -1173,7 +1142,7 @@ object DM: TDM
   end
   object QSped_CST_Tabela: TFDQuery
     BeforePost = QSped_CST_TabelaBeforePost
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from sped_cst_tabela order by cst')
     Left = 728
@@ -1204,7 +1173,7 @@ object DM: TDM
     MasterSource = dsSped_cst_tabela
     MasterFields = 'tabela'
     DetailFields = 'tabela'
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from sped_tabela where tabela= :tabela order by cod')
     Left = 728
@@ -1270,7 +1239,6 @@ object DM: TDM
     Top = 552
   end
   object QvwDest_nf: TFDQuery
-    Connection = DB
     SQL.Strings = (
       
         'select distinct cnpj, id,nome,razaosocial,tel1,logradouro,nmro,c' +
@@ -1386,7 +1354,7 @@ object DM: TDM
   end
   object Qcfop_cst_csosn: TFDQuery
     BeforePost = Qcfop_cst_csosnBeforePost
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from cfop_cst_csosn')
     Left = 720
@@ -1479,7 +1447,7 @@ object DM: TDM
   end
   object QCSTIPI: TFDQuery
     BeforePost = QCSTIPIBeforePost
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from cst_ipi order by cst')
     Left = 1112
@@ -1518,7 +1486,7 @@ object DM: TDM
   end
   object QCSTPIS: TFDQuery
     BeforePost = QCSTPISBeforePost
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from cst_pis')
     Left = 1112
@@ -1557,7 +1525,7 @@ object DM: TDM
   end
   object QCSTCOFINS: TFDQuery
     BeforePost = QCSTCOFINSBeforePost
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from cst_cofins')
     Left = 1112
@@ -1614,7 +1582,7 @@ object DM: TDM
   end
   object QCusto_Oper: TFDQuery
     BeforePost = QCusto_OperBeforePost
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from custo_operacional order by data desc')
     Left = 488
@@ -1716,7 +1684,7 @@ object DM: TDM
     Top = 520
   end
   object QvwBoleto: TFDQuery
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from vw_finan_boleto')
     Left = 176
@@ -1985,7 +1953,7 @@ object DM: TDM
     BeforeClose = QFinan_CliDebBeforeClose
     AfterClose = QFinan_CliDebAfterClose
     BeforePost = QFinan_CliDebBeforePost
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from vw_clideb')
     Left = 176
@@ -2021,7 +1989,7 @@ object DM: TDM
     MasterSource = DSFinan_CliDeb
     MasterFields = 'id'
     DetailFields = 'cliente'
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from finan_debito where cliente=:id'
       'and valor_pg < valor ')
@@ -2107,7 +2075,7 @@ object DM: TDM
     MasterSource = DSFinan_CliDeb
     MasterFields = 'id'
     DetailFields = 'cliente'
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from finan_credito where cliente=:id'
       'and baixa is null')
@@ -2173,7 +2141,7 @@ object DM: TDM
     MasterSource = DSFinan_CliDeb
     MasterFields = 'id'
     DetailFields = 'cliente'
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from vw_totaldebcred where cliente=:id')
     Left = 176
@@ -2210,7 +2178,7 @@ object DM: TDM
   end
   object QCaixaConst: TFDQuery
     BeforePost = QCaixaConstBeforePost
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'SELECT * FROM caixa_const')
     Left = 72
@@ -2247,7 +2215,7 @@ object DM: TDM
   end
   object QParcelas: TFDQuery
     BeforePost = QParcelasBeforePost
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from finan_parcelas')
     Left = 104
@@ -2288,7 +2256,7 @@ object DM: TDM
   end
   object Qfinan_centro_custo: TFDQuery
     BeforeDelete = Qfinan_centro_custoBeforeDelete
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from finan_centro_custo')
     Left = 24
@@ -2331,7 +2299,7 @@ object DM: TDM
     end
   end
   object QCarga: TFDQuery
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from carga')
     Left = 24
@@ -2358,7 +2326,7 @@ object DM: TDM
     end
   end
   object QCargaFull: TFDQuery
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from carga_full')
     Left = 24
@@ -2379,27 +2347,10 @@ object DM: TDM
       BlobType = ftMemo
     end
   end
-  object SP: TFDScript
-    SQLScripts = <>
-    Connection = DB
-    Params = <>
-    Macros = <>
-    Left = 128
-    Top = 8
-  end
-  object drvMySQL: TFDPhysMySQLDriverLink
-    Left = 216
-    Top = 8
-  end
-  object ADGUIxWaitCursor1: TFDGUIxWaitCursor
-    Provider = 'Forms'
-    Left = 496
-    Top = 12
-  end
   object QSegur: TFDQuery
     MasterSource = DSOperador
     MasterFields = 'id'
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from segur where operador=:id')
     Left = 728
@@ -2450,7 +2401,7 @@ object DM: TDM
   object QCST: TFDQuery
     BeforePost = QCSTBeforePost
     OnNewRecord = QCSTNewRecord
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from cst where simplesnacional="N"')
     Left = 256
@@ -2506,7 +2457,7 @@ object DM: TDM
   end
   object QInfo_compl: TFDQuery
     BeforePost = QInfo_complBeforePost
-    Connection = DB
+    Connection = DMConn.DB
     ResourceOptions.AssignedValues = [rvPersistent, rvBackup]
     SQL.Strings = (
       'select * from estoque_info_complem')
@@ -2549,37 +2500,9 @@ object DM: TDM
       BlobType = ftMemo
     end
   end
-  object DB: TFDConnection
-    ConnectionName = 'dbAutocom'
-    Params.Strings = (
-      'Database=autocom'
-      'User_Name=root'
-      'Server=192.168.254.110'
-      'ReadTimeout=1'
-      'WriteTimeout=1'
-      'DriverID=MySQL')
-    FetchOptions.AssignedValues = [evRowsetSize, evAutoClose]
-    FetchOptions.RowsetSize = 500
-    FetchOptions.AutoClose = False
-    FormatOptions.AssignedValues = [fvFmtDisplayDateTime, fvFmtDisplayDate, fvFmtDisplayTime, fvStrsTrim2Len]
-    FormatOptions.StrsTrim2Len = True
-    FormatOptions.FmtDisplayDateTime = 'dd/mm/yyyy hh:mm'
-    FormatOptions.FmtDisplayDate = 'dd/mm/yyyy'
-    FormatOptions.FmtDisplayTime = 'hh:mm'
-    ResourceOptions.AssignedValues = [rvPersistent, rvBackup, rvDefaultStoreFormat, rvDefaultStoreExt, rvAutoReconnect]
-    ResourceOptions.Persistent = True
-    ResourceOptions.Backup = True
-    ResourceOptions.DefaultStoreExt = '.ADB'
-    ResourceOptions.DefaultStoreFormat = sfBinary
-    ResourceOptions.AutoReconnect = True
-    LoginPrompt = False
-    AfterConnect = DBAfterConnect
-    Left = 16
-    Top = 16
-  end
   object QAliq: TFDQuery
     BeforePost = QAliqBeforePost
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from aliquota')
     Left = 216
@@ -2632,7 +2555,7 @@ object DM: TDM
   end
   object QCFOP: TFDQuery
     BeforePost = QCFOPBeforePost
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from cfop')
     Left = 456
@@ -2682,7 +2605,7 @@ object DM: TDM
     BeforePost = QCliBeforePost
     AfterPost = QCliAfterPost
     BeforeDelete = QCliBeforeDelete
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from cliente order by id desc limit 1')
     Left = 176
@@ -2991,7 +2914,7 @@ object DM: TDM
   end
   object QForn: TFDQuery
     BeforePost = QFornBeforePost
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from fornecedor order by id desc limit 1')
     Left = 496
@@ -3310,7 +3233,7 @@ object DM: TDM
   end
   object QFPag: TFDQuery
     BeforePost = QFPagBeforePost
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from fpag')
     Left = 536
@@ -3368,7 +3291,7 @@ object DM: TDM
   end
   object QSessao: TFDQuery
     BeforePost = QSessaoBeforePost
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from sessao order by nome')
     Left = 576
@@ -3415,7 +3338,7 @@ object DM: TDM
   end
   object QUnidade: TFDQuery
     BeforePost = QUnidadeBeforePost
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from unidade order by unidade')
     Left = 624
@@ -3459,7 +3382,7 @@ object DM: TDM
     BeforePost = QEstoqueBeforePost
     AfterPost = QEstoqueAfterPost
     BeforeDelete = QEstoqueBeforeDelete
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from estoque order by id desc limit 1')
     Left = 728
@@ -3873,7 +3796,7 @@ object DM: TDM
   end
   object QFinan_bol_Emit: TFDQuery
     BeforePost = QFinan_bol_EmitBeforePost
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from finan_boleto_emitido')
     Left = 176
@@ -4085,7 +4008,7 @@ object DM: TDM
     end
   end
   object QDebito: TFDQuery
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from finan_debito')
     Left = 176
@@ -4169,7 +4092,7 @@ object DM: TDM
   end
   object QFinan_Carne: TFDQuery
     BeforePost = QFinan_CarneBeforePost
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from finan_carne_emitido')
     Left = 176
@@ -4277,7 +4200,7 @@ object DM: TDM
   end
   object QCaixa: TFDQuery
     BeforePost = QCaixaBeforePost
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from caixa')
     Left = 72
@@ -4368,7 +4291,7 @@ object DM: TDM
   object QBancos: TFDQuery
     BeforePost = QBancosBeforePost
     BeforeDelete = QBancosBeforeDelete
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from finan_banco_banco order by numbanco')
     Left = 520
@@ -4408,7 +4331,7 @@ object DM: TDM
     MasterSource = DSBancos
     MasterFields = 'id'
     DetailFields = 'id'
-    Connection = DB
+    Connection = DMConn.DB
     FetchOptions.AssignedValues = [evCache]
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
@@ -4462,7 +4385,7 @@ object DM: TDM
     BeforeDelete = QBoletoBeforeDelete
     MasterSource = DSContas
     MasterFields = 'id'
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from finan_banco_boleto'
       'where conta=:id')
@@ -4809,7 +4732,7 @@ object DM: TDM
     BeforeDelete = QContasBeforeDelete
     MasterSource = DSAgencias
     MasterFields = 'id'
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from finan_banco_conta '
       'where agencia=:id'
@@ -4886,7 +4809,7 @@ object DM: TDM
   object QFinan_Banco_Movi: TFDQuery
     MasterSource = DSContas
     MasterFields = 'id'
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from finan_banco_movi'
       'where conta=:id')
@@ -5060,7 +4983,7 @@ object DM: TDM
     end
   end
   object QFinan_Bol_Cli: TFDQuery
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from finan_bol_cli')
     Left = 176
@@ -5119,7 +5042,7 @@ object DM: TDM
   end
   object QSoftHouse: TFDQuery
     BeforePost = QSoftHouseBeforePost
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from softhouse limit 1')
     Left = 72
@@ -5294,7 +5217,7 @@ object DM: TDM
   object QVenda: TFDQuery
     AfterInsert = QVendaAfterInsert
     BeforePost = TPAF_R01BeforePost
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from venda limit 1')
     Left = 664
@@ -5493,7 +5416,7 @@ object DM: TDM
     AfterInsert = QVenda_ItemAfterInsert
     MasterSource = DSVenda
     MasterFields = 'id'
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from venda_item where venda=:id order by nItem')
     Left = 504
@@ -5963,7 +5886,7 @@ object DM: TDM
   end
   object TPAF_R01: TFDQuery
     BeforePost = TPAF_R01BeforePost
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from paf_r01')
     Left = 553
@@ -6032,7 +5955,7 @@ object DM: TDM
   end
   object TPAF_R02: TFDQuery
     BeforePost = TPAF_R01BeforePost
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from paf_r02')
     Left = 551
@@ -6125,7 +6048,7 @@ object DM: TDM
     BeforePost = TPAF_R01BeforePost
     MasterSource = DSPAF_R02
     MasterFields = 'id'
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from paf_r03 where r02=:id')
     Left = 551
@@ -6186,7 +6109,7 @@ object DM: TDM
     BeforePost = TPAF_R01BeforePost
     MasterSource = DSPAF_R02
     MasterFields = 'id'
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from paf_r04 where r02=:id')
     Left = 551
@@ -6301,7 +6224,7 @@ object DM: TDM
     BeforePost = TPAF_R01BeforePost
     MasterSource = DSPAF_R04
     MasterFields = 'id'
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from paf_r05 where r04=:id')
     Left = 551
@@ -6435,7 +6358,7 @@ object DM: TDM
     BeforePost = TPAF_R01BeforePost
     MasterSource = DSPAF_R02
     MasterFields = 'id'
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from paf_r06 where r02=:id')
     Left = 551
@@ -6509,7 +6432,7 @@ object DM: TDM
   end
   object TPAF_R07: TFDQuery
     BeforePost = TPAF_R01BeforePost
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from paf_r07')
     Left = 551
@@ -6575,7 +6498,7 @@ object DM: TDM
   object TPAF_E2: TFDQuery
     AfterInsert = TPAF_E2AfterInsert
     BeforePost = TPAF_R01BeforePost
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from paf_e2 order by id desc limit 1')
     Left = 672
@@ -6637,7 +6560,7 @@ object DM: TDM
   end
   object TPAF_E3: TFDQuery
     BeforePost = TPAF_R01BeforePost
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from paf_e3 order by id desc limit 1')
     Left = 672
@@ -6700,7 +6623,7 @@ object DM: TDM
   end
   object TPAF_A2: TFDQuery
     BeforePost = TPAF_R01BeforePost
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from paf_a2')
     Left = 672
@@ -6762,7 +6685,7 @@ object DM: TDM
     end
   end
   object QvwEstoque: TFDQuery
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       '')
     Left = 948
@@ -7211,7 +7134,7 @@ object DM: TDM
   end
   object QOper_CRT: TFDQuery
     BeforePost = QOper_CRTBeforePost
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from oper_crt order by nome')
     Left = 912
@@ -7303,7 +7226,7 @@ object DM: TDM
     end
   end
   object QNatOper: TFDQuery
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from natureza_oper')
     Left = 1120
@@ -7336,7 +7259,7 @@ object DM: TDM
   object QNF: TFDQuery
     AfterOpen = QNFAfterOpen
     AfterClose = QNFAfterClose
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from nf order by id desc limit 1;')
     Left = 1076
@@ -7932,7 +7855,7 @@ object DM: TDM
     MasterSource = DSNF
     MasterFields = 'id'
     DetailFields = 'nf'
-    Connection = DB
+    Connection = DMConn.DB
     FetchOptions.AssignedValues = [evCache]
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
@@ -8740,7 +8663,7 @@ object DM: TDM
     MasterSource = DSNF
     MasterFields = 'id'
     DetailFields = 'nf'
-    Connection = DB
+    Connection = DMConn.DB
     FetchOptions.AssignedValues = [evCache]
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
@@ -8785,7 +8708,7 @@ object DM: TDM
     MasterSource = DSNF
     MasterFields = 'id'
     DetailFields = 'nf'
-    Connection = DB
+    Connection = DMConn.DB
     FetchOptions.AssignedValues = [evCache]
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
@@ -8837,7 +8760,7 @@ object DM: TDM
     MasterSource = DSNF
     MasterFields = 'id'
     DetailFields = 'nf'
-    Connection = DB
+    Connection = DMConn.DB
     FetchOptions.AssignedValues = [evCache]
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
@@ -8953,7 +8876,7 @@ object DM: TDM
     MasterSource = DSNF
     MasterFields = 'id'
     DetailFields = 'nf'
-    Connection = DB
+    Connection = DMConn.DB
     FetchOptions.AssignedValues = [evCache]
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
@@ -9012,7 +8935,7 @@ object DM: TDM
     MasterSource = DSNF_Volume
     MasterFields = 'id'
     DetailFields = 'vol'
-    Connection = DB
+    Connection = DMConn.DB
     FetchOptions.AssignedValues = [evCache]
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
@@ -9052,7 +8975,7 @@ object DM: TDM
     MasterSource = DSNF
     MasterFields = 'id'
     DetailFields = 'nf'
-    Connection = DB
+    Connection = DMConn.DB
     FetchOptions.AssignedValues = [evCache]
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
@@ -9111,7 +9034,7 @@ object DM: TDM
     MasterSource = DSNF_Item
     MasterFields = 'id'
     DetailFields = 'item'
-    Connection = DB
+    Connection = DMConn.DB
     FetchOptions.AssignedValues = [evCache]
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
@@ -9186,7 +9109,7 @@ object DM: TDM
     MasterSource = DSNF
     MasterFields = 'id'
     DetailFields = 'id'
-    Connection = DB
+    Connection = DMConn.DB
     FetchOptions.AssignedValues = [evCache]
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
@@ -9227,7 +9150,7 @@ object DM: TDM
   object Qtrn: TFDQuery
     MasterSource = DSVenda
     MasterFields = 'id'
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from trn where venda=:id')
     Left = 808
@@ -9302,7 +9225,7 @@ object DM: TDM
     MasterSource = DSTrn
     MasterFields = 'id'
     DetailFields = 'id'
-    Connection = DB
+    Connection = DMConn.DB
     FetchOptions.AssignedValues = [evCache]
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
@@ -9391,7 +9314,7 @@ object DM: TDM
     Top = 158
   end
   object QPFP: TFDQuery
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from pfp where venda=:id')
     Left = 504
@@ -9522,7 +9445,7 @@ object DM: TDM
     end
   end
   object TIBPTax: TFDQuery
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from ibptax')
     Left = 592
@@ -9569,7 +9492,7 @@ object DM: TDM
   end
   object QAssist_cfop_Emit: TFDQuery
     BeforePost = QAssist_cfop_EmitBeforePost
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from cfop_cst_csosn_emissao '
       'order by cfop, cst')
@@ -9664,7 +9587,7 @@ object DM: TDM
   end
   object Qcfop_devol: TFDQuery
     BeforePost = Qcfop_devolBeforePost
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from cfop_devol order by cfop')
     Left = 984
@@ -9735,7 +9658,7 @@ object DM: TDM
     BeforePost = QFinan_apagarBeforePost
     MasterSource = DSContas
     MasterFields = 'id'
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from finan_apagar')
     Left = 360
@@ -9872,7 +9795,7 @@ object DM: TDM
   end
   object Qfinan_ch_terc: TFDQuery
     BeforePost = Qfinan_ch_tercBeforePost
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from finan_chq_terceiro')
     Left = 360
@@ -9984,7 +9907,7 @@ object DM: TDM
   end
   object QFinan_ch_alinea: TFDQuery
     BeforePost = QFinan_ch_alineaBeforePost
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from finan_cheque_alinea')
     Left = 360
@@ -10003,7 +9926,7 @@ object DM: TDM
     end
   end
   object QEstoque_perda: TFDQuery
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from estoque_perda where baixa="N"')
     Left = 696
@@ -10051,7 +9974,7 @@ object DM: TDM
     end
   end
   object QBalanca: TFDQuery
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from balanca')
     Left = 264
@@ -10078,15 +10001,10 @@ object DM: TDM
       Origin = 'sessao'
     end
   end
-  object Q6: TFDQuery
-    Connection = DB
-    Left = 16
-    Top = 352
-  end
   object QRegras_Imposto: TFDQuery
     AfterInsert = QRegras_ImpostoAfterInsert
     BeforePost = QRegras_ImpostoBeforePost
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from regra_imposto order by nome')
     Left = 576
@@ -10177,7 +10095,7 @@ object DM: TDM
   object Qtablet: TFDQuery
     AfterOpen = QtabletAfterOpen
     BeforeClose = QtabletBeforeClose
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from tablet where codigo=:codigo')
     Left = 424
@@ -10205,7 +10123,7 @@ object DM: TDM
   object QTablet_Item: TFDQuery
     MasterSource = DSTablet
     MasterFields = 'id'
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from tablet_itens where tablet=:id and cancelado='#39'N'#39)
     Left = 424
@@ -10253,7 +10171,7 @@ object DM: TDM
     Top = 560
   end
   object TIBPTax_Itens: TFDQuery
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from ibptax_itens'
       '')
@@ -10317,7 +10235,7 @@ object DM: TDM
   object QCSOSN: TFDQuery
     BeforePost = QCSTBeforePost
     OnNewRecord = QCSOSNNewRecord
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from cst where simplesnacional="S"')
     Left = 332
@@ -10367,7 +10285,7 @@ object DM: TDM
   end
   object QDic_nf: TFDQuery
     BeforeOpen = Q1BeforeOpen
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from nf_dic')
     Left = 848
@@ -10387,7 +10305,7 @@ object DM: TDM
   end
   object QEstoque_Inicial: TFDQuery
     BeforeOpen = Q1BeforeOpen
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       
         'select e.id, e.cod_gtin, e.nome, if(i.id is null, 0, i.id) iid, ' +
@@ -10443,7 +10361,7 @@ object DM: TDM
     BeforeOpen = Q1BeforeOpen
     MasterSource = DSEstoque
     MasterFields = 'id'
-    Connection = DB
+    Connection = DMConn.DB
     SQL.Strings = (
       'select sum(quant)as quant from ('
       'select estoque as id, quant from estoque_inicial'
