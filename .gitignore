@@ -1,0 +1,17 @@
+/BIN/*.exe
+/BIN/INI/autocom.ini
+/BIN/INI/GRD
+/BIN/INI/EMP
+/FTP_UPLOAD
+/Logs
+/Txt
+/CADASTROS/__history
+/AAC/__history
+/AAC_dll/__recovery
+/AAC_dll/__history
+/ATUALIZADOR/__recovery
+/ATUALIZADOR/__history
+__recovery
+__history
+/DCU
+/BIN/Logs/
