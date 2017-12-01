@@ -926,7 +926,7 @@ uses uAutocomConsts, udmnfe, uFuncoes, ualterar_natop, uMD5Print, uCadFemissao, 
   uInutilizaNumeracao, uListaNF, uManut, uXML, udm_ini, dmSkins, uSkinDLL, uCadCli,
   uCadEmpresa, uCadEstoque, uCadForn, uCfg, uDM, uPesqCli, uPesqProd,
   uPesqNatOper, uRateio, uSplash, uManiDest, uAssDevol, uVendaNF, uDic_NF,
-  uDM_Conn;
+  uDM_Conn, uDMAux;
 
 {$R *.dfm}
 
@@ -2737,13 +2737,13 @@ end;
 procedure TfrmMain.btnCosultarLogClick(Sender: TObject);
 begin
    mmResp.Clear;
-   DM_NFE.OD1.Title      := 'Selecione o arquivo';
-   DM_NFE.OD1.InitialDir := Aqui(C_52,'');
-   DM_NFE.OD1.DefaultExt := C_211;
-   DM_NFE.OD1.Filter     := C_210;
+   DMAux.OD1.Title      := 'Selecione o arquivo';
+   DMAux.OD1.InitialDir := Aqui(C_52,'');
+   DMAux.OD1.DefaultExt := C_211;
+   DMAux.OD1.Filter     := C_210;
 
-   if DM_NFE.OD1.Execute then
-      mmResp.Lines.LoadFromFile(DM_NFE.OD1.FileName);
+   if DMAux.OD1.Execute then
+      mmResp.Lines.LoadFromFile(DMAux.OD1.FileName);
 end;
 
 procedure TfrmMain.btnConsultarStatusServiçoClick(Sender: TObject);
@@ -2847,16 +2847,16 @@ begin
       ConfigurarNFe;
       NFe1.NotasFiscais.Clear;
 
-      OD1.Title := 'Selecione a NFE';
+      DMAux.OD1.Title := 'Selecione a NFE';
       s_xml := NFe1.Configuracoes.Arquivos.PathNFe + FormatDateTime('yyyymm', date) + '\NFe\';
       ForceDirectories(s_xml);
-      DM_NFE.OD1.InitialDir := s_xml;
-      DM_NFE.OD1.DefaultExt := C_212;
-      DM_NFE.OD1.Filter     := C_213;
+      DMAux.OD1.InitialDir := s_xml;
+      DMAux.OD1.DefaultExt := C_212;
+      DMAux.OD1.Filter     := C_213;
 
-      if OD1.Execute then
+      if DMAux.OD1.Execute then
       begin
-         nfe := OD1.FileName;
+         nfe := DMAux.OD1.FileName;
          NFe1.NotasFiscais.LoadFromFile(nfe);
 
          s_chave := Number(NFe1.NotasFiscais.Items[0].Nfe.infNFe.ID);

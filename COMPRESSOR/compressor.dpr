@@ -5,7 +5,8 @@ uses
   uCompressor in 'uCompressor.pas' {Form1},
   uFuncoes in '..\COMUM\uFuncoes.pas',
   uAutocomConsts in '..\COMUM\uAutocomConsts.pas',
-  uMD5Print in '..\COMUM\uMD5Print.pas';
+  uMD5Print in '..\COMUM\uMD5Print.pas',
+  uViews in '..\COMUM\uViews.pas';
 
 {$R *.res}
 

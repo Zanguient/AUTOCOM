@@ -15,7 +15,8 @@ uses
   ufrmCad in '..\BASE\ufrmCad.pas' {frmCad},
   udm_ini in '..\DATAMODULES\udm_ini.pas' {DM_INI: TDataModule},
   uDM in '..\DATAMODULES\uDM.pas' {DM: TDataModule},
-  uDM_Conn in '..\DATAMODULES\uDM_Conn.pas' {DMConn: TDataModule};
+  uDM_Conn in '..\DATAMODULES\uDM_Conn.pas' {DMConn: TDataModule},
+  uDMAux in '..\DATAMODULES\uDMAux.pas' {DMAux: TDataModule};
 
 {$R *.res}
 
@@ -24,5 +25,6 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TDMSkin, DMSkin);
   Application.CreateForm(TfrmAtu, frmAtu);
+  Application.CreateForm(TDMAux, DMAux);
   Application.Run;
 end.

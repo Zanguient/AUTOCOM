@@ -63,5 +63,6 @@ begin
   Application.CreateForm(TDMSkin, DMSkin);
   Application.CreateForm(TfrmMain, frmMain);
   Application.CreateForm(TDMAux, DMAux);
+  Application.CreateForm(TDMAux, DMAux);
   Application.Run;
 end.

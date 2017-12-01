@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>2017/11/29 09:56:17.000.431,C:\PROJETOS\AUTOCOM\AUTOCOM_10.groupproj=C:\Users\koplin\Documents\Embarcadero\Studio\Projects\ProjectGroup1.groupproj</Transaction>
+    <Transaction>2017/11/29 09:56:17.000.431,C:\Users\koplin\Documents\Embarcadero\Studio\Projects\ProjectGroup1.groupproj=C:\PROJETOS\AUTOCOM\AUTOCOM_10.groupproj</Transaction>
   </Transactions>
 	<Default.Personality>
-		<Projects ActiveProject="C:\PROJETOS\AUTOCOM\GERENCIAL\Gerencial.dproj"/>
+		<Projects ActiveProject="C:\PROJETOS\AUTOCOM\VALIDA\softlock.dproj"/>
 	</Default.Personality>
 </BorlandProject>

@@ -36,7 +36,8 @@ uses
   uDM in '..\DATAMODULES\uDM.pas' {DM: TDataModule},
   uDM_Conn in '..\DATAMODULES\uDM_Conn.pas' {DMConn: TDataModule},
   uDM_PDV in '..\DATAMODULES\uDM_PDV.pas' {DM_PDV: TDataModule},
-  uDMecf in '..\DATAMODULES\uDMecf.pas' {DM_ECF: TDataModule};
+  uDMecf in '..\DATAMODULES\uDMecf.pas' {DM_ECF: TDataModule},
+  uDMAux in '..\DATAMODULES\uDMAux.pas' {DMAux: TDataModule};
 
 {$R *.res}
 
@@ -45,5 +46,6 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TDMSkin, DMSkin);
   Application.CreateForm(TfrmPV, frmPV);
+  Application.CreateForm(TDMAux, DMAux);
   Application.Run;
 end.

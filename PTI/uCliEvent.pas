@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, ACBrValidador,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrm, cxGraphics, cxLookAndFeels, cxLookAndFeelPainters, Vcl.Menus, ACBrBase,
   ACBrEnterTab, Easysize, RxPlacemnt, Vcl.StdCtrls, cxButtons, Vcl.ExtCtrls, cxControls, cxContainer, cxEdit, cxLabel,
-  cxTextEdit;
+  cxTextEdit, dxSkinsCore, dxSkinCaramel;
 
 type
   TfrmCliEvent = class(Tfrm)
@@ -33,7 +33,7 @@ implementation
 
 {$R *.dfm}
 
-uses uDM, uDM_PDV, uAutocomConsts, uFuncoes;
+uses uDM, uDM_PDV, uAutocomConsts, uFuncoes, uDMAux;
 
 procedure TfrmCliEvent.btnOKClick(Sender: TObject);
 begin
@@ -53,7 +53,7 @@ begin
       exit;
    end;
 
-   edCNPJ.Text := String(DM.Validador.Formatar);
+   edCNPJ.Text := String(DMAux.Validador.Formatar);
 
    if Trim(edEnder.Text) = C_ST_VAZIO then
    begin

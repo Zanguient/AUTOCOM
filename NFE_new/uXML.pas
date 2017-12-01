@@ -249,7 +249,7 @@ procedure ImportarXML;
 
 implementation
 
-uses uMain, udmnfe;
+uses uMain, udmnfe, uDMAux;
 
 procedure ImportarXML;
 var
@@ -439,10 +439,10 @@ begin
 
                      if NItem.ChildNodes['codbarra'].NodeValue <> null then
                      begin
-                        Validador.TipoDocto := docGTIN;
-                        Validador.Documento := NItem.ChildNodes['codbarra'].NodeValue;
+                        DMAux.Validador.TipoDocto := docGTIN;
+                        DMAux.Validador.Documento := NItem.ChildNodes['codbarra'].NodeValue;
 
-                        if Validador.Validar then
+                        if DMAux.Validador.Validar then
                            QNF_ItemcEAN.AsString := NItem.ChildNodes['codbarra'].NodeValue;
                      end;
 

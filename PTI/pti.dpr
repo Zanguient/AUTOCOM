@@ -62,7 +62,8 @@ uses
   udmnfe in '..\DATAMODULES\udmnfe.pas' {DM_NFE: TDataModule},
   uValidacao in '..\NFE_new\uValidacao.pas' {frmValidacao},
   uDM_Sintegra in '..\DATAMODULES\uDM_Sintegra.pas' {DM_Sintegra: TDataModule},
-  uDM_SPED in '..\DATAMODULES\uDM_SPED.pas' {DM_Sped: TDataModule};
+  uDM_SPED in '..\DATAMODULES\uDM_SPED.pas' {DM_Sped: TDataModule},
+  uDMAux in '..\DATAMODULES\uDMAux.pas' {DMAux: TDataModule};
 
 {$R *.res}
 {$R UAC.res}
@@ -108,6 +109,7 @@ Begin
   Application.CreateForm(TfrmValidacao, frmValidacao);
   Application.CreateForm(TDM_Sintegra, DM_Sintegra);
   Application.CreateForm(TDM_Sped, DM_Sped);
+  Application.CreateForm(TDMAux, DMAux);
   Application.Run;
      CloseHandle(MutexHandle);
   End;
