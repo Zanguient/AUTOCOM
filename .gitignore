@@ -48,3 +48,7 @@ __history
 /LOGOBAN/*.stat
 /SKINDLL/*.stat
 /AAC/*.stat
+/BIN/LIB/32/aacXE10.dll
+/BIN/LIB/32/AAC/paf.bak
+/BIN/LIB/32/AAC/paf.dat
+/BIN/DAT/PDV/autocom.pdv-journal

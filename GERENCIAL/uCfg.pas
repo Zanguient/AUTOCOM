@@ -277,7 +277,7 @@ uses uDM, uAutocomConsts, uFuncoes, udm_ini, dmSkins, uSkinDLL
 {$ENDIF};
 
 {$IFDEF PDV}
-procedure ShowAAC; stdcall; external 'LIB\aac_XE10.dll';
+procedure ShowAAC; stdcall; external 'LIB\32\aacXE10.dll';
 {$ENDIF}
 
 type
