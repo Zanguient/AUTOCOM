@@ -52,3 +52,11 @@ __history
 /BIN/LIB/32/AAC/paf.bak
 /BIN/LIB/32/AAC/paf.dat
 /BIN/DAT/PDV/autocom.pdv-journal
+/FINANCEIRO/*.vlb
+/OPERACIONAIS/*.vlb
+/DATAMODULES/*.vlb
+/CADASTROS/*.vlb
+/PREVENDA/*.vlb
+/PTI/*.vlb
+/FARMA/*.vlb
+/FISCAL/*.vlb
