@@ -53,10 +53,6 @@
       Tag = 1
       Caption = 'CONFIGURA'#199#195'O'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object PGCfg: TPageControl
         AlignWithMargins = True
         Left = 3
@@ -70,10 +66,6 @@
         object TabCfgDadosCfg: TTabSheet
           Caption = 'DADOS DE CONFIGURA'#199#195'O'
           ImageIndex = 1
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object btnGetCert: TSpeedButton
             Left = 238
             Top = 32
@@ -1284,10 +1276,6 @@
     object TabDados: TTabSheet
       Tag = 2
       Caption = 'DADOS DA NF-e'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object PGNF: TPageControl
         AlignWithMargins = True
         Left = 3
@@ -1835,10 +1823,6 @@
         object TabDadosRef: TTabSheet
           Caption = 'NOTAS FISCAIS REFERENCIADAS'
           ImageIndex = 1
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object GroupBox2: TGroupBox
             Left = 3
             Top = 113
@@ -2526,10 +2510,6 @@
       Tag = 3
       Caption = 'DESTINAT./REMETENTE'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object GroupBox6: TGroupBox
         Left = 3
         Top = 0
@@ -3468,10 +3448,6 @@
       Caption = 'PRODUT. E SERVI'#199'OS'
       ImageIndex = 3
       OnShow = TabItensShow
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object PGItem: TPageControl
         AlignWithMargins = True
         Left = 3
@@ -3635,7 +3611,7 @@
             Font.Style = [fsBold]
             ParentFont = False
             ReadOnly = True
-            TabOrder = 25
+            TabOrder = 23
           end
           object DBEdit96: TDBEdit
             Left = 675
@@ -3943,10 +3919,6 @@
           Caption = 'IMPOSTO'
           ImageIndex = 1
           OnShow = TabImpostoShow
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object PGImposto: TPageControl
             Left = 0
             Top = 0
@@ -3958,10 +3930,6 @@
             object TabIPI: TTabSheet
               Caption = 'IPI'
               ImageIndex = 1
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object DBEdit118: TDBEdit
                 Left = 218
                 Top = 36
@@ -4276,10 +4244,6 @@
             object TabICMS: TTabSheet
               Caption = 'ICMS'
               OnShow = TabICMSShow
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object DBText1: TDBText
                 Left = 90
                 Top = 57
@@ -5480,10 +5444,6 @@
             object TabISSQN: TTabSheet
               Caption = 'ISSQN'
               ImageIndex = 4
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object DBEdit150: TDBEdit
                 Left = 216
                 Top = 100
@@ -5835,10 +5795,6 @@
       Tag = 5
       Caption = 'TRANSPORTE'
       ImageIndex = 5
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object PGTransp: TPageControl
         AlignWithMargins = True
         Left = 3
@@ -5852,10 +5808,6 @@
         TabOrder = 0
         object TabTranspDados: TTabSheet
           Caption = 'TRANSPORTADOR'
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object DBEdit102: TDBEdit
             Left = 169
             Top = 40
@@ -6340,10 +6292,6 @@
         object TabTranspReboque: TTabSheet
           Caption = 'REBOQUE'
           ImageIndex = 3
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object GrdReboque: TcxGrid
             AlignWithMargins = True
             Left = 3

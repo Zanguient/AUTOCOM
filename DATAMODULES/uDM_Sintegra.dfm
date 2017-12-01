@@ -15,6 +15,7 @@ object DM_Sintegra: TDM_Sintegra
   object Q60M: TFDQuery
     BeforeOpen = Q50EBeforeOpen
     AfterOpen = Q50EAfterOpen
+    Connection = DMConn.DB
     SQL.Strings = (
       'select'
       'distinct(crz), '
@@ -141,6 +142,7 @@ object DM_Sintegra: TDM_Sintegra
     AfterOpen = Q50EAfterOpen
     MasterSource = DSQ60M
     MasterFields = 'id'
+    Connection = DMConn.DB
     SQL.Strings = (
       
         'select * from paf_r03 where r02=:id and cod_tot_parcial <> '#39'OPNF' +
@@ -201,6 +203,7 @@ object DM_Sintegra: TDM_Sintegra
     AfterOpen = Q50EAfterOpen
     MasterSource = DSQ60M
     MasterFields = 'id'
+    Connection = DMConn.DB
     SQL.Strings = (
       'select codigo,nome,unid,sum(qtd) as qtd, sum(total) as total, '
       
@@ -295,6 +298,7 @@ object DM_Sintegra: TDM_Sintegra
     AfterOpen = Q50EAfterOpen
     MasterSource = DSQ60M
     MasterFields = 'id'
+    Connection = DMConn.DB
     SQL.Strings = (
       'select r4.coo,item,codigo, nome, unid, qtd, total, '
       
@@ -389,6 +393,7 @@ object DM_Sintegra: TDM_Sintegra
   object Q60R: TFDQuery
     BeforeOpen = Q50EBeforeOpen
     AfterOpen = Q50EAfterOpen
+    Connection = DMConn.DB
     SQL.Strings = (
       'select codigo,sum(qtd) as qtd, sum(total) as total, '
       
@@ -447,6 +452,7 @@ object DM_Sintegra: TDM_Sintegra
     end
   end
   object Q74: TFDQuery
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from vw_balanco where data=:dt and '
       'quant > 0 order by cod_gtin')
@@ -513,6 +519,7 @@ object DM_Sintegra: TDM_Sintegra
   object Q50E: TFDQuery
     BeforeOpen = Q50EBeforeOpen
     AfterOpen = Q50EAfterOpen
+    Connection = DMConn.DB
     SQL.Strings = (
       
         'select  n.id,e.cnpj, n.Emit_CNPJCPF, n.Emit_IE, n.Ide_dSaiEnt, n' +
@@ -692,6 +699,7 @@ object DM_Sintegra: TDM_Sintegra
   object Q50S: TFDQuery
     BeforeOpen = Q50EBeforeOpen
     AfterOpen = Q50EAfterOpen
+    Connection = DMConn.DB
     SQL.Strings = (
       
         'select e.cnpj, n.Dest_CNPJCPF, n.Dest_IE, n.Ide_dSaiEnt, n.Dest_' +
@@ -851,6 +859,7 @@ object DM_Sintegra: TDM_Sintegra
     MasterSource = DS50S
     MasterFields = 'Ide_nNF;CFOP;ICMS_pICMS'
     DetailFields = 'Ide_nNF;cfop;ICMS_pICMS'
+    Connection = DMConn.DB
     FetchOptions.AssignedValues = [evCache]
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
@@ -1072,6 +1081,7 @@ object DM_Sintegra: TDM_Sintegra
     AfterOpen = Q50EAfterOpen
     MasterSource = DS50E
     MasterFields = 'cfop_inform;ICMS_pICMS;id'
+    Connection = DMConn.DB
     SQL.Strings = (
       
         'select n.Emit_CNPJCPF, n.Emit_IE, n.Ide_dSaiEnt, n.Emit_EnderEmi' +
@@ -1297,6 +1307,7 @@ object DM_Sintegra: TDM_Sintegra
   object Q61: TFDQuery
     BeforeOpen = Q50EBeforeOpen
     AfterOpen = Q50EAfterOpen
+    Connection = DMConn.DB
     SQL.Strings = (
       'select dt_movi, '
       'min(serie_d) as nmro_nf_ini,  '

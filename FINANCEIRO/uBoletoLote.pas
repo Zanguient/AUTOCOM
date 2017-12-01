@@ -13,7 +13,8 @@ uses
   cxDBData, cxGridLevel, cxClasses, cxGridCustomView, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxGrid, cxNavigator, cxDBNavigator,
   cxDBEdit, cxCalc, cxSpinEdit, cxProgressBar, cxCheckBox, cxGroupBox,
-  cxRadioGroup, Vcl.ComCtrls, dxCore, cxDateUtils;
+  cxRadioGroup, Vcl.ComCtrls, dxCore, cxDateUtils, dxSkinsCore, dxSkinCaramel,
+  dxSkinscxPCPainter;
 
 type
   TfrmBolLote = class(Tfrm)
@@ -62,7 +63,7 @@ implementation
 
 {$R *.dfm}
 
-uses uAutocomConsts, uDM, uFuncoes, uEnvioBol, uMD5Print;
+uses uAutocomConsts, uDM, uFuncoes, uEnvioBol, uMD5Print, uDMAux;
 
 procedure TfrmBolLote.cxButton1Click(Sender: TObject);
 var
@@ -78,8 +79,8 @@ begin
    DM.QFinan_Bol_Cli.First;
    DecodeDate(D1.Date,y,m,d);
 
-   DM.BoletoReport1.MostrarPreview := False;
-   DM.BoletoReport1.MostrarSetup   := False;
+   DMAux.BoletoReport1.MostrarPreview := False;
+   DMAux.BoletoReport1.MostrarSetup   := False;
 
    Bar1.Properties.Max := DM.QFinan_Bol_Cli.RecordCount;
    Bar1.Position := 0;

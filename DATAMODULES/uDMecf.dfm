@@ -49,11 +49,6 @@ object DM_ECF: TDM_ECF
     Left = 88
     Top = 16
   end
-  object Validador: TACBrValidador
-    IgnorarChar = './-'
-    Left = 80
-    Top = 72
-  end
   object Bal: TACBrBAL
     Porta = 'COM1'
     Left = 136

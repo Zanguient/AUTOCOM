@@ -56,7 +56,6 @@ type
     QConvenioOBS: TMemoField;
     QConvenioSUSPENSO: TStringField;
     QConvenioNMRO: TStringField;
-    Validador: TACBrValidador;
     QConveniocodmun: TStringField;
     QOperador: TFDQuery;
     DSOperador: TDataSource;
@@ -163,8 +162,6 @@ type
     DSBancos: TDataSource;
     DSAgencias: TDataSource;
     DSContas: TDataSource;
-    Boleto1: TACBrBoleto;
-    BoletoReport1: TACBrBoletoFCFR;
     DSBoleto: TDataSource;
     DSFinan_bol_Emit: TDataSource;
     QvwBoleto: TFDQuery;
@@ -1768,11 +1765,6 @@ type
     QInventarioncm: TStringField;
     QInventariovr_un: TFloatField;
     QInventariovr_estoque: TFloatField;
-    OD1: TOpenDialog;
-    Mail1: TACBrMail;
-    IdSMTP: TIdSMTP;
-    idHandle: TIdSSLIOHandlerSocketOpenSSL;
-    IdMessage: TIdMessage;
 
     procedure DataModuleCreate(Sender: TObject);
     procedure QEmpresaBeforePost(DataSet: TDataSet);
@@ -2059,7 +2051,7 @@ udm_ini, uAutocomConsts, uTraducao
 {$ENDIF}
 {$ENDIF}
 {$ENDIF}
-;
+, uDMAux;
 
 
 {$R *.dfm}
@@ -2318,11 +2310,11 @@ end;
 
 function TDM.Validar_Doc(doc, complem: AnsiString; tipo: TACBrValTipoDocto): Boolean;
 begin
-   Validador.Documento   := String(doc);
-   Validador.Complemento := String(complem);
-   Validador.TipoDocto   := tipo;
+   DMAux.Validador.Documento   := String(doc);
+   DMAux.Validador.Complemento := String(complem);
+   DMAux.Validador.TipoDocto   := tipo;
 
-   Result := Validador.Validar;
+   Result := DMAux.Validador.Validar;
 end;
 
 
@@ -2905,7 +2897,7 @@ begin
    begin
       if Validar_Doc(QClicnpj.AsAnsiString, C_ST_VAZIO, docCPF) then
       begin
-         QClicnpj.AsAnsiString := AnsiString(Validador.Formatar);
+         QClicnpj.AsAnsiString := AnsiString(DMAux.Validador.Formatar);
          //para CPF é possivel ter mais de uma IE, assim, verifica a combinação
          if (Verificar_Duplicidade(QCliid.AsString, 'cliente', 'cnpj', 'ie', QClicnpj.AsString, QCliie.AsString)) then
          begin
@@ -2920,7 +2912,7 @@ begin
       end
       else
       if not b then
-         QClicnpj.AsAnsiString := AnsiString(Validador.Formatar);
+         QClicnpj.AsAnsiString := AnsiString(DMAux.Validador.Formatar);
 
       if (not b)and (Verificar_Duplicidade(QCliid.AsString, 'cliente', 'cnpj', '', QClicnpj.AsString, '')) then
          s := s + (C_225) + C_CRLF;
@@ -2928,13 +2920,13 @@ begin
    //valida a UF
    if not Validar_Doc(QCliuf.AsAnsiString, C_ST_VAZIO, docUF) then
    begin
-     s := s + (Validador.MsgErro) + C_CRLF;
+     s := s + (DMAux.Validador.MsgErro) + C_CRLF;
    end;
    //valida a IE
    if Validar_Doc(QCliie.AsAnsiString, QCliuf.AsAnsiString, docInscEst) then
-      QCliie.AsAnsiString := AnsiString(Validador.Formatar)
+      QCliie.AsAnsiString := AnsiString(DMAux.Validador.Formatar)
       else
-      s := s + (Validador.MsgErro) + C_CRLF;
+      s := s + (DMAux.Validador.MsgErro) + C_CRLF;
 
    if not ValidarCampos(QCli, ['razaosocial','logradouro','nmro','bairro', 'codmun', 'uf','cep'], s) then
       raise Exception.Create('Faça as correções nos campos informados.');
@@ -3080,14 +3072,14 @@ begin
    if Number(QConvenioCNPJ.AsString) <> C_ST_VAZIO then
    begin
       if Validar_Doc(Qconveniocnpj.AsAnsiString, C_ST_VAZIO, docCPF) then
-         Qconveniocnpj.AsAnsiString := AnsiString(Validador.Formatar)
+         Qconveniocnpj.AsAnsiString := AnsiString(DMAux.Validador.Formatar)
       else
       if not Validar_Doc(Qconveniocnpj.AsAnsiString, C_ST_VAZIO, docCNPJ) then
       begin
-         s := s + (Validador.MsgErro) + C_CRLF;
+         s := s + (DMAux.Validador.MsgErro) + C_CRLF;
       end
       else
-         Qconveniocnpj.AsAnsiString := AnsiString(Validador.Formatar);
+         Qconveniocnpj.AsAnsiString := AnsiString(DMAux.Validador.Formatar);
 
       if (Verificar_Duplicidade(QConvenioid.AsString, 'convenio', 'cnpj', '', Qconveniocnpj.AsString, '')) then
          s := s + (C_225) + C_CRLF;
@@ -3095,13 +3087,13 @@ begin
 
    if not Validar_Doc(QConveniouf.AsAnsiString, C_ST_VAZIO, docUF) then
    begin
-     s := s + (Validador.MsgErro) + C_CRLF;
+     s := s + (DMAux.Validador.MsgErro) + C_CRLF;
    end;
 
    if Validar_Doc(QConvenioie.AsAnsiString, QConveniouf.AsAnsiString, docInscEst) then
-      QConvenioie.AsAnsiString := AnsiString(Validador.Formatar)
+      QConvenioie.AsAnsiString := AnsiString(DMAux.Validador.Formatar)
       else
-      s := s + (Validador.MsgErro) + C_CRLF;
+      s := s + (DMAux.Validador.MsgErro) + C_CRLF;
 
    if not ValidarCampos(Dataset, ['NOME','RAZAOSOCIAL','LOGRADOURO','NMRO','UF' ,'codmun'], s) then
       raise Exception.Create('Faça a correção nos campos informados');
@@ -3186,46 +3178,46 @@ begin
    QEmpresahash.AsString := id_Term;
  //empresa
    if Validar_Doc(QEmpresacnpj.AsAnsiString, C_ST_VAZIO, docCPF) then
-      QEmpresacnpj.AsAnsiString := AnsiString(Validador.Formatar)
+      QEmpresacnpj.AsAnsiString := AnsiString(DMAux.Validador.Formatar)
    else
    if not Validar_Doc(QEmpresacnpj.AsAnsiString, C_ST_VAZIO, docCNPJ) then
    begin
-      s := s + QEmpresacnpj.DisplayLabel + ': ' + (Validador.MsgErro) + C_CRLF;
+      s := s + QEmpresacnpj.DisplayLabel + ': ' + (DMAux.Validador.MsgErro) + C_CRLF;
    end
    else
-      QEmpresacnpj.AsAnsiString := AnsiString(Validador.Formatar);
+      QEmpresacnpj.AsAnsiString := AnsiString(DMAux.Validador.Formatar);
 
    if not Validar_Doc(QEmpresauf.AsAnsiString, C_ST_VAZIO, docUF) then
    begin
-     s := s + QEmpresauf.DisplayLabel + ': ' + (Validador.MsgErro) + C_CRLF;
+     s := s + QEmpresauf.DisplayLabel + ': ' + (DMAux.Validador.MsgErro) + C_CRLF;
    end;
 
    if Validar_Doc(QEmpresaie.AsAnsiString, QEmpresauf.AsAnsiString, docInscEst) then
-      QEmpresaie.AsAnsiString := AnsiString(Validador.Formatar)
+      QEmpresaie.AsAnsiString := AnsiString(DMAux.Validador.Formatar)
       else
-      s := s + QEmpresaie.DisplayLabel + ': ' + (Validador.MsgErro) + C_CRLF;
+      s := s + QEmpresaie.DisplayLabel + ': ' + (DMAux.Validador.MsgErro) + C_CRLF;
 
   //contador
    if Number(QEmpresacont_cnpj.AsString) <> C_ST_VAZIO then
    begin
       if not Validar_Doc(QEmpresacont_cnpj.AsAnsiString, C_ST_VAZIO, docCNPJ) then
       begin
-         s := s + QEmpresacont_cnpj.DisplayLabel + ': ' + (Validador.MsgErro) + C_CRLF;
+         s := s + QEmpresacont_cnpj.DisplayLabel + ': ' + (DMAux.Validador.MsgErro) + C_CRLF;
       end
       else
-         QEmpresacont_cnpj.AsAnsiString := AnsiString(Validador.Formatar);
+         QEmpresacont_cnpj.AsAnsiString := AnsiString(DMAux.Validador.Formatar);
 
       if not Validar_Doc(QEmpresacont_uf.AsAnsiString, C_ST_VAZIO, docUF) then
       begin
-        s := s + QEmpresacont_uf.DisplayLabel + ': ' + (Validador.MsgErro) + C_CRLF;
+        s := s + QEmpresacont_uf.DisplayLabel + ': ' + (DMAux.Validador.MsgErro) + C_CRLF;
       end;
 
       if not Validar_Doc(QEmpresacont_cpf.AsAnsiString, C_ST_VAZIO, docCPF) then
       begin
-         s := s + QEmpresacont_cpf.DisplayLabel + ': ' + (Validador.MsgErro) + C_CRLF;
+         s := s + QEmpresacont_cpf.DisplayLabel + ': ' + (DMAux.Validador.MsgErro) + C_CRLF;
       end
       else
-         QEmpresacont_cpf.AsAnsiString := AnsiString(Validador.Formatar);
+         QEmpresacont_cpf.AsAnsiString := AnsiString(DMAux.Validador.Formatar);
    end;
 
   //farmacêutico
@@ -3233,15 +3225,15 @@ begin
    begin
       if not Validar_Doc(QEmpresafarmac_crf_uf.AsAnsiString, C_ST_VAZIO, docUF) then
       begin
-        s := s + QEmpresafarmac_crf_uf.DisplayLabel + ': ' + (Validador.MsgErro) + C_CRLF;
+        s := s + QEmpresafarmac_crf_uf.DisplayLabel + ': ' + DMAux.Validador.MsgErro + C_CRLF;
       end;
 
       if not Validar_Doc(QEmpresafarmac_cpf.AsAnsiString, C_ST_VAZIO, docCPF) then
       begin
-         s := s + QEmpresafarmac_cpf.DisplayLabel + ': ' + (Validador.MsgErro) + C_CRLF;
+         s := s + QEmpresafarmac_cpf.DisplayLabel + ': ' + DMAux.Validador.MsgErro + C_CRLF;
       end
       else
-         QEmpresafarmac_cpf.AsAnsiString := AnsiString(Validador.Formatar);
+         QEmpresafarmac_cpf.AsAnsiString := AnsiString(DMAux.Validador.Formatar);
    end;
 
    if pos(QEmpresaefd_fiscal_cod_icms_a_recolher.AsString, cod) <0  then
@@ -3531,14 +3523,14 @@ begin
    if Number(QFornCNPJ.AsString) <> C_ST_VAZIO then
    begin
       if Validar_Doc(QForncnpj.AsAnsiString, C_ST_VAZIO, docCPF) then
-         QForncnpj.AsAnsiString := AnsiString(Validador.Formatar)
+         QForncnpj.AsAnsiString := AnsiString(DMAux.Validador.Formatar)
       else
       if not Validar_Doc(QForncnpj.AsAnsiString, C_ST_VAZIO, docCNPJ) then
       begin
-         s := s + (Validador.MsgErro) + C_CRLF;
+         s := s + (DMAux.Validador.MsgErro) + C_CRLF;
       end
       else
-         QForncnpj.AsAnsiString := AnsiString(Validador.Formatar);
+         QForncnpj.AsAnsiString := AnsiString(DMAux.Validador.Formatar);
 
       if (Verificar_Duplicidade(QFornid.AsString, 'fornecedor', 'cnpj', '', QForncnpj.AsString, '')) then
          s := s + (C_225) + C_CRLF;
@@ -3546,13 +3538,13 @@ begin
 
    if not Validar_Doc(QFornuf.AsAnsiString, C_ST_VAZIO, docUF) then
    begin
-     s := s + (Validador.MsgErro) + C_CRLF;
+     s := s + (DMAux.Validador.MsgErro) + C_CRLF;
    end;
 
    if Validar_Doc(QFornie.AsAnsiString, QFornuf.AsAnsiString, docInscEst) then
-      QFornie.AsAnsiString := AnsiString(Validador.Formatar)
+      QFornie.AsAnsiString := AnsiString(DMAux.Validador.Formatar)
       else
-      s := s + (Validador.MsgErro) + C_CRLF;
+      s := s + (DMAux.Validador.MsgErro) + C_CRLF;
 
    if not ValidarCampos(Dataset, ['razaosocial','logradouro','nmro','bairro', 'codmun', 'uf','cep'], s) then
       raise Exception.Create('Faça a correção nos campos informados');
@@ -3719,7 +3711,7 @@ begin
          raise Exception.Create('CNPJ/CPF inválido.');
       end
       else
-         QOper_CRTcnpj.AsAnsiString := AnsiString(Validador.Formatar);
+         QOper_CRTcnpj.AsAnsiString := AnsiString(DMAux.Validador.Formatar);
 
       if (Verificar_Duplicidade(QOper_CRTid.AsString, 'oper_crt', 'cnpj', '', QOper_CRTcnpj.AsString, '')) then
          raise Exception.Create(C_225);
@@ -3727,13 +3719,13 @@ begin
    //valida a UF
    if not Validar_Doc(QOper_CRTuf.AsAnsiString, C_ST_VAZIO, docUF) then
    begin
-     raise Exception.Create(Validador.MsgErro);
+     raise Exception.Create(DMAux.Validador.MsgErro);
    end;
    //valida a IE
    if Validar_Doc(QOper_CRTie.AsAnsiString, QOper_CRTuf.AsAnsiString, docInscEst) then
-      QOper_CRTie.AsAnsiString := AnsiString(Validador.Formatar)
+      QOper_CRTie.AsAnsiString := AnsiString(DMAux.Validador.Formatar)
       else
-      raise Exception.Create(Validador.MsgErro);
+      raise Exception.Create(DMAux.Validador.MsgErro);
 
    if not ValidarCampos(Dataset, ['nome','razaosocial','logradouro','nmro','bairro','codmun'], '') then
       raise Exception.Create('Faça as correções nos campos informados');
@@ -4271,25 +4263,26 @@ begin
    if QvwBoleto.IsEmpty then
       raise Exception.Create('Nenhum boleto cadastrado encontrado.');
 
-   Boleto1.ListadeBoletos.Clear;
-   Boleto1.Banco.TipoCobranca   := TACBrTipoCobranca(QvwBoletotipo_cobranca.Value);
+   DMAux.Boleto1.ListadeBoletos.Clear;
+   DMAux.Boleto1.Banco.TipoCobranca   := TACBrTipoCobranca(QvwBoletotipo_cobranca.Value);
    //BoletoReport1.FastReportFile := Aqui(C_BOL_REPORT_FILE, IntToStr(Report) + '.fr3');
    //BoletoReport1.DirLogo        := Aqui(C_TMP_FILE,'');
-   Boleto1.DataArquivo          := now;
-   Boleto1.DirArqRemessa        := Aqui('BOLETOS\REMESSA','');
-   Boleto1.DirArqRetorno        := Aqui('BOLETOS\RETORNO','');
-   Boleto1.NomeArqRemessa       := LFill(IntToStr(QvwBoletonossonumero.Value + 1), 12, '0')+'.rem';
-   OD1.InitialDir               := Boleto1.DirArqRetorno;
-   OD1.Filter                   := 'Arquivos de retorno|*.ret|Todos os Arquivos|*.*';
-   OD1.DefaultExt               := '.ret';
-   if OD1.Execute then
+   DMAux.Boleto1.DataArquivo          := now;
+   DMAux.Boleto1.DirArqRemessa        := Aqui('BOLETOS\REMESSA','');
+   DMAux.Boleto1.DirArqRetorno        := Aqui('BOLETOS\RETORNO','');
+   DMAux.Boleto1.NomeArqRemessa       := LFill(IntToStr(QvwBoletonossonumero.Value + 1), 12, '0')+'.rem';
+   DMAux.OD1.InitialDir               := DMAux.Boleto1.DirArqRetorno;
+   DMAux.OD1.Filter                   := 'Arquivos de retorno|*.ret|Todos os Arquivos|*.*';
+   DMAux.OD1.DefaultExt               := '.ret';
+
+   if DMAux.OD1.Execute then
    begin
-      Boleto1.NomeArqRetorno  := ExtractFileName(OD1.Filename);
+      DMAux.Boleto1.NomeArqRetorno  := ExtractFileName(DMAux.OD1.Filename);
    end
    else
       exit;
 
-   with Boleto1.Cedente do
+   with DMAux.Boleto1.Cedente do
    begin
       Nome              := QvwBoletocedente_nome.AsString;
       CodigoCedente     := QvwBoletocodigo_cedente.AsString;
@@ -4313,7 +4306,7 @@ begin
       CEP               :=Number(QvwBoletocedente_cep.AsString);
    end;
 
-   boleto1.LerRetorno;
+   DMAux.boleto1.LerRetorno;
 end;
 
 
@@ -4354,21 +4347,21 @@ begin
       FreeLibrary(dllHandle);
    end;
 
-   Boleto1.ListadeBoletos.Clear;
+   DMAux.Boleto1.ListadeBoletos.Clear;
 
-   Boleto1.Banco.TipoCobranca   := TACBrTipoCobranca(QvwBoletotipo_cobranca.Value);
-   BoletoReport1.FastReportFile := Aqui(C_BOL_REPORT_FILE, IntToStr(Report) + '.fr3');
-   BoletoReport1.DirLogo        := Aqui(C_TMP_FILE,'');
-   Boleto1.DataArquivo          := now;
-   Boleto1.DirArqRemessa        := Aqui('BOLETOS\REMESSA\','');
-   Boleto1.DirArqRetorno        := Aqui('BOLETOS\RETORNO\','');
-   Boleto1.NomeArqRemessa       := LFill(IntToStr(QvwBoletonossonumero.Value + 1), 12, '0')+'.rem';
-   Boleto1.NomeArqRetorno       := LFill(IntToStr(QvwBoletonossonumero.Value + 1), 12, '0')+'.ret';
+   DMAux.Boleto1.Banco.TipoCobranca   := TACBrTipoCobranca(QvwBoletotipo_cobranca.Value);
+   DMAux.BoletoReport1.FastReportFile := Aqui(C_BOL_REPORT_FILE, IntToStr(Report) + '.fr3');
+   DMAux.BoletoReport1.DirLogo        := Aqui(C_TMP_FILE,'');
+   DMAux.Boleto1.DataArquivo          := now;
+   DMAux.Boleto1.DirArqRemessa        := Aqui('BOLETOS\REMESSA\','');
+   DMAux.Boleto1.DirArqRetorno        := Aqui('BOLETOS\RETORNO\','');
+   DMAux.Boleto1.NomeArqRemessa       := LFill(IntToStr(QvwBoletonossonumero.Value + 1), 12, '0')+'.rem';
+   DMAux.Boleto1.NomeArqRetorno       := LFill(IntToStr(QvwBoletonossonumero.Value + 1), 12, '0')+'.ret';
    tam := 1;
    //o tamanho do noso numero influencia erros na geração do boleto
    //isso foi detecTFDo no boleto CEF e CEF-SICOB
    //assim esta rotina garante um tamanho minimo para o nosso numero
-   case Boleto1.Banco.TipoCobranca of
+   case DMAux.Boleto1.Banco.TipoCobranca of
      // cobNenhum: ;
       cobBancoDoBrasil: tam := 1;
      // cobSantander: ;
@@ -4388,7 +4381,7 @@ begin
      // cobBradescoSICOOB: ;
    end;
 
-   with Boleto1.Cedente do
+   with DMAux.Boleto1.Cedente do
    begin
       Nome              := QvwBoletocedente_nome.AsString;
       CodigoCedente     := QvwBoletocodigo_cedente.AsString;
@@ -4412,7 +4405,7 @@ begin
       CEP               :=Number(QvwBoletocedente_cep.AsString);
    end;
 
-   Titulo := Boleto1.CriarTituloNaLista;
+   Titulo := DMAux.Boleto1.CriarTituloNaLista;
 
   with Titulo do
   begin
@@ -4527,9 +4520,9 @@ begin
 
      OcorrenciaOriginal.Tipo := toRemessaRegistrar;
      //seta o local de armazenamento dos arquivos (..\BOLETOS\YYYYMM\)
-     BoletoReport1.NomeArquivo := Aqui('BOLETOS\' + FormatDateTime('yyyymm', DataDocumento), Format('%.6d', [StrToInt(NossoNumero)]) + '_' + Trim(Copy(Sacado.NomeSacado,1,20)) + '.pdf');
+     DMAux.BoletoReport1.NomeArquivo := Aqui('BOLETOS\' + FormatDateTime('yyyymm', DataDocumento), Format('%.6d', [StrToInt(NossoNumero)]) + '_' + Trim(Copy(Sacado.NomeSacado,1,20)) + '.pdf');
      //gera o boleto
-     Boleto1.GerarPDF;
+     DMAux.Boleto1.GerarPDF;
 
      //grava os dados no BD
 
@@ -4567,7 +4560,7 @@ begin
      QFinan_bol_Emit.Refresh; //atualiza o dataset para obter o id
 
      AStringList.Free;
-     Boleto1.GerarRemessa(QFinan_bol_Emitid.Value);
+     DMAux.Boleto1.GerarRemessa(QFinan_bol_Emitid.Value);
      //incrementa o nossonumero na tabela finan_banco_boleto e atualiza QvwBoleto
      ExecSQL('update finan_banco_boleto set nossonumero=' + Texto_Mysql(NossoNumero) +
              ' where id=' + Texto_Mysql(DM.QvwBoletoid.Value)
@@ -4575,7 +4568,7 @@ begin
      QvwBoleto.Refresh;
 
      if Imprimir then
-        Boleto1.Imprimir;
+        DMAux.Boleto1.Imprimir;
   end;
 end;
 
@@ -4585,81 +4578,81 @@ function TDM.Envia_Mail(Email, Conta, Senha, Autentica, Smtp, Auth_SSL,
 begin
    Result      := True;
 
-   if IdSMTP.Connected then
-      IdSMTP.Disconnect();
+   if DMAux.IdSMTP.Connected then
+      DMAux.IdSMTP.Disconnect();
 
-   IdSMTP.Host := Smtp;
+   DMAux.IdSMTP.Host := Smtp;
    { Configuraçao da Autenticação }
    if tipo = 0 then { Sem Autenticação }
    begin
-      IdSMTP.IOHandler := nil;
-      IdSMTP.AuthType := satNone;
-      IdSMTP.Username := '';
-      IdSMTP.Password := '';
-      IdSMTP.UseTLS := utNoTLSSupport;
+      DMAux.IdSMTP.IOHandler := nil;
+      DMAux.IdSMTP.AuthType := satNone;
+      DMAux.IdSMTP.Username := '';
+      DMAux.IdSMTP.Password := '';
+      DMAux.IdSMTP.UseTLS := utNoTLSSupport;
    end
    else if tipo = 1 then { Default }
    begin
-      IdSMTP.IOHandler := nil;
-      IdSMTP.AuthType := satDefault;
-      IdSMTP.Username := Conta;
-      IdSMTP.Password := Senha;
-      IdSMTP.UseTLS := utUseExplicitTLS;
+      DMAux.IdSMTP.IOHandler := nil;
+      DMAux.IdSMTP.AuthType := satDefault;
+      DMAux.IdSMTP.Username := Conta;
+      DMAux.IdSMTP.Password := Senha;
+      DMAux.IdSMTP.UseTLS := utUseExplicitTLS;
    end
    else if tipo = 2 then { SSL }
    begin
-      IdSMTP.IOHandler := idHandle;
-      IdSMTP.AuthType := satDefault;
-      IdSMTP.Username := Conta;
-      IdSMTP.Password := Senha;
-      IdSMTP.UseTLS := utUseExplicitTLS;
+      DMAux.IdSMTP.IOHandler := DMAux.idHandle;
+      DMAux.IdSMTP.AuthType := satDefault;
+      DMAux.IdSMTP.Username := Conta;
+      DMAux.IdSMTP.Password := Senha;
+      DMAux.IdSMTP.UseTLS := utUseExplicitTLS;
       { Configuramos o IOHandle }
-      idHandle.SSLOptions.Method := sslvSSLv23;
+      DMAux.idHandle.SSLOptions.Method := sslvSSLv23;
    end
    else if tipo = 3 then { TLS }
    begin
-      IdSMTP.IOHandler := idHandle;
-      IdSMTP.AuthType := satDefault;
-      IdSMTP.Username := Conta;
-      IdSMTP.Password := Senha;
-      IdSMTP.UseTLS := utUseRequireTLS;
+      DMAux.IdSMTP.IOHandler := DMAux.idHandle;
+      DMAux.IdSMTP.AuthType := satDefault;
+      DMAux.IdSMTP.Username := Conta;
+      DMAux.IdSMTP.Password := Senha;
+      DMAux.IdSMTP.UseTLS := utUseRequireTLS;
       { Configuramos o IOHandle }
-      idHandle.SSLOptions.Method := sslvSSLv3;
+      DMAux.idHandle.SSLOptions.Method := sslvSSLv3;
    end;
 
-   IdSMTP.Port := StrToInt(Porta_smtp);
+   DMAux.IdSMTP.Port := StrToInt(Porta_smtp);
    { Configuraçao da Autenticação FIM }
 
-   IdMessage.From.Name    := Nom_exibe; // Nome do Remetente
-   IdMessage.From.Address := Email; // E-mail do Remetente = email valido...
-   IdMessage.Recipients.EMailAddresses := Destinatario; // destinatario
-   IdMessage.Priority     := mpHighest;
-   IdMessage.Subject      := Assunto; // Assunto do E-mail
+   DMAux.IdMessage.From.Name    := Nom_exibe; // Nome do Remetente
+   DMAux.IdMessage.From.Address := Email; // E-mail do Remetente = email valido...
+   DMAux.IdMessage.Recipients.EMailAddresses := Destinatario; // destinatario
+   DMAux.IdMessage.Priority     := mpHighest;
+   DMAux.IdMessage.Subject      := Assunto; // Assunto do E-mail
 
    try
       if trim(ArqPDF) <> '' then
       begin
-         TIdAttachmentFile.Create(IdMessage.MessageParts, TFileName(ArqPDF));
+         TIdAttachmentFile.Create(DMAux.IdMessage.MessageParts, TFileName(ArqPDF));
       end;
 
-      IdMessage.Body.Clear;
-      IdMessage.Body.Add(Corpo);
+      DMAux.IdMessage.Body.Clear;
+      DMAux.IdMessage.Body.Add(Corpo);
 
-      IdSMTP.Connect;
+      DMAux.IdSMTP.Connect;
 
-      if IdSMTP.AuthType <> satNone then
-         IdSMTP.Authenticate;
+      if DMAux.IdSMTP.AuthType <> satNone then
+         DMAux.IdSMTP.Authenticate;
 
-      IdSMTP.Send(IdMessage);
-      IdMessage.MessageParts.Clear;
-      IdSMTP.Disconnect();
+      DMAux.IdSMTP.Send(DMAux.IdMessage);
+      DMAux.IdMessage.MessageParts.Clear;
+      DMAux.IdSMTP.Disconnect();
       {$IFDEF GER}
       Status(False,'','');
       {$endif}
    except
       on E: Exception do
       begin
-         IdMessage.MessageParts.Clear;
+         DMAux.IdMessage.MessageParts.Clear;
         {$IFDEF GER}
          Status(False,'','');
          {$endif}

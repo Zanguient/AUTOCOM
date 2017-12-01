@@ -26,11 +26,12 @@ inherited frmBoletoAvulso: TfrmBoletoAvulso
       end
       object cbPrint: TcxCheckBox
         AlignWithMargins = True
-        Left = 341
+        Left = 299
         Top = 3
         Align = alRight
         Caption = 'Imprimir'
         TabOrder = 1
+        ExplicitLeft = 341
         ExplicitHeight = 0
       end
       object crFormato: TcxRadioGroup

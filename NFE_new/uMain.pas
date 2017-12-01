@@ -3111,6 +3111,10 @@ begin
       if (Components[i] is TcxGridDBTableView) then
          (Components[i] as TcxGridDBTableView).StoreToIniFile(Aqui(C_GRD_FILE, MD5_Str(TForm(sender).Name + (Components[i] as TcxGridDBTableView).Name) + '.grd')); //RestoreFromIniFile   // StoreToIniFile
   end;
+  FreeAndNil(DM_INI);
+  FreeAndNil(DM);
+  FreeAndNil(DMConn);
+  FreeAndNil(DM_NFE);
 end;
 
 procedure TfrmMain.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -3162,6 +3166,10 @@ begin
   inherited;
    CAPTION := 'MÓDULO EMISSOR DE NF-e ' + C_117;
    SplashMsg('Carregando ini...');
+   DM_INI := TDM_INI.Create(Self);
+   DM_NFE := TDM_NFE.Create(Self);
+   DMConn := TDMConn.Create(Self);
+   DM     := TDM.Create(Self);
    DM_INI.INI.IniFileName := Aqui(C_INI_FILE, 'autocom.ini');
    DM_INI.INI.Active := true;
    DM_INI.INI.RestoreFormPlacement;

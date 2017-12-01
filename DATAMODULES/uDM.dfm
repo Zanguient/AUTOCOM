@@ -2,7 +2,7 @@ object DM: TDM
   OldCreateOrder = False
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
-  Height = 863
+  Height = 1097
   Width = 1255
   object QEmpresa: TFDQuery
     Tag = 1
@@ -11,8 +11,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from empresa limit 1')
-    Left = 73
-    Top = 68
+    Left = 21
+    Top = 12
     object QEmpresaid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -443,8 +443,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from convenio order by id desc limit 1')
-    Left = 129
-    Top = 68
+    Left = 77
+    Top = 12
     object QConvenioid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -562,11 +562,6 @@ object DM: TDM
       Origin = 'codmun'
     end
   end
-  object Validador: TACBrValidador
-    IgnorarChar = './-'
-    Left = 740
-    Top = 20
-  end
   object QOperador: TFDQuery
     Tag = 1
     BeforeInsert = QOperadorBeforeInsert
@@ -577,8 +572,8 @@ object DM: TDM
     ResourceOptions.AssignedValues = [rvPersistent, rvBackup]
     SQL.Strings = (
       'select * from operador order by nome')
-    Left = 728
-    Top = 300
+    Left = 192
+    Top = 80
     object QOperadorid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -655,8 +650,8 @@ object DM: TDM
   object DSOperador: TDataSource
     AutoEdit = False
     DataSet = QOperador
-    Left = 800
-    Top = 336
+    Left = 192
+    Top = 128
   end
   object QVendedor: TFDQuery
     BeforePost = QVendedorBeforePost
@@ -664,8 +659,8 @@ object DM: TDM
     ResourceOptions.AssignedValues = [rvPersistent, rvBackup]
     SQL.Strings = (
       'select * from vendedor order by nome')
-    Left = 682
-    Top = 72
+    Left = 290
+    Top = 12
     object QVendedorid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -753,8 +748,8 @@ object DM: TDM
     ResourceOptions.AssignedValues = [rvPersistent, rvBackup]
     SQL.Strings = (
       'select * from nf_modelos')
-    Left = 733
-    Top = 72
+    Left = 481
+    Top = 180
     object QModNFid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -844,8 +839,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from ncm limit 5')
-    Left = 856
-    Top = 72
+    Left = 768
+    Top = 12
     object QNCMcod_nbm: TStringField
       DisplayLabel = 'NBM'
       FieldName = 'cod_nbm'
@@ -987,8 +982,8 @@ object DM: TDM
       '    sessao, produto, x.cst'
       'order by'
       '    e.nome')
-    Left = 72
-    Top = 128
+    Left = 320
+    Top = 176
     ParamData = <
       item
         Name = 'data'
@@ -1244,8 +1239,8 @@ object DM: TDM
         'select distinct cnpj, id,nome,razaosocial,tel1,logradouro,nmro,c' +
         'omplem,bairro,'
       'cidade,uf,cep,ie,cidade_cod,email,tipo from vw_dest_nf')
-    Left = 136
-    Top = 128
+    Left = 828
+    Top = 68
     object QvwDest_nfcnpj: TStringField
       FieldName = 'cnpj'
       Origin = 'cnpj'
@@ -1324,33 +1319,33 @@ object DM: TDM
   end
   object dsMod2: TDataSource
     DataSet = cdMod2
-    Left = 84
-    Top = 400
+    Left = 92
+    Top = 724
   end
   object dsMod: TDataSource
     DataSet = cdMod
-    Left = 84
-    Top = 454
+    Left = 92
+    Top = 778
   end
   object dsCSOSN: TDataSource
     DataSet = cdcsosn
-    Left = 1016
-    Top = 25
+    Left = 828
+    Top = 145
   end
   object dsCST: TDataSource
     DataSet = QCST
-    Left = 260
-    Top = 118
+    Left = 476
+    Top = 58
   end
   object dsCST2: TDataSource
     DataSet = cdCST2
-    Left = 992
-    Top = 134
+    Left = 812
+    Top = 250
   end
   object dsCSTPC: TDataSource
     DataSet = cdCSTPC
-    Left = 1000
-    Top = 190
+    Left = 816
+    Top = 306
   end
   object Qcfop_cst_csosn: TFDQuery
     BeforePost = Qcfop_cst_csosnBeforePost
@@ -1585,8 +1580,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from custo_operacional order by data desc')
-    Left = 488
-    Top = 628
+    Left = 492
+    Top = 820
     object QCusto_Operid: TIntegerField
       AutoGenerateValue = arAutoInc
       FieldName = 'id'
@@ -1619,76 +1614,39 @@ object DM: TDM
   object DSBancos: TDataSource
     AutoEdit = False
     DataSet = QBancos
-    Left = 584
-    Top = 132
+    Left = 9
+    Top = 586
   end
   object DSAgencias: TDataSource
     AutoEdit = False
     DataSet = QAgencias
-    Left = 424
-    Top = 179
+    Left = 61
+    Top = 586
   end
   object DSContas: TDataSource
     AutoEdit = False
     DataSet = QContas
-    Left = 424
-    Top = 232
-  end
-  object Boleto1: TACBrBoleto
-    MAIL = Mail1
-    Banco.Numero = 237
-    Banco.TamanhoMaximoNossoNum = 11
-    Banco.TipoCobranca = cobBradesco
-    Banco.LayoutVersaoArquivo = 0
-    Banco.LayoutVersaoLote = 0
-    Cedente.Nome = 'CLAUDIA LUCIA GURGEL BARBOSA'
-    Cedente.CodigoCedente = '29475'
-    Cedente.Agencia = '3176'
-    Cedente.AgenciaDigito = '0'
-    Cedente.Conta = '0029475'
-    Cedente.Modalidade = '02'
-    Cedente.CNPJCPF = '05.213.425/0001-00'
-    Cedente.TipoInscricao = pJuridica
-    DirArqRemessa = 'c:\temp'
-    NumeroArquivo = 0
-    LayoutRemessa = c240
-    ImprimirMensagemPadrao = False
-    ACBrBoletoFC = BoletoReport1
-    Left = 816
-    Top = 19
-  end
-  object BoletoReport1: TACBrBoletoFCFR
-    ACBrBoleto = Boleto1
-    LayOut = lPadraoEntrega
-    DirLogo = 'E:\DELPHI XE2\COMPONENTES\ACBr\Fontes\ACBrBoleto\Logos\Colorido'
-    MostrarPreview = False
-    MostrarSetup = False
-    Filtro = fiPDF
-    FastReportFile = 'E:\PROJETOS\bin\DAT\BOL\Boleto.fr3'
-    ModoThread = False
-    IncorporarBackgroundPdf = False
-    IncorporarFontesPdf = False
-    Left = 896
-    Top = 20
+    Left = 121
+    Top = 586
   end
   object DSBoleto: TDataSource
     AutoEdit = False
     DataSet = QBoleto
-    Left = 424
-    Top = 296
+    Left = 169
+    Top = 586
   end
   object DSFinan_bol_Emit: TDataSource
     AutoEdit = False
     DataSet = QFinan_bol_Emit
-    Left = 270
-    Top = 520
+    Left = 278
+    Top = 844
   end
   object QvwBoleto: TFDQuery
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from vw_finan_boleto')
-    Left = 176
-    Top = 580
+    Left = 184
+    Top = 904
     object QvwBoletonumbanco: TIntegerField
       FieldName = 'numbanco'
       Origin = 'numbanco'
@@ -1945,8 +1903,8 @@ object DM: TDM
   end
   object DSvwBoleto: TDataSource
     DataSet = QvwBoleto
-    Left = 270
-    Top = 584
+    Left = 278
+    Top = 908
   end
   object QFinan_CliDeb: TFDQuery
     AfterOpen = QFinan_CliDebAfterOpen
@@ -1956,8 +1914,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from vw_clideb')
-    Left = 176
-    Top = 236
+    Left = 236
+    Top = 536
     object QFinan_CliDebid: TIntegerField
       FieldName = 'id'
       Origin = 'id'
@@ -1981,8 +1939,8 @@ object DM: TDM
   object DSFinan_CliDeb: TDataSource
     AutoEdit = False
     DataSet = QFinan_CliDeb
-    Left = 270
-    Top = 232
+    Left = 238
+    Top = 588
   end
   object QFinanDeb: TFDQuery
     BeforePost = QFinanDebBeforePost
@@ -1993,8 +1951,8 @@ object DM: TDM
     SQL.Strings = (
       'select * from finan_debito where cliente=:id'
       'and valor_pg < valor ')
-    Left = 176
-    Top = 292
+    Left = 312
+    Top = 536
     ParamData = <
       item
         Name = 'ID'
@@ -2067,8 +2025,8 @@ object DM: TDM
   object DSFinanDeb: TDataSource
     AutoEdit = False
     DataSet = QFinanDeb
-    Left = 270
-    Top = 288
+    Left = 314
+    Top = 588
   end
   object QFinanCred: TFDQuery
     BeforePost = QFinanCredBeforePost
@@ -2079,8 +2037,8 @@ object DM: TDM
     SQL.Strings = (
       'select * from finan_credito where cliente=:id'
       'and baixa is null')
-    Left = 176
-    Top = 348
+    Left = 342
+    Top = 438
     ParamData = <
       item
         Name = 'ID'
@@ -2133,8 +2091,8 @@ object DM: TDM
   object DSFinanCredito: TDataSource
     AutoEdit = False
     DataSet = QFinanCred
-    Left = 270
-    Top = 344
+    Left = 142
+    Top = 792
   end
   object QFinanTotDebCred: TFDQuery
     BeforePost = QFinanTotDebCredBeforePost
@@ -2144,8 +2102,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from vw_totaldebcred where cliente=:id')
-    Left = 176
-    Top = 404
+    Left = 412
+    Top = 544
     ParamData = <
       item
         Name = 'ID'
@@ -2173,16 +2131,16 @@ object DM: TDM
   object DSFinanTotDebCred: TDataSource
     AutoEdit = False
     DataSet = QFinanTotDebCred
-    Left = 270
-    Top = 400
+    Left = 410
+    Top = 600
   end
   object QCaixaConst: TFDQuery
     BeforePost = QCaixaConstBeforePost
     Connection = DMConn.DB
     SQL.Strings = (
       'SELECT * FROM caixa_const')
-    Left = 72
-    Top = 292
+    Left = 46
+    Top = 700
     object QCaixaConstid: TIntegerField
       FieldName = 'id'
     end
@@ -2204,22 +2162,22 @@ object DM: TDM
   object DSCaixa: TDataSource
     AutoEdit = False
     DataSet = QCaixa
-    Left = 120
-    Top = 239
+    Left = 342
+    Top = 76
   end
   object DSFinan_Carne: TDataSource
     AutoEdit = False
     DataSet = QFinan_Carne
-    Left = 270
-    Top = 461
+    Left = 42
+    Top = 480
   end
   object QParcelas: TFDQuery
     BeforePost = QParcelasBeforePost
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from finan_parcelas')
-    Left = 104
-    Top = 524
+    Left = 112
+    Top = 848
     object QParcelasid: TIntegerField
       Alignment = taCenter
       AutoGenerateValue = arAutoInc
@@ -2251,16 +2209,16 @@ object DM: TDM
   object DSFinan_Banco_Movi: TDataSource
     AutoEdit = False
     DataSet = QFinan_Banco_Movi
-    Left = 463
-    Top = 344
+    Left = 141
+    Top = 482
   end
   object Qfinan_centro_custo: TFDQuery
     BeforeDelete = Qfinan_centro_custoBeforeDelete
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from finan_centro_custo')
-    Left = 24
-    Top = 516
+    Left = 250
+    Top = 434
     object Qfinan_centro_custoid: TIntegerField
       Alignment = taCenter
       AutoGenerateValue = arAutoInc
@@ -2302,8 +2260,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from carga')
-    Left = 24
-    Top = 580
+    Left = 32
+    Top = 904
     object QCargaid: TIntegerField
       Alignment = taCenter
       AutoGenerateValue = arAutoInc
@@ -2329,8 +2287,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from carga_full')
-    Left = 24
-    Top = 628
+    Left = 32
+    Top = 952
     object QCargaFullid: TIntegerField
       DisplayLabel = 'ID'
       FieldName = 'id'
@@ -2353,8 +2311,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from segur where operador=:id')
-    Left = 728
-    Top = 356
+    Left = 244
+    Top = 84
     ParamData = <
       item
         Name = 'ID'
@@ -2404,8 +2362,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from cst where simplesnacional="N"')
-    Left = 256
-    Top = 68
+    Left = 476
+    Top = 12
     object QCSTid: TFDAutoIncField
       Alignment = taCenter
       DisplayLabel = 'ID'
@@ -2461,8 +2419,8 @@ object DM: TDM
     ResourceOptions.AssignedValues = [rvPersistent, rvBackup]
     SQL.Strings = (
       'select * from estoque_info_complem')
-    Left = 800
-    Top = 72
+    Left = 660
+    Top = 58
     object QInfo_complid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -2505,8 +2463,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from aliquota')
-    Left = 216
-    Top = 68
+    Left = 436
+    Top = 12
     object QAliqid: TFDAutoIncField
       Alignment = taCenter
       DisplayLabel = 'ID'
@@ -2558,8 +2516,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from cfop')
-    Left = 456
-    Top = 72
+    Left = 524
+    Top = 12
     object QCFOPid: TFDAutoIncField
       Alignment = taCenter
       DisplayLabel = 'ID'
@@ -2608,8 +2566,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from cliente order by id desc limit 1')
-    Left = 176
-    Top = 68
+    Left = 124
+    Top = 12
     object QCliid: TFDAutoIncField
       Alignment = taCenter
       DisplayLabel = 'ID'
@@ -2917,8 +2875,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from fornecedor order by id desc limit 1')
-    Left = 496
-    Top = 72
+    Left = 176
+    Top = 12
     object QFornid: TFDAutoIncField
       DisplayLabel = 'ID'
       FieldName = 'id'
@@ -3236,8 +3194,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from fpag')
-    Left = 536
-    Top = 72
+    Left = 660
+    Top = 12
     object QFPagid: TFDAutoIncField
       Alignment = taCenter
       DisplayLabel = 'ID'
@@ -3294,8 +3252,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from sessao order by nome')
-    Left = 576
-    Top = 72
+    Left = 77
+    Top = 80
     object QSessaoid: TFDAutoIncField
       Alignment = taCenter
       DisplayLabel = 'ID'
@@ -3341,8 +3299,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from unidade order by unidade')
-    Left = 624
-    Top = 72
+    Left = 21
+    Top = 80
     object QUnidadeid: TFDAutoIncField
       Alignment = taCenter
       DisplayLabel = 'ID'
@@ -3385,8 +3343,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from estoque order by id desc limit 1')
-    Left = 728
-    Top = 412
+    Left = 12
+    Top = 176
     object QEstoqueid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -3799,8 +3757,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from finan_boleto_emitido')
-    Left = 176
-    Top = 520
+    Left = 184
+    Top = 844
     object QFinan_bol_Emitid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -4011,8 +3969,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from finan_debito')
-    Left = 176
-    Top = 184
+    Left = 118
+    Top = 644
     object QDebitoid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -4095,8 +4053,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from finan_carne_emitido')
-    Left = 176
-    Top = 464
+    Left = 40
+    Top = 435
     object QFinan_Carneid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -4203,8 +4161,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from caixa')
-    Left = 72
-    Top = 240
+    Left = 342
+    Top = 16
     object QCaixaid: TFDAutoIncField
       DisplayLabel = 'ID'
       FieldName = 'id'
@@ -4294,8 +4252,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from finan_banco_banco order by numbanco')
-    Left = 520
-    Top = 132
+    Left = 9
+    Top = 534
     object QBancosid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -4338,8 +4296,8 @@ object DM: TDM
       'select * from finan_banco_agencia '
       'where banco=:id'
       'order by agencia')
-    Left = 360
-    Top = 184
+    Left = 61
+    Top = 534
     ParamData = <
       item
         Name = 'ID'
@@ -4389,8 +4347,8 @@ object DM: TDM
     SQL.Strings = (
       'select * from finan_banco_boleto'
       'where conta=:id')
-    Left = 360
-    Top = 296
+    Left = 169
+    Top = 534
     ParamData = <
       item
         Name = 'ID'
@@ -4737,8 +4695,8 @@ object DM: TDM
       'select * from finan_banco_conta '
       'where agencia=:id'
       'order by conta')
-    Left = 360
-    Top = 240
+    Left = 121
+    Top = 534
     ParamData = <
       item
         Name = 'ID'
@@ -4813,8 +4771,8 @@ object DM: TDM
     SQL.Strings = (
       'select * from finan_banco_movi'
       'where conta=:id')
-    Left = 360
-    Top = 344
+    Left = 142
+    Top = 434
     ParamData = <
       item
         Name = 'ID'
@@ -4884,8 +4842,8 @@ object DM: TDM
     ResourceOptions.SilentMode = True
     UpdateOptions.AssignedValues = [uvCheckRequired]
     UpdateOptions.CheckRequired = False
-    Left = 948
-    Top = 88
+    Left = 768
+    Top = 204
     object cdCSTid: TIntegerField
       FieldName = 'id'
     end
@@ -4902,8 +4860,8 @@ object DM: TDM
     ResourceOptions.SilentMode = True
     UpdateOptions.AssignedValues = [uvCheckRequired]
     UpdateOptions.CheckRequired = False
-    Left = 964
-    Top = 24
+    Left = 772
+    Top = 140
     object cdcsosnid: TIntegerField
       FieldName = 'id'
     end
@@ -4920,8 +4878,8 @@ object DM: TDM
     ResourceOptions.SilentMode = True
     UpdateOptions.AssignedValues = [uvCheckRequired]
     UpdateOptions.CheckRequired = False
-    Left = 948
-    Top = 136
+    Left = 768
+    Top = 252
     object cdCST2id: TIntegerField
       FieldName = 'id'
     end
@@ -4938,8 +4896,8 @@ object DM: TDM
     ResourceOptions.SilentMode = True
     UpdateOptions.AssignedValues = [uvCheckRequired]
     UpdateOptions.CheckRequired = False
-    Left = 948
-    Top = 192
+    Left = 768
+    Top = 308
     object cdCSTPCid: TIntegerField
       FieldName = 'id'
     end
@@ -4956,8 +4914,8 @@ object DM: TDM
     ResourceOptions.SilentMode = True
     UpdateOptions.AssignedValues = [uvCheckRequired]
     UpdateOptions.CheckRequired = False
-    Left = 24
-    Top = 448
+    Left = 684
+    Top = 724
     object cdModid: TIntegerField
       FieldName = 'id'
     end
@@ -4973,8 +4931,8 @@ object DM: TDM
     ResourceOptions.SilentMode = True
     UpdateOptions.AssignedValues = [uvCheckRequired]
     UpdateOptions.CheckRequired = False
-    Left = 24
-    Top = 400
+    Left = 620
+    Top = 720
     object cdMod2id: TIntegerField
       FieldName = 'id'
     end
@@ -4986,8 +4944,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from finan_bol_cli')
-    Left = 176
-    Top = 630
+    Left = 184
+    Top = 954
     object QFinan_Bol_Cliid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -5045,8 +5003,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from softhouse limit 1')
-    Left = 72
-    Top = 180
+    Left = 228
+    Top = 12
     object QSoftHouseid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -5220,8 +5178,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from venda limit 1')
-    Left = 664
-    Top = 136
+    Left = 8
+    Top = 336
     object QVendaid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -5409,8 +5367,8 @@ object DM: TDM
   object DSVenda: TDataSource
     AutoEdit = False
     DataSet = QVenda
-    Left = 727
-    Top = 156
+    Left = 7
+    Top = 388
   end
   object QVenda_Item: TFDQuery
     AfterInsert = QVenda_ItemAfterInsert
@@ -5419,8 +5377,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from venda_item where venda=:id order by nItem')
-    Left = 504
-    Top = 188
+    Left = 72
+    Top = 336
     ParamData = <
       item
         Name = 'ID'
@@ -5890,7 +5848,7 @@ object DM: TDM
     SQL.Strings = (
       'select * from paf_r01')
     Left = 553
-    Top = 298
+    Top = 182
     object TPAF_R01id: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -5959,7 +5917,7 @@ object DM: TDM
     SQL.Strings = (
       'select * from paf_r02')
     Left = 551
-    Top = 358
+    Top = 242
     object TPAF_R02id: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -6052,7 +6010,7 @@ object DM: TDM
     SQL.Strings = (
       'select * from paf_r03 where r02=:id')
     Left = 551
-    Top = 412
+    Top = 296
     ParamData = <
       item
         Name = 'ID'
@@ -6097,12 +6055,12 @@ object DM: TDM
   object DSPAF_R03: TDataSource
     DataSet = TPAF_R03
     Left = 623
-    Top = 412
+    Top = 296
   end
   object DSPAF_R02: TDataSource
     DataSet = TPAF_R02
     Left = 623
-    Top = 358
+    Top = 242
   end
   object TPAF_R04: TFDQuery
     AfterInsert = TPAF_R04AfterInsert
@@ -6113,7 +6071,7 @@ object DM: TDM
     SQL.Strings = (
       'select * from paf_r04 where r02=:id')
     Left = 551
-    Top = 466
+    Top = 350
     ParamData = <
       item
         Name = 'ID'
@@ -6217,7 +6175,7 @@ object DM: TDM
   object DSPAF_R04: TDataSource
     DataSet = TPAF_R04
     Left = 623
-    Top = 466
+    Top = 350
   end
   object TPAF_R05: TFDQuery
     AfterInsert = TPAF_R05AfterInsert
@@ -6228,7 +6186,7 @@ object DM: TDM
     SQL.Strings = (
       'select * from paf_r05 where r04=:id')
     Left = 551
-    Top = 517
+    Top = 401
     ParamData = <
       item
         Name = 'ID'
@@ -6351,7 +6309,7 @@ object DM: TDM
   object DSPAF_R05: TDataSource
     DataSet = TPAF_R05
     Left = 622
-    Top = 517
+    Top = 401
   end
   object TPAF_R06: TFDQuery
     AfterInsert = TPAF_R06AfterInsert
@@ -6362,7 +6320,7 @@ object DM: TDM
     SQL.Strings = (
       'select * from paf_r06 where r02=:id')
     Left = 551
-    Top = 569
+    Top = 453
     ParamData = <
       item
         Name = 'ID'
@@ -6428,7 +6386,7 @@ object DM: TDM
   object DSPAF_R06: TDataSource
     DataSet = TPAF_R06
     Left = 622
-    Top = 569
+    Top = 453
   end
   object TPAF_R07: TFDQuery
     BeforePost = TPAF_R01BeforePost
@@ -6436,7 +6394,7 @@ object DM: TDM
     SQL.Strings = (
       'select * from paf_r07')
     Left = 551
-    Top = 624
+    Top = 508
     object TPAF_R07id: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -6488,12 +6446,12 @@ object DM: TDM
   object DSPAF_R07: TDataSource
     DataSet = TPAF_R07
     Left = 622
-    Top = 624
+    Top = 508
   end
   object DSPAF_R01: TDataSource
     DataSet = TPAF_R01
     Left = 623
-    Top = 302
+    Top = 186
   end
   object TPAF_E2: TFDQuery
     AfterInsert = TPAF_E2AfterInsert
@@ -6501,8 +6459,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from paf_e2 order by id desc limit 1')
-    Left = 672
-    Top = 422
+    Left = 684
+    Top = 334
     object TPAF_E2id: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -6563,8 +6521,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from paf_e3 order by id desc limit 1')
-    Left = 672
-    Top = 364
+    Left = 684
+    Top = 276
     object TPAF_E3id: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -6626,8 +6584,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from paf_a2')
-    Left = 672
-    Top = 474
+    Left = 684
+    Top = 386
     object TPAF_A2id: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -6688,8 +6646,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       '')
-    Left = 948
-    Top = 260
+    Left = 68
+    Top = 176
     object QvwEstoqueid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -7137,8 +7095,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from oper_crt order by nome')
-    Left = 912
-    Top = 72
+    Left = 828
+    Top = 12
     object QOper_CRTid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -9153,8 +9111,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from trn where venda=:id')
-    Left = 808
-    Top = 136
+    Left = 892
+    Top = 12
     ParamData = <
       item
         Name = 'ID'
@@ -9230,8 +9188,8 @@ object DM: TDM
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
       'select* from trn_item where trn=:id')
-    Left = 648
-    Top = 182
+    Left = 216
+    Top = 338
     ParamData = <
       item
         Name = 'ID'
@@ -9310,15 +9268,15 @@ object DM: TDM
   end
   object DSTrn: TDataSource
     DataSet = Qtrn
-    Left = 856
-    Top = 158
+    Left = 892
+    Top = 58
   end
   object QPFP: TFDQuery
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from pfp where venda=:id')
-    Left = 504
-    Top = 236
+    Left = 716
+    Top = 12
     ParamData = <
       item
         Name = 'ID'
@@ -9448,8 +9406,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from ibptax')
-    Left = 592
-    Top = 14
+    Left = 332
+    Top = 644
     object TIBPTaxid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -9650,8 +9608,8 @@ object DM: TDM
   object DSFinan_apagar: TDataSource
     AutoEdit = False
     DataSet = QFinan_apagar
-    Left = 463
-    Top = 408
+    Left = 407
+    Top = 496
   end
   object QFinan_apagar: TFDQuery
     AfterInsert = QFinan_apagarAfterInsert
@@ -9661,8 +9619,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from finan_apagar')
-    Left = 360
-    Top = 408
+    Left = 412
+    Top = 440
     object QFinan_apagarid: TFDAutoIncField
       Alignment = taCenter
       FieldName = 'id'
@@ -9798,8 +9756,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from finan_chq_terceiro')
-    Left = 360
-    Top = 468
+    Left = 368
+    Top = 792
     object Qfinan_ch_tercid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -9902,16 +9860,16 @@ object DM: TDM
   object DSfinan_ch_terc: TDataSource
     AutoEdit = False
     DataSet = Qfinan_ch_terc
-    Left = 447
-    Top = 472
+    Left = 455
+    Top = 796
   end
   object QFinan_ch_alinea: TFDQuery
     BeforePost = QFinan_ch_alineaBeforePost
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from finan_cheque_alinea')
-    Left = 360
-    Top = 532
+    Left = 368
+    Top = 856
     object QFinan_ch_alineaid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -9929,8 +9887,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from estoque_perda where baixa="N"')
-    Left = 696
-    Top = 228
+    Left = 244
+    Top = 176
     object QEstoque_perdaid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -9977,8 +9935,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from balanca')
-    Left = 264
-    Top = 172
+    Left = 132
+    Top = 80
     object QBalancaid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -10007,8 +9965,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from regra_imposto order by nome')
-    Left = 576
-    Top = 236
+    Left = 404
+    Top = 180
     object QRegras_Impostoid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -10098,8 +10056,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from tablet where codigo=:codigo')
-    Left = 424
-    Top = 532
+    Left = 280
+    Top = 344
     ParamData = <
       item
         Name = 'CODIGO'
@@ -10126,8 +10084,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from tablet_itens where tablet=:id and cancelado='#39'N'#39)
-    Left = 424
-    Top = 592
+    Left = 344
+    Top = 344
     ParamData = <
       item
         Name = 'ID'
@@ -10167,16 +10125,16 @@ object DM: TDM
   object DSTablet: TDataSource
     AutoEdit = False
     DataSet = Qtablet
-    Left = 471
-    Top = 560
+    Left = 479
+    Top = 884
   end
   object TIBPTax_Itens: TFDQuery
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from ibptax_itens'
       '')
-    Left = 648
-    Top = 14
+    Left = 332
+    Top = 700
     object TIBPTax_Itensid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -10229,8 +10187,8 @@ object DM: TDM
   end
   object dsQCSOSN: TDataSource
     DataSet = QCSOSN
-    Left = 336
-    Top = 122
+    Left = 588
+    Top = 58
   end
   object QCSOSN: TFDQuery
     BeforePost = QCSTBeforePost
@@ -10238,8 +10196,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from cst where simplesnacional="S"')
-    Left = 332
-    Top = 72
+    Left = 584
+    Top = 12
     object QCSOSNid: TFDAutoIncField
       DisplayLabel = 'ID'
       FieldName = 'id'
@@ -10288,8 +10246,8 @@ object DM: TDM
     Connection = DMConn.DB
     SQL.Strings = (
       'select * from nf_dic')
-    Left = 848
-    Top = 248
+    Left = 768
+    Top = 64
     object QDic_nfID: TFDAutoIncField
       FieldName = 'ID'
       Origin = 'ID'
@@ -10313,8 +10271,8 @@ object DM: TDM
       'estoque e'
       'left join estoque_inicial i on i.estoque = e.id '
       'order by e.nome')
-    Left = 36
-    Top = 704
+    Left = 148
+    Top = 176
     object QEstoque_Inicialid: TFDAutoIncField
       DisplayLabel = 'ID'
       FieldName = 'id'
@@ -10354,8 +10312,8 @@ object DM: TDM
   object DSEstoqueInicial: TDataSource
     AutoEdit = False
     DataSet = QEstoque_Inicial
-    Left = 100
-    Top = 719
+    Left = 148
+    Top = 231
   end
   object QVwQuant_Estoque: TFDQuery
     BeforeOpen = Q1BeforeOpen
@@ -10380,8 +10338,8 @@ object DM: TDM
         ' <>'#39'N'#39
       ')CURQ'
       'where id = :id ')
-    Left = 264
-    Top = 672
+    Left = 272
+    Top = 996
     ParamData = <
       item
         Name = 'ID'
@@ -10400,59 +10358,7 @@ object DM: TDM
   object DSVwQuant_Estoque: TDataSource
     AutoEdit = False
     DataSet = QVwQuant_Estoque
-    Left = 364
-    Top = 679
-  end
-  object OD1: TOpenDialog
-    Options = [ofEnableSizing]
-    Left = 380
-    Top = 20
-  end
-  object Mail1: TACBrMail
-    Host = '127.0.0.1'
-    Port = '25'
-    SetSSL = False
-    SetTLS = False
-    Attempts = 3
-    DefaultCharset = UTF_8
-    IDECharset = CP1252
-    Left = 316
-    Top = 16
-  end
-  object IdSMTP: TIdSMTP
-    OnStatus = IdSMTPStatus
-    IOHandler = idHandle
-    OnWorkEnd = IdSMTPWorkEnd
-    SASLMechanisms = <>
-    UseTLS = utUseExplicitTLS
-    Left = 388
-    Top = 84
-  end
-  object idHandle: TIdSSLIOHandlerSocketOpenSSL
-    OnStatus = idHandleStatus
-    Destination = ':25'
-    MaxLineAction = maException
-    Port = 25
-    DefaultPort = 0
-    SSLOptions.Mode = sslmUnassigned
-    SSLOptions.VerifyMode = []
-    SSLOptions.VerifyDepth = 0
-    OnStatusInfo = idHandleStatusInfo
-    Left = 388
-    Top = 132
-  end
-  object IdMessage: TIdMessage
-    AttachmentEncoding = 'UUE'
-    BccList = <>
-    CCList = <>
-    Encoding = meDefault
-    FromList = <
-      item
-      end>
-    Recipients = <>
-    ReplyTo = <>
-    ConvertPreamble = True
-    Left = 440
-    Top = 132
+    Left = 372
+    Top = 1003
   end
 end

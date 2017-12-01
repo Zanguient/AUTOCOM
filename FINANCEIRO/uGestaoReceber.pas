@@ -363,7 +363,7 @@ implementation
 {$R *.dfm}
 
 uses uAutocomConsts, uDM, uFuncoes, uMD5Print, uBoletoAvulso, udm_ini,
-  uCadPlanoContas, uAssoc, uEnvioBol, uParcelamento, uQuita, uDM_Conn;
+  uCadPlanoContas, uAssoc, uEnvioBol, uParcelamento, uQuita, uDM_Conn, uDMAux;
 
 procedure TfrmGestaoReceber.BaixarDoc1Click(Sender: TObject);
 begin
@@ -1085,9 +1085,9 @@ begin
 
    DM.LerArqRetorno;
 
-   for i := 0 to DM.Boleto1.ListadeBoletos.Count - 1 do
+   for i := 0 to DMAux.Boleto1.ListadeBoletos.Count - 1 do
    begin
-      with DM.Boleto1.ListadeBoletos[i] do
+      with DMAux.Boleto1.ListadeBoletos[i] do
       begin
          if Trim(DescricaoMotivoRejeicaoComando.Text) <> '' then
             Memo1.Lines.Add(NumeroDocumento + ' - ' + SeuNumero + '- ' + DescricaoMotivoRejeicaoComando.Text);

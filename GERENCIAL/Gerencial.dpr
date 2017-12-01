@@ -95,7 +95,6 @@ uses
   uCadBal in '..\CADASTROS\uCadBal.pas' {frmCadBal},
   uAtuFarma in '..\FARMA\uAtuFarma.pas' {frmAtu_Farma},
   uManut in '..\NFE_new\uManut.pas' {frmManu},
-  udmnfe in '..\NFE_new\udmnfe.pas' {DM_NFE: TDataModule},
   uValidacao in '..\NFE_new\uValidacao.pas' {frmValidacao},
   uStatus in '..\NFE_new\uStatus.pas' {frmStatus},
   uEstoque_Inicial in '..\CADASTROS\uEstoque_Inicial.pas' {frmCad_Estoque_Inicial},
@@ -107,7 +106,9 @@ uses
   uDM_Sintegra in '..\DATAMODULES\uDM_Sintegra.pas' {DM_Sintegra: TDataModule},
   uDM_SPED in '..\DATAMODULES\uDM_SPED.pas' {DM_Sped: TDataModule},
   uDM_SPED_PIS in '..\DATAMODULES\uDM_SPED_PIS.pas' {DM_SPED_PIS: TDataModule},
-  uDMecf in '..\DATAMODULES\uDMecf.pas' {DM_ECF: TDataModule};
+  uDMecf in '..\DATAMODULES\uDMecf.pas' {DM_ECF: TDataModule},
+  udmnfe in '..\DATAMODULES\udmnfe.pas' {DM_NFE: TDataModule},
+  uDMAux in '..\DATAMODULES\uDMAux.pas' {DMAux: TDataModule};
 
 {$R *.res}
 
@@ -132,6 +133,8 @@ begin
   Application.Title := 'AUTOCOM GERENCIAL';
   Application.CreateForm(TfrmMain, frmMain);
   Application.CreateForm(TDM_ECF, DM_ECF);
+  Application.CreateForm(TDM_NFE, DM_NFE);
+  Application.CreateForm(TDMAux, DMAux);
   Application.Run;
   CloseHandle(MutexHandle);
 end.

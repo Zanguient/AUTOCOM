@@ -1,37 +1,37 @@
 object DM_PDV: TDM_PDV
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Height = 613
-  Width = 821
+  Height = 493
+  Width = 789
   object DSVendaItem: TDataSource
     DataSet = TVenda_Item
-    Left = 264
-    Top = 186
+    Left = 254
+    Top = 146
   end
   object DSVenda: TDataSource
     DataSet = TVenda
-    Left = 272
-    Top = 132
+    Left = 254
+    Top = 98
   end
   object DSProd: TDataSource
     AutoEdit = False
     DataSet = TProd
-    Left = 272
-    Top = 18
+    Left = 254
+    Top = 3
   end
   object DSCli: TDataSource
     AutoEdit = False
     DataSet = TCli
-    Left = 272
-    Top = 78
+    Left = 254
+    Top = 52
   end
   object TPAF_R01: TFDQuery
     AfterInsert = TPAF_R01AfterInsert
     Connection = DB
     SQL.Strings = (
       'select * from paf_r01')
-    Left = 697
-    Top = 18
+    Left = 533
+    Top = 10
     object TPAF_R01id: TIntegerField
       FieldName = 'id'
       Origin = 'id'
@@ -90,20 +90,20 @@ object DM_PDV: TDM_PDV
     ResourceOptions.AutoReconnect = True
     LoginPrompt = False
     AfterConnect = DBAfterConnect
-    Left = 32
-    Top = 18
+    Left = 22
+    Top = 3
   end
   object Q1: TFDQuery
     Connection = DB
-    Left = 32
-    Top = 78
+    Left = 22
+    Top = 52
   end
   object TOperador: TFDQuery
     Connection = DB
     SQL.Strings = (
       'select * from operador')
-    Left = 32
-    Top = 132
+    Left = 22
+    Top = 98
     object TOperadorid: TIntegerField
       FieldName = 'id'
       Origin = 'id'
@@ -178,8 +178,8 @@ object DM_PDV: TDM_PDV
     Connection = DB
     SQL.Strings = (
       'select * from empresa')
-    Left = 32
-    Top = 186
+    Left = 22
+    Top = 146
     object TEmpresaid: TIntegerField
       FieldName = 'id'
       Origin = 'id'
@@ -411,8 +411,8 @@ object DM_PDV: TDM_PDV
     FetchOptions.RowsetSize = 50000
     SQL.Strings = (
       'select * from estoque')
-    Left = 192
-    Top = 18
+    Left = 182
+    Top = 3
     object TProdid: TIntegerField
       FieldName = 'id'
       Origin = 'id'
@@ -565,8 +565,8 @@ object DM_PDV: TDM_PDV
     Connection = DB
     SQL.Strings = (
       'select * from fpag')
-    Left = 32
-    Top = 290
+    Left = 22
+    Top = 246
     object TFPagid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -622,8 +622,8 @@ object DM_PDV: TDM_PDV
     FetchOptions.RowsetSize = 5000
     SQL.Strings = (
       'select * from cliente')
-    Left = 192
-    Top = 78
+    Left = 182
+    Top = 52
     object TCliid: TIntegerField
       FieldName = 'id'
       Origin = 'id'
@@ -897,8 +897,8 @@ object DM_PDV: TDM_PDV
     Connection = DB
     SQL.Strings = (
       'select * from ibptax')
-    Left = 32
-    Top = 354
+    Left = 22
+    Top = 294
     object TIBPTaxid: TIntegerField
       FieldName = 'id'
       Origin = 'id'
@@ -941,8 +941,8 @@ object DM_PDV: TDM_PDV
     Connection = DB
     SQL.Strings = (
       'select * from venda order by id desc limit 1')
-    Left = 192
-    Top = 132
+    Left = 182
+    Top = 98
     object TVendaid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -1093,8 +1093,8 @@ object DM_PDV: TDM_PDV
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
       'select * from venda_item where venda=:id order by nitem')
-    Left = 192
-    Top = 186
+    Left = 182
+    Top = 146
     ParamData = <
       item
         Name = 'ID'
@@ -1481,8 +1481,8 @@ object DM_PDV: TDM_PDV
     Connection = DB
     SQL.Strings = (
       'select * from ecf')
-    Left = 32
-    Top = 237
+    Left = 22
+    Top = 197
     object TECFecf: TIntegerField
       FieldName = 'ecf'
       Origin = 'ecf'
@@ -1575,8 +1575,8 @@ object DM_PDV: TDM_PDV
     Connection = DB
     SQL.Strings = (
       'select * from rg')
-    Left = 32
-    Top = 418
+    Left = 22
+    Top = 344
     object TRGid: TIntegerField
       FieldName = 'id'
       Origin = 'id'
@@ -1601,8 +1601,8 @@ object DM_PDV: TDM_PDV
     Connection = DB
     SQL.Strings = (
       'select * from cnf')
-    Left = 32
-    Top = 482
+    Left = 22
+    Top = 394
     object TCNFid: TIntegerField
       FieldName = 'id'
       Origin = 'id'
@@ -1627,8 +1627,8 @@ object DM_PDV: TDM_PDV
     Connection = DB
     SQL.Strings = (
       'select * from paf_a2')
-    Left = 376
-    Top = 18
+    Left = 366
+    Top = 3
     object TPAF_A2id: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -1670,16 +1670,16 @@ object DM_PDV: TDM_PDV
     end
   end
   object SQLIteLink: TFDPhysSQLiteDriverLink
-    Left = 112
-    Top = 18
+    Left = 102
+    Top = 3
   end
   object TPAF_R02: TFDQuery
     AfterInsert = TPAF_R02AfterInsert
     Connection = DB
     SQL.Strings = (
       'select * from paf_r02')
-    Left = 695
-    Top = 78
+    Left = 531
+    Top = 70
     object TPAF_R02id: TIntegerField
       FieldName = 'id'
       Origin = 'id'
@@ -1753,8 +1753,8 @@ object DM_PDV: TDM_PDV
     Connection = DB
     SQL.Strings = (
       'select * from paf_r03 where r02=:id')
-    Left = 695
-    Top = 132
+    Left = 531
+    Top = 124
     ParamData = <
       item
         Name = 'ID'
@@ -1784,13 +1784,13 @@ object DM_PDV: TDM_PDV
   end
   object DSPAF_R03: TDataSource
     DataSet = TPAF_R03
-    Left = 767
-    Top = 132
+    Left = 603
+    Top = 124
   end
   object DSPAF_R02: TDataSource
     DataSet = TPAF_R02
-    Left = 767
-    Top = 78
+    Left = 603
+    Top = 70
   end
   object TPAF_R04: TFDQuery
     MasterSource = DSPAF_R02
@@ -1798,8 +1798,8 @@ object DM_PDV: TDM_PDV
     Connection = DB
     SQL.Strings = (
       'select * from paf_r04 where r02=:id')
-    Left = 695
-    Top = 186
+    Left = 531
+    Top = 178
     ParamData = <
       item
         Name = 'ID'
@@ -1888,8 +1888,8 @@ object DM_PDV: TDM_PDV
   end
   object DSPAF_R04: TDataSource
     DataSet = TPAF_R04
-    Left = 767
-    Top = 186
+    Left = 603
+    Top = 178
   end
   object TPAF_R05: TFDQuery
     MasterSource = DSPAF_R04
@@ -1897,8 +1897,8 @@ object DM_PDV: TDM_PDV
     Connection = DB
     SQL.Strings = (
       'select * from paf_r05 where r04=:id')
-    Left = 695
-    Top = 237
+    Left = 531
+    Top = 229
     ParamData = <
       item
         Name = 'ID'
@@ -2005,8 +2005,8 @@ object DM_PDV: TDM_PDV
   end
   object DSPAF_R05: TDataSource
     DataSet = TPAF_R05
-    Left = 766
-    Top = 237
+    Left = 602
+    Top = 229
   end
   object TPAF_R06: TFDQuery
     MasterSource = DSPAF_R02
@@ -2014,8 +2014,8 @@ object DM_PDV: TDM_PDV
     Connection = DB
     SQL.Strings = (
       'select * from paf_r06 where r02=:id')
-    Left = 695
-    Top = 289
+    Left = 531
+    Top = 281
     ParamData = <
       item
         Name = 'ID'
@@ -2066,15 +2066,15 @@ object DM_PDV: TDM_PDV
   end
   object DSPAF_R06: TDataSource
     DataSet = TPAF_R06
-    Left = 766
-    Top = 289
+    Left = 602
+    Top = 281
   end
   object TPAF_R07: TFDQuery
     Connection = DB
     SQL.Strings = (
       'select * from paf_r07')
-    Left = 695
-    Top = 344
+    Left = 531
+    Top = 336
     object TPAF_R07id: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -2111,16 +2111,16 @@ object DM_PDV: TDM_PDV
   end
   object DSPAF_R07: TDataSource
     DataSet = TPAF_R07
-    Left = 766
-    Top = 344
+    Left = 602
+    Top = 336
   end
   object TPAF_E2: TFDQuery
     CachedUpdates = True
     Connection = DB
     SQL.Strings = (
       'select * from paf_e2')
-    Left = 376
-    Top = 126
+    Left = 366
+    Top = 98
     object TPAF_E2id: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -2165,8 +2165,8 @@ object DM_PDV: TDM_PDV
     Connection = DB
     SQL.Strings = (
       'select * from paf_e3')
-    Left = 376
-    Top = 76
+    Left = 366
+    Top = 52
     object TPAF_E3id: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -2213,8 +2213,8 @@ object DM_PDV: TDM_PDV
     Connection = DB
     SQL.Strings = (
       'select * from aliquota')
-    Left = 32
-    Top = 542
+    Left = 22
+    Top = 441
     object TAliqid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -2244,15 +2244,15 @@ object DM_PDV: TDM_PDV
   end
   object DSPAF_R01: TDataSource
     DataSet = TPAF_R01
-    Left = 767
-    Top = 22
+    Left = 603
+    Top = 14
   end
   object TPaf_cancelar: TFDQuery
     Connection = DB
     SQL.Strings = (
       'select * from paf_cancelar')
-    Left = 376
-    Top = 190
+    Left = 366
+    Top = 146
     object TPaf_cancelarid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -2272,8 +2272,8 @@ object DM_PDV: TDM_PDV
     Connection = DB
     SQL.Strings = (
       'select * from oper_crt order by nome')
-    Left = 192
-    Top = 238
+    Left = 182
+    Top = 198
     object TOper_CRTid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -2334,8 +2334,8 @@ object DM_PDV: TDM_PDV
     Connection = DB
     SQL.Strings = (
       'select * from pfp')
-    Left = 192
-    Top = 302
+    Left = 182
+    Top = 246
     object TPFPid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -2434,8 +2434,8 @@ object DM_PDV: TDM_PDV
     Connection = DB
     SQL.Strings = (
       'select * from trn where venda=:id')
-    Left = 192
-    Top = 358
+    Left = 182
+    Top = 294
     ParamData = <
       item
         Name = 'ID'
@@ -2496,8 +2496,8 @@ object DM_PDV: TDM_PDV
     Connection = DB
     SQL.Strings = (
       'select* from trn_item where trn=:id')
-    Left = 192
-    Top = 406
+    Left = 182
+    Top = 344
     ParamData = <
       item
         Name = 'ID'
@@ -2562,15 +2562,15 @@ object DM_PDV: TDM_PDV
   end
   object DSTrn: TDataSource
     DataSet = TTrn
-    Left = 240
-    Top = 378
+    Left = 230
+    Top = 324
   end
   object TVendedor: TFDQuery
     Connection = DB
     SQL.Strings = (
       'select * from vendedor')
-    Left = 112
-    Top = 134
+    Left = 102
+    Top = 98
     object TVendedorid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -2605,8 +2605,8 @@ object DM_PDV: TDM_PDV
       'select v.id,r4.canc from venda v '
       'left join paf_r04 r4 on((r4.coo = v.coo))'
       'where v.id=:id')
-    Left = 192
-    Top = 478
+    Left = 182
+    Top = 394
     ParamData = <
       item
         Name = 'ID'
@@ -2635,24 +2635,24 @@ object DM_PDV: TDM_PDV
     CloseDataSource = False
     DataSet = TVenda
     BCDToCurrency = False
-    Left = 528
-    Top = 332
+    Left = 718
+    Top = 209
   end
   object TFRItem: TfrxDBDataset
     UserName = 'TFRItem'
     CloseDataSource = False
     DataSet = TVenda_Item
     BCDToCurrency = False
-    Left = 528
-    Top = 392
+    Left = 718
+    Top = 269
   end
   object TFRCli: TfrxDBDataset
     UserName = 'TFRCli'
     CloseDataSource = False
     DataSet = TCli
     BCDToCurrency = False
-    Left = 528
-    Top = 456
+    Left = 718
+    Top = 333
   end
   object Rep1: TfrxReport
     Version = '5.6.1'
@@ -2669,8 +2669,8 @@ object DM_PDV: TDM_PDV
       'begin'
       ''
       'end.')
-    Left = 652
-    Top = 408
+    Left = 720
+    Top = 24
     Datasets = <
       item
         DataSet = FREmpresa
@@ -3084,8 +3084,8 @@ object DM_PDV: TDM_PDV
     CloseDataSource = False
     DataSet = TOperador
     BCDToCurrency = False
-    Left = 528
-    Top = 512
+    Left = 718
+    Top = 389
   end
   object frxDesigner1: TfrxDesigner
     DefaultScriptLanguage = 'PascalScript'
@@ -3106,23 +3106,23 @@ object DM_PDV: TDM_PDV
     Restrictions = []
     RTLLanguage = False
     MemoParentFont = False
-    Left = 656
-    Top = 480
+    Left = 720
+    Top = 96
   end
   object FREmpresa: TfrxDBDataset
     UserName = 'FREmpresa'
     CloseDataSource = False
     DataSet = TEmpresa
     BCDToCurrency = False
-    Left = 640
-    Top = 544
+    Left = 720
+    Top = 160
   end
   object TIBPTax_Itens: TFDQuery
     Connection = DB
     SQL.Strings = (
       'select * from ibptax_itens')
-    Left = 100
-    Top = 354
+    Left = 90
+    Top = 294
     object TIBPTax_Itensid: TIntegerField
       FieldName = 'id'
       Origin = 'id'

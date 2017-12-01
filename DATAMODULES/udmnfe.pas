@@ -14,21 +14,16 @@ uses
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Stan.ExprFuncs,
   FireDAC.UI.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Phys,
   FireDAC.Comp.Client, FireDAC.Phys.SQLite, FireDAC.Comp.DataSet,
-  ACBrNFeDANFEFRDM, ACBrDFe, FireDAC.Phys.SQLiteDef, FireDAC.VCLUI.Wait
+  ACBrNFeDANFEFRDM, ACBrDFe, FireDAC.Phys.SQLiteDef, FireDAC.VCLUI.Wait,
+  FireDAC.Comp.UI
   {$IFDEF GER}
-   , uCadEstoque, FireDAC.Comp.UI
+   , uCadEstoque
   {$ENDIF}
   ;
 
 type
   TDM_NFE = class(TDataModule)
-    idHandle: TIdSSLIOHandlerSocketOpenSSL;
-    IdMessage: TIdMessage;
     NFe1: TACBrNFe;
-    IdSMTP: TIdSMTP;
-    OD1: TOpenDialog;
-    EAD: TACBrEAD;
-    Validador: TACBrValidador;
     QNF: TFDQuery;
     QNF_Item: TFDQuery;
     DSNF_Item: TDataSource;
@@ -448,9 +443,6 @@ type
     procedure QCfgAfterOpen(DataSet: TDataSet);
     procedure NFe1StatusChange(Sender: TObject);
     procedure NFe1GerarLog(const Mensagem: string);
-    procedure idHandleStatus(ASender: TObject; const AStatus: TIdStatus;
-      const AStatusText: string);
-    procedure idHandleStatusInfo(const AMsg: string);
     procedure DataModuleCreate(Sender: TObject);
     procedure DBError(ASender: TObject; const AInitiator: IFDStanObject; var AException: Exception);
     procedure QFEmissaoAfterOpen(DataSet: TDataSet);
@@ -548,7 +540,7 @@ var
 
 implementation
 
-uses uValidacao, uStatus, IdAttachmentFile, dmSkins, uDM, uDM_Conn;
+uses uValidacao, uStatus, IdAttachmentFile, dmSkins, uDM, uDM_Conn, uDMAux;
 
 {$R *.dfm}
 
@@ -899,81 +891,80 @@ function TDM_NFE.Envia_Mail(Email, Conta, Senha, Autentica, Smtp, Auth_SSL,
    tipo: integer) : Boolean;
 begin
    Result      := True;
-   IdSMTP.Host := Smtp;
+   DMAux.IdSMTP.Host := Smtp;
    { Configuraçao da Autenticação }
    if tipo = 0 then { Sem Autenticação }
    begin
-      IdSMTP.IOHandler := nil;
-      IdSMTP.AuthType := satNone;
-      IdSMTP.Username := '';
-      IdSMTP.Password := '';
-      IdSMTP.UseTLS := utNoTLSSupport;
+      DMAux.IdSMTP.IOHandler := nil;
+      DMAux.IdSMTP.AuthType := satNone;
+      DMAux.IdSMTP.Username := '';
+      DMAux.IdSMTP.Password := '';
+      DMAux.IdSMTP.UseTLS := utNoTLSSupport;
    end
    else if tipo = 1 then { Default }
    begin
-      IdSMTP.IOHandler := nil;
-      IdSMTP.AuthType := satDefault;
-      IdSMTP.Username := Conta;
-      IdSMTP.Password := Senha;
-      IdSMTP.UseTLS := utNoTLSSupport;
+      DMAux.IdSMTP.IOHandler := nil;
+      DMAux.IdSMTP.AuthType := satDefault;
+      DMAux.IdSMTP.Username := Conta;
+      DMAux.IdSMTP.Password := Senha;
+      DMAux.IdSMTP.UseTLS := utNoTLSSupport;
    end
    else if tipo = 2 then { SSL }
    begin
-      IdSMTP.IOHandler := idHandle;
-      IdSMTP.AuthType := satDefault;
-      IdSMTP.Username := Conta;
-      IdSMTP.Password := Senha;
-      IdSMTP.UseTLS := utUseImplicitTLS;
+      DMAux.IdSMTP.IOHandler := DMAux.idHandle;
+      DMAux.IdSMTP.AuthType := satDefault;
+      DMAux.IdSMTP.Username := Conta;
+      DMAux.IdSMTP.Password := Senha;
+      DMAux.IdSMTP.UseTLS := utUseImplicitTLS;
       { Configuramos o IOHandle }
-      idHandle.SSLOptions.Method := sslvSSLv23;
+      DMAux.idHandle.SSLOptions.Method := sslvSSLv23;
    end
    else if tipo = 3 then { TLS }
    begin
-      IdSMTP.IOHandler := idHandle;
-      IdSMTP.AuthType := satDefault;
-      IdSMTP.Username := Conta;
-      IdSMTP.Password := Senha;
-      IdSMTP.UseTLS := utUseRequireTLS;
+      DMAux.IdSMTP.IOHandler := DMAux.idHandle;
+      DMAux.IdSMTP.AuthType := satDefault;
+      DMAux.IdSMTP.Username := Conta;
+      DMAux.IdSMTP.Password := Senha;
+      DMAux.IdSMTP.UseTLS := utUseRequireTLS;
       { Configuramos o IOHandle }
-      idHandle.SSLOptions.Method := sslvSSLv3;
+      DMAux.idHandle.SSLOptions.Method := sslvSSLv3;
    end;
 
-   IdSMTP.Port := StrToInt(Porta_smtp);
+   DMAux.IdSMTP.Port := StrToInt(Porta_smtp);
    { Configuraçao da Autenticação FIM }
 
-   IdMessage.From.Name    := Nom_exibe; // Nome do Remetente
-   IdMessage.From.Address := Email; // E-mail do Remetente = email valido...
-   IdMessage.Recipients.EMailAddresses := Destinatario; // destinatario
-   IdMessage.Priority     := mpHighest;
-   IdMessage.Subject      := Assunto; // Assunto do E-mail
+   DMAux.IdMessage.From.Name    := Nom_exibe; // Nome do Remetente
+   DMAux.IdMessage.From.Address := Email; // E-mail do Remetente = email valido...
+   DMAux.IdMessage.Recipients.EMailAddresses := Destinatario; // destinatario
+   DMAux.IdMessage.Priority     := mpHighest;
+   DMAux.IdMessage.Subject      := Assunto; // Assunto do E-mail
 
    try
       if trim(ArqXML) <> '' then
       begin
-         TIdAttachmentFile.Create(IdMessage.MessageParts, TFileName(ArqXML));
+         TIdAttachmentFile.Create(DMAux.IdMessage.MessageParts, TFileName(ArqXML));
       end;
 
       if trim(ArqPDF) <> '' then
       begin
-         TIdAttachmentFile.Create(IdMessage.MessageParts, TFileName(ArqPDF));
+         TIdAttachmentFile.Create(DMAux.IdMessage.MessageParts, TFileName(ArqPDF));
       end;
 
-      IdMessage.Body.Clear;
-      IdMessage.Body.Add(Corpo);
+      DMAux.IdMessage.Body.Clear;
+      DMAux.IdMessage.Body.Add(Corpo);
 
-      IdSMTP.Connect;
+      DMAux.IdSMTP.Connect;
 
-      if IdSMTP.AuthType <> satNone then
-         IdSMTP.Authenticate;
+      if DMAux.IdSMTP.AuthType <> satNone then
+         DMAux.IdSMTP.Authenticate;
 
-      IdSMTP.Send(IdMessage);
-      IdMessage.MessageParts.Clear;
-      IdSMTP.Disconnect();
+      DMAux.IdSMTP.Send(DMAux.IdMessage);
+      DMAux.IdSMTP.Disconnect();
       Status(False,'','');
    except
       on E: Exception do
       begin
-         IdMessage.MessageParts.Clear;
+         DMAux.IdMessage.MessageParts.Clear;
         // IdSMTP.Disconnect();
          Status(False,'','');
          ShowMessage('Erro no envio do e-mail: ' + E.Message);
@@ -1215,7 +1206,7 @@ end;
 function TDM_NFE.MD5FromString(const AString: String): String;
 begin
   Result := AString + _C;
-  Result := EAD.MD5FromString(Result);
+  Result := DMAux.EAD.MD5FromString(Result);
 end;
 
 procedure TDM_NFE.Salvar;
@@ -1230,29 +1221,11 @@ begin
    end;
 end;
 
+
+
 procedure TDM_NFE.Status(Mostrar: Boolean; Msg1, Msg2: String);
 begin
-   if Mostrar then
-   begin
-      if not Assigned(frmStatus) then
-         frmStatus := TfrmStatus.Create(application);
-
-      if Msg1 <> C_ST_VAZIO then
-         frmStatus.LBlStatus.Caption := Msg1;
-
-      if Msg2 <> C_ST_VAZIO then
-         frmStatus.mmLog.Lines.Add(Msg2);
-
-      frmStatus.Show;
-      frmStatus.BringToFront;
-      application.ProcessMessages;
-   end
-   else if Assigned(frmStatus) then
-   begin
-      frmStatus.close;
-      FreeAndNil(frmStatus);
-   end;
-   application.ProcessMessages;
+  DMAux.Status(Mostrar, Msg1, Msg2);
 end;
 
 procedure TDM_NFE.NFe1GerarLog(const Mensagem: string);
@@ -1274,30 +1247,30 @@ end;
 
 procedure TDM_NFE.Imprimir_Evento;
 begin
-  OD1.Title      := 'Selecione o Evento';
-  OD1.DefaultExt := '*.XML';
-  OD1.Filter     := 'Arquivos XML (*.XML)|*.XML|Todos os Arquivos (*.*)|*.*';
-  OD1.InitialDir := NFe1.Configuracoes.Arquivos.PathNFe;
+  DMAux.OD1.Title      := 'Selecione o Evento';
+  DMAux.OD1.DefaultExt := '*.XML';
+  DMAux.OD1.Filter     := 'Arquivos XML (*.XML)|*.XML|Todos os Arquivos (*.*)|*.*';
+  DMAux.OD1.InitialDir := NFe1.Configuracoes.Arquivos.PathNFe;
 
-  if OD1.Execute then
+  if DMAux.OD1.Execute then
   begin
     NFe1.EventoNFe.Evento.Clear;
-    NFe1.EventoNFe.LerXML(OD1.FileName) ;
+    NFe1.EventoNFe.LerXML(DMAux.OD1.FileName) ;
     NFe1.ImprimirEvento;
   end;
 end;
 
 procedure TDM_NFE.Imprimir_NFe;
 begin
-  OD1.Title      := 'Selecione a NFE';
-  OD1.DefaultExt := C_212;
-  OD1.Filter     := C_213;
-  OD1.InitialDir := NFe1.Configuracoes.Arquivos.PathNFe;
+  DMAux.OD1.Title      := 'Selecione a NFE';
+  DMAux.OD1.DefaultExt := C_212;
+  DMAux.OD1.Filter     := C_213;
+  DMAux.OD1.InitialDir := NFe1.Configuracoes.Arquivos.PathNFe;
 
-  if OD1.Execute then
+  if DMAux.OD1.Execute then
   begin
     NFe1.NotasFiscais.Clear;
-    NFe1.NotasFiscais.LoadFromFile(OD1.FileName);
+    NFe1.NotasFiscais.LoadFromFile(DMAux.OD1.FileName);
 
      if NFe1.NotasFiscais.Items[0].NFe.procNFe.nProt = '' then
 
@@ -1321,17 +1294,17 @@ procedure TDM_NFE.Inserir_Protocolo;
 var
   NomeArq : String;
 begin
-  OD1.Title      := 'Selecione a NFE';
-  OD1.DefaultExt := C_212;
-  OD1.Filter     := C_213;
-  OD1.InitialDir := NFe1.Configuracoes.Arquivos.PathNFe;
+  DMAux.OD1.Title      := 'Selecione a NFE';
+  DMAux.OD1.DefaultExt := C_212;
+  DMAux.OD1.Filter     := C_213;
+  DMAux.OD1.InitialDir := NFe1.Configuracoes.Arquivos.PathNFe;
 
-  if OD1.Execute then
+  if DMAux.OD1.Execute then
   begin
     NFe1.NotasFiscais.Clear;
-    NFe1.NotasFiscais.LoadFromFile(OD1.FileName);
+    NFe1.NotasFiscais.LoadFromFile(DMAux.OD1.FileName);
     NFe1.Consultar;
-    NomeArq := OD1.FileName;
+    NomeArq := DMAux.OD1.FileName;
     Status(False, '', '');
 
     if pos(UpperCase('-nfe.xml'),UpperCase(NomeArq)) > 0 then
@@ -1354,16 +1327,16 @@ begin
 
    if trim(Nfe) = C_ST_VAZIO then
    begin
-      OD1.Title             := 'Selecione a NFE';
+      DMAux.OD1.Title             := 'Selecione a NFE';
       s := NFe1.Configuracoes.Arquivos.PathNFe + FormatDateTime('yyyymm', date) + '\NFe\';
       ForceDirectories(s);
-      OD1.InitialDir := s;
-      OD1.DefaultExt := C_212;
-      OD1.Filter     := C_213;
+      DMAux.OD1.InitialDir := s;
+      DMAux.OD1.DefaultExt := C_212;
+      DMAux.OD1.Filter     := C_213;
 
-      if OD1.Execute then
+      if DMAux.OD1.Execute then
       begin
-         Nfe := OD1.FileName;
+         Nfe := DMAux.OD1.FileName;
       end
       else
       begin
@@ -1884,15 +1857,15 @@ end;
 
 procedure TDM_NFE.Gerar_PDF;
 begin
-  OD1.Title      := 'Selecione a NFE';
-  OD1.DefaultExt := C_212;
-  OD1.Filter     := C_213;
-  OD1.InitialDir := NFe1.Configuracoes.Arquivos.PathSalvar;
+  DMAux.OD1.Title      := 'Selecione a NFE';
+  DMAux.OD1.DefaultExt := C_212;
+  DMAux.OD1.Filter     := C_213;
+  DMAux.OD1.InitialDir := NFe1.Configuracoes.Arquivos.PathSalvar;
   NFe1.NotasFiscais.Clear;
 
-  if OD1.Execute then
+  if DMAux.OD1.Execute then
   begin
-     NFe1.NotasFiscais.LoadFromFile(OD1.FileName);
+     NFe1.NotasFiscais.LoadFromFile(DMAux.OD1.FileName);
 
      if NFe1.NotasFiscais.Items[0].NFe.procNFe.nProt = '' then
 
@@ -2105,17 +2078,6 @@ begin
    DM.QNF.Close;
 end;
 
-procedure TDM_NFE.idHandleStatus(ASender: TObject; const AStatus: TIdStatus;
-  const AStatusText: string);
-begin
-   Status(True, '', AStatusText);
-end;
-
-procedure TDM_NFE.idHandleStatusInfo(const AMsg: string);
-begin
-   Status(True, '', 'OIHandle StatusInfo: ' + AMsg);
-end;
-
 procedure TDM_NFE.NFe1StatusChange(Sender: TObject);
 var
    s: String;
@@ -2295,15 +2257,15 @@ procedure TDM_NFE.Cancelar_NFe_Xml;
 var
   vAux: String;
 begin
-  OD1.Title      := 'Selecione a NFE';
-  OD1.DefaultExt := C_212;
-  OD1.Filter     := C_213;
-  OD1.InitialDir := NFe1.Configuracoes.Arquivos.PathNFe;
+  DMAux.OD1.Title      := 'Selecione a NFE';
+  DMAux.OD1.DefaultExt := C_212;
+  DMAux.OD1.Filter     := C_213;
+  DMAux.OD1.InitialDir := NFe1.Configuracoes.Arquivos.PathNFe;
 
-  if OD1.Execute then
+  if DMAux.OD1.Execute then
   begin
     NFe1.NotasFiscais.Clear;
-    NFe1.NotasFiscais.LoadFromFile(OD1.FileName);
+    NFe1.NotasFiscais.LoadFromFile(DMAux.OD1.FileName);
 
     if not(InputQuery('WebServices Eventos: Cancelamento', 'Justificativa', vAux)) then
        exit;
@@ -2658,34 +2620,34 @@ end;
 
 function TDM_NFE.ValidarDoc(doc, complem: AnsiString; tipo: TACBrValTipoDocto): Boolean;
 begin
-   Validador.Documento   := doc;
-   Validador.Complemento := complem;
-   Validador.TipoDocto   := tipo;
+   DMAux.Validador.Documento   := doc;
+   DMAux.Validador.Complemento := complem;
+   DMAux.Validador.TipoDocto   := tipo;
 
-   Result := Validador.Validar;
+   Result := DMAux.Validador.Validar;
 end;
 
 procedure TDM_NFE.Validar_Destinatario;
 begin
    if ValidarDoc(QNFDest_CNPJCPF.AsAnsiString, '', docCPF) then
-      QNFDest_CNPJCPF.AsAnsiString := Validador.Formatar
+      QNFDest_CNPJCPF.AsAnsiString := DMAux.Validador.Formatar
    else
    if not ValidarDoc(QNFDest_CNPJCPF.AsAnsiString, '', docCNPJ) then
    begin
-      frmValidacao.ListaErros.Items.Append('Destinatário: ' + Validador.MsgErro);
+      frmValidacao.ListaErros.Items.Append('Destinatário: ' + DMAux.Validador.MsgErro);
    end
    else
-      QNFDest_CNPJCPF.AsAnsiString := Validador.Formatar;
+      QNFDest_CNPJCPF.AsAnsiString := DMAux.Validador.Formatar;
 
    if not ValidarDoc(QNFDest_EnderDest_UF.AsAnsiString, '', docUF) then
    begin
-      frmValidacao.ListaErros.Items.Append('Destinatário: ' + Validador.MsgErro);
+      frmValidacao.ListaErros.Items.Append('Destinatário: ' + DMAux.Validador.MsgErro);
    end;
 
    if ValidarDoc(QNFDest_IE.AsAnsiString, QNFDest_EnderDest_UF.AsAnsiString, docInscEst) then
-      QNFDest_IE.AsAnsiString := Validador.Formatar
+      QNFDest_IE.AsAnsiString := DMAux.Validador.Formatar
       else
-      frmValidacao.ListaErros.Items.Append('Destinatário: ' + Validador.MsgErro);
+      frmValidacao.ListaErros.Items.Append('Destinatário: ' + DMAux.Validador.MsgErro);
 
    if Length(Trim(QNFDest_xNome.AsString)) < 1 then
    begin
@@ -2694,7 +2656,7 @@ begin
 
    if not ValidarDoc(QNFDest_EnderDest_CEP.AsAnsiString, QNFDest_EnderDest_UF.AsAnsiString, docCEP) then
    begin
-      frmValidacao.ListaErros.Items.Append('Destinatário: ' + Validador.MsgErro);
+      frmValidacao.ListaErros.Items.Append('Destinatário: ' + DMAux.Validador.MsgErro);
    end;
 
    if Length(Trim(QNFDest_EnderDest_xLgr.AsString)) < 1 then
@@ -2722,24 +2684,24 @@ end;
 procedure TDM_NFE.Validar_Emitente;
 begin
    if ValidarDoc(QNFEmit_CNPJCPF.AsAnsiString, '', docCPF) then
-      QNFEmit_CNPJCPF.AsAnsiString := Validador.Formatar
+      QNFEmit_CNPJCPF.AsAnsiString := DMAux.Validador.Formatar
    else
    if not ValidarDoc(QNFEmit_CNPJCPF.AsAnsiString, '', docCNPJ) then
    begin
-      frmValidacao.ListaErros.Items.Append('Emitente: ' + Validador.MsgErro);
+      frmValidacao.ListaErros.Items.Append('Emitente: ' + DMAux.Validador.MsgErro);
    end
    else
-      QNFEmit_CNPJCPF.AsAnsiString := Validador.Formatar;
+      QNFEmit_CNPJCPF.AsAnsiString := DMAux.Validador.Formatar;
 
    if not ValidarDoc(QNFEmit_EnderEmit_UF.AsAnsiString, '', docUF) then
    begin
-      frmValidacao.ListaErros.Items.Append('Emitente: ' + Validador.MsgErro);
+      frmValidacao.ListaErros.Items.Append('Emitente: ' + DMAux.Validador.MsgErro);
    end;
 
    if ValidarDoc(QNFEmit_IE.AsAnsiString, QNFEmit_EnderEmit_UF.AsAnsiString, docInscEst) then
-      QNFEmit_IE.AsAnsiString := Validador.Formatar
+      QNFEmit_IE.AsAnsiString := DMAux.Validador.Formatar
       else
-      frmValidacao.ListaErros.Items.Append('Emitente: ' + Validador.MsgErro);
+      frmValidacao.ListaErros.Items.Append('Emitente: ' + DMAux.Validador.MsgErro);
 
    if Length(Trim(QNFEmit_xNome.AsString)) < 1 then
    begin
@@ -2753,7 +2715,7 @@ begin
 
    if not ValidarDoc(QNFmit_EnderEmit_CEP.AsAnsiString, QNFEmit_EnderEmit_UF.AsAnsiString, docCEP) then
    begin
-      frmValidacao.ListaErros.Items.Append('Emitente: ' + Validador.MsgErro);
+      frmValidacao.ListaErros.Items.Append('Emitente: ' + DMAux.Validador.MsgErro);
    end;
 
    if Length(Trim(QNFEmit_EnderEmit_xLgr.AsString)) < 1 then
@@ -2809,12 +2771,12 @@ begin
 
    if Trim(QNF_ItemcEAN.AsString) <> C_ST_VAZIO then
    begin
-      Validador.TipoDocto := docGTIN;
-      Validador.Documento := QNF_ItemcEAN.Value;
+      DMAux.Validador.TipoDocto := docGTIN;
+      DMAux.Validador.Documento := QNF_ItemcEAN.Value;
 
-      if not Validador.Validar then
+      if not DMAux.Validador.Validar then
       begin
-         frmValidacao.ListaErros.Items.Append('Item: ' + Validador.MsgErro);
+         frmValidacao.ListaErros.Items.Append('Item: ' + DMAux.Validador.MsgErro);
       end;
    end;
 end;

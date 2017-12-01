@@ -1,7 +1,7 @@
 object DM_SPED_PIS: TDM_SPED_PIS
   OldCreateOrder = False
-  Height = 716
-  Width = 954
+  Height = 245
+  Width = 174
   object ACBrSPEDPisCofins1: TACBrSPEDPisCofins
     Path = 'C:\Program Files\Embarcadero\RAD Studio\11.0\bin\'
     Delimitador = '|'
@@ -11,10 +11,11 @@ object DM_SPED_PIS: TDM_SPED_PIS
     Top = 16
   end
   object QNf: TFDQuery
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from vw_sped_pis_nf where Ide_dEmi between :d1 and :d2')
-    Left = 144
-    Top = 64
+    Left = 48
+    Top = 72
     ParamData = <
       item
         Name = 'D1'
@@ -698,10 +699,11 @@ object DM_SPED_PIS: TDM_SPED_PIS
   object Qnf_Itens: TFDQuery
     MasterSource = DSNF
     MasterFields = 'id'
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from vw_sped_pis_nf_itens where nf=:id')
-    Left = 144
-    Top = 120
+    Left = 48
+    Top = 128
     ParamData = <
       item
         Name = 'ID'
@@ -1495,16 +1497,17 @@ object DM_SPED_PIS: TDM_SPED_PIS
   end
   object DSNF: TDataSource
     DataSet = QNf
-    Left = 192
-    Top = 96
+    Left = 96
+    Top = 104
   end
   object QNF_Chave: TFDQuery
     MasterSource = DSNF
     MasterFields = 'id'
+    Connection = DMConn.DB
     SQL.Strings = (
       'select * from nf_chave where nf=:id')
-    Left = 144
-    Top = 176
+    Left = 48
+    Top = 184
     ParamData = <
       item
         Name = 'ID'

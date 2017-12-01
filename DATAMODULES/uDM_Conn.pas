@@ -9,7 +9,7 @@ uses
   FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Phys, FireDAC.Phys.MySQL,
   FireDAC.Phys.MySQLDef, FireDAC.Comp.ScriptCommands, FireDAC.Stan.Util,
   FireDAC.VCLUI.Wait, FireDAC.Comp.UI, FireDAC.Comp.Script, FireDAC.Comp.Client,
-  Data.DB, FireDAC.Comp.DataSet;
+  Data.DB, FireDAC.Comp.DataSet, uDMAux;
 
 type
   TDMConn = class(TDataModule)
@@ -24,6 +24,8 @@ type
     SP: TFDScript;
     drvMySQL: TFDPhysMySQLDriverLink;
     ADGUIxWaitCursor1: TFDGUIxWaitCursor;
+    procedure DataModuleCreate(Sender: TObject);
+    procedure DataModuleDestroy(Sender: TObject);
   private
     { Private declarations }
   public
@@ -38,5 +40,15 @@ implementation
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 {$R *.dfm}
+
+procedure TDMConn.DataModuleCreate(Sender: TObject);
+begin
+  DMAux := TDMAux.Create(Self);
+end;
+
+procedure TDMConn.DataModuleDestroy(Sender: TObject);
+begin
+  FreeAndNil(DMAux);
+end;
 
 end.

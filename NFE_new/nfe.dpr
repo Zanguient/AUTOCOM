@@ -48,7 +48,8 @@ uses
   uDM in '..\DATAMODULES\uDM.pas' {DM: TDataModule},
   uDM_NF_Entr in '..\DATAMODULES\uDM_NF_Entr.pas' {DM_NF_Entr: TDataModule},
   udmnfe in '..\DATAMODULES\udmnfe.pas' {DM_NFE: TDataModule},
-  uDM_Conn in '..\DATAMODULES\uDM_Conn.pas' {DMConn: TDataModule};
+  uDM_Conn in '..\DATAMODULES\uDM_Conn.pas' {DMConn: TDataModule},
+  uDMAux in '..\DATAMODULES\uDMAux.pas' {DMAux: TDataModule};
 
 {$R *.res}
 
@@ -61,12 +62,6 @@ begin
   frmSplash.Update;
   Application.CreateForm(TDMSkin, DMSkin);
   Application.CreateForm(TfrmMain, frmMain);
-  Application.CreateForm(TfrmPesqCidade, frmPesqCidade);
-  Application.CreateForm(TfrmPesqNCM, frmPesqNCM);
-  Application.CreateForm(TDM_INI, DM_INI);
-  Application.CreateForm(TDM, DM);
-  Application.CreateForm(TDM_NF_Entr, DM_NF_Entr);
-  Application.CreateForm(TDM_NFE, DM_NFE);
-  Application.CreateForm(TDMConn, DMConn);
+  Application.CreateForm(TDMAux, DMAux);
   Application.Run;
 end.

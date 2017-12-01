@@ -96,7 +96,7 @@ implementation
 
 {$R *.dfm}
 
-uses uDM, uFuncoes, uAutocomConsts, uListaEmitentes, uDM_Conn;
+uses uDM, uFuncoes, uAutocomConsts, uListaEmitentes, uDM_Conn, uDMAux;
 
 procedure TfrmBoletoAvulso.btnCadClick(Sender: TObject);
 begin
@@ -184,7 +184,7 @@ begin
    if edInstr6.Enabled then
       s3 := edInstr6.Text;
 
-   DM.BoletoReport1.MostrarPreview := True;
+   DMAux.BoletoReport1.MostrarPreview := True;
 
    DM.Emitir_Boleto(dtVenc.Date, dtDoc.Date, Date, 'AV-', ednome.Text, edcnpj.Text, edlogradouro.Text, ednmro.Text,
                     edbairro.Text, edmunic.Text, eduf.Text, edCep.Text, edValor.Value, 0, edJuros.Value, eddesc.Value, edMulta.Value,

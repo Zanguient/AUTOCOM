@@ -1,5 +1,7 @@
 object DMConn: TDMConn
   OldCreateOrder = False
+  OnCreate = DataModuleCreate
+  OnDestroy = DataModuleDestroy
   Height = 439
   Width = 435
   object Q1: TFDQuery

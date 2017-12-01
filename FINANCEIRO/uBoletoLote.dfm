@@ -291,7 +291,6 @@ inherited frmBolLote: TfrmBolLote
         Top = 8
         Caption = 'Apenas gerar. N'#227'o imprimir agora'
         TabOrder = 1
-        Width = 207
       end
     end
     object cxDBCheckBox1: TcxDBCheckBox
@@ -303,7 +302,6 @@ inherited frmBolLote: TfrmBolLote
       Properties.ValueChecked = 'S'
       Properties.ValueUnchecked = 'N'
       TabOrder = 7
-      Width = 145
     end
   end
   inherited ini: TFormStorage

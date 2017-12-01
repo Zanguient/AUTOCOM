@@ -12,7 +12,6 @@ type
   TDM_ECF = class(TDataModule)
     AAC: TACBrAAC;
     EAD: TACBrEAD;
-    Validador: TACBrValidador;
     Bal: TACBrBAL;
     IBPTax: TACBrIBPTax;
     PAF: TACBrPAF;

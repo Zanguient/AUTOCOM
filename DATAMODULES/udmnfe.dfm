@@ -2,36 +2,7 @@ object DM_NFE: TDM_NFE
   OldCreateOrder = False
   OnCreate = DataModuleCreate
   Height = 530
-  Width = 845
-  object idHandle: TIdSSLIOHandlerSocketOpenSSL
-    OnStatus = idHandleStatus
-    Destination = 'smtp.incon.com.br:25'
-    Host = 'smtp.incon.com.br'
-    MaxLineAction = maException
-    Port = 25
-    DefaultPort = 0
-    ReadTimeout = 10
-    SSLOptions.Mode = sslmUnassigned
-    SSLOptions.VerifyMode = []
-    SSLOptions.VerifyDepth = 0
-    OnStatusInfo = idHandleStatusInfo
-    Left = 68
-    Top = 148
-  end
-  object IdMessage: TIdMessage
-    AttachmentEncoding = 'UUE'
-    BccList = <>
-    CCList = <>
-    Encoding = meDefault
-    FromList = <
-      item
-      end>
-    Recipients = <>
-    ReplyTo = <>
-    ConvertPreamble = True
-    Left = 12
-    Top = 148
-  end
+  Width = 606
   object NFe1: TACBrNFe
     OnStatusChange = NFe1StatusChange
     Configuracoes.Geral.SSLLib = libCapicomDelphiSoap
@@ -51,32 +22,7 @@ object DM_NFE: TDM_NFE
     Configuracoes.WebServices.QuebradeLinha = '|'
     DANFE = DANFE
     Left = 60
-    Top = 84
-  end
-  object IdSMTP: TIdSMTP
-    UseEhlo = False
-    Host = 'smtp.incon.com.br'
-    SASLMechanisms = <>
-    Left = 20
-    Top = 203
-  end
-  object OD1: TOpenDialog
-    DefaultExt = '*-nfe.XML'
-    Filter = 
-      'Arquivos NFE (*-nfe.XML)|*-nfe.XML|Arquivos XML (*.XML)|*.XML|To' +
-      'dos os Arquivos (*.*)|*.*'
-    Title = 'Selecione a NFe'
-    Left = 16
-    Top = 84
-  end
-  object EAD: TACBrEAD
-    Left = 64
-    Top = 204
-  end
-  object Validador: TACBrValidador
-    IgnorarChar = './-'
-    Left = 20
-    Top = 252
+    Top = 64
   end
   object QNF: TFDQuery
     AfterInsert = QNFAfterInsert
@@ -84,8 +30,8 @@ object DM_NFE: TDM_NFE
     Connection = DB
     SQL.Strings = (
       'select * from nf order by id desc limit 1;')
-    Left = 208
-    Top = 12
+    Left = 428
+    Top = 4
     object QNFid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -696,8 +642,8 @@ object DM_NFE: TDM_NFE
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
       'select * from nf_item where nf=:id')
-    Left = 208
-    Top = 64
+    Left = 428
+    Top = 56
     ParamData = <
       item
         Name = 'ID'
@@ -1466,13 +1412,13 @@ object DM_NFE: TDM_NFE
   end
   object DSNF_Item: TDataSource
     DataSet = QNF_Item
-    Left = 308
-    Top = 64
+    Left = 528
+    Top = 56
   end
   object DSNF: TDataSource
     DataSet = QNF
-    Left = 308
-    Top = 12
+    Left = 528
+    Top = 4
   end
   object QNF_Duplicata: TFDQuery
     AutoCalcFields = False
@@ -1485,8 +1431,8 @@ object DM_NFE: TDM_NFE
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
       'select * from nf_duplicata where nf=:id')
-    Left = 208
-    Top = 168
+    Left = 428
+    Top = 160
     ParamData = <
       item
         Name = 'ID'
@@ -1529,8 +1475,8 @@ object DM_NFE: TDM_NFE
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
       'select * from nf_reboque where nf=:id')
-    Left = 208
-    Top = 228
+    Left = 428
+    Top = 220
     ParamData = <
       item
         Name = 'ID'
@@ -1582,8 +1528,8 @@ object DM_NFE: TDM_NFE
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
       'select * from nf_referenciada where nf=:id')
-    Left = 208
-    Top = 280
+    Left = 428
+    Top = 272
     ParamData = <
       item
         Name = 'ID'
@@ -1704,8 +1650,8 @@ object DM_NFE: TDM_NFE
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
       'select * from nf_volumes where nf=:id')
-    Left = 208
-    Top = 344
+    Left = 428
+    Top = 336
     ParamData = <
       item
         Name = 'ID'
@@ -1764,8 +1710,8 @@ object DM_NFE: TDM_NFE
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
       'select * from nf_vol_lacre where vol=:id')
-    Left = 208
-    Top = 400
+    Left = 428
+    Top = 392
     ParamData = <
       item
         Name = 'ID'
@@ -1792,8 +1738,8 @@ object DM_NFE: TDM_NFE
   end
   object DSNF_Volume: TDataSource
     DataSet = QNF_Volume
-    Left = 308
-    Top = 344
+    Left = 528
+    Top = 336
   end
   object QNF_Chave: TFDQuery
     AfterInsert = QNF_ChaveAfterInsert
@@ -1806,8 +1752,8 @@ object DM_NFE: TDM_NFE
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
       'select * from nf_chave where nf=:id')
-    Left = 208
-    Top = 464
+    Left = 428
+    Top = 456
     ParamData = <
       item
         Name = 'ID'
@@ -1852,8 +1798,8 @@ object DM_NFE: TDM_NFE
   end
   object DSNF_Chave: TDataSource
     DataSet = QNF_Chave
-    Left = 308
-    Top = 464
+    Left = 528
+    Top = 456
   end
   object QNF_Item_Med: TFDQuery
     AutoCalcFields = False
@@ -1866,8 +1812,8 @@ object DM_NFE: TDM_NFE
     FetchOptions.Cache = [fiBlobs, fiMeta]
     SQL.Strings = (
       'select * from nf_item_med where item=:id')
-    Left = 208
-    Top = 116
+    Left = 428
+    Top = 108
     ParamData = <
       item
         Name = 'ID'
@@ -1909,21 +1855,21 @@ object DM_NFE: TDM_NFE
   end
   object DSNF_Item_Med: TDataSource
     DataSet = QNF_Item
-    Left = 308
-    Top = 116
+    Left = 528
+    Top = 108
   end
   object DSNF_Duplicata: TDataSource
     DataSet = QNF_Duplicata
-    Left = 308
-    Top = 168
+    Left = 528
+    Top = 160
   end
   object DSNF_Reboque: TDataSource
     DataSet = QNF_Reboque
-    Left = 308
-    Top = 232
+    Left = 528
+    Top = 224
   end
   object drvSQLite: TFDPhysSQLiteDriverLink
-    Left = 88
+    Left = 66
     Top = 10
   end
   object DB: TFDConnection
@@ -1936,17 +1882,17 @@ object DM_NFE: TDM_NFE
     ResourceOptions.AutoReconnect = True
     LoginPrompt = False
     Left = 16
-    Top = 22
+    Top = 10
   end
   object DSNF_Lacre: TDataSource
     DataSet = QNF_Lacre
-    Left = 308
-    Top = 408
+    Left = 528
+    Top = 400
   end
   object DSNF_Referenciada: TDataSource
     DataSet = QNF_Referenciada
-    Left = 308
-    Top = 288
+    Left = 528
+    Top = 280
   end
   object QCfg: TFDQuery
     AfterOpen = QCfgAfterOpen
@@ -1954,8 +1900,8 @@ object DM_NFE: TDM_NFE
     Connection = DB
     SQL.Strings = (
       'select * from cfg limit 1')
-    Left = 16
-    Top = 308
+    Left = 284
+    Top = 60
     object QCfgCfg_Certif_NmroSerie: TStringField
       FieldName = 'Cfg_Certif_NmroSerie'
       Origin = 'Cfg_Certif_NmroSerie'
@@ -2154,21 +2100,21 @@ object DM_NFE: TDM_NFE
   end
   object Q1: TFDQuery
     Connection = DB
-    Left = 120
-    Top = 140
+    Left = 284
+    Top = 8
   end
   object DSCfg: TDataSource
     DataSet = QCfg
-    Left = 76
-    Top = 312
+    Left = 344
+    Top = 64
   end
   object QFEmissao: TFDQuery
     AfterOpen = QFEmissaoAfterOpen
     Connection = DB
     SQL.Strings = (
       'select * from femissao')
-    Left = 16
-    Top = 364
+    Left = 284
+    Top = 116
     object QFEmissaoid: TIntegerField
       FieldName = 'id'
       Origin = 'id'
@@ -2198,8 +2144,8 @@ object DM_NFE: TDM_NFE
   end
   object DSFEmissao: TDataSource
     DataSet = QFEmissao
-    Left = 76
-    Top = 364
+    Left = 344
+    Top = 116
   end
   object DANFE: TACBrNFeDANFEFR
     ACBrNFe = NFe1
@@ -2248,11 +2194,11 @@ object DM_NFE: TDM_NFE
     IncorporarFontesPdf = True
     ImprimirDadosDocReferenciados = True
     Left = 132
-    Top = 92
+    Top = 64
   end
   object ADGUIxWaitCursor1: TFDGUIxWaitCursor
     Provider = 'Forms'
     Left = 147
-    Top = 36
+    Top = 10
   end
 end
