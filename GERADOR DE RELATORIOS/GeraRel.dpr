@@ -16,10 +16,10 @@ uses
   uGeraRel in 'uGeraRel.pas' {frmGeraRel},
   FuncFRR in 'FuncFRR.pas',
   uCompo_Adic in 'uCompo_Adic.pas',
-  udm_ini in '..\COMUM\udm_ini.pas' {DM_INI: TDataModule},
   dmSkins in '..\BASE\dmSkins.pas' {DMSkin: TDataModule},
   uSkinDLL in '..\BASE\uSkinDLL.pas',
-  uViews in '..\COMUM\uViews.pas';
+  uViews in '..\COMUM\uViews.pas',
+  udm_ini in '..\DATAMODULES\udm_ini.pas' {DM_INI: TDataModule};
 
 {$R *.res}
 
@@ -43,6 +43,7 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TDMSkin, DMSkin);
   Application.CreateForm(TfrmGeraRel, frmGeraRel);
+  Application.CreateForm(TDM_INI, DM_INI);
   Application.Run;
   CloseHandle(MutexHandle);
 end.

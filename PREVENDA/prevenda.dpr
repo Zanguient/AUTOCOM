@@ -10,7 +10,6 @@ uses
   uTraducao in '..\COMUM\uTraducao.pas',
   uMD5Print in '..\COMUM\uMD5Print.pas',
   uFuncoes in '..\COMUM\uFuncoes.pas',
-  udm_ini in '..\COMUM\udm_ini.pas' {DM_INI: TDataModule},
   uAutocomConsts in '..\COMUM\uAutocomConsts.pas',
   FastShareMem in '..\COMUM\FastShareMem.pas',
   Extensos in '..\COMUM\Extensos.pas',
@@ -35,7 +34,8 @@ uses
   uDMecf in '..\PTI\uDMecf.pas' {DM_ECF: TDataModule},
   uSplash in '..\COMUM\uSplash.pas' {frmsplash},
   utefMsg in '..\PTI\utefMsg.pas' {frmTEFMessage},
-  uItem in 'uItem.pas' {frmItem};
+  uItem in 'uItem.pas' {frmItem},
+  udm_ini in '..\DATAMODULES\udm_ini.pas' {DM_INI: TDataModule};
 
 {$R *.res}
 
@@ -44,5 +44,6 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TDMSkin, DMSkin);
   Application.CreateForm(TfrmPV, frmPV);
+  Application.CreateForm(TDM_INI, DM_INI);
   Application.Run;
 end.

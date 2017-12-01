@@ -42,7 +42,6 @@ uses
   uPesqNF in '..\OPERACIONAIS\uPesqNF.pas' {frmPesqNF},
   uListaEmitentes in '..\OPERACIONAIS\uListaEmitentes.pas' {frmListaEmit},
   uDadosItemNF in '..\OPERACIONAIS\uDadosItemNF.pas' {frmdadosItemNF},
-  udm_ini in '..\COMUM\udm_ini.pas' {DM_INI: TDataModule},
   uReplica in '..\OPERACIONAIS\uReplica.pas' {frmReplica},
   uConverteEmitInform in '..\OPERACIONAIS\uConverteEmitInform.pas' {frmConverteEmitInform},
   uPrecificacao in '..\OPERACIONAIS\uPrecificacao.pas' {frmPrecificacao},
@@ -106,7 +105,8 @@ uses
   uValidacao in '..\NFE_new\uValidacao.pas' {frmValidacao},
   uStatus in '..\NFE_new\uStatus.pas' {frmStatus},
   uEstoque_Inicial in '..\CADASTROS\uEstoque_Inicial.pas' {frmCad_Estoque_Inicial},
-  uViews in '..\COMUM\uViews.pas';
+  uViews in '..\COMUM\uViews.pas',
+  udm_ini in '..\DATAMODULES\udm_ini.pas' {DM_INI: TDataModule};
 
 {$R *.res}
 
@@ -135,6 +135,7 @@ begin
   Application.CreateForm(TfrmValidacao, frmValidacao);
   Application.CreateForm(TfrmStatus, frmStatus);
   Application.CreateForm(TfrmCad_Estoque_Inicial, frmCad_Estoque_Inicial);
+  Application.CreateForm(TDM_INI, DM_INI);
   Application.Run;
   CloseHandle(MutexHandle);
 end.

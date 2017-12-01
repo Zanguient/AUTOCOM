@@ -17,7 +17,6 @@ uses
   uXML in 'uXML.pas',
   Vcl.Themes,
   Vcl.Styles,
-  udm_ini in '..\COMUM\udm_ini.pas' {DM_INI: TDataModule},
   dmSkins in '..\BASE\dmSkins.pas' {DMSkin: TDataModule},
   uSkinDLL in '..\BASE\uSkinDLL.pas',
   uFrm in '..\BASE\uFrm.pas' {frm},
@@ -47,7 +46,8 @@ uses
   uDadosItemNF in '..\OPERACIONAIS\uDadosItemNF.pas' {frmdadosItemNF},
   uViews in '..\COMUM\uViews.pas',
   uPesqCidade in '..\GERENCIAL\uPesqCidade.pas' {frmPesqCidade},
-  uPesqNCM in '..\GERENCIAL\uPesqNCM.pas' {frmPesqNCM};
+  uPesqNCM in '..\GERENCIAL\uPesqNCM.pas' {frmPesqNCM},
+  udm_ini in '..\DATAMODULES\udm_ini.pas' {DM_INI: TDataModule};
 
 {$R *.res}
 
@@ -60,10 +60,10 @@ begin
   frmSplash.Update;
   Application.CreateForm(TDMSkin, DMSkin);
   Application.CreateForm(TDM, DM);
-  Application.CreateForm(TDM_INI, DM_INI);
   Application.CreateForm(TDM_NFE, DM_NFE);
   Application.CreateForm(TfrmMain, frmMain);
   Application.CreateForm(TfrmPesqCidade, frmPesqCidade);
   Application.CreateForm(TfrmPesqNCM, frmPesqNCM);
+  Application.CreateForm(TDM_INI, DM_INI);
   Application.Run;
 end.

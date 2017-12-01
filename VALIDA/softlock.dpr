@@ -14,10 +14,10 @@ uses
   Data.DB,
   Dialogs,
   WinAPI.Windows,
-  udm_ini in '..\COMUM\udm_ini.pas' {DM_INI: TDataModule},
   uTraducao in '..\COMUM\uTraducao.pas',
   uLibera in 'uLibera.pas' {frmLibera},
-  uViews in '..\COMUM\uViews.pas';
+  uViews in '..\COMUM\uViews.pas',
+  udm_ini in '..\DATAMODULES\udm_ini.pas' {DM_INI: TDataModule};
 
 {$R *.res}
 

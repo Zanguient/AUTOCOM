@@ -5,7 +5,6 @@ uses
   Vcl.Forms,
   dmSkins in '..\BASE\dmSkins.pas' {DMSkin: TDataModule},
   uSkinDLL in '..\BASE\uSkinDLL.pas',
-  udm_ini in '..\COMUM\udm_ini.pas',
   uDM in 'uDM.pas' {DM: TDataModule},
   uMain in 'uMain.pas' {frmMain},
   uFuncoes in '..\COMUM\uFuncoes.pas',
@@ -18,7 +17,8 @@ uses
   uPesqCompr in 'uPesqCompr.pas' {frmPesqCompr},
   uSNGPCConsts in '..\COMUM\uSNGPCConsts.pas',
   sngpc_p in 'sngpc_p.pas',
-  uViews in '..\COMUM\uViews.pas';
+  uViews in '..\COMUM\uViews.pas',
+  udm_ini in '..\DATAMODULES\udm_ini.pas' {DM_INI: TDataModule};
 
 {$R *.res}
 
@@ -31,5 +31,6 @@ begin
   Application.CreateForm(TDMSkin, DMSkin);
   Application.CreateForm(TDM_INI, DM_INI);
   Application.CreateForm(TfrmMain, frmMain);
+  Application.CreateForm(TDM_INI, DM_INI);
   Application.Run;
 end.

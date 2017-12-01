@@ -14,7 +14,6 @@ uses
   uFrm in '..\BASE\uFrm.pas' {frm},
   ufrmCad in '..\BASE\ufrmCad.pas' {frmCad},
   uTraducao in '..\COMUM\uTraducao.pas',
-  udm_ini in '..\COMUM\udm_ini.pas' {DM_INI: TDataModule},
   dmSkins in '..\BASE\dmSkins.pas' {DMSkin: TDataModule},
   uSkinDLL in '..\BASE\uSkinDLL.pas',
   uMenu in 'uMenu.pas' {frmMenu},
@@ -59,7 +58,8 @@ uses
   uViews in '..\COMUM\uViews.pas',
   uCfg in '..\GERENCIAL\uCfg.pas' {frmCfg},
   uStatus in '..\NFE_new\uStatus.pas' {frmStatus},
-  uRegras_Imposto in '..\OPERACIONAIS\uRegras_Imposto.pas' {frmRegras_Imposto};
+  uRegras_Imposto in '..\OPERACIONAIS\uRegras_Imposto.pas' {frmRegras_Imposto},
+  udm_ini in '..\DATAMODULES\udm_ini.pas' {DM_INI: TDataModule};
 
 {$R *.res}
 {$R UAC.res}
@@ -104,6 +104,7 @@ Begin
   Application.CreateForm(TfrmCfg, frmCfg);
   Application.CreateForm(TfrmStatus, frmStatus);
   Application.CreateForm(TfrmRegras_Imposto, frmRegras_Imposto);
+  Application.CreateForm(TDM_INI, DM_INI);
   Application.Run;
      CloseHandle(MutexHandle);
   End;
