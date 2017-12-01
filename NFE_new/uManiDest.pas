@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrm, cxGraphics, cxLookAndFeels, cxLookAndFeelPainters, Vcl.Menus, ACBrBase,
   ACBrEnterTab, Easysize, RxPlacemnt, Vcl.StdCtrls, cxButtons, Vcl.ExtCtrls, cxControls, cxContainer, cxEdit,
-  cxGroupBox, cxRadioGroup, cxLabel, cxTextEdit, cxMaskEdit, pcnAuxiliar, pcnconversao, System.UITypes;
+  cxGroupBox, cxRadioGroup, cxLabel, cxTextEdit, cxMaskEdit, pcnAuxiliar, pcnconversao, System.UITypes,
+  dxSkinsCore, dxSkinCaramel;
 
 type
   TfrmManiDest = class(Tfrm)
@@ -110,7 +111,7 @@ begin
 
   if DM_NFE.NFe1.WebServices.EnvEvento.EventoRetorno.retEvento.Items[0].RetInfEvento.cStat = 135 then
   begin
-    DM.DB.ExecSQL('update nf_chave_entr set manif_dest_cod=' +
+    DM.ExecSQL('update nf_chave_entr set manif_dest_cod=' +
                   Texto_Mysql(gbOpc.Properties.Items[gbOpc.ItemIndex].Value) +
                   ', manif_dest_data=curdate() where chave=' + Texto_Mysql(Number(edChave.Text)) + ';'
     );

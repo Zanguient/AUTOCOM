@@ -2250,4 +2250,9 @@ object DM_NFE: TDM_NFE
     Left = 132
     Top = 92
   end
+  object ADGUIxWaitCursor1: TFDGUIxWaitCursor
+    Provider = 'Forms'
+    Left = 147
+    Top = 36
+  end
 end

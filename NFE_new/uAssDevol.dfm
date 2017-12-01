@@ -53,13 +53,17 @@ inherited frmAssDevol: TfrmAssDevol
     Properties.ActivePage = Tab1
     Properties.CustomButtons.Buttons = <>
     OnChange = pg1Change
-    ClientRectBottom = 339
-    ClientRectRight = 602
+    ClientRectBottom = 335
+    ClientRectLeft = 4
+    ClientRectRight = 598
     ClientRectTop = 26
     object Tab1: TcxTabSheet
       Caption = 'NOTA FISCAL DE COMPRA'
       ImageIndex = 0
       OnShow = Tab1Show
+      ExplicitLeft = 0
+      ExplicitWidth = 602
+      ExplicitHeight = 313
       object edNmro: TcxTextEdit
         Left = 460
         Top = 23
@@ -351,6 +355,7 @@ inherited frmAssDevol: TfrmAssDevol
       Caption = 'ITENS DA NOTA'
       ImageIndex = 1
       OnShow = Tab2Show
+      ExplicitLeft = 0
       ExplicitTop = 0
       ExplicitWidth = 0
       ExplicitHeight = 0
@@ -441,32 +446,32 @@ inherited frmAssDevol: TfrmAssDevol
       Caption = 'DADOS ADICIONAIS'
       ImageIndex = 2
       OnShow = Tab3Show
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object mmDadosAdic: TcxMemo
         Left = 0
         Top = 0
         Align = alClient
         TabOrder = 0
-        Height = 292
-        Width = 602
+        Height = 288
+        Width = 594
       end
       object Panel3: TPanel
         Left = 0
-        Top = 292
-        Width = 602
+        Top = 288
+        Width = 594
         Height = 21
         Align = alBottom
         Caption = 
           'Altere ou acrescente informa'#231#245'es neste quadro, conforme a sua ne' +
           'cessidade.'
         TabOrder = 1
+        ExplicitTop = 292
+        ExplicitWidth = 602
       end
     end
     object Tab4: TcxTabSheet
       Caption = 'NF POR PRODUTO'
       ImageIndex = 3
+      ExplicitLeft = 0
       ExplicitTop = 0
       ExplicitWidth = 0
       ExplicitHeight = 0

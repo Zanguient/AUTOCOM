@@ -65,7 +65,7 @@ implementation
 
 {$R *.dfm}
 
-uses uFuncoes, uDM, uAutocomConsts, udm_ini, uSkinDLL, dmSkins;
+uses uFuncoes, uDM, uAutocomConsts, udm_ini, uSkinDLL, dmSkins, uDM_Conn;
 
 procedure TfrmAtu.ExecScript;
 var
@@ -250,6 +250,7 @@ begin
    end;
 
    DM_INI := TDM_INI.Create(self);
+   DMConn := TDMConn.Create(self);
    DM := TDM.Create(self);
    //Ini do DM
    DM_INI.ini.inifilename := Aqui(C_INI_FILE, 'autocom.ini');
@@ -410,11 +411,11 @@ begin
             else //busca na base de dados pela atualização
             begin
                st_nome := AnsiUpperCase(Trim(Copy(sfile, 1, pos('_', sfile)-1)));
-               DM.Q1.Open('select nome from version where tipo="exe" and nome=' +
+               DMConn.Q1.Open('select nome from version where tipo="exe" and nome=' +
                            QuotedDuoStr(s) + ' and app=' +
                            QuotedDuoStr(st_nome));
 
-               if (DM.Q1.Fields[0].AsString = s)or(s = C_ST_VAZIO) then
+               if (DMConn.Q1.Fields[0].AsString = s)or(s = C_ST_VAZIO) then
                begin
                   Display('Aplicativo: Nenhuma atualização exe disponível.');
                   Result := False;
@@ -442,11 +443,11 @@ begin
             else //busca na base de dados pela atualização
             begin
                st_nome := AnsiUpperCase(Trim(Copy(sfile, 1, pos('_', sfile)-1)));
-               DM.Q1.Open('select nome from version where tipo="dll" and nome=' +
+               DMConn.Q1.Open('select nome from version where tipo="dll" and nome=' +
                            QuotedDuoStr(s) + ' and app=' +
                            QuotedDuoStr(st_nome));
 
-               if (DM.Q1.Fields[0].AsString = s)or(s = C_ST_VAZIO) then
+               if (DMConn.Q1.Fields[0].AsString = s)or(s = C_ST_VAZIO) then
                begin
                   Display('Aplicativo: Nenhuma atualização dll disponível.');
                   Result := False;
@@ -464,9 +465,9 @@ begin
          else
          if pos('.sql', sfile)>0 then
          begin
-            DM.Q1.Open('select nome from version where tipo="sql" and nome=' + QuotedDuoStr(s));
+            DMConn.Q1.Open('select nome from version where tipo="sql" and nome=' + QuotedDuoStr(s));
 
-            if (DM.Q1.Fields[0].AsString = s)or(s = C_ST_VAZIO) then
+            if (DMConn.Q1.Fields[0].AsString = s)or(s = C_ST_VAZIO) then
             begin
                Display('script: Nenhuma atualização disponível.');
                Result := False;

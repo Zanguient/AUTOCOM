@@ -12,10 +12,10 @@ uses
   uFrm in '..\BASE\uFrm.pas' {frm},
   uViews in '..\COMUM\uViews.pas',
   uStatus in '..\NFE_new\uStatus.pas' {frmStatus},
-  uRegras_Imposto in '..\GERENCIAL\OPERACIONAIS\uRegras_Imposto.pas',
   ufrmCad in '..\BASE\ufrmCad.pas' {frmCad},
   udm_ini in '..\DATAMODULES\udm_ini.pas' {DM_INI: TDataModule},
-  uDM in '..\DATAMODULES\uDM.pas' {DM: TDataModule};
+  uDM in '..\DATAMODULES\uDM.pas' {DM: TDataModule},
+  uDM_Conn in '..\DATAMODULES\uDM_Conn.pas' {DMConn: TDataModule};
 
 {$R *.res}
 
@@ -24,7 +24,5 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TDMSkin, DMSkin);
   Application.CreateForm(TfrmAtu, frmAtu);
-  Application.CreateForm(TDM_INI, DM_INI);
-  Application.CreateForm(TDM, DM);
   Application.Run;
 end.

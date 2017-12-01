@@ -10,7 +10,8 @@ uses
   cxCheckBox, cxGridLevel, cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxClasses, cxGridCustomView,
   cxGrid, cxLabel, uclasse, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
-  FireDAC.DApt.Intf, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+  FireDAC.DApt.Intf, FireDAC.Comp.DataSet, FireDAC.Comp.Client, dxSkinsCore,
+  dxSkinCaramel, dxSkinscxPCPainter;
 
 type
   TfrmConcluir = class(Tfrm)
@@ -91,7 +92,7 @@ implementation
 {$R *.dfm}
 
 uses uAutocomConsts, uDM, udm_ini, uFuncoes, uMD5Print, uPesqCli, upv,
-  uVendedor, uDM_PDV;
+  uVendedor, uDM_PDV, uDM_Conn;
 
 function TfrmConcluir.Total_venda: currency;
 begin
@@ -167,8 +168,8 @@ begin
    end;
 
    try
-      DM.DB.ExecSQL('update venda_item set CFOP=' + Texto_Mysql(s1) + ' where CFOP <> "CANC" and ICMS_cst in (10,60,70) and venda=' + Texto_Mysql(DM.QVendaid.Value) + ';');
-      DM.DB.ExecSQL('update venda_item set CFOP=' + Texto_Mysql(s) + ' where CFOP <> "CANC" and ICMS_cst not in (10,60,70) and venda=' + Texto_Mysql(DM.QVendaid.Value) + ';');
+      DM.ExecSQL('update venda_item set CFOP=' + Texto_Mysql(s1) + ' where CFOP <> "CANC" and ICMS_cst in (10,60,70) and venda=' + Texto_Mysql(DM.QVendaid.Value) + ';');
+      DM.ExecSQL('update venda_item set CFOP=' + Texto_Mysql(s) + ' where CFOP <> "CANC" and ICMS_cst not in (10,60,70) and venda=' + Texto_Mysql(DM.QVendaid.Value) + ';');
    finally
       ;
    end;
@@ -217,16 +218,16 @@ begin
 
    //para teste
   // CupomVinculado.LoadFromFile(Aqui('TXT', 'cv.txt'));
-   DM.Q1.Open('select max(coo) from venda where tipo=' + Texto_Mysql(sTipo));
-   DM.Q2.Open('select max(coa) from venda where tipo=' + Texto_Mysql(sTipo));
+   DMConn.Q1.Open('select max(coo) from venda where tipo=' + Texto_Mysql(sTipo));
+   DMConn.Q2.Open('select max(coa) from venda where tipo=' + Texto_Mysql(sTipo));
 
    DM.QVendacliente.AsInteger := DM.QCliid.Value;
 
    if DM_INI.ini.StoredValue['venda_comissionada'] then
       DM.QVendavendedor.Value := DM.QVendedorid.Value;
 
-   DM.QVendacoo.Value     := DM.Q1.Fields[0].AsInteger + 1;
-   DM.QVendacoa.AsInteger := DM.Q2.Fields[0].AsInteger + 1;
+   DM.QVendacoo.Value     := DMConn.Q1.Fields[0].AsInteger + 1;
+   DM.QVendacoa.AsInteger := DMConn.Q2.Fields[0].AsInteger + 1;
 
    if sTipo = 'PV' then
       DM.QVendapv.AsString := LFill(FloatToStr(DM.Indice('pv')),10,'0');
@@ -299,9 +300,9 @@ begin
 
    DM.QVenda.Edit;
    //grava a comissão na tab venda. No pdv, é recalculado, mas na NF não
-   DM.Q1.Open('select sum(vComissao) from venda_item where venda=' + Texto_Mysql(DM.QVendaid.Value));
+   DMConn.Q1.Open('select sum(vComissao) from venda_item where venda=' + Texto_Mysql(DM.QVendaid.Value));
 
-   DM.QVendavr_comissao.AsCurrency := DM.Q1.Fields[0].AsCurrency;
+   DM.QVendavr_comissao.AsCurrency := DMConn.Q1.Fields[0].AsCurrency;
 
    if sTipo = 'PV' then //na PV o valor assume total-desconto e o desconto estara nos itens
    begin
@@ -320,7 +321,7 @@ begin
 
    if sTipo = 'PV' then
    begin
-      DM.DB.ExecSQL('update indices set valor=if(valor >=9999999999,1,valor+1) where nome="pv";');
+      DM.ExecSQL('update indices set valor=if(valor >=9999999999,1,valor+1) where nome="pv";');
       ShowMessage('Nº PV: ' + DM.QVendapv.AsString);
    end;
 

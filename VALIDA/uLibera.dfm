@@ -87,8 +87,6 @@ object frmLibera: TfrmLibera
     Transparent = True
     ExplicitLeft = 40
     ExplicitTop = 64
-    ExplicitWidth = 140
-    ExplicitHeight = 100
     Height = 275
     Width = 408
   end

@@ -17,7 +17,8 @@ uses
   uLibera in 'uLibera.pas' {frmLibera},
   uViews in '..\COMUM\uViews.pas',
   udm_ini in '..\DATAMODULES\udm_ini.pas' {DM_INI: TDataModule},
-  uDM in '..\DATAMODULES\uDM.pas' {DM: TDataModule};
+  uDM in '..\DATAMODULES\uDM.pas' {DM: TDataModule},
+  uDM_Conn in '..\DATAMODULES\uDM_Conn.pas' {DMConn: TDataModule};
 
 {$R *.res}
 
@@ -90,28 +91,31 @@ begin
    DM_INI.ini.inifilename := Aqui(C_INI_FILE, 'autocom.ini');
    DM_INI.ini.Active      := True;
    DM_INI.ini.RestoreFormPlacement;
+   DMConn := TDMConn.Create(nil);
    DM := TDM.Create(nil);
 
    if not DM.Conectar then
    begin
       FreeAndNil(DM);
+      FreeAndNil(DMConn);
       Log('softlock', '', 'Não foi possivel conectar ao BD...');
       Showmessage('SoftLock - Não foi possivel conectar ao BD.');
       Result := -1;
       exit;
    end;
 
-   DM.Q1.Open('select * from valida limit 1');
+   DMConn.Q1.Open('select * from valida limit 1');
 
-   if DM.Q1.IsEmpty then
+   if DMConn.Q1.IsEmpty then
    begin
       //O arquivo é gerado tão logo gere um novo registro em valida. Se ja existe é pq apagaram o registro...
       if FileExists(Aqui(C_TXT_FILE, 'sftlk.dat')) then
       begin
          Log('softlock', '', 'Detectada fraude.');
          Showmessage('O registro de licença foi corrompido. Contate o suporte.');
-         DM.DB.Connected := False;
+         DMConn.DB.Connected := False;
          FreeAndNil(DM);
+         FreeAndNil(DMConn);
          exit;
       end;
 
@@ -141,7 +145,7 @@ begin
       inicio := 'insert into valida set cod=' + Texto_Mysql(cod) +
                 ',acesso=' + Texto_Mysql(data) +
                 ',cont=' + Texto_Mysql(cont) + ';';
-      DM.DB.execSQL(inicio);
+      DM.execSQL(inicio);
       Log('softlock', '', 'Novo registro gravado.');
       Lista := TStringList.Create;
 
@@ -167,15 +171,15 @@ begin
       Lista.Append(cod);
       Lista.SaveToFile(Aqui(C_TXT_FILE, 'sftlk.dat'));
      //recarrega a tabela
-      DM.Q1.Close;
-      DM.Q1.Open;
+      DMConn.Q1.Close;
+      DMConn.Q1.Open;
    end;
 
    //faz a verificação: 1º via webservice, senao via banco de dados...
 
-   data   := DM.Q1.FieldByName('acesso').AsString;
-   cont   := DM.Q1.FieldByName('cont').AsString;
-   cod    := DM.Q1.FieldByName('cod').AsString;
+   data   := DMConn.Q1.FieldByName('acesso').AsString;
+   cont   := DMConn.Q1.FieldByName('cont').AsString;
+   cod    := DMConn.Q1.FieldByName('cod').AsString;
    reset  := cod;
    inicio := Copy(cont, 3,1);
    fim    := copy(cont, length(cont)-2, 1);
@@ -193,8 +197,9 @@ begin
             Result := Validar_Soap(cod) * 5; //será 5 ou 0 - 10 considera valido
          except
             Log('softlock', 'ERRO', 'Conectou na net mas nao consegui ler o webservice...');
-            DM.DB.Connected := False;
+            DMConn.DB.Connected := False;
             FreeAndNil(DM);
+            FreeAndNil(DMConn);
          end;
 
          if Result > 0 then
@@ -206,7 +211,7 @@ begin
             fim    := Copy(MD5_Str(cont), 1, 2);
             cont   := Concat(inicio, '0', meio, '5', fim);//5 dias como default
 
-            DM.DB.execSQL('update valida set cont=' + Texto_Mysql(cont) + ', acesso='  + Texto_Mysql(data) + ';');
+            DM.execSQL('update valida set cont=' + Texto_Mysql(cont) + ', acesso='  + Texto_Mysql(data) + ';');
             Log('softlock', '', 'Registro atualizado...');
          end
          else
@@ -218,12 +223,13 @@ begin
             fim    := Copy(MD5_Str(cont), 1, 2);
             cont   := Concat(inicio, '0', meio, '0', fim);//zero
 
-            DM.DB.execSQL('update valida set cont=' + Texto_Mysql(cont) + ', acesso='  + Texto_Mysql(data) + ';');
+            DM.execSQL('update valida set cont=' + Texto_Mysql(cont) + ', acesso='  + Texto_Mysql(data) + ';');
             Log('softlock', '', 'Registro atualizado...');
          end;
 
-         DM.DB.Connected := False;
+         DMConn.DB.Connected := False;
          FreeAndNil(DM);
+         FreeAndNil(DMConn);
          Log('softlock', '', 'FIM..............................................');
          exit;
       end;
@@ -242,7 +248,7 @@ begin
       fim    := Copy(MD5_Str(cont), 1, 2);
       cont   := Concat(inicio, copy(cod, 1, 1), meio, copy(cod, 2, 1), fim);
 
-      DM.DB.execSQL('update valida set cont=' + Texto_Mysql(cont) + ', acesso='  + Texto_Mysql(data) + ';');
+      DM.execSQL('update valida set cont=' + Texto_Mysql(cont) + ', acesso='  + Texto_Mysql(data) + ';');
       Log('softlock', '', 'Registro atualizado...');
    end
    else
@@ -268,8 +274,9 @@ begin
       LibManual(reset);
    end;
 
-   DM.DB.Connected := False;
+   DMConn.DB.Connected := False;
    FreeAndNil(DM);
+   FreeAndNil(DMConn);
 
    Log('softlock', '', 'FIM..............................................');
 end;

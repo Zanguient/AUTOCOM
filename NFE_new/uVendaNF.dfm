@@ -48,7 +48,6 @@ inherited frmVendaNF: TfrmVendaNF
         Caption = 'Exibir Dados adicionais'
         TabOrder = 2
         OnClick = cb1Click
-        Width = 152
       end
       object bar1: TcxProgressBar
         Left = 172
@@ -68,12 +67,16 @@ inherited frmVendaNF: TfrmVendaNF
     TabOrder = 2
     Properties.ActivePage = TAB1
     Properties.CustomButtons.Buttons = <>
-    ClientRectBottom = 447
-    ClientRectRight = 530
+    ClientRectBottom = 443
+    ClientRectLeft = 4
+    ClientRectRight = 526
     ClientRectTop = 26
     object TAB1: TcxTabSheet
       ImageIndex = 0
       OnShow = TAB1Show
+      ExplicitLeft = 0
+      ExplicitWidth = 530
+      ExplicitHeight = 421
       object rg1: TcxRadioGroup
         Left = 27
         Top = 104
@@ -139,14 +142,16 @@ inherited frmVendaNF: TfrmVendaNF
       object grd: TcxGrid
         Left = 0
         Top = 25
-        Width = 530
-        Height = 299
+        Width = 522
+        Height = 295
         Align = alClient
         TabOrder = 0
         LevelTabs.Slants.Kind = skCutCorner
         LevelTabs.Style = 6
         LookAndFeel.Kind = lfStandard
         LookAndFeel.NativeStyle = False
+        ExplicitWidth = 530
+        ExplicitHeight = 299
         object tbv: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           FilterBox.Visible = fvNever
@@ -166,8 +171,8 @@ inherited frmVendaNF: TfrmVendaNF
           OptionsData.Editing = False
           OptionsData.Inserting = False
           OptionsSelection.CellSelect = False
-          OptionsSelection.HideFocusRectOnExit = False
           OptionsSelection.MultiSelect = True
+          OptionsSelection.HideFocusRectOnExit = False
           OptionsSelection.UnselectFocusedRecordOnExit = False
           OptionsView.NoDataToDisplayInfoText = '<Sem dados para exibir...>'
           OptionsView.ScrollBars = ssVertical
@@ -215,20 +220,21 @@ inherited frmVendaNF: TfrmVendaNF
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 530
+        Width = 522
         Height = 25
         Align = alTop
         Caption = 'Panel1'
         TabOrder = 1
+        ExplicitWidth = 530
       end
       object mmDadosAdic: TcxMemo
         Left = 0
-        Top = 324
+        Top = 320
         Align = alBottom
         TabOrder = 2
         Visible = False
         Height = 97
-        Width = 530
+        Width = 522
       end
     end
   end
@@ -243,7 +249,6 @@ inherited frmVendaNF: TfrmVendaNF
     Top = 0
   end
   object QVendas: TFDQuery
-    Connection = DM.DB
     SQL.Strings = (
       'select * from venda '
       'where cliente=:cliente and '

@@ -23,19 +23,20 @@ uses
   uScanner in '..\FARMA\uScanner.pas' {frmScanner},
   uMenuConv in 'uMenuConv.pas' {frmMenu_Convenio},
   uOpcoes in 'uOpcoes.pas' {frmOpc},
-  uDM_PDV in '..\PTI\uDM_PDV.pas' {DM_PDV: TDataModule},
   uProgress in '..\PTI\uProgress.pas' {frmprogress},
   uVendedor in '..\PTI\uVendedor.pas' {frmVendedor},
   uParcelas in 'uParcelas.pas' {frmParcelas},
   uViews in '..\COMUM\uViews.pas',
   uStatus in '..\NFE_new\uStatus.pas' {frmStatus},
   uRegras_Imposto in '..\OPERACIONAIS\uRegras_Imposto.pas' {frmRegras_Imposto},
-  uDMecf in '..\PTI\uDMecf.pas' {DM_ECF: TDataModule},
   uSplash in '..\COMUM\uSplash.pas' {frmsplash},
   utefMsg in '..\PTI\utefMsg.pas' {frmTEFMessage},
   uItem in 'uItem.pas' {frmItem},
   udm_ini in '..\DATAMODULES\udm_ini.pas' {DM_INI: TDataModule},
-  uDM in '..\DATAMODULES\uDM.pas' {DM: TDataModule};
+  uDM in '..\DATAMODULES\uDM.pas' {DM: TDataModule},
+  uDM_Conn in '..\DATAMODULES\uDM_Conn.pas' {DMConn: TDataModule},
+  uDM_PDV in '..\DATAMODULES\uDM_PDV.pas' {DM_PDV: TDataModule},
+  uDMecf in '..\DATAMODULES\uDMecf.pas' {DM_ECF: TDataModule};
 
 {$R *.res}
 
@@ -44,7 +45,5 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TDMSkin, DMSkin);
   Application.CreateForm(TfrmPV, frmPV);
-  Application.CreateForm(TDM_INI, DM_INI);
-  Application.CreateForm(TDM, DM);
   Application.Run;
 end.

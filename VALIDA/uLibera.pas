@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
   dxGDIPlusClasses, cxGraphics, cxControls, cxLookAndFeels,
-  cxLookAndFeelPainters, cxContainer, cxEdit, cxImage;
+  cxLookAndFeelPainters, cxContainer, cxEdit, cxImage, dxSkinsCore,
+  dxSkinCaramel;
 
 type
   TfrmLibera = class(TForm)
@@ -76,7 +77,7 @@ begin
    fim    := Copy(MD5_Str(cont), 1, 2);
    cont   := Concat(inicio, copy(cod, 1, 1), meio, copy(cod, 2, 1), fim);
 
-   DM.DB.execSQL('update valida set cont=' + Texto_Mysql(cont) + ', acesso='  + Texto_Mysql(data) + ';');
+   DM.execSQL('update valida set cont=' + Texto_Mysql(cont) + ', acesso='  + Texto_Mysql(data) + ';');
    Log('softlock', 'LIBERAÇÃO MANUAL', 'Registro atualizado...');
    Log('softlock', 'LIBERAÇÃO MANUAL', 'FIM...');
    close;

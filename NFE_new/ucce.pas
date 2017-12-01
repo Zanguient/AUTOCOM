@@ -8,7 +8,8 @@ uses
   cxLookAndFeelPainters, Vcl.Menus, cxControls, cxContainer, cxEdit, cxTextEdit,
   cxMaskEdit, cxDropDownEdit, cxCalendar, Vcl.StdCtrls, cxButtons, Vcl.DBCtrls,
   Vcl.Mask, RxToolEdit, RxCurrEdit, Vcl.ExtCtrls, Easysize, ACBrBase, pcnConversao,
-  ACBrEnterTab, RxPlacemnt, uAutocomConsts, udmnfe, uFuncoes, Data.DB, Vcl.ComCtrls, dxCore, cxDateUtils;
+  ACBrEnterTab, RxPlacemnt, uAutocomConsts, udmnfe, uFuncoes, Data.DB, Vcl.ComCtrls, dxCore, cxDateUtils,
+  dxSkinsCore, dxSkinCaramel;
 
 type
   Tfrmcce = class(Tfrm)
@@ -61,7 +62,7 @@ implementation
 
 {$R *.dfm}
 
-uses uMain, uDM;
+uses uMain, uDM, uDM_Conn;
 
 procedure Tfrmcce.btnEmitirClick(Sender: TObject);
 VAR
@@ -71,9 +72,9 @@ begin
   if length(Trim(memo1.Text)) < 15 then
     raise Exception.Create('O texto deve conter ao menos 15 caracteres.');
 
-  DM.Q1.OPen('select count(*) from nf_cce where nf="' + DM.QNFid.AsString + '"');
+  DMConn.Q1.OPen('select count(*) from nf_cce where nf="' + DM.QNFid.AsString + '"');
 
-  i :=  DM.Q1.Fields[0].AsInteger + 1;
+  i :=  DMConn.Q1.Fields[0].AsInteger + 1;
 
   if i > 20 then
      raise Exception.Create('O limite de 20 eventos para esta NF foi atingido.');

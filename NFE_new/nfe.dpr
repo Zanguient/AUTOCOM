@@ -9,7 +9,6 @@ uses
   uAutocomConsts in '..\COMUM\uAutocomConsts.pas',
   uFuncoes in '..\COMUM\uFuncoes.pas',
   uMD5Print in '..\COMUM\uMD5Print.pas',
-  udmnfe in 'udmnfe.pas' {DM_NFE: TDataModule},
   ucce in 'ucce.pas' {frmcce},
   uInutilizaNumeracao in 'uInutilizaNumeracao.pas' {frmInut},
   uListaNF in 'uListaNF.pas' {frmListaNF},
@@ -47,7 +46,9 @@ uses
   uPesqNCM in '..\GERENCIAL\uPesqNCM.pas' {frmPesqNCM},
   udm_ini in '..\DATAMODULES\udm_ini.pas' {DM_INI: TDataModule},
   uDM in '..\DATAMODULES\uDM.pas' {DM: TDataModule},
-  uDM_NF_Entr in '..\DATAMODULES\uDM_NF_Entr.pas' {DM_NF_Entr: TDataModule};
+  uDM_NF_Entr in '..\DATAMODULES\uDM_NF_Entr.pas' {DM_NF_Entr: TDataModule},
+  udmnfe in '..\DATAMODULES\udmnfe.pas' {DM_NFE: TDataModule},
+  uDM_Conn in '..\DATAMODULES\uDM_Conn.pas' {DMConn: TDataModule};
 
 {$R *.res}
 
@@ -59,12 +60,13 @@ begin
   frmSplash.Show;
   frmSplash.Update;
   Application.CreateForm(TDMSkin, DMSkin);
-  Application.CreateForm(TDM_NFE, DM_NFE);
   Application.CreateForm(TfrmMain, frmMain);
   Application.CreateForm(TfrmPesqCidade, frmPesqCidade);
   Application.CreateForm(TfrmPesqNCM, frmPesqNCM);
   Application.CreateForm(TDM_INI, DM_INI);
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TDM_NF_Entr, DM_NF_Entr);
+  Application.CreateForm(TDM_NFE, DM_NFE);
+  Application.CreateForm(TDMConn, DMConn);
   Application.Run;
 end.

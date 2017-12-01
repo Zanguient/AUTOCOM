@@ -143,9 +143,9 @@ inherited frmConcluir: TfrmConcluir
     TabOrder = 2
     object grd1: TcxGrid
       Left = 1
-      Top = 29
+      Top = 26
       Width = 255
-      Height = 276
+      Height = 279
       Align = alClient
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -157,6 +157,8 @@ inherited frmConcluir: TfrmConcluir
       LevelTabs.Slants.Kind = skCutCorner
       LevelTabs.Style = 6
       LookAndFeel.Kind = lfOffice11
+      ExplicitTop = 29
+      ExplicitHeight = 276
       object tbv: TcxGridDBTableView
         Navigator.Buttons.CustomButtons = <>
         Navigator.Buttons.First.Visible = False
@@ -197,9 +199,9 @@ inherited frmConcluir: TfrmConcluir
         OptionsBehavior.DragOpening = False
         OptionsBehavior.DragScrolling = False
         OptionsBehavior.GoToNextCellOnEnter = True
-        OptionsBehavior.ImmediateEditor = False
         OptionsBehavior.CopyPreviewToClipboard = False
         OptionsBehavior.ExpandMasterRowOnDblClick = False
+        OptionsBehavior.ImmediateEditor = False
         OptionsBehavior.PullFocusing = True
         OptionsCustomize.ColumnFiltering = False
         OptionsCustomize.ColumnGrouping = False
@@ -305,6 +307,7 @@ inherited frmConcluir: TfrmConcluir
       Top = 143
       Align = alTop
       Caption = 'DIFEREN'#199'A'
+      ExplicitTop = 145
     end
     object LblDif: TcxLabel
       AlignWithMargins = True
@@ -327,6 +330,7 @@ inherited frmConcluir: TfrmConcluir
       Properties.LabelStyle = cxlsLowered
       Properties.LineOptions.Visible = True
       Properties.Orientation = cxoLeftTop
+      ExplicitTop = 167
       Height = 29
       Width = 213
       AnchorX = 217
@@ -352,6 +356,7 @@ inherited frmConcluir: TfrmConcluir
       Properties.LabelStyle = cxlsLowered
       Properties.LineOptions.Visible = True
       Properties.Orientation = cxoLeftTop
+      ExplicitTop = 223
       Height = 29
       Width = 213
       AnchorX = 217
@@ -361,6 +366,7 @@ inherited frmConcluir: TfrmConcluir
       Top = 197
       Align = alTop
       Caption = 'TROCO'
+      ExplicitTop = 199
     end
     object lblVrCompra: TcxLabel
       Left = 1
@@ -386,6 +392,7 @@ inherited frmConcluir: TfrmConcluir
       Properties.LabelStyle = cxlsLowered
       Properties.LineOptions.Visible = True
       Properties.Orientation = cxoLeftTop
+      ExplicitTop = 116
       Height = 29
       Width = 219
       AnchorX = 220

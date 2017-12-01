@@ -1940,9 +1940,11 @@ type
     function ExecSQL(s_script: string; raising: boolean=True): boolean;
     //procedure Pesquisar(qQuery: TADQuery; s_script: string);
     procedure GeraChave;
- //{$IFDEF GER}
+{$IFNDEF ATT}
+{$IFNDEF SFL}
     procedure Status(Mostrar: Boolean; Msg1, Msg2: String);
-// {$ENDIF}
+ {$ENDIF}
+  {$ENDIF}
     procedure Abrir_Central_Relat(modo,arq_ini: string; pasta: string = C_ST_VAZIO; arquivo: string = C_ST_VAZIO; params: string = C_ST_VAZIO);
 
     //atualiza as tabelas de cst pi cofins ipi
@@ -2044,16 +2046,26 @@ implementation
 uses
 udm_ini, uAutocomConsts, uTraducao
 
-//{$IFDEF GER}
+{$IFNDEF ATT}
+{$IFNDEF SFL}
 ,uRegras_Imposto, uStatus
-//{$ENDIF}
-, uViews, udmnfe;
-
+{$ENDIF}
+{$ENDIF}
+, uViews
+{$IFNDEF PV}
+{$IFNDEF ATT}
+{$IFNDEF SFL}
+, udmnfe
+{$ENDIF}
+{$ENDIF}
+{$ENDIF}
+;
 
 
 {$R *.dfm}
 
-//{$IFDEF GER}
+{$IFNDEF ATT}
+{$IFNDEF SFL}
 procedure TDM.Status(Mostrar: Boolean; Msg1, Msg2: String);
 begin
    if Mostrar then
@@ -2078,7 +2090,8 @@ begin
    end;
    application.ProcessMessages;
 end;
-//{$ENDIF}
+{$ENDIF}
+{$ENDIF}
 
 function TDM.Comissao: currency;
 var
@@ -2362,12 +2375,20 @@ end;
 procedure TDM.IdSMTPStatus(ASender: TObject; const AStatus: TIdStatus;
   const AStatusText: string);
 begin
+{$IFNDEF ATT}
+{$IFNDEF SFL}
    Status(True, '', AStatusText);
+{$ENDIF}
+{$ENDIF}
 end;
 
 procedure TDM.IdSMTPWorkEnd(ASender: TObject; AWorkMode: TWorkMode);
 begin
+{$IFNDEF ATT}
+{$IFNDEF SFL}
    Status(True, '', 'ENVIO CONCLUÍDO.');
+{$ENDIF}
+{$ENDIF}
 end;
 
 function TDM.Indice(campo: string): currency;

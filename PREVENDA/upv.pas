@@ -204,7 +204,7 @@ implementation
 {$R *.dfm}
 
 uses udm_ini, uDM, dmSkins, uFuncoes, uSkinDLL, uAutocomConsts, uMD5Print, uPesqCli, uPesqProd, uItem,
-  uCancelar, uConcluir, uEmpresa, uOpcoes, uDM_PDV;
+  uCancelar, uConcluir, uEmpresa, uOpcoes, uDM_PDV, uDM_Conn;
 
 //funçoes de dlls
 function Validar: Integer; stdcall; external 'LIB\32\softlock.dll';
@@ -280,8 +280,8 @@ begin
       exit;
    end;
 
-   bar1.Panels[0].Text := DM.DB.Params.Values['Server'];
-   bar1.Panels[1].Text := DM.DB.Params.Values['Database'];
+   bar1.Panels[0].Text := DMConn.DB.Params.Values['Server'];
+   bar1.Panels[1].Text := DMConn.DB.Params.Values['Database'];
 
    if DM_INI.ini.StoredValue['idTerm'] = '00' then
    begin
@@ -377,8 +377,8 @@ end;
 
 procedure TfrmPV.AtuPV;
 begin
-   DM.Q1.Open('select valor from indices where nome="pv"');
-   PV := LFill(DM.Q1.Fields[0].AsString, 10, '0');
+   DMConn.Q1.Open('select valor from indices where nome="pv"');
+   PV := LFill(DMConn.Q1.Fields[0].AsString, 10, '0');
    stTipo := '';
 
    case ini.StoredValue['modo'] of
@@ -506,6 +506,7 @@ begin
    ini.SaveFormPlacement;
    DM_INI.INI.SaveFormPlacement;
    FreeAndNil(DM);
+   FreeAndNil(DMConn);
    FreeAndNil(DM_INI);
    inherited;;
 end;
@@ -524,6 +525,7 @@ begin
   end;
    CAPTION := 'AUTOCOM PRÉ-VENDA ' + C_117;
    DM_INI := TDM_INI.Create(self);
+   DMConn := TDMConn.Create(self);
    DM := TDM.Create(self);
 
    Timer1.Enabled := true;
@@ -648,13 +650,13 @@ begin
             DM.QVenda.Fields[i].AsCurrency := 0;
       end;
 
-      DM.Q1.Open('select max(coo) from venda where tipo="PV"');
-      DM.Q2.Open('select max(coa) from venda where tipo="PV"');
+      DMConn.Q1.Open('select max(coo) from venda where tipo="PV"');
+      DMConn.Q2.Open('select max(coa) from venda where tipo="PV"');
       DM_PDV.Q1.Open('select sum(vProd) from pv');
 
       DM.QVendacliente.AsInteger      := DM.QCliid.Value;
-      DM.QVendacoo.Value              := DM.Q1.Fields[0].AsInteger + 1;
-      DM.QVendacoa.AsInteger          := DM.Q2.Fields[0].AsInteger + 1;
+      DM.QVendacoo.Value              := DMConn.Q1.Fields[0].AsInteger + 1;
+      DM.QVendacoa.AsInteger          := DMConn.Q2.Fields[0].AsInteger + 1;
       DM.QVendapv.AsString            := LFill(FloatToStr(DM.Indice('pv')),10,'0');
       DM.QVendatipo.AsString          := 'PV';
       DM.QVendaoperador.AsInteger     := DM.Operador.ID;
@@ -689,7 +691,7 @@ begin
          frmPV.TVenda_Item.Next;
       end;
 
-      DM.DB.ExecSQL('update indices set valor=if(valor >=9999999999,1,valor+1) where nome="pv";');
+      DM.ExecSQL('update indices set valor=if(valor >=9999999999,1,valor+1) where nome="pv";');
    end;
 
    frmPV.LimparPV;
@@ -729,9 +731,9 @@ begin
 
    s := InputBox('Permissão de supervisor', 'Senha supervisor', s);
 
-   DM.Q1.Open('select * from operador where senha=' + Texto_Mysql(s) + ' and acesso > 7');
+   DMConn.Q1.Open('select * from operador where senha=' + Texto_Mysql(s) + ' and acesso > 7');
 
-   Result := not DM.Q1.IsEmpty;
+   Result := not DMConn.Q1.IsEmpty;
 
    if Result then
       ShowMessage('Autorizado.')

@@ -925,7 +925,8 @@ implementation
 uses uAutocomConsts, udmnfe, uFuncoes, ualterar_natop, uMD5Print, uCadFemissao, ucce,
   uInutilizaNumeracao, uListaNF, uManut, uXML, udm_ini, dmSkins, uSkinDLL, uCadCli,
   uCadEmpresa, uCadEstoque, uCadForn, uCfg, uDM, uPesqCli, uPesqProd,
-  uPesqNatOper, uRateio, uSplash, uManiDest, uAssDevol, uVendaNF, uDic_NF;
+  uPesqNatOper, uRateio, uSplash, uManiDest, uAssDevol, uVendaNF, uDic_NF,
+  uDM_Conn;
 
 {$R *.dfm}
 
@@ -986,11 +987,11 @@ end;
 
 procedure TfrmMain.Verificar_NFs;
 begin
-   DM.Q1.OPen(C_SQL54);
+   DMConn.Q1.OPen(C_SQL54);
 
-   if DM.Q1.Fields[0].AsInteger > 0 then
+   if DMConn.Q1.Fields[0].AsInteger > 0 then
    begin
-      ShowMessage('EXISTEM ' + DM.Q1.Fields[0].AsString + ' NOTAS FISCAIS EMITIDAS SEM A '+#13+#10+
+      ShowMessage('EXISTEM ' + DMConn.Q1.Fields[0].AsString + ' NOTAS FISCAIS EMITIDAS SEM A '+#13+#10+
                   'DECLARAÇÃO DA DATA DE SAÍDA.'+#13+#10+
                   'Acesse a opção EMISSÃO / Botão Notas Fiscais e verifique.');
    end;
@@ -1504,15 +1505,15 @@ begin
          
          if QNFEmit_CRT.Value >0 then//se nao é SN
          begin
-            DM.Q1.Open('select icms_pc, texto from estoque_info_complem where id=' + Texto_Mysql(DM.QEstoqueinfo_complem.Value));
+            DMConn.Q1.Open('select icms_pc, texto from estoque_info_complem where id=' + Texto_Mysql(DM.QEstoqueinfo_complem.Value));
 
             if not DM.QEstoque_Info_compl.IsEmpty then
             begin
-               QNF_ItemICMS_pRedBC.Value  := DM.Q1.Fields[0].AsCurrency;
+               QNF_ItemICMS_pRedBC.Value  := DMConn.Q1.Fields[0].AsCurrency;
                if s <> '' then
-                  s := s + DM.Q1.Fields[1].AsString
+                  s := s + DMConn.Q1.Fields[1].AsString
                else
-                  s := 'Item ' + QNF_ItemnItem.AsString + ': ' + DM.Q1.Fields[1].AsString;
+                  s := 'Item ' + QNF_ItemnItem.AsString + ': ' + DMConn.Q1.Fields[1].AsString;
             end;
          end;
 
@@ -1839,15 +1840,15 @@ begin
          
       if DM_NFE.QNFEmit_CRT.Value >0 then//se nao é SN
       begin
-         DM.Q1.Open('select icms_pc, texto from estoque_info_complem where id=' + Texto_Mysql(DM.QEstoqueinfo_complem.Value));
+         DMConn.Q1.Open('select icms_pc, texto from estoque_info_complem where id=' + Texto_Mysql(DM.QEstoqueinfo_complem.Value));
 
          if not DM.QEstoque_Info_compl.IsEmpty then
          begin
-            DM_NFE.QNF_ItemICMS_pRedBC.Value  := DM.Q1.Fields[0].AsCurrency;
+            DM_NFE.QNF_ItemICMS_pRedBC.Value  := DMConn.Q1.Fields[0].AsCurrency;
             if s <> '' then
-               s := s + DM.Q1.Fields[1].AsString
+               s := s + DMConn.Q1.Fields[1].AsString
             else
-               s := 'Item ' + DM_NFE.QNF_ItemnItem.AsString + ': ' + DM.Q1.Fields[1].AsString;
+               s := 'Item ' + DM_NFE.QNF_ItemnItem.AsString + ': ' + DMConn.Q1.Fields[1].AsString;
          end;
       end;
 
@@ -2130,9 +2131,9 @@ var
 
 function CFOP: string;
 begin
-   DM.Q2.Open('select * from cfop_devol where interno="S" and ind="X"');
+   DMConn.Q2.Open('select * from cfop_devol where interno="S" and ind="X"');
 
-   Result := DM.Q2.FieldByName('cfop').AsString;
+   Result := DMConn.Q2.FieldByName('cfop').AsString;
 
    //preenche os demais campos
 
@@ -2141,22 +2142,22 @@ begin
       if DM_NFE.QNFEmit_CRT.AsInteger = 0 then  //SN
       begin
          QNF_ItemICMS_CST.Value   := integer(cstVazio);
-         QNF_ItemICMS_CSOSN.Value := DM.Q2.FieldByName('csosn').AsInteger;
+         QNF_ItemICMS_CSOSN.Value := DMConn.Q2.FieldByName('csosn').AsInteger;
       end
       else
-         QNF_ItemICMS_CST.Value := DM.Q2.FieldByName('cst').AsInteger;
+         QNF_ItemICMS_CST.Value := DMConn.Q2.FieldByName('cst').AsInteger;
 
-      QNF_ItemPIS_CST.Value       := DM.Q2.FieldByName('cst_pis').AsInteger;
-      QNF_ItemCOFINS_CST.Value    := DM.Q2.FieldByName('cst_pis').AsInteger;
-      QNF_ItemIPI_CST.Value       := DM.Q2.FieldByName('cst_ipi').AsInteger;
+      QNF_ItemPIS_CST.Value       := DMConn.Q2.FieldByName('cst_pis').AsInteger;
+      QNF_ItemCOFINS_CST.Value    := DMConn.Q2.FieldByName('cst_pis').AsInteger;
+      QNF_ItemIPI_CST.Value       := DMConn.Q2.FieldByName('cst_ipi').AsInteger;
       QNF_Itembaixa_estoque.Value := 'N';
    end;
 end;
 
 begin
-   DM.Q3.Open('select cProd, sum(qtd) as qtd from estoque_perda where baixa="N" group BY cProd');
+   DMConn.Q3.Open('select cProd, sum(qtd) as qtd from estoque_perda where baixa="N" group BY cProd');
 
-   if DM.Q3.IsEmpty then
+   if DMConn.Q3.IsEmpty then
    begin
       if DM_NFE.QNF.state in [dsinsert] then
          DM_NFE.QNF.Cancel
@@ -2223,12 +2224,12 @@ begin
          QNF.Post;
 
 
-      while not DM.Q3.Eof do
+      while not DMConn.Q3.Eof do
       begin
-         DM.QvwEstoque.Open('select * from vw_estoque where id="' + DM.Q3.FieldByName('cProd').AsString + '";');
+         DM.QvwEstoque.Open('select * from vw_estoque where id="' + DMConn.Q3.FieldByName('cProd').AsString + '";');
 
          if DM.QvwEstoque.IsEmpty then
-            raise Exception.Create('Produto "' + DM.Q3.FieldByName('cProd').AsString + '" não encontrado.');
+            raise Exception.Create('Produto "' + DMConn.Q3.FieldByName('cProd').AsString + '" não encontrado.');
 
          with DM_NFE do
          begin
@@ -2245,7 +2246,7 @@ begin
 
             //inclui o CFOP, QTD e valor de custo
             QNF_ItemCFOP.AsString     := CFOP;
-            QNF_ItemqCom.Value        := DM.Q3.FieldByName('qtd').Value;
+            QNF_ItemqCom.Value        := DMConn.Q3.FieldByName('qtd').Value;
             QNF_ItemvUnCom.Value      := DM.QvwEstoquevrcusto.Value;
             QNF_ItemICMS_orig.Value   := DM.QvwEstoqueorigem.Value; //nacional
             QNF_ItemICMS_modBC.Value  := DM.QvwEstoqueicms_mod_bc.Value;
@@ -2255,7 +2256,7 @@ begin
             QNF_Item.Post;
          end;
 
-         DM.Q3.Next;
+         DMConn.Q3.Next;
       end;
    end;
    ShowMessage('Confira a NF e informe os dados adicionais pertinentes.');
@@ -2441,9 +2442,9 @@ procedure TfrmMain.cbMovEstoqueClick(Sender: TObject);
 begin
    if (cbMovEstoque.focused)and(DM_NFE.QNF_ItemCFOP.AsInteger > 0) and (DM_NFE.QNF_Item.State IN [dsEdit, dsInsert]) then
    begin
-      DM.Q3.Open('select baixa_estoque from cfop where cfop=' + Texto_Mysql(DM_NFE.QNF_ItemCFOP.AsString));
+      DMConn.Q3.Open('select baixa_estoque from cfop where cfop=' + Texto_Mysql(DM_NFE.QNF_ItemCFOP.AsString));
 
-      if (DM.Q3.Fields[0].AsString = 'N') and (cbMovEstoque.Checked) then
+      if (DMConn.Q3.Fields[0].AsString = 'N') and (cbMovEstoque.Checked) then
       begin
          if (MessageBox(0, 'Este CFOP não baixa estoque. Deseja Forçar esta condição?', 'Atenção', MB_ICONWARNING or MB_YESNO) = idNo) then
          begin
@@ -2453,7 +2454,7 @@ begin
          end;
       end;
 
-      if (DM.Q3.Fields[0].AsString = 'S') and (not cbMovEstoque.Checked) then
+      if (DMConn.Q3.Fields[0].AsString = 'S') and (not cbMovEstoque.Checked) then
       begin
          if (MessageBox(0, 'Este CFOP baixa estoque. Deseja Forçar esta condição?', 'Atenção', MB_ICONWARNING or MB_YESNO) = idNo) then
          begin
@@ -2662,10 +2663,10 @@ begin
 *)
    if DM_NFE.NFe1.WebServices.EnvEvento.EventoRetorno.retEvento.Items[0].RetInfEvento.cStat in [{135}101, 151]  then//se cancelou
    begin
-      DM.Q1.Open('select nf from nf_chave where chave=' + Texto_Mysql(DM_NFE.NFe1.WebServices.EnvEvento.EventoRetorno.retEvento.Items[0].RetInfEvento.chNFe));
-      if DM.Q1.Fields[0].AsInteger > 0 then
+      DMConn.Q1.Open('select nf from nf_chave where chave=' + Texto_Mysql(DM_NFE.NFe1.WebServices.EnvEvento.EventoRetorno.retEvento.Items[0].RetInfEvento.chNFe));
+      if DMConn.Q1.Fields[0].AsInteger > 0 then
       begin
-         DM.QNF.Open('select * from nf where id=' + Texto_Mysql(DM.Q1.Fields[0].AsInteger));
+         DM.QNF.Open('select * from nf where id=' + Texto_Mysql(DMConn.Q1.Fields[0].AsInteger));
          DM.QNF.Edit;
          DM.QNFstatus.Value := 2;
          DM.QNF.Post;
@@ -2861,11 +2862,11 @@ begin
          s_chave := Number(NFe1.NotasFiscais.Items[0].Nfe.infNFe.ID);
          cnpj    := Number(NFe1.NotasFiscais.Items[0].Nfe.Dest.CNPJCPF);
 
-         DM.Q1.Open('SELECT DISTINCT cnpj, nome, razaosocial,cidade, uf, email ' +
+         DMConn.Q1.Open('SELECT DISTINCT cnpj, nome, razaosocial,cidade, uf, email ' +
                                        'FROM vw_dest_nf where cnpj=' + Texto_Mysql(cnpj)
          );
 
-         if DM.Q1.Fields[0].AsString = C_ST_VAZIO then
+         if DMConn.Q1.Fields[0].AsString = C_ST_VAZIO then
          begin
             s_xml := 'Não foi encontrado o cadastro do CNPJ ' + cnpj;
             Log('nfe', 'btn_enviar_emailClick', s_xml);
@@ -2886,10 +2887,10 @@ begin
             raise Exception.Create(s_xml);
          end;
 
-         lblnome.Caption := DM.Q1.FieldByName('razaosocial').AsString;
-         lblcnpj.Caption := DM.Q1.FieldByName('cnpj').AsString;
-         lblendereco.Caption := DM.Q1.FieldByName('cidade').AsString + ' ' + DM.Q1.FieldByName('uf').AsString;
-         edmail.Text     := DM.Q1.FieldByName('email').AsString;
+         lblnome.Caption := DMConn.Q1.FieldByName('razaosocial').AsString;
+         lblcnpj.Caption := DMConn.Q1.FieldByName('cnpj').AsString;
+         lblendereco.Caption := DMConn.Q1.FieldByName('cidade').AsString + ' ' + DMConn.Q1.FieldByName('uf').AsString;
+         edmail.Text     := DMConn.Q1.FieldByName('email').AsString;
          pnlmail.Show;
       end;
    end;
@@ -3629,8 +3630,8 @@ begin
    begin
       if DM_NFE.QNF_ItemCFOP.Value <> '' then
       begin
-         DM.Q3.Open('select baixa_estoque from cfop where cfop=' + Texto_Mysql(DM_NFE.QNF_ItemCFOP.AsString));
-         DM_NFE.QNF_Itembaixa_estoque.AsString := DM.Q3.Fields[0].AsString;
+         DMConn.Q3.Open('select baixa_estoque from cfop where cfop=' + Texto_Mysql(DM_NFE.QNF_ItemCFOP.AsString));
+         DM_NFE.QNF_Itembaixa_estoque.AsString := DMConn.Q3.Fields[0].AsString;
       end;
    end;
 end;

@@ -15,7 +15,8 @@ uses
   cxGrid, cxCheckBox, cxMemo, cxProgressBar, FireDAC.Stan.Intf,
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
-  FireDAC.Comp.Client, FireDAC.Comp.DataSet;
+  FireDAC.Comp.Client, FireDAC.Comp.DataSet, dxSkinsCore, dxSkinCaramel,
+  dxSkinscxPCPainter, dxBarBuiltInMenu;
 
 type
   TfrmVendaNF = class(Tfrm)
@@ -116,7 +117,7 @@ implementation
 
 {$R *.dfm}
 
-uses uAutocomConsts, uDM, udm_ini, uFuncoes, udmnfe, uMain;
+uses uAutocomConsts, uDM, udm_ini, uFuncoes, udmnfe, uMain, uDM_Conn;
 
 procedure TfrmVendaNF.btnExibirClick(Sender: TObject);
 begin
@@ -184,7 +185,7 @@ begin
       exit;
    //obtem os itens agrupados por código, preço e icms e ordenados por nome
    Bar1.Show;
-   DM.Q5.Open('select cProd, cEAN, xProd, NCM, CFOP, uCom, vUnCom, sum(qCom) as qCom,' +
+   DMConn.Q5.Open('select cProd, cEAN, xProd, NCM, CFOP, uCom, vUnCom, sum(qCom) as qCom,' +
               'sum(vProd) as vProd, sum(vDesc) as vDesc, ICMS_CST,ICMS_orig, ' +
               'ICMS_modBC,sum(ICMS_vBC) as ICMS_vBC,ICMS_pICMS, sum(ICMS_vICMS) as ICMS_vICMS, ' +
               'ICMS_CSOSN,ICMS_pCredSN,sum(ICMS_vCredICMSSN)as ICMS_vCredICMSSN, ' +
@@ -208,7 +209,7 @@ begin
               'from venda_item where venda_item.venda in(' + st_id +
               ') group by cProd,vUnCom, ICMS_pICMS order by xProd');
 
-   Bar1.Properties.Max := DM.Q5.RecordCount;
+   Bar1.Properties.Max := DMConn.Q5.RecordCount;
    Bar1.Position       := 0;
    Gerar(st_id);
 end;
@@ -263,97 +264,97 @@ begin
 
    //DM.QvwEstoque.Open;
 
-   while not DM.Q5.Eof do
+   while not DMConn.Q5.Eof do
    begin
-      DM.QvwEstoque.Open('select * from vw_estoque where id="' + DM.Q5.FieldByName('cProd').AsString + '";');
+      DM.QvwEstoque.Open('select * from vw_estoque where id="' + DMConn.Q5.FieldByName('cProd').AsString + '";');
 
       if DM.QvwEstoque.IsEmpty then
-         raise Exception.Create('Produto "' + DM.Q5.FieldByName('cProd').AsString + '" não encontrado.');
+         raise Exception.Create('Produto "' + DMConn.Q5.FieldByName('cProd').AsString + '" não encontrado.');
 
-      Bar1.Position := DM.Q5.RecNo;
+      Bar1.Position := DMConn.Q5.RecNo;
 
       with DM_NFE do
       begin
          QNF_Item.Append;
          Application.ProcessMessages;
 
-         if ValidaEAN(DM.Q5.FieldByName('cEAN').AsString) then
-            QNF_ItemcEAN.AsString := DM.Q5.FieldByName('cEAN').AsString;
+         if ValidaEAN(DMConn.Q5.FieldByName('cEAN').AsString) then
+            QNF_ItemcEAN.AsString := DMConn.Q5.FieldByName('cEAN').AsString;
 
-         QNF_ItemcProd.AsString := DM.Q5.FieldByName('cProd').AsString;
-         QNF_ItemxProd.AsString := DM.Q5.FieldByName('xProd').AsString;
-         QNF_ItemNCM.AsString   := DM.Q5.FieldByName('NCM').AsString;
+         QNF_ItemcProd.AsString := DMConn.Q5.FieldByName('cProd').AsString;
+         QNF_ItemxProd.AsString := DMConn.Q5.FieldByName('xProd').AsString;
+         QNF_ItemNCM.AsString   := DMConn.Q5.FieldByName('NCM').AsString;
         // QNF_ItemEXTIPI.AsString := DM.QvwEstoqueextipi.AsString;
-         QNF_ItemuCom.AsString  := Clip(DM.Q5.FieldByName('uCom').AsString,2);
+         QNF_ItemuCom.AsString  := Clip(DMConn.Q5.FieldByName('uCom').AsString,2);
 
          //inclui o CFOP, QTD e valor de custo
-         QNF_ItemCFOP.AsString     := Iif(rg1.ItemIndex=0, DM.Q5.FieldByName('CFOP').AsString, Copy(DM.Q5.FieldByName('CFOP').AsString,1,1) + '929');
-         QNF_ItemqCom.Value        := DM.Q5.FieldByName('qCom').AsCurrency;
-         QNF_ItemvUnCom.Value      := DM.Q5.FieldByName('vUnCom').AsCurrency;
+         QNF_ItemCFOP.AsString     := Iif(rg1.ItemIndex=0, DMConn.Q5.FieldByName('CFOP').AsString, Copy(DMConn.Q5.FieldByName('CFOP').AsString,1,1) + '929');
+         QNF_ItemqCom.Value        := DMConn.Q5.FieldByName('qCom').AsCurrency;
+         QNF_ItemvUnCom.Value      := DMConn.Q5.FieldByName('vUnCom').AsCurrency;
          //para obter o desconto no item : vProd - ICMS_vBC
-         QNF_ItemvDesc.Value       := DM.Q5.FieldByName('vProd').AsCurrency - DM.Q5.FieldByName('ICMS_vBC').AsCurrency ;
-         QNF_ItemICMS_orig.Value   := DM.Q5.FieldByName('ICMS_orig').AsInteger; //nacional
-         QNF_ItemICMS_modBC.Value  := DM.Q5.FieldByName('ICMS_modBC').AsInteger;
+         QNF_ItemvDesc.Value       := DMConn.Q5.FieldByName('vProd').AsCurrency - DMConn.Q5.FieldByName('ICMS_vBC').AsCurrency ;
+         QNF_ItemICMS_orig.Value   := DMConn.Q5.FieldByName('ICMS_orig').AsInteger; //nacional
+         QNF_ItemICMS_modBC.Value  := DMConn.Q5.FieldByName('ICMS_modBC').AsInteger;
 
-         DM.Q2.Open('select cod_receita from estoque where id=' + Texto_Mysql(DM.Q5.FieldByName('cProd').Value));
-         QNF_ItemPIS_codrec.Value := DM.Q2.FieldByName('cod_receita').asInteger;
+         DMConn.Q2.Open('select cod_receita from estoque where id=' + Texto_Mysql(DMConn.Q5.FieldByName('cProd').Value));
+         QNF_ItemPIS_codrec.Value := DMConn.Q2.FieldByName('cod_receita').asInteger;
 
          s := '';
 
          if(QNFEmit_CRT.Value >0)and(rg1.ItemIndex = 0) then//se nao é SN  e nao é ECF
          begin
-            DM.Q2.Open('select icms_pc, texto from estoque_info_complem where id=' + Texto_Mysql(DM.QEstoqueinfo_complem.Value));
+            DMConn.Q2.Open('select icms_pc, texto from estoque_info_complem where id=' + Texto_Mysql(DM.QEstoqueinfo_complem.Value));
 
             if not DM.QEstoque_Info_compl.IsEmpty then
             begin
-               QNF_ItemICMS_pRedBC.Value  := DM.Q2.Fields[0].AsCurrency;
+               QNF_ItemICMS_pRedBC.Value  := DMConn.Q2.Fields[0].AsCurrency;
                if s <> '' then
-                  s := s + DM.Q2.Fields[1].AsString
+                  s := s + DMConn.Q2.Fields[1].AsString
                else
-                  s := 'Item ' + QNF_ItemnItem.AsString + ': ' + DM.Q2.Fields[1].AsString;
+                  s := 'Item ' + QNF_ItemnItem.AsString + ': ' + DMConn.Q2.Fields[1].AsString;
             end;
          end;
 
          if rg1.ItemIndex=0 then//venda NF
          begin
-            QNF_ItemICMS_modBC.Value  := DM.Q5.FieldByName('ICMS_modBC').AsInteger;
-            QNF_ItemICMS_pICMS.Value  := DM.Q5.FieldByName('ICMS_pICMS').AsCurrency;
+            QNF_ItemICMS_modBC.Value  := DMConn.Q5.FieldByName('ICMS_modBC').AsInteger;
+            QNF_ItemICMS_pICMS.Value  := DMConn.Q5.FieldByName('ICMS_pICMS').AsCurrency;
 
             if DM_NFE.QNFEmit_CRT.AsInteger = 0 then  //SN
             begin
                QNF_ItemICMS_CST.Value   := integer(cstVazio);
-               QNF_ItemICMS_CSOSN.Value := DM_NFE.Converter_CST_CSOSN(False, DM.Q5.FieldByName('ICMS_CST').AsString);
+               QNF_ItemICMS_CSOSN.Value := DM_NFE.Converter_CST_CSOSN(False, DMConn.Q5.FieldByName('ICMS_CST').AsString);
             end
             else
-               QNF_ItemICMS_CST.Value := DM_NFE.Converter_CST_CSOSN(True, DM.Q5.FieldByName('ICMS_CST').AsString);
+               QNF_ItemICMS_CST.Value := DM_NFE.Converter_CST_CSOSN(True, DMConn.Q5.FieldByName('ICMS_CST').AsString);
 
-            QNF_ItemPIS_CST.Value    := DM.Q5.FieldByName('PIS_CST').AsInteger;
-            QNF_ItemCOFINS_CST.Value := DM.Q5.FieldByName('PIS_CST').AsInteger;
-            QNF_ItemIPI_CST.Value    := DM.Q5.FieldByName('IPI_CST').AsInteger;
+            QNF_ItemPIS_CST.Value    := DMConn.Q5.FieldByName('PIS_CST').AsInteger;
+            QNF_ItemCOFINS_CST.Value := DMConn.Q5.FieldByName('PIS_CST').AsInteger;
+            QNF_ItemIPI_CST.Value    := DMConn.Q5.FieldByName('IPI_CST').AsInteger;
          end
          else //ECF
          begin
-            DM.Q2.Open('select * from cfop_cst_csosn_emissao where cfop=' + Texto_Mysql(QNF_ItemCFOP.AsString));
+            DMConn.Q2.Open('select * from cfop_cst_csosn_emissao where cfop=' + Texto_Mysql(QNF_ItemCFOP.AsString));
             QNF_ItemICMS_modBC.Value  := 3;//dbiValorOperacao
-            QNF_ItemICMS_pICMS.Value  := DM.Q5.FieldByName('ICMS_pICMS').AsCurrency;//mantem o pICMS
+            QNF_ItemICMS_pICMS.Value  := DMConn.Q5.FieldByName('ICMS_pICMS').AsCurrency;//mantem o pICMS
 
             if DM_NFE.QNFEmit_CRT.AsInteger = 0 then  //SN
             begin
                QNF_ItemICMS_CST.Value   := integer(cstVazio);
-               QNF_ItemICMS_CSOSN.Value := DM.Q2.FieldByName('cst').AsInteger;
+               QNF_ItemICMS_CSOSN.Value := DMConn.Q2.FieldByName('cst').AsInteger;
             end
             else
-               QNF_ItemICMS_CST.Value := DM.Q2.FieldByName('cst').AsInteger;
+               QNF_ItemICMS_CST.Value := DMConn.Q2.FieldByName('cst').AsInteger;
 
-            QNF_ItemPIS_CST.Value    := DM.Q2.FieldByName('cst_pis_sai').AsInteger;
-            QNF_ItemCOFINS_CST.Value := DM.Q2.FieldByName('cst_pis_sai').AsInteger;
-            QNF_ItemIPI_CST.Value    := DM.Q2.FieldByName('cst_ipi_sai').AsInteger;
+            QNF_ItemPIS_CST.Value    := DMConn.Q2.FieldByName('cst_pis_sai').AsInteger;
+            QNF_ItemCOFINS_CST.Value := DMConn.Q2.FieldByName('cst_pis_sai').AsInteger;
+            QNF_ItemIPI_CST.Value    := DMConn.Q2.FieldByName('cst_ipi_sai').AsInteger;
          end;
 
          QNF_Item.Post;
       end;
 
-      DM.Q5.Next;
+      DMConn.Q5.Next;
    end;
    DM_NFE.Preenche_Info_Compl(False);
    frmMain.AtivaTabs('12345678');
@@ -382,17 +383,17 @@ end;
 procedure TfrmVendaNF.FormShow(Sender: TObject);
 begin
    inherited;
-   DM.Q1.Open('select * from vw_clivenda order by nome');
+   DMConn.Q1.Open('select * from vw_clivenda order by nome');
 
-   while not DM.Q1.Eof do
+   while not DMConn.Q1.Eof do
    begin
       with cmbDest.Properties.Items.Add do
       begin
-         Description := DM.Q1.FieldByName('nome').AsString;
-         Value       := DM.Q1.FieldByName('id').AsInteger;
+         Description := DMConn.Q1.FieldByName('nome').AsString;
+         Value       := DMConn.Q1.FieldByName('id').AsInteger;
       end;
 
-      DM.Q1.Next;
+      DMConn.Q1.Next;
    end;
 end;
 

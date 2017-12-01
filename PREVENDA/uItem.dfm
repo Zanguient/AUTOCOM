@@ -4,7 +4,7 @@ inherited frmItem: TfrmItem
   ClientHeight = 358
   ClientWidth = 203
   ExplicitWidth = 209
-  ExplicitHeight = 386
+  ExplicitHeight = 387
   PixelsPerInch = 96
   TextHeight = 15
   inherited TPA: TPanel
@@ -145,15 +145,15 @@ inherited frmItem: TfrmItem
       end
       object lblT: TcxLabel
         Left = 1
-        Top = 56
+        Top = 78
         Align = alBottom
         Caption = 'DESCONTO SOBRE O VALOR TOTAL'
         ParentFont = False
-        ExplicitTop = 78
+        ExplicitTop = 70
       end
       object edDescT: TcxCurrencyEdit
         Left = 1
-        Top = 73
+        Top = 95
         Align = alBottom
         EditValue = 0.000000000000000000
         Enabled = False
@@ -170,7 +170,6 @@ inherited frmItem: TfrmItem
         Style.IsFontAssigned = True
         TabOrder = 3
         OnKeyDown = edDescUKeyDown
-        ExplicitTop = 95
         Width = 199
       end
       object cxLabel4: TcxLabel
@@ -180,11 +179,12 @@ inherited frmItem: TfrmItem
         Align = alBottom
         Caption = 'Tecle P =%, V= $'
         ParentFont = False
+        ExplicitTop = 115
       end
     end
     object pnlpfp: TPanel
       Left = 1
-      Top = 61
+      Top = 39
       Width = 201
       Height = 67
       Align = alTop

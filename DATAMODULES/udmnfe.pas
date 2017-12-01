@@ -16,7 +16,7 @@ uses
   FireDAC.Comp.Client, FireDAC.Phys.SQLite, FireDAC.Comp.DataSet,
   ACBrNFeDANFEFRDM, ACBrDFe, FireDAC.Phys.SQLiteDef, FireDAC.VCLUI.Wait
   {$IFDEF GER}
-   , uCadEstoque, FireDAC.Phys.SQLiteDef, FireDAC.VCLUI.Wait
+   , uCadEstoque, FireDAC.Comp.UI
   {$ENDIF}
   ;
 
@@ -443,6 +443,7 @@ type
     QNF_Itembaixa_estoque: TStringField;
     DANFE: TACBrNFeDANFEFR;
     QNFDest_IndIEDest: TIntegerField;
+    ADGUIxWaitCursor1: TFDGUIxWaitCursor;
     procedure QCfgAfterPost(DataSet: TDataSet);
     procedure QCfgAfterOpen(DataSet: TDataSet);
     procedure NFe1StatusChange(Sender: TObject);

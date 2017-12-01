@@ -50,7 +50,7 @@ implementation
 
 {$R *.dfm}
 
-uses udm_ini, uFuncoes, uDM, upv, uDM_PDV;
+uses udm_ini, uFuncoes, uDM, upv, uDM_PDV, uDM_Conn;
 
 procedure TfrmItem.btnF11Click(Sender: TObject);
 var
@@ -163,7 +163,7 @@ begin
       if Desconto > 0 then
          s := 'Item ' + frmPV.TVenda_ItemnItem.AsString + ': Desc. de ' + FloatToStrF(Desconto, ffCurrency, 15, 2) + ' ';
 
-      DM.Q1.Open('select icms_pc, texto from estoque_info_complem where id=' + Texto_Mysql(DM.QEstoqueinfo_complem.Value));
+      DMConn.Q1.Open('select icms_pc, texto from estoque_info_complem where id=' + Texto_Mysql(DM.QEstoqueinfo_complem.Value));
 
       //processa a red BC se houver
 
@@ -173,17 +173,17 @@ begin
 
       if DM.QvwEstoqueinfo_complem.Value > 0 then //se tem RedBC
       begin
-         DM.Q1.Open('select * from estoque_info_complem where id=' + Texto_Mysql(DM.QvwEstoqueinfo_complem.Value));
+         DMConn.Q1.Open('select * from estoque_info_complem where id=' + Texto_Mysql(DM.QvwEstoqueinfo_complem.Value));
          //n assume o valor da redução
-         n := Arredonda(Percentual(DM.Q1.FieldByName('icms_pc').AsCurrency, frmPV.TVenda_ItemvProd.AsCurrency), 2);
+         n := Arredonda(Percentual(DMConn.Q1.FieldByName('icms_pc').AsCurrency, frmPV.TVenda_ItemvProd.AsCurrency), 2);
          //em tese, a BC se mantem e so informa o pRedBC
          //frmPV.TVenda_ItemICMS_vBC.AsCurrency := n;
-         frmPV.TVenda_ItemICMS_pRedBC.Value := DM.Q1.FieldByName('icms_pc').AsCurrency;
+         frmPV.TVenda_ItemICMS_pRedBC.Value := DMConn.Q1.FieldByName('icms_pc').AsCurrency;
 
          if s <> '' then
-            s := s + DM.Q1.Fields[1].AsString
+            s := s + DMConn.Q1.Fields[1].AsString
          else
-            s := 'Item ' + frmPV.TVenda_ItemnItem.AsString + ': ' + DM.Q1.Fields[1].AsString;
+            s := 'Item ' + frmPV.TVenda_ItemnItem.AsString + ': ' + DMConn.Q1.Fields[1].AsString;
       end;
 
       frmPV.TVenda_IteminfAdProd.AsString    := s;

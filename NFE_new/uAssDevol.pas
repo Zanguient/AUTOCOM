@@ -11,7 +11,8 @@ uses
   cxGridCustomView, cxGrid, cxClasses, cxMemo, cxMaskEdit, cxDropDownEdit, cxGroupBox, cxRadioGroup, cxCheckBox,
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, uViews,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.DBCtrls;
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.DBCtrls, dxSkinsCore,
+  dxSkinCaramel, dxSkinscxPCPainter, dxBarBuiltInMenu;
 
 type
   TfrmAssDevol = class(Tfrm)
@@ -124,7 +125,8 @@ implementation
 
 {$R *.dfm}
 
-uses udmnfe, uDM_NF_Entr, uFuncoes, uAutocomConsts, uMD5Print, uDM, uMain;
+uses udmnfe, uDM_NF_Entr, uFuncoes, uAutocomConsts, uMD5Print, uDM, uMain,
+  uDM_Conn;
 
 procedure TfrmAssDevol.btnMontarClick(Sender: TObject);
 var
@@ -134,26 +136,26 @@ var
    function CFOP: string;
 
    begin
-      DM.Q1.Open('select * from cfop_devol where id=' + IntToStr(cmbCFOP.Properties.Items[cmbCFOP.SelectedItem].Value));
+      DMConn.Q1.Open('select * from cfop_devol where id=' + IntToStr(cmbCFOP.Properties.Items[cmbCFOP.SelectedItem].Value));
 
-      Result := DM.Q1.FieldByName('cfop').AsString;
+      Result := DMConn.Q1.FieldByName('cfop').AsString;
 
       //preenche os demais campos
 
       if DM_NFE.QNFEmit_CRT.AsInteger = 0 then  //SN
       begin
          DM_NFE.QNF_ItemICMS_CST.Value   := integer(cstVazio);
-         DM_NFE.QNF_ItemICMS_CSOSN.Value := DM.Q1.FieldByName('csosn').AsInteger;
+         DM_NFE.QNF_ItemICMS_CSOSN.Value := DMConn.Q1.FieldByName('csosn').AsInteger;
       end
       else
       begin
-         DM_NFE.QNF_ItemICMS_CST.Value   := DM.Q1.FieldByName('cst').AsInteger;
+         DM_NFE.QNF_ItemICMS_CST.Value   := DMConn.Q1.FieldByName('cst').AsInteger;
          DM_NFE.QNF_ItemICMS_CSOSN.Value := integer(csosnVazio);
       end;
 
-      DM_NFE.QNF_ItemPIS_CST.Value    := DM.Q1.FieldByName('cst_pis').AsInteger;
-      DM_NFE.QNF_ItemCOFINS_CST.Value := DM.Q1.FieldByName('cst_pis').AsInteger;
-      DM_NFE.QNF_ItemIPI_CST.Value    := DM.Q1.FieldByName('cst_ipi').AsInteger;
+      DM_NFE.QNF_ItemPIS_CST.Value    := DMConn.Q1.FieldByName('cst_pis').AsInteger;
+      DM_NFE.QNF_ItemCOFINS_CST.Value := DMConn.Q1.FieldByName('cst_pis').AsInteger;
+      DM_NFE.QNF_ItemIPI_CST.Value    := DMConn.Q1.FieldByName('cst_ipi').AsInteger;
    end;
 
 begin
@@ -276,15 +278,15 @@ begin
 
          if QNFEmit_CRT.Value >0 then//se nao é SN
          begin
-            DM.Q1.Open('select icms_pc, texto from estoque_info_complem where id=' + Texto_Mysql(DM.QEstoqueinfo_complem.Value));
+            DMConn.Q1.Open('select icms_pc, texto from estoque_info_complem where id=' + Texto_Mysql(DM.QEstoqueinfo_complem.Value));
 
             if not DM.QEstoque_Info_compl.IsEmpty then
             begin
-               QNF_ItemICMS_pRedBC.Value  := DM.Q1.Fields[0].AsCurrency;
+               QNF_ItemICMS_pRedBC.Value  := DMConn.Q1.Fields[0].AsCurrency;
                if s <> '' then
-                  s := s + DM.Q1.Fields[1].AsString
+                  s := s + DMConn.Q1.Fields[1].AsString
                else
-                  s := 'Item ' + QNF_ItemnItem.AsString + ': ' + DM.Q1.Fields[1].AsString;
+                  s := 'Item ' + QNF_ItemnItem.AsString + ': ' + DMConn.Q1.Fields[1].AsString;
             end;
          end;
 
@@ -344,17 +346,17 @@ begin
    else
       s := '"S"';
 
-   DM.Q1.Open('select id, CFOP from cfop_devol where interno = ' + s + ' order by cfop');
+   DMConn.Q1.Open('select id, CFOP from cfop_devol where interno = ' + s + ' order by cfop');
    cmbCFOP.Properties.Items.Clear;
 
-   while not DM.Q1.Eof do
+   while not DMConn.Q1.Eof do
    begin
      with cmbCFOP.Properties.Items.Add do
      begin
-        Description := DM.Q1.Fields[1].AsString;
-        Value       := DM.Q1.Fields[0].AsInteger;
+        Description := DMConn.Q1.Fields[1].AsString;
+        Value       := DMConn.Q1.Fields[0].AsInteger;
      end;
-     DM.Q1.Next;
+     DMConn.Q1.Next;
    end;
 
    while not T1.IsEmpty do
@@ -413,10 +415,10 @@ begin
   if not(InputQuery('Localizar Notas por produto', 'Entre com o código GTIN do produto', S)) then
      exit;
 
-  DM.Q1.Open('select Ide_nNF, Ide_dEmi, Emit_xNome, ICMSTot_vNF, n.id from nf_entr n, nf_item_entr na where ' +
+  DMConn.Q1.Open('select Ide_nNF, Ide_dEmi, Emit_xNome, ICMSTot_vNF, n.id from nf_entr n, nf_item_entr na where ' +
              'na.nf = n.id and na.cEAN=' + Texto_Mysql(S) + ' order by Ide_nNF');
 
-  if DM.Q1.IsEmpty then
+  if DMConn.Q1.IsEmpty then
    raise Exception.Create('Nenhuma NF de entrada para este produto.');
 
    T2.Open;
@@ -424,15 +426,15 @@ begin
    while not T2.IsEmpty do
       T2.Delete;
 
-   while not DM.Q1.Eof do
+   while not DMConn.Q1.Eof do
    begin
       T2.Append;
-      T2nmro.Value  :=  DM.Q1.Fields[0].AsInteger;
-      T2data.Value  :=  DM.Q1.Fields[1].AsDateTime;
-      T2nome.AsString  :=  DM.Q1.Fields[2].AsString;
-      T2valor.Value :=  DM.Q1.Fields[3].AsCurrency;
-      T2id.Value    :=  DM.Q1.Fields[4].AsInteger;
-      DM.Q1.Next;
+      T2nmro.Value  :=  DMConn.Q1.Fields[0].AsInteger;
+      T2data.Value  :=  DMConn.Q1.Fields[1].AsDateTime;
+      T2nome.AsString  :=  DMConn.Q1.Fields[2].AsString;
+      T2valor.Value :=  DMConn.Q1.Fields[3].AsCurrency;
+      T2id.Value    :=  DMConn.Q1.Fields[4].AsInteger;
+      DMConn.Q1.Next;
    end;
 
    Tab4.TabVisible := True;
