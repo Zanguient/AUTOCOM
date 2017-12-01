@@ -800,9 +800,11 @@ begin
 end;
 
 function TDM_ECF.Carregar_AAC: boolean;
+const
+  _PATH_AAC = 'LIB\32\';
 begin
    Result := False;
-   AAC.NomeArquivoAux := Aqui(C_DAT_FILE, C_116);
+   AAC.NomeArquivoAux := Aqui(_PATH_AAC + 'AAC', C_116);
 
    if not FileExists(AAC.NomeArquivoAux) then
    begin
@@ -818,30 +820,30 @@ begin
   begin
      Clear;
      Add(AAC.IdentPAF.Paf.PrincipalExe.Nome);
-     Add('libeay32.dll');            // OpenSSL 0.9.8.1
-     Add('ssleay32.dll');            // OpenSSL 0.9.8.1
-     Add('BemaFI32.dll');            // ECF: Bematech
-     Add('BemaMFD.dll');             // ECF: Bematech
-     Add('BemaMFD2.dll');            // ECF: Bematech
-     Add('sign_bema.dll');           // ECF: Bematech
+     Add(_PATH_AAC + 'libeay32.dll');            // OpenSSL 0.9.8.1
+     Add(_PATH_AAC + 'ssleay32.dll');            // OpenSSL 0.9.8.1
+     Add(_PATH_AAC + 'BemaFI32.dll');            // ECF: Bematech
+     Add(_PATH_AAC + 'BemaMFD.dll');             // ECF: Bematech
+     Add(_PATH_AAC + 'BemaMFD2.dll');            // ECF: Bematech
+     Add(_PATH_AAC + 'sign_bema.dll');           // ECF: Bematech
      //Add('BemaMFD2_MP4000THFI.dll'); // ECF: Bematech
-     Add('AX6R32.DLL');              // ECF: Bematech
-     Add('Bematech.dll');            // ECF: Bematech
-     Add('DAO350.DLL');              // ECF: Bematech
-     Add('MSJET35.dll');             // ECF: Bematech
-     Add('swmfd.dll');               // ECF: Sweda
-     Add('CONVECF.dll');             // ECF: Sweda
-     Add('DarumaFrameWork.dll');     // ECF: Daruma
-     Add('LeituraMFDBin.dll');       // ECF: Daruma
-     Add('lebin.dll');               // ECF: Daruma
-     Add('QrCode_DarumaFramework.dll'); // ECF: Daruma
-     Add('DLLG2.dll');               // ECF: DataRegis/TermoPrinter
-     Add('DLLG2_Gerador.dll');       // ECF: DataRegis/TermoPrinter
-     Add('HIME.dll');                // ECF: DataRegis/TermoPrinter ?
-     Add('elgin.dll');               // ECF: Elgin
-     Add('ATO17.dll');               // ECF: Elgin/Urano
-     Add('leitura.dll');             // ECF: Elgin/Urano
-     Add('InterfaceEpson.dll');      // ECF: Epson
+     Add(_PATH_AAC + 'AX6R32.DLL');              // ECF: Bematech
+     Add(_PATH_AAC + 'Bematech.dll');            // ECF: Bematech
+     Add(_PATH_AAC + 'DAO350.DLL');              // ECF: Bematech
+     Add(_PATH_AAC + 'MSJET35.dll');             // ECF: Bematech
+     Add(_PATH_AAC + 'swmfd.dll');               // ECF: Sweda
+     Add(_PATH_AAC + 'CONVECF.dll');             // ECF: Sweda
+     Add(_PATH_AAC + 'DarumaFrameWork.dll');     // ECF: Daruma
+     Add(_PATH_AAC + 'LeituraMFDBin.dll');       // ECF: Daruma
+     Add(_PATH_AAC + 'lebin.dll');               // ECF: Daruma
+     Add(_PATH_AAC + 'QrCode_DarumaFramework.dll'); // ECF: Daruma
+     Add(_PATH_AAC + 'DLLG2.dll');               // ECF: DataRegis/TermoPrinter
+     Add(_PATH_AAC + 'DLLG2_Gerador.dll');       // ECF: DataRegis/TermoPrinter
+     Add(_PATH_AAC + 'HIME.dll');                // ECF: DataRegis/TermoPrinter ?
+     Add(_PATH_AAC + 'elgin.dll');               // ECF: Elgin
+     Add(_PATH_AAC + 'ATO17.dll');               // ECF: Elgin/Urano
+     Add(_PATH_AAC + 'leitura.dll');             // ECF: Elgin/Urano
+     Add(_PATH_AAC + 'InterfaceEpson.dll');      // ECF: Epson
      Add('prevenda.exe');            // prevenda
   end ;
 

@@ -69,7 +69,6 @@ object DM_ECF: TDM_ECF
     Path = 'C:\Program Files\Embarcadero\RAD Studio\9.0\bin\'
     EAD = EAD
     AAC = AAC
-    OnError = PAFError
     Left = 184
     Top = 72
   end

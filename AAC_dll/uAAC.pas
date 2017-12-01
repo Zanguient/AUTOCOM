@@ -156,7 +156,7 @@ end;
 
 function Tfrmaac.GetPathArquivoAuxiliar: String;
 begin
-  Result := Aqui(C_DAT_FILE, 'paf.dat');
+  Result := Aqui('AAC', 'paf.dat');
 end;
 
 procedure Tfrmaac.PrepararCNIEE;
@@ -164,7 +164,7 @@ var
    i: integer;
 begin
    edCNIEE.Clear;
-   cniee.Arquivo := Aqui(C_TXT_FILE, 'cniee.bin');
+   cniee.Arquivo := Aqui('AAC', 'cniee.bin');
 
    lbl1.Caption := 'Iniciando download da tabela CNIEE...';
 
