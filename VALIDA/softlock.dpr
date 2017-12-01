@@ -18,7 +18,8 @@ uses
   uViews in '..\COMUM\uViews.pas',
   udm_ini in '..\DATAMODULES\udm_ini.pas' {DM_INI: TDataModule},
   uDM in '..\DATAMODULES\uDM.pas' {DM: TDataModule},
-  uDM_Conn in '..\DATAMODULES\uDM_Conn.pas' {DMConn: TDataModule};
+  uDM_Conn in '..\DATAMODULES\uDM_Conn.pas' {DMConn: TDataModule},
+  uDMAux in '..\DATAMODULES\uDMAux.pas' {DMAux: TDataModule};
 
 {$R *.res}
 
