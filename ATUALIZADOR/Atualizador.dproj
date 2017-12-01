@@ -86,7 +86,7 @@
         <Debugger_RunParams>-start</Debugger_RunParams>
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
         <BT_BuildType>Debug</BT_BuildType>
-        <DCC_DcuOutput>C:\PROJETOS\AUTOCOM\DCU\</DCC_DcuOutput>
+        <DCC_DcuOutput>C:\PROJETOS\AUTOCOM\DCU\ATT</DCC_DcuOutput>
         <Icon_MainIcon>..\IMG\Gerencial_Icon1.ico</Icon_MainIcon>
         <Manifest_File>(None)</Manifest_File>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
@@ -184,13 +184,15 @@
                     <Source Name="MainSource">Atualizador.dpr</Source>
                 </Source>
                 <Excluded_Packages>
+                    <Excluded_Packages Name="C:\Windows\SYSTEM32\fs25.bpl">(untitled)</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Windows\SYSTEM32\fsDB25.bpl">(untitled)</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Windows\SYSTEM32\frxDB25.bpl">(untitled)</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Windows\SYSTEM32\frx25.bpl">(untitled)</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Windows\SYSTEM32\frxe25.bpl">(untitled)</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcboffice2k250.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcbofficexp250.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dcloffice2k250.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dclofficexp250.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
-                    <Excluded_Packages Name="C:\COMPO\Steema TeeChart 10.2 Tokyo\Source\..\Compiled\Delphi25.win32\Bin\DclTeePro925.bpl">File C:\COMPO\Steema TeeChart 10.2 Tokyo\Source\..\Compiled\Delphi25.win32\Bin\DclTeePro925.bpl not found</Excluded_Packages>
-                    <Excluded_Packages Name="C:\COMPO\Steema TeeChart 10.2 Tokyo\Source\..\Compiled\Delphi25.win32\Bin\DclTeeMaker125.bpl">File C:\COMPO\Steema TeeChart 10.2 Tokyo\Source\..\Compiled\Delphi25.win32\Bin\DclTeeMaker125.bpl not found</Excluded_Packages>
-                    <Excluded_Packages Name="C:\COMPO\Steema TeeChart 10.2 Tokyo\Source\..\TeeTree\Compiled\Delphi25.win32\Bin\DclTree2D25Tee9.bpl">File C:\COMPO\Steema TeeChart 10.2 Tokyo\Source\..\TeeTree\Compiled\Delphi25.win32\Bin\DclTree2D25Tee9.bpl not found</Excluded_Packages>
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">

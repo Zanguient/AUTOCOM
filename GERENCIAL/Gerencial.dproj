@@ -99,7 +99,7 @@
         <VerInfo_MajorVer>3</VerInfo_MajorVer>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <DCC_DcuOutput>C:\PROJETOS\AUTOCOM\DCU\</DCC_DcuOutput>
+        <DCC_DcuOutput>C:\PROJETOS\AUTOCOM\DCU\GER</DCC_DcuOutput>
         <VerInfo_Keys>CompanyName=;FileVersion=3.1.2.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductVersion=3.1.2.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
         <BT_BuildType>Debug</BT_BuildType>
         <Icon_MainIcon>..\IMG\Gerencial_Icon1.ico</Icon_MainIcon>

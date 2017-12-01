@@ -83,7 +83,7 @@
         <VerInfo_MajorVer>3</VerInfo_MajorVer>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
         <VerInfo_Release>1</VerInfo_Release>
-        <DCC_DcuOutput>C:\PROJETOS\AUTOCOM\DCU\</DCC_DcuOutput>
+        <DCC_DcuOutput>C:\PROJETOS\AUTOCOM\DCU\PTI</DCC_DcuOutput>
         <DCC_Define>PDV;$(DCC_Define)</DCC_Define>
         <VerInfo_Locale>1046</VerInfo_Locale>
         <DCC_ExeOutput>C:\PROJETOS\AUTOCOM\BIN\</DCC_ExeOutput>

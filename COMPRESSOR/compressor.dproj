@@ -76,7 +76,7 @@
         <DCC_RemoteDebug>true</DCC_RemoteDebug>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <DCC_DcuOutput>C:\PROJETOS\AUTOCOM\DCU\</DCC_DcuOutput>
+        <DCC_DcuOutput>C:\PROJETOS\AUTOCOM\DCU\COMP</DCC_DcuOutput>
         <DCC_ExeOutput>C:\PROJETOS\AUTOCOM\BIN\</DCC_ExeOutput>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>

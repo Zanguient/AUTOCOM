@@ -67,7 +67,7 @@
         <Debugger_HostApplication>E:\PROJETOSXE4\bin\skindll.exe</Debugger_HostApplication>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <DCC_DcuOutput>C:\PROJETOS\AUTOCOM\DCU\</DCC_DcuOutput>
+        <DCC_DcuOutput>C:\PROJETOS\AUTOCOM\DCU\SKN</DCC_DcuOutput>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <DCC_ExeOutput>C:\PROJETOS\AUTOCOM\BIN\LIB\32\</DCC_ExeOutput>
     </PropertyGroup>
