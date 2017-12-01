@@ -80,7 +80,7 @@
         <DCC_ExeOutput>C:\PROJETOS\AUTOCOM\BIN\</DCC_ExeOutput>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <Icon_MainIcon>K_bkp_auto_Icon.ico</Icon_MainIcon>
+        <Icon_MainIcon>..\IMG\Gerencial_Icon1.ico</Icon_MainIcon>
         <VerInfo_Keys>CompanyName=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductVersion=1.0.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
         <DCC_DcuOutput>C:\PROJETOS\AUTOCOM\DCU\</DCC_DcuOutput>
         <BT_BuildType>Debug</BT_BuildType>
@@ -157,11 +157,11 @@
                     <VersionInfoKeys Name="CFBundleDevelopmentRegion"/>
                 </VersionInfoKeys>
                 <Excluded_Packages>
-                    <Excluded_Packages Name="C:\Windows\SYSTEM32\frxDB25.bpl">(untitled)</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Windows\SYSTEM32\frxe25.bpl">(untitled)</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Windows\SYSTEM32\frx25.bpl">(untitled)</Excluded_Packages>
                     <Excluded_Packages Name="C:\Windows\SYSTEM32\fs25.bpl">(untitled)</Excluded_Packages>
                     <Excluded_Packages Name="C:\Windows\SYSTEM32\fsDB25.bpl">(untitled)</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Windows\SYSTEM32\frxDB25.bpl">(untitled)</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Windows\SYSTEM32\frx25.bpl">(untitled)</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Windows\SYSTEM32\frxe25.bpl">(untitled)</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcboffice2k250.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcbofficexp250.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dcloffice2k250.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
