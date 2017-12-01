@@ -15,3 +15,36 @@ __recovery
 __history
 /DCU
 /BIN/Logs/
+/GERENCIAL/*.dproj
+/LOGOBAN/*.dproj
+/SKINDLL/*.dproj
+/VALIDA/*.dproj
+/SkinsDLL/*.dproj
+/validador/fonte/*.dproj
+/K_BKP_AUTO/*.dproj
+/COMPRESSOR/*.dproj
+/ATUALIZADOR/*.dproj
+/AAC_dll/*.dproj
+/SNGPC_2.0/*.dproj
+/GERADOR DE RELATORIOS/*.dproj
+/NFE_new/*.dproj
+/PREVENDA/*.dproj
+/PTI/*.dproj
+/AAC/*.dproj
+/FARMA/VIDALINK/*.dproj
+/GERADOR DE RELATORIOS/*.stat
+/VALIDA/*.stat
+/SkinsDLL/*.stat
+/validador/fonte/*.stat
+/K_BKP_AUTO/*.stat
+/COMPRESSOR/*.stat
+/ATUALIZADOR/*.stat
+/AAC_dll/*.stat
+/SNGPC_2.0/*.stat
+/NFE_new/*.stat
+/PREVENDA/*.stat
+/PTI/*.stat
+/GERENCIAL/*.stat
+/LOGOBAN/*.stat
+/SKINDLL/*.stat
+/AAC/*.stat

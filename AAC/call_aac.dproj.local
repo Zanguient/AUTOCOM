@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<BorlandProject>
-	<Transactions>
-    <Transaction>2013/12/15 11:24:56.000.201,=C:\Users\Koplin\Documents\RAD Studio\Projects\Unit2.pas</Transaction>
-    <Transaction>2013/12/15 11:25:42.000.326,E:\PROJETOSXE4\AAC\aac.dfm=C:\Users\Koplin\Documents\RAD Studio\Projects\Unit2.dfm</Transaction>
-    <Transaction>2013/12/15 11:25:42.000.326,E:\PROJETOSXE4\AAC\aac.pas=C:\Users\Koplin\Documents\RAD Studio\Projects\Unit2.pas</Transaction>
-    <Transaction>2013/12/15 11:26:15.000.407,E:\PROJETOSXE4\AAC\call_aac.dproj=C:\Users\Koplin\Documents\RAD Studio\Projects\Project2.dproj</Transaction>
-  </Transactions>
-</BorlandProject>
