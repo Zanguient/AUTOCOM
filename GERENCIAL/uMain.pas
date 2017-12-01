@@ -9,7 +9,8 @@ uses
   cxEdit, Vcl.Menus, Vcl.StdCtrls, cxButtons, cxGroupBox, ACBrBase, ShellAPI,
   ACBrEnterTab, cxClasses, RxPlacemnt, Easysize, cxStyles,
   cxGridTableView, dxScreenTip, dxCustomHint, cxHint, dxStatusBar,
-  cxTextEdit, cxLabel, dxSkinsCore, dxSkinsdxStatusBarPainter, dxGDIPlusClasses;
+  cxTextEdit, cxLabel, dxSkinsCore, dxSkinsdxStatusBarPainter, dxGDIPlusClasses,
+  dxSkinCaramel;
 
 type
 

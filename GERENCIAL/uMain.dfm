@@ -5,7 +5,7 @@ object frmMain: TfrmMain
   ActiveControl = edLogin
   AlphaBlendValue = 200
   Caption = 'frmGerencial'
-  ClientHeight = 545
+  ClientHeight = 525
   ClientWidth = 1018
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -28,7 +28,7 @@ object frmMain: TfrmMain
     Left = 0
     Top = 75
     Width = 385
-    Height = 450
+    Height = 430
     Align = alLeft
     BevelOuter = bvNone
     TabOrder = 0
@@ -37,7 +37,7 @@ object frmMain: TfrmMain
       Left = 3
       Top = 3
       Width = 384
-      Height = 308
+      Height = 288
       Align = alLeft
       AutoSize = True
       Picture.Data = {
@@ -2503,7 +2503,7 @@ object frmMain: TfrmMain
     object cxLabel1: TcxLabel
       AlignWithMargins = True
       Left = 3
-      Top = 358
+      Top = 338
       Margins.Bottom = 50
       Align = alBottom
       Caption = 'AUTOCOM GERENCIAL'
@@ -2519,7 +2519,7 @@ object frmMain: TfrmMain
     end
     object pnlLogin: TPanel
       Left = 0
-      Top = 314
+      Top = 294
       Width = 385
       Height = 41
       Align = alBottom
@@ -2584,7 +2584,7 @@ object frmMain: TfrmMain
     Left = 550
     Top = 75
     Width = 468
-    Height = 450
+    Height = 430
     Align = alRight
     AutoSize = True
     BevelOuter = bvNone
@@ -2594,7 +2594,7 @@ object frmMain: TfrmMain
       Left = 81
       Top = 98
       Width = 384
-      Height = 349
+      Height = 329
       Align = alRight
       AutoSize = True
       Center = True
@@ -5228,7 +5228,7 @@ object frmMain: TfrmMain
   end
   object bar1: TdxStatusBar
     Left = 0
-    Top = 525
+    Top = 505
     Width = 1018
     Height = 20
     Panels = <
@@ -5568,7 +5568,7 @@ object frmMain: TfrmMain
     Enabled = False
     Interval = 60000
     OnTimer = tmInativoTimer
-    Left = 452
+    Left = 451
     Top = 84
   end
 end
