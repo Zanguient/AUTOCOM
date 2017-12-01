@@ -21,7 +21,6 @@ uses
   uSkinDLL in '..\BASE\uSkinDLL.pas',
   uFrm in '..\BASE\uFrm.pas' {frm},
   uCfg in '..\GERENCIAL\uCfg.pas' {frmCfg},
-  uDM in '..\GERENCIAL\uDM.pas' {DM: TDataModule},
   uCadCli in '..\CADASTROS\uCadCli.pas',
   uCadEmpresa in '..\CADASTROS\uCadEmpresa.pas',
   uCadEstoque in '..\CADASTROS\uCadEstoque.pas',
@@ -38,7 +37,6 @@ uses
   uManiDest in 'uManiDest.pas' {frmManiDest},
   uDetNF in 'uDetNF.pas' {frmDetNF},
   uAssDevol in 'uAssDevol.pas' {frmAssDevol},
-  uDM_NF_Entr in '..\GERENCIAL\uDM_NF_Entr.pas' {DM_NF_Entr: TDataModule},
   uVendaNF in 'uVendaNF.pas' {frmVendaNF},
   uRegras_Imposto in '..\OPERACIONAIS\uRegras_Imposto.pas' {frmRegras_Imposto},
   uDic_NF in 'uDic_NF.pas' {frmDic_NF},
@@ -47,7 +45,9 @@ uses
   uViews in '..\COMUM\uViews.pas',
   uPesqCidade in '..\GERENCIAL\uPesqCidade.pas' {frmPesqCidade},
   uPesqNCM in '..\GERENCIAL\uPesqNCM.pas' {frmPesqNCM},
-  udm_ini in '..\DATAMODULES\udm_ini.pas' {DM_INI: TDataModule};
+  udm_ini in '..\DATAMODULES\udm_ini.pas' {DM_INI: TDataModule},
+  uDM in '..\DATAMODULES\uDM.pas' {DM: TDataModule},
+  uDM_NF_Entr in '..\DATAMODULES\uDM_NF_Entr.pas' {DM_NF_Entr: TDataModule};
 
 {$R *.res}
 
@@ -59,11 +59,12 @@ begin
   frmSplash.Show;
   frmSplash.Update;
   Application.CreateForm(TDMSkin, DMSkin);
-  Application.CreateForm(TDM, DM);
   Application.CreateForm(TDM_NFE, DM_NFE);
   Application.CreateForm(TfrmMain, frmMain);
   Application.CreateForm(TfrmPesqCidade, frmPesqCidade);
   Application.CreateForm(TfrmPesqNCM, frmPesqNCM);
   Application.CreateForm(TDM_INI, DM_INI);
+  Application.CreateForm(TDM, DM);
+  Application.CreateForm(TDM_NF_Entr, DM_NF_Entr);
   Application.Run;
 end.

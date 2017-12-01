@@ -13,7 +13,6 @@ uses
   uAutocomConsts in '..\COMUM\uAutocomConsts.pas',
   FastShareMem in '..\COMUM\FastShareMem.pas',
   Extensos in '..\COMUM\Extensos.pas',
-  uDM in '..\GERENCIAL\uDM.pas' {DM: TDataModule},
   uCfg in '..\GERENCIAL\uCfg.pas' {frmCfg},
   upv in 'upv.pas' {frmPV},
   uPesqCli in 'uPesqCli.pas' {frmPesqCli},
@@ -35,7 +34,8 @@ uses
   uSplash in '..\COMUM\uSplash.pas' {frmsplash},
   utefMsg in '..\PTI\utefMsg.pas' {frmTEFMessage},
   uItem in 'uItem.pas' {frmItem},
-  udm_ini in '..\DATAMODULES\udm_ini.pas' {DM_INI: TDataModule};
+  udm_ini in '..\DATAMODULES\udm_ini.pas' {DM_INI: TDataModule},
+  uDM in '..\DATAMODULES\uDM.pas' {DM: TDataModule};
 
 {$R *.res}
 
@@ -45,5 +45,6 @@ begin
   Application.CreateForm(TDMSkin, DMSkin);
   Application.CreateForm(TfrmPV, frmPV);
   Application.CreateForm(TDM_INI, DM_INI);
+  Application.CreateForm(TDM, DM);
   Application.Run;
 end.

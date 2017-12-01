@@ -3,7 +3,6 @@ library softlock;
 uses
   System.SysUtils,
   System.Classes,
-  uDM in '..\GERENCIAL\uDM.pas' {DM: TDataModule},
   soap_server in '..\COMUM\soap_server.pas',
   uAutocomConsts in '..\COMUM\uAutocomConsts.pas',
   uFuncoes in '..\COMUM\uFuncoes.pas',
@@ -17,7 +16,8 @@ uses
   uTraducao in '..\COMUM\uTraducao.pas',
   uLibera in 'uLibera.pas' {frmLibera},
   uViews in '..\COMUM\uViews.pas',
-  udm_ini in '..\DATAMODULES\udm_ini.pas' {DM_INI: TDataModule};
+  udm_ini in '..\DATAMODULES\udm_ini.pas' {DM_INI: TDataModule},
+  uDM in '..\DATAMODULES\uDM.pas' {DM: TDataModule};
 
 {$R *.res}
 

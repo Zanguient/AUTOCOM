@@ -12,7 +12,8 @@ uses
   FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Stan.Param, FireDAC.DatS,
   FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.VCLUI.Wait,
   FireDAC.Comp.ScriptCommands, FireDAC.Comp.Client, FireDAC.Comp.Script,
-  FireDAC.Comp.UI, FireDAC.Phys.MySQL, FireDAC.Comp.DataSet;
+  FireDAC.Comp.UI, FireDAC.Phys.MySQL, FireDAC.Comp.DataSet,
+  FireDAC.Phys.MySQLDef, FireDAC.Stan.Util;
 
 type
   TDM = class(TDataModule)

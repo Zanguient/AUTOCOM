@@ -4,7 +4,6 @@ uses
   Vcl.Forms,
   uFuncoes in '..\COMUM\uFuncoes.pas',
   uAutocomConsts in '..\COMUM\uAutocomConsts.pas',
-  uDM in '..\GERENCIAL\uDM.pas' {DM: TDataModule},
   uAtu in '..\COMUM\uAtu.pas' {frmAtu},
   uMD5Print in '..\COMUM\uMD5Print.pas',
   uTraducao in '..\COMUM\uTraducao.pas',
@@ -15,7 +14,8 @@ uses
   uStatus in '..\NFE_new\uStatus.pas' {frmStatus},
   uRegras_Imposto in '..\GERENCIAL\OPERACIONAIS\uRegras_Imposto.pas',
   ufrmCad in '..\BASE\ufrmCad.pas' {frmCad},
-  udm_ini in '..\DATAMODULES\udm_ini.pas' {DM_INI: TDataModule};
+  udm_ini in '..\DATAMODULES\udm_ini.pas' {DM_INI: TDataModule},
+  uDM in '..\DATAMODULES\uDM.pas' {DM: TDataModule};
 
 {$R *.res}
 
@@ -23,8 +23,8 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TDMSkin, DMSkin);
-  Application.CreateForm(TDM, DM);
   Application.CreateForm(TfrmAtu, frmAtu);
   Application.CreateForm(TDM_INI, DM_INI);
+  Application.CreateForm(TDM, DM);
   Application.Run;
 end.

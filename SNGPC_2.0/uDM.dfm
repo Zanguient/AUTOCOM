@@ -1316,30 +1316,12 @@ object DM: TDM
     Connection = DB1
     Params = <>
     Macros = <>
-    OnError = SP1Error
     Left = 16
     Top = 89
   end
   object Zip: TZipMaster
-    AddOptions = []
-    AddStoreSuffixes = [assGIF, assPNG, assZ, assZIP, assZOO, assARC, assLZH, assARJ, assTAZ, assTGZ, assLHA, assRAR, assACE, assCAB, assGZ, assGZIP, assJAR, assJPG, assJPEG, ass7Zp, assMP3, assWMV, assWMA, assDVR, assAVI]
     ConfirmErase = False
-    DLL_Load = False
-    ExtrOptions = []
-    KeepFreeOnAllDisks = 0
-    KeepFreeOnDisk1 = 0
-    LanguageID = 0
-    MaxVolumeSize = 0
-    MaxVolumeSizeKb = 0
-    NoReadAux = False
-    SFXOptions = []
-    SFXOverwriteMode = ovrAlways
-    SpanOptions = []
-    Trace = False
-    Unattended = False
-    Verbose = False
-    Version = '1.9.1.0019'
-    WriteOptions = []
+    Version = '1.9.2.0023'
     Left = 236
     Top = 24
   end

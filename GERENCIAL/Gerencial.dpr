@@ -11,7 +11,6 @@ uses
   uAutocomConsts in '..\COMUM\uAutocomConsts.pas',
   uFuncoes in '..\COMUM\uFuncoes.pas',
   uMD5Print in '..\COMUM\uMD5Print.pas',
-  uDM in 'uDM.pas' {DM: TDataModule},
   uFrm in '..\BASE\uFrm.pas' {frm},
   ufrmCad in '..\BASE\ufrmCad.pas' {frmCad},
   uCadEmpresa in '..\CADASTROS\uCadEmpresa.pas' {frmCadEmpresa},
@@ -28,7 +27,6 @@ uses
   uCadSessao in '..\CADASTROS\uCadSessao.pas' {frmCadSessao},
   uCadUnidade in '..\CADASTROS\uCadUnidade.pas' {frmCadUnid},
   uCadVendedor in '..\CADASTROS\uCadVendedor.pas' {frmCadVendedor},
-  uDM_NF_Entr in 'uDM_NF_Entr.pas' {DM_NF_Entr: TDataModule},
   uEntradaNF in '..\OPERACIONAIS\uEntradaNF.pas' {frmEntradaNF},
   uCadModeloNF in '..\CADASTROS\uCadModeloNF.pas' {frmCadModeloNF},
   uCadEstoque in '..\CADASTROS\uCadEstoque.pas' {frmCadEstoque},
@@ -106,7 +104,9 @@ uses
   uStatus in '..\NFE_new\uStatus.pas' {frmStatus},
   uEstoque_Inicial in '..\CADASTROS\uEstoque_Inicial.pas' {frmCad_Estoque_Inicial},
   uViews in '..\COMUM\uViews.pas',
-  udm_ini in '..\DATAMODULES\udm_ini.pas' {DM_INI: TDataModule};
+  udm_ini in '..\DATAMODULES\udm_ini.pas' {DM_INI: TDataModule},
+  uDM in '..\DATAMODULES\uDM.pas' {DM: TDataModule},
+  uDM_NF_Entr in '..\DATAMODULES\uDM_NF_Entr.pas' {DM_NF_Entr: TDataModule};
 
 {$R *.res}
 
@@ -136,6 +136,8 @@ begin
   Application.CreateForm(TfrmStatus, frmStatus);
   Application.CreateForm(TfrmCad_Estoque_Inicial, frmCad_Estoque_Inicial);
   Application.CreateForm(TDM_INI, DM_INI);
+  Application.CreateForm(TDM, DM);
+  Application.CreateForm(TDM_NF_Entr, DM_NF_Entr);
   Application.Run;
   CloseHandle(MutexHandle);
 end.
